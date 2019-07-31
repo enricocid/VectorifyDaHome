@@ -1,11 +1,11 @@
 ### Another chapter in the series "I'm bored"
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/bored.png)
+![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/bored2.png)
 
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home
 
 ###### Vectorify da home!
-###### Current version: (1) 1.0
+###### Current version: (2) 1.0.1
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh.gif) 
 

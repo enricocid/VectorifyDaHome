@@ -11,12 +11,12 @@
         app:cardBackgroundColor="@android:color/white"
         android:layout_marginStart="8dp"
         app:cardElevation="4dp"
-        android:layout_marginVertical="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
         android:layout_marginEnd="16dp"
         tools:context=".VectorifyActivity">
 
     <LinearLayout
-            android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:onClick="startIconColorPicker"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -28,14 +28,16 @@
                   android:id="@+id/icon_color_head"
                   android:paddingTop="8dp"
                   android:paddingBottom="4dp"
-                  android:paddingHorizontal="16dp"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="16dp"
                   android:textSize="20sp"
                   android:textStyle="bold"/>
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:text="@string/title_icon"
-                  android:paddingHorizontal="16dp"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="16dp"
                   android:id="@+id/icon_color_subhead"
                   android:textAppearance="@android:style/TextAppearance.Material.Small"/>
 
@@ -43,8 +45,7 @@
                 android:id="@+id/icon_system_accent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="16dp"
+                android:layout_margin="16dp"
                 android:onClick="setSystemAccentForIcon"
                 app:chipStrokeWidth="1dp"
                 android:alpha="0.5"

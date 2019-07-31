@@ -3,54 +3,52 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/background_color"
+        app:cardCornerRadius="8dp"
+        android:id="@+id/icon_color"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/black"
+        app:cardBackgroundColor="@android:color/white"
+        android:layout_marginStart="8dp"
         app:cardElevation="4dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:cardCornerRadius="8dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginEnd="16dp"
         tools:context=".VectorifyActivity">
 
     <LinearLayout
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:onClick="startIconColorPicker"
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:onClick="startBackgroundColorPicker"
             android:layout_height="wrap_content">
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/title_background"
+                  android:text="@string/title_icon"
+                  android:id="@+id/icon_color_head"
                   android:paddingTop="8dp"
                   android:paddingBottom="4dp"
-                  android:paddingStart="16dp"
-                  android:paddingEnd="16dp"
+                  android:paddingHorizontal="16dp"
                   android:textSize="20sp"
-                  android:textStyle="bold"
-                  android:id="@+id/background_color_head"/>
+                  android:textStyle="bold"/>
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/title_background"
-                  android:id="@+id/background_color_subhead"
-                  android:paddingStart="16dp"
-                  android:paddingEnd="16dp"
+                  android:text="@string/title_icon"
+                  android:paddingHorizontal="16dp"
+                  android:id="@+id/icon_color_subhead"
                   android:textAppearance="@android:style/TextAppearance.Material.Small"/>
 
         <com.google.android.material.chip.Chip
-                android:id="@+id/background_system_accent"
+                android:id="@+id/icon_system_accent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:chipBackgroundColor="@color/activity_background_color_dark"
+                android:onClick="setSystemAccentForIcon"
                 app:chipStrokeWidth="1dp"
                 android:alpha="0.5"
                 android:textColor="@color/bottom_bar_color"
-                android:onClick="setSystemAccentForBackground"
+                app:chipBackgroundColor="@color/activity_background_color_dark"
                 android:textAppearance="@style/chipTextAppearance"
                 android:text="@string/title_accent_me"/>
     </LinearLayout>

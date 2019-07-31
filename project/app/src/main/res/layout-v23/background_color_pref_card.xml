@@ -17,6 +17,7 @@
         tools:context=".VectorifyActivity">
 
     <LinearLayout
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:onClick="startBackgroundColorPicker"
