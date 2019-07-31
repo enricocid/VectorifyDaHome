@@ -191,6 +191,8 @@ class IconsAdapter(private val context: Context) : RecyclerView.Adapter<IconsAda
         R.drawable.death_star,
         R.drawable.death_star_variant,
         R.drawable.db_tenkaichi,
+        R.drawable.kame_sennin_mark,
+        R.drawable.dragon_sphere,
         R.drawable.puzzle,
 
         //buildings
