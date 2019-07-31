@@ -1,0 +1,8 @@
+<!-- drawable/diamond.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:height="24dp"
+        android:width="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+    <path android:fillColor="#000" android:pathData="M6,2L2,8L12,22L22,8L18,2H6Z"/>
+</vector>

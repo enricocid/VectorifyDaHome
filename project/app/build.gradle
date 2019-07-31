@@ -1,0 +1,37 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+    defaultConfig {
+        applicationId "com.iven.iconify"
+        minSdkVersion 27
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+    }
+
+
+    applicationVariants.all { variant ->
+        variant.resValue "string", "versionName", variant.versionName }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.preference:preference:1.1.0-rc01'
+    implementation 'com.afollestad.material-dialogs:core:3.1.0'
+    implementation 'com.afollestad.material-dialogs:color:3.1.0'
+    api 'com.google.android.material:material:1.0.0'
+}

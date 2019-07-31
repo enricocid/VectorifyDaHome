@@ -1,0 +1,28 @@
+<resources>
+    <string name="live_wallpaper_name" translatable="false">Vectorify da home!</string>
+
+    <!-- Card titles -->
+    <string name="title_background">Background</string>
+    <string name="title_icon">Icon</string>
+    <string name="title_presets" translatable="false">Presets</string>
+    <string name="title_icons">Icons</string>
+    <string name="title_accent_me">ACCENT ME!</string>
+
+    <!-- Preferences keys -->
+    <string name="background_color_key" translatable="false">background_key</string>
+    <string name="icon_color_key" translatable="false">icon_key</string>
+    <string name="theme_key" translatable="false">theme_key</string>
+    <string name="accent_background_set" translatable="false">accent_background_set</string>
+    <string name="accent_icon_set" translatable="false">accent_icon_set</string>
+    <string name="icon_key" translatable="false">icon_resource_key</string>
+
+    <!-- BottomBar menu items -->
+    <string name="title_theme">Theme</string>
+    <string name="title_restore">Restore default colors!</string>
+
+    <string name="app_git_link" translatable="false">https://github.com/enricocid/IconifyDaHome</string>
+    <string name="install_browser_message">Install a browser first!</string>
+
+    <!-- Hex string -->
+    <string name="hex" translatable="false">#%1s</string>
+</resources>

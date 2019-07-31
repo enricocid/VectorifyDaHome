@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wallpaper xmlns:android="http://schemas.android.com/apk/res/android"
+           android:description="@string/live_wallpaper_name"
+           android:settingsActivity="com.iven.vectorify.VectorifyActivity"
+           android:thumbnail="@mipmap/ic_launcher_round"/>

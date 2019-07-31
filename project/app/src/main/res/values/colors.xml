@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_accent_color">#3427FF</color>
+
+    <color name="bottom_bar_color">#FAFAFA</color>
+    <color name="system_bars_color">#BFBFBF</color>
+
+    <color name="presets_card_color_dark">#595959</color>
+    <color name="bottom_bar_color_dark">#303030</color>
+    <color name="system_bars_color_dark">#313131</color>
+    <color name="activity_background_color_dark">#424242</color>
+
+    <!--  PRESETS -->
+
+    <color name="midnight_blue">#1E1F26</color>
+    <color name="ink">#283655</color>
+    <color name="light_blue_berry">#4D648D</color>
+
+    <color name="dark_navy">#011A27</color>
+    <color name="blue_berry">#063852</color>
+    <color name="daffodil">#E6DF44</color>
+
+    <color name="shadow">#2A3132</color>
+    <color name="mist">#90AFC5</color>
+
+    <color name="crevice">#46211A</color>
+    <color name="desert">#BA5536</color>
+
+    <color name="deep_aqua">#003B46</color>
+    <color name="wave">#66A5AD</color>
+
+    <color name="blue_black">#021C1E</color>
+    <color name="rain">#2C7873</color>
+
+    <color name="blue_pine">#324851</color>
+    <color name="reflection">#34675C</color>
+
+    <color name="cocoa">#301B28</color>
+    <color name="chocolate">#523634</color>
+    <color name="toffee">#B6452C</color>
+    <color name="frosting">#DDC5A2</color>
+
+    <color name="slate">#626D71</color>
+    <color name="ceramic">#CDCDC0</color>
+    <color name="latte">#DDBC95</color>
+
+    <color name="egg_plant">#50312F</color>
+    <color name="lemon_lime">#E4EA8C</color>
+
+    <color name="cloud">#505160</color>
+    <color name="moss">#AEBD38</color>
+
+    <color name="blue">#4D85BD</color>
+    <color name="sun">#F5E356</color>
+
+    <color name="sky">#375E97</color>
+    <color name="sunflower">#FFBB00</color>
+
+    <color name="sea">#20948B</color>
+    <color name="sandstone">#F4CC70</color>
+
+    <color name="stem">#80BD9E</color>
+    <color name="poppy">#F98866</color>
+
+    <color name="turquoise">#5BC8AC</color>
+    <color name="pink_tulip">#F18D9E</color>
+
+    <color name="branch">#5D535E</color>
+    <color name="berry">#EC96A4</color>
+
+
+    <color name="ice">#A1D6E2</color>
+    <color name="overcast">#F1F1F2</color>
+    <color name="glacier">#1995AD</color>
+
+    <color name="plaster">#F4EADE</color>
+    <color name="greece">#2F496E</color>
+</resources>

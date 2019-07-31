@@ -1,0 +1,14 @@
+<resources>
+
+    <!-- Titoli cards -->
+    <string name="title_background">Sfondo</string>
+    <string name="title_icon">Icona</string>
+    <string name="title_icons">Icone</string>
+    <string name="title_accent_me">ACCENTAMI!</string>
+
+    <!-- Items del menu della BottomBar -->
+    <string name="title_theme">Tema</string>
+    <string name="title_restore">Ripristina colori di default</string>
+
+    <string name="install_browser_message">Installa un browser prima!</string>
+</resources>
