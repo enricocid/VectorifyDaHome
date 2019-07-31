@@ -24,7 +24,7 @@
 You can edit the background and image colors using a fantastic Color Picker, presets ... or the device accent color (which is tracked)!
 
 
-- Why a Live Wallpaper e not a wallpaper?
+- Why a Live Wallpaper and not a wallpaper?
 
 Because it is faster to update and without the need to save images your storage (no storage permissions needed).
 
