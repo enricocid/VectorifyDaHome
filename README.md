@@ -36,7 +36,7 @@ Unlike classical Live Wallpapers, the image is not drawn (almost) continuously b
 
 # Credits
 
-- Icons from [material.io](https://material.io/resources/icons) and [materialdesignicons](https://materialdesignicons.com/)!
+- Icons from [material.io](https://material.io/resources/icons), [materialdesignicons](https://materialdesignicons.com/) and [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page)!
 
 
 - Colors combo taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
