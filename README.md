@@ -25,7 +25,7 @@ You can edit the background and image colors using a fantastic color picker, pre
 
 - Why a Live Wallpaper and not a wallpaper?
 
-Because it is faster to update and there's no need to save images to your storage (no storage permissions is needed).
+Because it is faster to update and there's no need to save images to your storage (no storage access permissions are needed).
 
 
 - Why "static"?
