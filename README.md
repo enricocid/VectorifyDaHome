@@ -6,7 +6,7 @@
 
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
-###### Current version: (5) 1.1.1
+###### Current version: [(5) 1.1.1](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.1.1)
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh2.gif) 
 
