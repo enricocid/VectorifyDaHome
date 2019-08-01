@@ -18,22 +18,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <ImageView android:layout_width="match_parent"
-                   android:id="@+id/icon_frame"
-                   android:src="@drawable/android"
-                   android:padding="16dp"
-                   android:contentDescription="@string/live_wallpaper_name"
-                   android:layout_height="wrap_content"/>
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/icons_title"
-                  android:text="@string/title_icons"
-                  android:textColor="?attr/presets_text_color"
-                  android:paddingTop="8dp"
-                  android:paddingHorizontal="16dp"
-                  android:textSize="20sp"
-                  android:textStyle="bold"/>
+            <ImageView android:layout_width="match_parent"
+                       android:id="@+id/icon_frame"
+                       android:src="@drawable/android"
+                       android:padding="16dp"
+                       android:contentDescription="@string/live_wallpaper_name"
+                       android:layout_height="wrap_content"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/icons_title"
+                      android:text="@string/title_icons"
+                      android:textColor="?attr/presets_text_color"
+                      android:paddingTop="8dp"
+                      android:paddingHorizontal="16dp"
+                      android:textSize="20sp"
+                      android:textStyle="bold"/>
+        </FrameLayout>
 
         <!-- COLORS OPTIONS -->
         <androidx.recyclerview.widget.RecyclerView
@@ -41,7 +46,6 @@
                 android:clipToPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 tools:context=".MainActivity"/>
     </LinearLayout>
 

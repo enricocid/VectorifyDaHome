@@ -7,8 +7,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -162,7 +162,7 @@ class VectorifyActivity : AppCompatActivity() {
         //set icon frame height to match icons rv + "icons" title total height
         icons_rv.afterMeasured {
 
-            val iconFrameLayoutParams = mIconFrame.layoutParams as LinearLayout.LayoutParams
+            val iconFrameLayoutParams = mIconFrame.layoutParams as FrameLayout.LayoutParams
             iconFrameLayoutParams.height = height + icons_title.height
             mIconFrame.layoutParams = iconFrameLayoutParams
 
@@ -174,7 +174,7 @@ class VectorifyActivity : AppCompatActivity() {
     private fun setIconFrameColors() {
         mIconFrame.setImageResource(mIcon)
         mIconFrame.setBackgroundColor(mBackgroundColor)
-
+        icons_title.setTextColor(Utils.getSecondaryColor(mBackgroundColor))
         if (mBackgroundColor == mIconColor) {
             if (Utils.isColorDark(mIconColor)) mIconFrame.setColorFilter(Utils.lightenColor(mIconColor, 0.20F))
             else mIconFrame.setColorFilter(Utils.darkenColor(mIconColor, 0.20F))
