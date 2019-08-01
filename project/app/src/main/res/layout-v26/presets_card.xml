@@ -24,7 +24,7 @@
                   android:textColor="?attr/presets_text_color"
                   android:paddingTop="8dp"
                   android:paddingHorizontal="16dp"
-                  android:textSize="20sp"
+                  android:textAppearance="@android:style/TextAppearance.Material.Title"
                   android:textStyle="bold"/>
 
         <!-- COLORS OPTIONS -->

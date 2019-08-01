@@ -39,7 +39,7 @@
                       android:paddingTop="8dp"
                       android:paddingStart="16dp"
                       android:paddingEnd="16dp"
-                      android:textSize="20sp"
+                      android:textAppearance="@android:style/TextAppearance.Material.Title"
                       android:textStyle="bold"/>
         </FrameLayout>
 
