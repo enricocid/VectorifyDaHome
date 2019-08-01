@@ -24,7 +24,7 @@ import com.iven.vectorify.adapters.IconsAdapter
 import com.iven.vectorify.ui.Utils
 import kotlinx.android.synthetic.main.background_color_pref_card.*
 import kotlinx.android.synthetic.main.icon_color_pref_card.*
-import kotlinx.android.synthetic.main.iconify_activity.*
+import kotlinx.android.synthetic.main.vectorify_activity.*
 import kotlinx.android.synthetic.main.icons_card.*
 import kotlinx.android.synthetic.main.presets_card.*
 
@@ -62,7 +62,7 @@ class VectorifyActivity : AppCompatActivity() {
         mTheme = mVectorifyPreferences.theme
         setTheme(mTheme)
 
-        setContentView(R.layout.iconify_activity)
+        setContentView(R.layout.vectorify_activity)
 
         //get system accent grabbers
         mBackgroundSystemAccentGrabber = background_system_accent
