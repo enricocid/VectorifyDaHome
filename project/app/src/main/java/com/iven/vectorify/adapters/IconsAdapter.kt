@@ -53,7 +53,6 @@ class IconsAdapter(private val context: Context) : RecyclerView.Adapter<IconsAda
         R.drawable.alert,
         R.drawable.alert_outline,
         R.drawable.alert_circle,
-        R.drawable.diamond,
 
         //animals
         R.drawable.cat,
@@ -152,10 +151,11 @@ class IconsAdapter(private val context: Context) : RecyclerView.Adapter<IconsAda
         R.drawable.infinity,
         R.drawable.flash,
         R.drawable.fire,
-        R.drawable.hexagon_outline,
         R.drawable.sticker,
 
         //science
+        R.drawable.hexagon_outline,
+        R.drawable.diamond,
         R.drawable.flask,
         R.drawable.flask_outline,
         R.drawable.flask_empty,
