@@ -6,8 +6,7 @@
         android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/activity_padding"
-        android:paddingBottom="@dimen/activity_padding">
+        android:paddingVertical="@dimen/activity_padding">
 
     <include layout="@layout/icons_card"/>
 
