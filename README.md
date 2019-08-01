@@ -4,12 +4,11 @@
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/bored2.png)
 
-# <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home
+# <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
-###### Vectorify da home!
-###### Current version: (3) 1.0.2
+###### Current version: (4) 1.1.0
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh.gif) 
+![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh2.gif) 
 
 
 # Downloads

@@ -47,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:onClick="setSystemAccentForIcon"
-                app:chipStrokeWidth="1dp"
                 android:alpha="0.5"
                 android:textColor="@color/bottom_bar_color"
                 app:chipBackgroundColor="@color/activity_background_color_dark"

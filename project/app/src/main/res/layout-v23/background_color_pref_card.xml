@@ -48,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 app:chipBackgroundColor="@color/activity_background_color_dark"
-                app:chipStrokeWidth="1dp"
                 android:alpha="0.5"
                 android:textColor="@color/bottom_bar_color"
                 android:onClick="setSystemAccentForBackground"
