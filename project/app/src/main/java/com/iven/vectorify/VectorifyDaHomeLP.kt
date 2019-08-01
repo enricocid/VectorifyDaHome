@@ -83,9 +83,10 @@ class VectorifyDaHomeLP : WallpaperService() {
 
         private fun drawBitmap(vectorDrawable: VectorDrawable, canvas: Canvas) {
 
+            val dimension = if (mDeviceWidth> mDeviceHeight) mDeviceHeight else mDeviceWidth
             val bitmap = Bitmap.createBitmap(
-                (mDeviceWidth * 0.35f).toInt(),
-                (mDeviceWidth * 0.35f).toInt(), Bitmap.Config.ARGB_8888
+                (dimension * 0.35f).toInt(),
+                (dimension * 0.35f).toInt(), Bitmap.Config.ARGB_8888
             )
 
             val drawableCanvas = Canvas(bitmap)
