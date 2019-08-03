@@ -19,8 +19,8 @@
 
 # Description:
 
-**Vectorify da home!** is a minimal and open source app to apply static Live Wallpapers generated from a vector image you can choose from a vaste collection!
-You can edit the background and image colors using a fantastic color picker, presets ... or the device accent color (which is tracked)!
+**Vectorify da home!** is a minimal and open source app to apply static Live Wallpapers from a vaste collection of vector graphics!
+Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color (which is tracked)!
 
 
 - Why a Live Wallpaper and not a wallpaper?
@@ -33,6 +33,11 @@ Because it is faster to update and there's no need to save images to your storag
 Unlike classical Live Wallpapers the canvas is not updated continuously but only one time when the LP becomes visible (for example, when you come back to your home from an app or when you unlock the device).
 
 NO BATTERY DRAINING!
+
+
+- Other features?
+
+The app itself implements a dark/light theme switcher!
 
 
 # Credits
