@@ -20,7 +20,7 @@ class VectorifyDaHomeLP : WallpaperService() {
     private var mDeviceWidth = 0F
     private var mDeviceHeight = 0F
 
-    //the potato battery live vectorify_wallpaper service and engine
+    //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
 
         if (baseContext != null) {
