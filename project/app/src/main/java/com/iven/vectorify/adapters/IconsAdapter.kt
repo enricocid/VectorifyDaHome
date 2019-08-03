@@ -253,12 +253,10 @@ class IconsAdapter(private val context: Context) : RecyclerView.Adapter<IconsAda
 
             iconButton.setImageResource(drawable)
 
-            if (mSelectedDrawable == drawable) {
-                iconButton.setBackgroundColor(accent)
-
-            } else {
+            if (mSelectedDrawable == drawable) iconButton.setBackgroundColor(accent)
+            else
                 iconButton.setBackgroundColor(Color.TRANSPARENT)
-            }
+
             itemView.setOnClickListener {
                 notifyItemChanged(getIconPosition(mSelectedDrawable))
                 mSelectedDrawable = drawable
