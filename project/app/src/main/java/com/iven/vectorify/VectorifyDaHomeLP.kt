@@ -42,14 +42,14 @@ class VectorifyDaHomeLP : WallpaperService() {
     private fun checkSystemAccent() {
 
         val isBackgroundAccented = mVectorifyPreferences.isBackgroundAccented
-        val isPotatoAccented = mVectorifyPreferences.isIconAccented
+        val isDrawableAccented = mVectorifyPreferences.isIconAccented
 
-        if (isBackgroundAccented || isPotatoAccented) {
+        if (isBackgroundAccented || isDrawableAccented) {
             //change only if system accent has changed
             val systemAccentColor = Utils.getSystemAccentColor(this)
             if (isBackgroundAccented && mBackgroundColor != systemAccentColor) mBackgroundColor =
                 systemAccentColor
-            if (isPotatoAccented && mDrawableColor != systemAccentColor) mDrawableColor = systemAccentColor
+            if (isDrawableAccented && mDrawableColor != systemAccentColor) mDrawableColor = systemAccentColor
         }
     }
 
