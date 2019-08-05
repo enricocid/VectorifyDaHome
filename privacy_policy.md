@@ -23,9 +23,20 @@ The app improvement is based purely only on Google Play Store requests or users 
 **WE DO NOT COLLECT** personally identifiable information from anyone, including children (under the age of 18).
 
 
+### Ads
+
+
+**NO ADS or paid contents** are present.
+
+
 ### Special restrictions
 
 Vectorify da home! **DOES NOT** contain hazardous, violent or any other content (e.g. augment reality) that may require parental supervision.
+
+
+### Legal compliance
+
+Vectorify da home! is complaint with the U.S. Children's Online Privacy and Protection Act (COPPA), E.U. General Data Protection Regulation (GDPR), and any other applicable laws or regulations.
 
 
 ### Type of permissions requested
@@ -43,21 +54,17 @@ The app accesses internal storage ONLY to save a .PNG picture to "Pictures" fold
 By denying this permission request the app won't be able to save pictures to internal memory.
 
 
-
 ### Links To Other Sites
 
 Vectorify da home! contain a link to the app's GitHub page, i.e. the source code which is fully accessible.
 
 
-### Legal compliance
-
-Vectorify da home! is complaint with the U.S. Children's Online Privacy and Protection Act (COPPA), E.U. General Data Protection Regulation (GDPR), and any other applicable laws or regulations.
-
-
 ### Changes To This Privacy Policy
+
 We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.
 
 You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+
 
 ### Contact Us
 If you have any questions about this Privacy Policy, please contact us:
