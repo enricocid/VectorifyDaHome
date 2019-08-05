@@ -26,15 +26,15 @@
 
 - Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
 
-- Preview where you can customize the size of the vector graphic.
+- Preview screen where you can customize the size of the vector graphic.
 
 - 3 ways to set the wallpaper:
 
-1. Save to internal memory and set it using your preferred gallery/app
+  - Save to internal memory and set it using your preferred gallery/app
 
-2. Set it using the stock wallpaper picker (involves saving to internal memory for faster processing)
+  - Set it using the stock wallpaper picker (involves saving to internal memory for faster processing)
 
-3. Set as LiveWallpaper
+  - Set as LiveWallpaper
 Unlike classical Live Wallpapers the canvas is not updated continuously but only one time when the LP becomes visible (for example, when you come back to your home from an app or when you unlock the device).
 
 NO BATTERY DRAINING!
