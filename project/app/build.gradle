@@ -11,8 +11,8 @@ android {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 5
-        versionName "1.1.1"
+        versionCode 6
+        versionName "1.2.0"
     }
 
     applicationVariants.all { variant ->
@@ -29,6 +29,7 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.preference:preference:1.1.0-rc01'
     implementation 'com.afollestad.material-dialogs:core:3.1.0'
     implementation 'com.afollestad.material-dialogs:color:3.1.0'

@@ -3,19 +3,31 @@
           package="com.iven.vectorify">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <uses-feature
             android:name="android.software.live_wallpaper"
             android:required="true"/>
 
     <application
-            android:name="com.iven.vectorify.IconifyApp"
+            android:name="com.iven.vectorify.VectorifyApp"
             android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/live_wallpaper_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="@string/live_wallpaper_name"
+                android:exported="false"
+                android:grantUriPermissions="true">
+
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/provider_paths"/>
+        </provider>
 
         <activity android:name="com.iven.vectorify.VectorifyActivity"
                   android:theme="@style/AppTheme"
@@ -26,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.iven.vectorify.SetWallpaperActivity"
+                  android:theme="@style/AppTheme"
+                  android:screenOrientation="portrait"/>
 
         <service
                 android:name="com.iven.vectorify.VectorifyDaHomeLP"

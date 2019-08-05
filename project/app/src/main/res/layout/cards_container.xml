@@ -9,7 +9,7 @@
         android:paddingTop="@dimen/activity_padding"
         android:paddingBottom="@dimen/activity_padding">
 
-    <include layout="@layout/icons_card"/>
+    <include layout="@layout/vectors_card"/>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +18,7 @@
 
         <include layout="@layout/background_color_pref_card"/>
 
-        <include layout="@layout/icon_color_pref_card"/>
+        <include layout="@layout/vector_color_pref_card"/>
 
     </LinearLayout>
 

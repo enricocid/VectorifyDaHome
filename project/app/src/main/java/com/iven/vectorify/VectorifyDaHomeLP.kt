@@ -1,14 +1,10 @@
 package com.iven.vectorify
 
-import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.VectorDrawable
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
-import android.util.DisplayMetrics
 import android.view.SurfaceHolder
-import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import com.iven.vectorify.ui.Utils
 
@@ -16,25 +12,21 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private var mBackgroundColor = 0
     private var mDrawableColor = 0
+    private var mScaleFactor = 0.35F
 
-    private var mDeviceWidth = 0F
-    private var mDeviceHeight = 0F
+    private var mDeviceWidth = 0
+    private var mDeviceHeight = 0
 
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
 
-        if (baseContext != null) {
-            //retrieve display specifications
-            val window = baseContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            val d = DisplayMetrics()
-            window.defaultDisplay.getRealMetrics(d)
-            mDeviceWidth = d.widthPixels.toFloat()
-            mDeviceHeight = d.heightPixels.toFloat()
-        }
+        mDeviceWidth = mDeviceMetrics.first
+        mDeviceHeight = mDeviceMetrics.second
 
         //set paints props
         mBackgroundColor = mVectorifyPreferences.backgroundColor
-        mDrawableColor = mVectorifyPreferences.iconColor
+        mDrawableColor = mVectorifyPreferences.vectorColor
+        mScaleFactor = mVectorifyPreferences.scale
 
         return VectorifyEngine()
     }
@@ -42,7 +34,7 @@ class VectorifyDaHomeLP : WallpaperService() {
     private fun checkSystemAccent() {
 
         val isBackgroundAccented = mVectorifyPreferences.isBackgroundAccented
-        val isDrawableAccented = mVectorifyPreferences.isIconAccented
+        val isDrawableAccented = mVectorifyPreferences.isVectorAccented
 
         if (isBackgroundAccented || isDrawableAccented) {
             //change only if system accent has changed
@@ -81,27 +73,6 @@ class VectorifyDaHomeLP : WallpaperService() {
             handler.removeCallbacks(drawRunner)
         }
 
-        private fun drawBitmap(vectorDrawable: VectorDrawable, canvas: Canvas) {
-
-            val dimension = if (mDeviceWidth> mDeviceHeight) mDeviceHeight else mDeviceWidth
-            val bitmap = Bitmap.createBitmap(
-                (dimension * 0.35f).toInt(),
-                (dimension * 0.35f).toInt(), Bitmap.Config.ARGB_8888
-            )
-
-            val drawableCanvas = Canvas(bitmap)
-            vectorDrawable.setBounds(0, 0, drawableCanvas.width, drawableCanvas.height)
-
-            vectorDrawable.draw(drawableCanvas)
-
-            canvas.drawBitmap(
-                bitmap,
-                canvas.width / 2F - drawableCanvas.width / 2F,
-                canvas.height / 2F - drawableCanvas.width / 2F,
-                null
-            )
-        }
-
         //draw potato according to battery level
         private fun draw() {
             val holder = surfaceHolder
@@ -112,14 +83,14 @@ class VectorifyDaHomeLP : WallpaperService() {
                 if (canvas != null && baseContext != null) {
                     //draw potato!
                     canvas.drawColor(mBackgroundColor)
-                    val bit = ContextCompat.getDrawable(baseContext, mVectorifyPreferences.icon) as VectorDrawable
+                    val bit = ContextCompat.getDrawable(baseContext, mVectorifyPreferences.vector) as VectorDrawable
                     bit.setTint(mDrawableColor)
 
                     if (mBackgroundColor == mDrawableColor) {
                         if (Utils.isColorDark(mDrawableColor)) bit.setTint(Utils.lightenColor(mDrawableColor, 0.20F))
                         else bit.setTint(Utils.darkenColor(mDrawableColor, 0.20F))
                     }
-                    drawBitmap(bit, canvas)
+                    Utils.drawBitmap(bit, canvas, mDeviceWidth, mDeviceHeight, mScaleFactor)
                 }
             } finally {
                 if (canvas != null)

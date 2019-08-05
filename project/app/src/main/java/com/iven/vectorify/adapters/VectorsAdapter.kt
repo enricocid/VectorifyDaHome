@@ -11,12 +11,12 @@ import com.iven.vectorify.R
 import com.iven.vectorify.mVectorifyPreferences
 import com.iven.vectorify.ui.Utils
 
-class IconsAdapter(private val context: Context) : RecyclerView.Adapter<IconsAdapter.IconsHolder>() {
+class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
-    var onIconClick: ((Int?) -> Unit)? = null
+    var onVectorClick: ((Int?) -> Unit)? = null
 
-    //first = background color, second = icon color
-    private val mIcons = listOf(
+    //first = background color, second = vector color
+    private val mVectors = listOf(
         //from https://material.io/resources/icons
         //and
         //https://materialdesignicons.com/
@@ -220,48 +220,48 @@ class IconsAdapter(private val context: Context) : RecyclerView.Adapter<IconsAda
     private var mSelectedDrawable = R.drawable.android
 
     init {
-        mSelectedDrawable = mVectorifyPreferences.icon
+        mSelectedDrawable = mVectorifyPreferences.vector
     }
 
-    fun getIconPosition(drawable: Int): Int {
+    fun getVectorPosition(drawable: Int): Int {
         return try {
-            mIcons.indexOf(drawable)
+            mVectors.indexOf(drawable)
         } catch (e: Exception) {
             0
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IconsHolder {
-        return IconsHolder(LayoutInflater.from(parent.context).inflate(R.layout.icon_option, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VectorsHolder {
+        return VectorsHolder(LayoutInflater.from(parent.context).inflate(R.layout.vector_option, parent, false))
     }
 
     override fun getItemCount(): Int {
-        return mIcons.size
+        return mVectors.size
     }
 
-    override fun onBindViewHolder(holder: IconsHolder, position: Int) {
-        holder.bindItems(mIcons[holder.adapterPosition])
+    override fun onBindViewHolder(holder: VectorsHolder, position: Int) {
+        holder.bindItems(mVectors[holder.adapterPosition])
     }
 
-    inner class IconsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class VectorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val accent = Utils.getSystemAccentColor(context)
+        private val accent = Utils.getSystemAccentColor(context)
 
         fun bindItems(drawable: Int) {
 
-            val iconButton = itemView as ImageButton
+            val vectorButton = itemView as ImageButton
 
-            iconButton.setImageResource(drawable)
+            vectorButton.setImageResource(drawable)
 
-            if (mSelectedDrawable == drawable) iconButton.setBackgroundColor(accent)
+            if (mSelectedDrawable == drawable) vectorButton.setBackgroundColor(accent)
             else
-                iconButton.setBackgroundColor(Color.TRANSPARENT)
+                vectorButton.setBackgroundColor(Color.TRANSPARENT)
 
             itemView.setOnClickListener {
-                notifyItemChanged(getIconPosition(mSelectedDrawable))
+                notifyItemChanged(getVectorPosition(mSelectedDrawable))
                 mSelectedDrawable = drawable
-                iconButton.setBackgroundColor(accent)
-                onIconClick?.invoke(drawable)
+                vectorButton.setBackgroundColor(accent)
+                onVectorClick?.invoke(drawable)
             }
         }
     }

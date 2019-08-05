@@ -15,7 +15,7 @@ class ColorsAdapter(@NonNull private val context: Context) :
 
     var onColorClick: ((Pair<Int, Int>) -> Unit)? = null
 
-    //first = background color, second = icon color
+    //first = background color, second = vector color
     private val mColors = listOf(
         //from https://www.canva.com/learn/100-color-combinations/
         Pair(R.color.midnight_blue, R.color.ink),

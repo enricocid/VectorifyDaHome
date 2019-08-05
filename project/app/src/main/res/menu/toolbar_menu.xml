@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/save"
+            android:icon="@drawable/ic_save"
+            android:title="@string/title_save_to"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/set"
+            android:icon="@drawable/ic_crop"
+            android:title="@string/title_crop"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/go_live"
+            android:icon="@drawable/ic_set_live"
+            android:title="@string/title_go_live"
+            app:showAsAction="ifRoom"/>
+</menu>

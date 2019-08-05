@@ -9,8 +9,9 @@
         app:cardBackgroundColor="?attr/presets_card_color"
         app:cardElevation="4dp"
         android:padding="4dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         tools:context=".VectorifyActivity">
 
     <LinearLayout
@@ -18,18 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="@string/title_presets"
-                  android:textColor="?attr/presets_text_color"
-                  android:paddingTop="8dp"
-                  android:paddingHorizontal="16dp"
-                  android:textAppearance="@android:style/TextAppearance.Material.Title"
-                  android:textStyle="bold"/>
+        <ImageView android:layout_width="match_parent"
+                   android:id="@+id/vector_frame"
+                   android:src="@drawable/android"
+                   android:padding="8dp"
+                   android:contentDescription="@string/live_wallpaper_name"
+                   android:layout_height="wrap_content"/>
 
         <!-- COLORS OPTIONS -->
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/colors_rv"
+                android:id="@+id/vectors_rv"
                 android:clipToPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
