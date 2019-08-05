@@ -1,12 +1,12 @@
 ### Another chapter in the series "I'm bored"
 
-[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) 
+[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21)[Privacy policy](https://github.com/enricocid/Music-Player-GO/blob/master/privacy_policy.md)
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/bored2.png)
 
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
-[Privacy policy](https://github.com/enricocid/Music-Player-GO/blob/master/privacy_policy.md)
+
 
 ###### Current version: [(6) 1.2.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.2.0)
 ###### Based on the project [Potate da home](https://github.com/enricocid/PotateDaHome)
