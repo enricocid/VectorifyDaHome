@@ -1,15 +1,17 @@
 ### Another chapter in the series "I'm bored"
 
-[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid)
+[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) 
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/bored2.png)
 
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
-###### Current version: [(5) 1.1.1](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.1.1)
+[Privacy policy](https://github.com/enricocid/Music-Player-GO/blob/master/privacy_policy.md)
+
+###### Current version: [(6) 1.2.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.2.0)
 ###### Based on the project [Potate da home](https://github.com/enricocid/PotateDaHome)
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh2.gif) 
+![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh3.gif) 
 
 
 # Downloads
@@ -20,17 +22,19 @@
 
 # Description:
 
-**Vectorify da home!** is a minimal and open source app to apply static Live Wallpapers from a vaste collection of vector graphics!
-Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color (which is tracked)!
+**Vectorify da home!** is a minimal and open source app to apply static Live Wallpapers from a vaste collection of vector graphics:
 
+- Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color (which is tracked)!
 
-- Why a Live Wallpaper and not a wallpaper?
+- Preview where you can customize the size of the vector graphic.
 
-Because it is faster to update and there's no need to save images to your storage (no storage access permissions are needed).
+- 3 ways to set the wallpaper:
 
+1. Save to internal memory and set it using your preferred gallery/app
 
-- Why "static"?
+2. Set it using the stock wallpaper picker (involves saving to internal memory for faster processing)
 
+3. Set as LiveWallpaper
 Unlike classical Live Wallpapers the canvas is not updated continuously but only one time when the LP becomes visible (for example, when you come back to your home from an app or when you unlock the device).
 
 NO BATTERY DRAINING!
