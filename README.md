@@ -1,6 +1,6 @@
 ### Another chapter in the series "I'm bored"
 
-[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [Privacy policy](https://github.com/enricocid/Music-Player-GO/blob/master/privacy_policy.md)
+[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [Privacy policy](https://github.com/enricocid/VectorifyDaHome/blob/master/privacy_policy.md)
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/bored2.png)
 
