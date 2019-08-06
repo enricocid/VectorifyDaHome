@@ -10,7 +10,7 @@
 
 
 
-###### Current version: [(6) 1.2.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.2.0)
+###### Current version: [(7) 1.2.1](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.2.1)
 ###### Based on the project [Potate da home](https://github.com/enricocid/PotateDaHome)
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh3.gif) 
