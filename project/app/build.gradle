@@ -15,9 +15,6 @@ android {
         versionName "1.2.1"
     }
 
-    applicationVariants.all { variant ->
-        variant.resValue "string", "versionName", variant.versionName }
-
     buildTypes {
         release {
             minifyEnabled true

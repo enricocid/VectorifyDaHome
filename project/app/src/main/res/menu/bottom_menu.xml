@@ -6,7 +6,7 @@
     <item
             android:id="@+id/app_bar_info"
             android:icon="@drawable/ic_info"
-            android:title="@string/versionName"
+            android:title="@string/title_privacy"
             app:showAsAction="ifRoom"/>
 
     <item
