@@ -56,7 +56,7 @@ By denying this permission request the app won't be able to save pictures to int
 
 ### Links To Other Sites
 
-Vectorify da home! contains a link to the app's GitHub page, i.e. the source code which is fully accessible.
+Vectorify da home! contains a link to the present privacy policy.
 
 
 ### Changes To This Privacy Policy
