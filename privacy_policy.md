@@ -14,7 +14,7 @@ This page informs you of our policies regarding the collection, use, and disclos
 
 The app does not implement any APIs or SDKs that are not approved for use in child-directed services including Google Sign-In (or any other API Service that accesses data associated with a Google Account), Google Play Games Services, and any other API Service using OAuth technology for authentication and authorization.
 
-The app improvement is based purely only on Google Play Store requests or users feedbacks.
+The app improvement is based purely on Google Play Store reviews or users feedbacks.
 
 
 ### Children's Privacy
