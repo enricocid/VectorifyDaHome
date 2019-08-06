@@ -19,8 +19,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 object Utils {
 
@@ -105,10 +103,15 @@ object Utils {
         activity.requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), code)
     }
 
+    //method to get rounded float string
     @JvmStatic
-    fun getDecimalFormat(number: Float): Float {
-        val df = DecimalFormat("#.#")
-        df.roundingMode = RoundingMode.CEILING
-        return df.format(number).toFloat()
+    fun getDecimalFormattedString(number: Float): String {
+        var formattedNumber = ""
+        try {
+            formattedNumber = String.format("%.2f", number)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedNumber
     }
 }

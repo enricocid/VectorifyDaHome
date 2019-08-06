@@ -157,7 +157,7 @@ class SetWallpaperActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser && progress >= 10) {
                     userProgress = progress
-                    scale_text.text = Utils.getDecimalFormat(progress.toFloat() / 100).toString()
+                    scale_text.text = Utils.getDecimalFormattedString(progress.toFloat() / 100)
                     mVectorView.setScaleFactor(progress.toFloat() / 100)
                 }
             }
@@ -177,7 +177,7 @@ class SetWallpaperActivity : AppCompatActivity() {
 
         //set scale text
         scale_text.setTextColor(widgetColors)
-        scale_text.text = Utils.getDecimalFormat(mVectorifyPreferences.scale).toString()
+        scale_text.text = Utils.getDecimalFormattedString(mVectorifyPreferences.scale)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
