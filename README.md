@@ -2,7 +2,7 @@
 
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) 
 
-[Privacy policy](https://github.com/enricocid/VectorifyDaHome/blob/master/privacy_policy.md)
+[PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md)
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/bored2.png)
 
