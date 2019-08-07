@@ -12,13 +12,13 @@ The objective of this policy document is to provide an open environment between 
 For better and enhanced utilization of Vectorify da home!, the software is designed to request only the storage permission on the device on which the software's services is intended.
 
 This permission has to be enabled so the software can save wallpapers to internal memory.
-  
-Another capability of the software is
-- Ability to set wallpaper.
 
 The information that may be collected with the enablement of this permission are stored locally on the device and the developer has no access to that information.
 
 This permission can be revoked when they are not needed, this is privy to only devices running Android 6.0 upward.
+
+Another capability of the software is
+- Ability to set wallpaper.
 
 The app does not implement any APIs or SDKs that are not approved for use in child-directed services including Google Sign-In (or any other API Service that accesses data associated with a Google Account), Google Play Games Services, and any other API Service using OAuth technology for authentication and authorization.
 
