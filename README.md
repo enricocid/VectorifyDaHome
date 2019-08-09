@@ -1,6 +1,6 @@
 ### Another chapter in the series "I'm bored"
 
-[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) 
+[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid) 
 
 [PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md)
 
@@ -10,7 +10,7 @@
 
 
 
-###### Current version: [(10) 1.2.3](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.2.3)
+###### Current version: [(11) 1.3.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.3.0)
 ###### Based on the project [Potate da home](https://github.com/enricocid/PotateDaHome)
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh3.gif) 

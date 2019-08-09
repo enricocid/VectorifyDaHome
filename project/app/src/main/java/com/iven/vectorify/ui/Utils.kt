@@ -169,7 +169,6 @@ object Utils {
     //make rationale permission dialog
     @JvmStatic
     private fun openVectorifyDaHomeDetails(context: Context) {
-
         try {
             //Open the specific App Info page:
             val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
