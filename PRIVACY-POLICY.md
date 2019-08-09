@@ -2,7 +2,7 @@
 
 ###### Effective date: August 05, 2019
 
-**Enrico D'Ortenzio** built the Vectorify da home! app as an Open Source app. This SERVICE is provided by Enrico D'Ortenzio at no cost and is intended for use as is.
+**Enrico D'Ortenzio** built the Vectorify da home! app as an Open Source app. This APP is provided by Enrico D'Ortenzio at no cost and is intended for use as is.
 
 This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my App.
 
