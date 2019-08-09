@@ -242,6 +242,7 @@ class VectorifyActivity : AppCompatActivity() {
                         //update the color only if it really changed
                         if (mBackgroundColor != color) {
                             mTempPreferences.tempIsBackgroundAccented = false
+                            mTempPreferences.isBackgroundColorChanged = true
                             setBackgroundColorForUI(color, false)
                         }
                     }
@@ -249,7 +250,7 @@ class VectorifyActivity : AppCompatActivity() {
                         //update the color only if it really changed
                         if (mVectorColor != color) {
                             mTempPreferences.tempIsVectorAccented = false
-                            mTempPreferences.tempVectorColor = mVectorColor
+                            mTempPreferences.isVectorColorChanged = true
                             setVectorColorForUI(color, false)
                         }
                     }
