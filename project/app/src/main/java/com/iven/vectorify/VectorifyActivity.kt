@@ -83,7 +83,7 @@ class VectorifyActivity : AppCompatActivity() {
         val bottomBar = bar
         bottomBar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.app_bar_info -> openPrivacyPolicyPage()
+                R.id.app_bar_info -> openGitHubPage()
                 R.id.app_bar_theme -> setNewTheme()
                 R.id.app_bar_restore -> setDefaultVectorColors()
             }
@@ -321,10 +321,10 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     //method to open git page
-    private fun openPrivacyPolicyPage() {
+    private fun openGitHubPage() {
         //intent to open git link
         val openGitHubPageIntent = Intent(Intent.ACTION_VIEW)
-        openGitHubPageIntent.data = Uri.parse(getString(R.string.app_policy_link))
+        openGitHubPageIntent.data = Uri.parse(getString(R.string.app_github_link))
 
         //check if a browser is present
         if (openGitHubPageIntent.resolveActivity(packageManager) != null) startActivity(openGitHubPageIntent) else

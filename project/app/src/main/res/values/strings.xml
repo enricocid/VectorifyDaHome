@@ -17,12 +17,12 @@
     <string name="scale_key" translatable="false">scale_key</string>
 
     <!-- BottomBar menu items -->
-    <string name="title_privacy" translatable="false">Privacy policy</string>
+    <string name="title_github">GitHub page</string>
     <string name="title_theme">Theme</string>
     <string name="title_restore">Restore default colors!</string>
 
-    <string name="app_policy_link" translatable="false">
-        https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md
+    <string name="app_github_link" translatable="false">
+        https://github.com/enricocid/VectorifyDaHome
     </string>
     <string name="install_browser_message">Install a browser first!</string>
 

@@ -6,6 +6,7 @@
     <string name="title_accent_me">ACCENTAMI!</string>
 
     <!-- Items del menu della BottomBar -->
+    <string name="title_github">Pagina GitHub</string>
     <string name="title_theme">Tema</string>
     <string name="title_restore">Ripristina colori di default</string>
 
