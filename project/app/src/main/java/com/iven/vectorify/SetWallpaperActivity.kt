@@ -1,13 +1,18 @@
 package com.iven.vectorify
 
+import android.Manifest
+import android.annotation.TargetApi
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.iven.vectorify.ui.Utils
 import com.iven.vectorify.ui.VectorView
 import kotlinx.android.synthetic.main.save_activity.*
@@ -42,14 +47,22 @@ class SetWallpaperActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val shouldShowRationale =
+            ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
         when (item.itemId) {
-            R.id.save -> if (Utils.hasToRequestWriteStoragePermission(this)) Utils.checkPermissions(
+            R.id.save ->
+                if (Utils.hasToRequestWriteStoragePermission(this)) Utils.makeRationaleDialog(
+                    this,
+                    SAVE_WALLPAPER,
+                    shouldShowRationale
+                ) else handleWallpaperChanges(SAVE_WALLPAPER)
+
+            R.id.set -> if (Utils.hasToRequestWriteStoragePermission(this)) Utils.makeRationaleDialog(
                 this,
-                SAVE_WALLPAPER
-            ) else handleWallpaperChanges(SAVE_WALLPAPER)
-            R.id.set -> if (Utils.hasToRequestWriteStoragePermission(this)) Utils.checkPermissions(
-                this,
-                SET_WALLPAPER
+                SET_WALLPAPER,
+                shouldShowRationale
             ) else handleWallpaperChanges(SET_WALLPAPER)
             R.id.go_live -> handleWallpaperChanges(SET_LIVE_WALLPAPER)
             android.R.id.home -> finishAndRemoveTask()
@@ -58,17 +71,20 @@ class SetWallpaperActivity : AppCompatActivity() {
     }
 
     //manage request permission result, continue loading ui if permissions was granted
+    @TargetApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) Utils.checkPermissions(
-            this,
-            requestCode
-        ) else
-
+        if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                Utils.makeRationaleDialog(this, requestCode, true) else
+                Toast.makeText(this, getString(R.string.boo), Toast.LENGTH_LONG)
+                    .show()
+        } else {
             when (requestCode) {
                 SAVE_WALLPAPER -> handleWallpaperChanges(SAVE_WALLPAPER)
                 SET_WALLPAPER -> handleWallpaperChanges(SET_WALLPAPER)
             }
+        }
     }
 
     //method to check if accent theme has changed on resume
@@ -124,7 +140,8 @@ class SetWallpaperActivity : AppCompatActivity() {
             SET_LIVE_WALLPAPER -> {
                 if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
                 else
-                    Utils.makeToast(this, R.string.title_already_live)
+                    Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_SHORT)
+                        .show()
             }
         }
     }

@@ -21,11 +21,23 @@
     <string name="title_theme">Theme</string>
     <string name="title_restore">Restore default colors!</string>
 
-    <string name="app_policy_link" translatable="false">https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md</string>
+    <string name="app_policy_link" translatable="false">
+        https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md
+    </string>
     <string name="install_browser_message">Install a browser first!</string>
 
     <!-- Hex string -->
     <string name="hex" translatable="false">#%1s</string>
+
+    <!-- Dialog rationale things -->
+    <string name="title_rationale">Storage access permission</string>
+    <string name="rationale">Let me access to Your storage in order to save wallpapers to Your internal memory. No
+        personal data will be accessed by me :)
+    </string>
+    <string name="rationale_denied">You have recently chose \"Don\'t ask me again\" option when storage access
+        permission was asked. Go to the app\'s info and grant me the permission or reset its data.
+    </string>
+    <string name="boo">Boo! No access no party! Use the live wallpaper!</string>
 
     <!-- Set wallpaper things -->
     <string name="save_pattern" translatable="false">vectorify_da_home_</string>

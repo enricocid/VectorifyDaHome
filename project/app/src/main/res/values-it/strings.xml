@@ -11,6 +11,17 @@
 
     <string name="install_browser_message">Installa un browser prima!</string>
 
+    <!-- Dialog rationale things -->
+    <string name="title_rationale">Permessi accesso storage</string>
+    <string name="rationale">Permettimi di accedere alla tua memoria interna per potervi salvare gli sfondi. Nessun dato
+        personale mi sarà accessibile :)
+    </string>
+    <string name="rationale_denied">Recentemente hai scelto l\'opzione \"Non chiedermelo più\" quando ti ho chiesto il
+        permesso di accesso alla memoria interna. Vai nelle info dell\'app e dammi il permesso oppure resetta i suoi
+        dati.
+    </string>
+    <string name="boo">Boo! No accesso no party! Usa il Live Wallpaper!</string>
+
     <!-- Set wallpaper things -->
     <string name="title_size">Dimensione</string>
     <string name="title_save_to">Salva nella memoria interna</string>

@@ -6,6 +6,7 @@ import android.Manifest
 import android.annotation.TargetApi
 import android.app.Activity
 import android.app.WallpaperManager
+import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -14,13 +15,17 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.VectorDrawable
+import android.net.Uri
 import android.os.Build
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
+import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
 import com.iven.vectorify.mTempPreferences
+
 
 object Utils {
 
@@ -95,14 +100,17 @@ object Utils {
     }
 
     @JvmStatic
-    fun hasToRequestWriteStoragePermission(context: Context): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+    fun hasToRequestWriteStoragePermission(activity: Activity): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(
+            activity,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ) != PackageManager.PERMISSION_GRANTED
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     @JvmStatic
-    fun checkPermissions(activity: Activity, code: Int) {
-        activity.requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), code)
+    fun requestPermissions(activity: Activity, code: Int) {
+        ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), code)
     }
 
     //method to get rounded float string
@@ -136,10 +144,39 @@ object Utils {
         return info != null && info.packageName == context.packageName
     }
 
-    //make toast method
+    //make rationale permission dialog
     @JvmStatic
-    fun makeToast(context: Context, which: Int) {
-        Toast.makeText(context, context.getString(which), Toast.LENGTH_SHORT)
-            .show()
+    fun makeRationaleDialog(activity: Activity, which: Int, shouldRequestRationale: Boolean) {
+
+        val message = if (shouldRequestRationale) R.string.rationale else R.string.rationale_denied
+
+        MaterialDialog(activity).show {
+            title(R.string.title_rationale)
+            message(message)
+            positiveButton {
+                if (shouldRequestRationale) requestPermissions(activity, which)
+                else openVectorifyDaHomeDetails(activity)
+
+            }
+            negativeButton {
+                Toast.makeText(activity, activity.getString(R.string.boo), Toast.LENGTH_LONG)
+                    .show()
+                dismiss()
+            }
+        }
+    }
+
+    //make rationale permission dialog
+    @JvmStatic
+    private fun openVectorifyDaHomeDetails(context: Context) {
+
+        try {
+            //Open the specific App Info page:
+            val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            intent.data = Uri.parse("package:" + context.packageName)
+            context.startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            e.printStackTrace()
+        }
     }
 }

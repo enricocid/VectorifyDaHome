@@ -13,7 +13,7 @@ The present Privacy policy page is accessible also from within the app via a but
 
 **We don't store any data. Period. We physically can't. We have nowhere to store it. We are very poor so we don't even have a server database to store any kind of information.**
 
-For a better utilization I may only require to ask You **storage permission** on the device on which the app is intended. This permission has to be enabled if you want to save wallpapers to internal memory.
+For a better utilization I may only require to ask You **storage access permission** on the device on which the app is intended. This permission has to be enabled if you want to save wallpapers to internal memory.
 This permission can be revoked at runtime when they are not needed, this is privy to only devices running Android 6.0 upward.
 
 The app does not implement any APIs or SDKs that are not approved for use in child-directed services including Google Sign-In (or any other API Service that accesses data associated with a Google Account), Google Play Games Services, and any other API Service using OAuth technology for authentication and authorization.<hr>

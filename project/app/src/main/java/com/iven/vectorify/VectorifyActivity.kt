@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -327,7 +328,8 @@ class VectorifyActivity : AppCompatActivity() {
 
         //check if a browser is present
         if (openGitHubPageIntent.resolveActivity(packageManager) != null) startActivity(openGitHubPageIntent) else
-            Utils.makeToast(this, R.string.install_browser_message)
+            Toast.makeText(this, getString(R.string.install_browser_message), Toast.LENGTH_SHORT)
+                .show()
     }
 
     //Generified function to measure layout params
