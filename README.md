@@ -10,7 +10,7 @@
 
 
 
-###### Current version: [(11) 1.3.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.3.0)
+###### Current version: [(12) 1.3.0.1](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.3.0.1)
 ###### Based on the project [Potate da home](https://github.com/enricocid/PotateDaHome)
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh3.gif) 
@@ -54,6 +54,8 @@ The app itself implements a dark/light theme switcher!
 - Colors combo taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
 
 - Aidan Follestad for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library
+
+- [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on Music Player GO which I used here!
 
 
 # Notice:
