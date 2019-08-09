@@ -15,10 +15,12 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.VectorDrawable
 import android.os.Build
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
+import com.iven.vectorify.mTempPreferences
 
 object Utils {
 
@@ -113,5 +115,31 @@ object Utils {
             e.printStackTrace()
         }
         return formattedNumber
+    }
+
+    //determine if wallpaper props changed
+    @JvmStatic
+    fun checkWallpaperChanged(): Boolean {
+        return mTempPreferences.isBackgroundColorChanged ||
+                mTempPreferences.isVectorColorChanged ||
+                mTempPreferences.isVectorChanged ||
+                mTempPreferences.isBackgroundAccentSet ||
+                mTempPreferences.isVectorAccentSet ||
+                mTempPreferences.isScaleChanged
+    }
+
+    //determine if the live wallpaper is already applied
+    @JvmStatic
+    fun isLiveWallpaperRunning(context: Context): Boolean {
+        val wpm = WallpaperManager.getInstance(context)
+        val info = wpm.wallpaperInfo
+        return info != null && info.packageName == context.packageName
+    }
+
+    //make toast method
+    @JvmStatic
+    fun makeToast(context: Context, which: Int) {
+        Toast.makeText(context, context.getString(which), Toast.LENGTH_SHORT)
+            .show()
     }
 }

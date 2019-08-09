@@ -1,6 +1,7 @@
 package com.iven.vectorify
 
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.VectorDrawable
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
@@ -10,8 +11,8 @@ import com.iven.vectorify.ui.Utils
 
 class VectorifyDaHomeLP : WallpaperService() {
 
-    private var mBackgroundColor = 0
-    private var mDrawableColor = 0
+    private var mBackgroundColor = Color.BLACK
+    private var mDrawableColor = Color.WHITE
     private var mScaleFactor = 0.35F
 
     private var mDeviceWidth = 0
@@ -23,12 +24,16 @@ class VectorifyDaHomeLP : WallpaperService() {
         mDeviceWidth = mDeviceMetrics.first
         mDeviceHeight = mDeviceMetrics.second
 
+        updatePaintProps()
+
+        return VectorifyEngine()
+    }
+
+    private fun updatePaintProps() {
         //set paints props
         mBackgroundColor = mVectorifyPreferences.backgroundColor
         mDrawableColor = mVectorifyPreferences.vectorColor
         mScaleFactor = mVectorifyPreferences.scale
-
-        return VectorifyEngine()
     }
 
     private fun checkSystemAccent() {
@@ -54,6 +59,7 @@ class VectorifyDaHomeLP : WallpaperService() {
         override fun onVisibilityChanged(visible: Boolean) {
             sVisible = visible
             if (visible) {
+                if (Utils.checkWallpaperChanged()) updatePaintProps()
                 checkSystemAccent()
                 handler.post(drawRunner)
             } else {

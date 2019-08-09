@@ -16,5 +16,6 @@
     <string name="title_save_to">Salva nella memoria interna</string>
     <string name="title_crop">Crop e setta come sfondo</string>
     <string name="title_go_live">Setta come LiveWallpaper</string>
+    <string name="title_already_live">Applico i cambiamenti&#8230;</string>
     <string name="message_saved_to">%1s salvato in %1s</string>
 </resources>

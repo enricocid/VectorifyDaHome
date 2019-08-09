@@ -20,10 +20,9 @@ const val SET_LIVE_WALLPAPER = 2
 
 class SetWallpaperActivity : AppCompatActivity() {
 
-    private var mBackgroundColor = 0
+    private var mBackgroundColor = mTempPreferences.tempBackgroundColor
     private var sUserIsSeeking = false
-    private var sScaleChanged = false
-    private var mScaleFactor = 0.35F
+    private var mScaleFactor = mTempPreferences.tempScale
 
     private lateinit var mVectorView: VectorView
 
@@ -97,19 +96,43 @@ class SetWallpaperActivity : AppCompatActivity() {
 
     private fun handleWallpaperChanges(which: Int) {
         //do all the save shit here
-        if (sScaleChanged) mVectorifyPreferences.scale = mScaleFactor
+
+        if (mTempPreferences.isBackgroundColorChanged) {
+            mVectorifyPreferences.isBackgroundAccented = false
+            mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
+        }
+        if (mTempPreferences.isVectorColorChanged) {
+            mVectorifyPreferences.isVectorAccented = false
+            mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
+        }
+        if (mTempPreferences.isBackgroundAccentSet) {
+            mVectorifyPreferences.isBackgroundAccented = true
+            mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
+        }
+        if (mTempPreferences.isVectorAccentSet) {
+            mVectorifyPreferences.isVectorAccented = true
+            mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
+        }
+
+        if (mTempPreferences.isVectorChanged) mVectorifyPreferences.vector = mTempPreferences.tempVector
+
+        if (mTempPreferences.isScaleChanged) mVectorifyPreferences.scale = mScaleFactor
 
         when (which) {
             SAVE_WALLPAPER -> mVectorView.vectorifyDaHome(false)
             SET_WALLPAPER -> mVectorView.vectorifyDaHome(true)
-            SET_LIVE_WALLPAPER -> Utils.openLiveWallpaperIntent(this)
+            SET_LIVE_WALLPAPER -> {
+                if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
+                else
+                    Utils.makeToast(this, R.string.title_already_live)
+            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mBackgroundColor = mVectorifyPreferences.backgroundColor
+        mBackgroundColor = mTempPreferences.tempBackgroundColor
 
         //set ui theme and immersive mode
         setTheme(mVectorifyPreferences.theme)
@@ -164,8 +187,9 @@ class SetWallpaperActivity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 sUserIsSeeking = false
-                sScaleChanged = true
+                mTempPreferences.isScaleChanged = true
                 mScaleFactor = userProgress.toFloat() / 100
+                mTempPreferences.tempScale = mScaleFactor
             }
         })
 
@@ -173,11 +197,11 @@ class SetWallpaperActivity : AppCompatActivity() {
         seekbar_card.setCardBackgroundColor(mBackgroundColor)
 
         //restore saved scale value
-        seek_size.progress = (mVectorifyPreferences.scale * 100).toInt()
+        seek_size.progress = (mScaleFactor * 100).toInt()
 
         //set scale text
         scale_text.setTextColor(widgetColors)
-        scale_text.text = Utils.getDecimalFormattedString(mVectorifyPreferences.scale)
+        scale_text.text = Utils.getDecimalFormattedString(mScaleFactor)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

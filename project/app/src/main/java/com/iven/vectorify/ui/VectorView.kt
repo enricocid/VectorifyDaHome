@@ -2,6 +2,7 @@ package com.iven.vectorify.ui
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.VectorDrawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
@@ -9,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.drawToBitmap
 import com.iven.vectorify.SaveWallpaperAsync
 import com.iven.vectorify.mDeviceMetrics
-import com.iven.vectorify.mVectorifyPreferences
+import com.iven.vectorify.mTempPreferences
 import java.lang.ref.WeakReference
 
 class VectorView @JvmOverloads constructor(
@@ -19,8 +20,8 @@ class VectorView @JvmOverloads constructor(
     private var mDeviceWidth = 0
     private var mDeviceHeight = 0
 
-    private var mBackgroundColor = 0
-    private var mDrawableColor = 0
+    private var mBackgroundColor = Color.BLACK
+    private var mDrawableColor = Color.WHITE
     private var mScaleFactor = 0.35F
 
     fun vectorifyDaHome(isSetAsWallpaper: Boolean) {
@@ -38,9 +39,9 @@ class VectorView @JvmOverloads constructor(
         mDeviceWidth = mDeviceMetrics.first
         mDeviceHeight = mDeviceMetrics.second
 
-        mScaleFactor = mVectorifyPreferences.scale
-        mBackgroundColor = mVectorifyPreferences.backgroundColor
-        mDrawableColor = mVectorifyPreferences.vectorColor
+        mScaleFactor = mTempPreferences.tempScale
+        mBackgroundColor = mTempPreferences.tempBackgroundColor
+        mDrawableColor = mTempPreferences.tempVectorColor
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -50,7 +51,7 @@ class VectorView @JvmOverloads constructor(
             //draw the vector!
             canvas.drawColor(mBackgroundColor)
             setColorFilter(mDrawableColor)
-            val bit = ContextCompat.getDrawable(context, mVectorifyPreferences.vector) as VectorDrawable
+            val bit = ContextCompat.getDrawable(context, mTempPreferences.tempVector) as VectorDrawable
             bit.mutate()
             bit.setTint(mDrawableColor)
 

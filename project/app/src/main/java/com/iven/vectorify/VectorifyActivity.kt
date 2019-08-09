@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,21 +32,14 @@ class VectorifyActivity : AppCompatActivity() {
 
     private var mTheme = R.style.AppTheme
 
-    private var mBackgroundColor = 0
-    private var mVectorColor = 0
-    private var mVector = R.drawable.android
+    private var mBackgroundColor = mTempPreferences.tempBackgroundColor
+    private var mVectorColor = mTempPreferences.tempVectorColor
+    private var mVector = mTempPreferences.tempVector
 
     private lateinit var mFab: FloatingActionButton
     private lateinit var mVectorFrame: ImageView
     private lateinit var mBackgroundSystemAccentGrabber: Chip
     private lateinit var mVectorSystemAccentGrabber: Chip
-
-    private var sBackgroundColorChanged = false
-    private var sVectorColorChanged = false
-    private var sBackgroundAccentSet = false
-    private var sVectorAccentSet = false
-
-    private var sVectorChanged = true
 
     override fun onResume() {
         super.onResume()
@@ -74,18 +66,17 @@ class VectorifyActivity : AppCompatActivity() {
 
         //apply live wallpaper on fab click!
         mFab.setOnClickListener {
-            handleWallpaperChanges()
+
+            //start preview activity
+            val intent = Intent(this, SetWallpaperActivity::class.java)
+            startActivity(intent)
         }
 
         //update background card color and text from preferences
-        mBackgroundColor = mVectorifyPreferences.backgroundColor
         setBackgroundColorForUI(mBackgroundColor, false)
 
         //update vector card color and text from preferences
-        mVectorColor = mVectorifyPreferences.vectorColor
         setVectorColorForUI(mVectorColor, false)
-
-        mVector = mVectorifyPreferences.vector
 
         //set the bottom bar menu
         val bottomBar = bar
@@ -131,9 +122,9 @@ class VectorifyActivity : AppCompatActivity() {
 
             if (mVector != vector) {
                 mVector = vector!!
+                mTempPreferences.isVectorChanged = true
+                mTempPreferences.tempVector = mVector
                 runOnUiThread { mVectorFrame.setImageResource(mVector) }
-
-                sVectorChanged = true
             }
         }
 
@@ -148,31 +139,6 @@ class VectorifyActivity : AppCompatActivity() {
 
             setVectorFrameColors()
         }
-    }
-
-    private fun handleWallpaperChanges() {
-        //do all the save shit here
-        if (sBackgroundColorChanged) {
-            mVectorifyPreferences.isBackgroundAccented = false
-            mVectorifyPreferences.backgroundColor = mBackgroundColor
-        }
-        if (sVectorColorChanged) {
-            mVectorifyPreferences.isVectorAccented = false
-            mVectorifyPreferences.vectorColor = mVectorColor
-        }
-        if (sBackgroundAccentSet) {
-            mVectorifyPreferences.isBackgroundAccented = true
-            mVectorifyPreferences.backgroundColor = mBackgroundColor
-        }
-        if (sVectorAccentSet) {
-            mVectorifyPreferences.isVectorAccented = true
-            mVectorifyPreferences.vectorColor = mVectorColor
-        }
-
-        if (sVectorChanged) mVectorifyPreferences.vector = mVector
-
-        val intent = Intent(this, SetWallpaperActivity::class.java)
-        startActivity(intent)
     }
 
     //update vector frame
@@ -190,6 +156,7 @@ class VectorifyActivity : AppCompatActivity() {
     //update background card colors
     private fun setBackgroundColorForUI(color: Int, isSystemAccentChanged: Boolean) {
         mBackgroundColor = color
+        mTempPreferences.tempBackgroundColor = mBackgroundColor
 
         //if system accent has changed update preferences on resume with the new accent
         if (isSystemAccentChanged) mVectorifyPreferences.backgroundColor = mBackgroundColor
@@ -214,6 +181,7 @@ class VectorifyActivity : AppCompatActivity() {
     //update vector card colors
     private fun setVectorColorForUI(color: Int, isSystemAccentChanged: Boolean) {
         mVectorColor = color
+        mTempPreferences.tempVectorColor = mVectorColor
 
         //if system accent has changed update preferences on resume with the new accent
         if (isSystemAccentChanged) mVectorifyPreferences.vectorColor = mVectorColor
@@ -236,14 +204,14 @@ class VectorifyActivity : AppCompatActivity() {
 
     //set system accent as background color
     fun setSystemAccentForBackground(view: View) {
-        sBackgroundAccentSet = true
+        mTempPreferences.tempIsBackgroundAccented = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setBackgroundColorForUI(systemAccent, false)
     }
 
     //set system accent as vector color
     fun setSystemAccentForVector(view: View) {
-        sVectorAccentSet = true
+        mTempPreferences.isVectorAccentSet = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setVectorColorForUI(systemAccent, false)
     }
@@ -272,16 +240,15 @@ class VectorifyActivity : AppCompatActivity() {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
                         if (mBackgroundColor != color) {
-                            sBackgroundColorChanged = true
-                            sBackgroundAccentSet = false
+                            mTempPreferences.tempIsBackgroundAccented = false
                             setBackgroundColorForUI(color, false)
                         }
                     }
                     else -> {
                         //update the color only if it really changed
                         if (mVectorColor != color) {
-                            sVectorColorChanged = true
-                            sVectorAccentSet = false
+                            mTempPreferences.tempIsVectorAccented = false
+                            mTempPreferences.tempVectorColor = mVectorColor
                             setVectorColorForUI(color, false)
                         }
                     }
@@ -292,10 +259,10 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     private fun setBackgroundAndVectorColorsChanged() {
-        sBackgroundAccentSet = false
-        sVectorAccentSet = false
-        sBackgroundColorChanged = true
-        sVectorColorChanged = true
+        mTempPreferences.isBackgroundAccentSet = false
+        mTempPreferences.isVectorAccentSet = false
+        mTempPreferences.isBackgroundColorChanged = true
+        mTempPreferences.isVectorColorChanged = true
     }
 
     //method to start background color picker for background
@@ -360,7 +327,7 @@ class VectorifyActivity : AppCompatActivity() {
 
         //check if a browser is present
         if (openGitHubPageIntent.resolveActivity(packageManager) != null) startActivity(openGitHubPageIntent) else
-            Toast.makeText(this, getString(R.string.install_browser_message), Toast.LENGTH_SHORT).show()
+            Utils.makeToast(this, R.string.install_browser_message)
     }
 
     //Generified function to measure layout params
