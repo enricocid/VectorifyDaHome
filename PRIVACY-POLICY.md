@@ -2,42 +2,28 @@
 
 ###### Effective date: August 05, 2019
 
-This privacy policy document is to clearly state and provides information on what, how and why personal data or information is collected, used and disclosed when this software is utilized and the choices you have associated with that data. 
+**Enrico D'Ortenzio** built the Vectorify da home! app as an Open Source app. This SERVICE is provided by Enrico D'Ortenzio at no cost and is intended for use as is.
 
-The objective of this policy document is to provide an open environment between developer and users of this software by openly stating what information the developer collects or not. By utilizing this software, it means you accept all the terms and conditions of the developer peculiar to only Vectorify da home! software. This Policy applies to this software and the developer would not be held responsible for the content or privacy practices on any third party app not operated by the developer to which this software links or that links to this software, therefore it is advisable to read up the privacy policies of third party services that may be linked to this software. <hr>
+This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my App.
 
-
-## Information Collection And Use
-
-For better and enhanced utilization of Vectorify da home!, the software is designed to request only the storage permission on the device on which the software's services is intended.
-
-This permission has to be enabled so the software can save wallpapers to internal memory.
-
-The information that may be collected with the enablement of this permission are stored locally on the device and the developer has no access to that information.
-
-This permission can be revoked when they are not needed, this is privy to only devices running Android 6.0 upward.
-
-Another capability of the software is
-- Ability to set wallpaper.
-
-The app does not implement any APIs or SDKs that are not approved for use in child-directed services including Google Sign-In (or any other API Service that accesses data associated with a Google Account), Google Play Games Services, and any other API Service using OAuth technology for authentication and authorization.
-
-Moreover, the app improvement is based purely on Google Play Store reviews or users feedbacks.<hr>
+The present Privacy policy page is accessible also from within the app via a button. <hr>
 
 
-## Types of Data Collected
+### Information Collection And Use
 
-### Personal data
+**We don't store any data. Period. We physically can't. We have nowhere to store it. We are very poor so we don't even have a server database to store any kind of information.**
 
-The developer doesn't collect personally identifiable data while the software is being utilized. <hr>
+For a better utilization I may only require to ask You **storage permission** on the device on which the app is intended. This permission has to be enabled if you want to save wallpapers to internal memory.
+This permission can be revoked at runtime when they are not needed, this is privy to only devices running Android 6.0 upward.
+
+The app does not implement any APIs or SDKs that are not approved for use in child-directed services including Google Sign-In (or any other API Service that accesses data associated with a Google Account), Google Play Games Services, and any other API Service using OAuth technology for authentication and authorization.<hr>
+
 
 ### Children's Privacy
 
-This software is intended for general use and has no restrictions on utilization by children. Vectorify da home! **DOES NOT** contain hazardous, violent or any other content (e.g. augment reality) that may require parental supervision. <hr>
+The app do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13. In the case I discover that a child under 13 has provided me with personal information (by email), I immediately delete it. If you are a parent or guardian and you are aware that your child has provided us with personal information by email, please contact me so that I will be able to do necessary actions.
 
-### Links To Other Sites
-
-Vectorify da home! contains a link to the present privacy policy.<hr>
+This software is intended for general use and has no restrictions on utilization by children. Vectorify da home! **DOES NOT** contain any hazardous, violent or any other content (e.g. augment reality) that may require parental supervision. <hr>
 
 
 ### Changes To This Privacy Policy
