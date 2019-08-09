@@ -134,9 +134,9 @@ class VectorifyActivity : AppCompatActivity() {
         //set vector frame height
         vectors_rv.afterMeasured {
 
-            val vectorFrameLayoutParams = mVectorFrame.layoutParams as LinearLayout.LayoutParams
-            vectorFrameLayoutParams.height = (height / 0.75F).toInt()
-            mVectorFrame.layoutParams = vectorFrameLayoutParams
+            val vectorFrameParams = mVectorFrame.layoutParams as LinearLayout.LayoutParams
+            vectorFrameParams.height = (height / 0.75F).toInt()
+            mVectorFrame.layoutParams = vectorFrameParams
 
             setVectorFrameColors()
         }
