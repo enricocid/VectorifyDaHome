@@ -205,7 +205,7 @@ class VectorifyActivity : AppCompatActivity() {
 
     //set system accent as background color
     fun setSystemAccentForBackground(view: View) {
-        mTempPreferences.tempIsBackgroundAccented = true
+        mTempPreferences.isBackgroundAccentSet = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setBackgroundColorForUI(systemAccent, false)
     }
@@ -241,7 +241,7 @@ class VectorifyActivity : AppCompatActivity() {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
                         if (mBackgroundColor != color) {
-                            mTempPreferences.tempIsBackgroundAccented = false
+                            mVectorifyPreferences.isBackgroundAccented = false
                             mTempPreferences.isBackgroundColorChanged = true
                             setBackgroundColorForUI(color, false)
                         }
@@ -249,7 +249,7 @@ class VectorifyActivity : AppCompatActivity() {
                     else -> {
                         //update the color only if it really changed
                         if (mVectorColor != color) {
-                            mTempPreferences.tempIsVectorAccented = false
+                            mVectorifyPreferences.isVectorAccented = false
                             mTempPreferences.isVectorColorChanged = true
                             setVectorColorForUI(color, false)
                         }
@@ -261,8 +261,8 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     private fun setBackgroundAndVectorColorsChanged() {
-        mTempPreferences.isBackgroundAccentSet = false
-        mTempPreferences.isVectorAccentSet = false
+        mVectorifyPreferences.isBackgroundAccented = false
+        mVectorifyPreferences.isVectorAccented = false
         mTempPreferences.isBackgroundColorChanged = true
         mTempPreferences.isVectorColorChanged = true
     }

@@ -102,15 +102,53 @@ class SetWallpaperActivity : AppCompatActivity() {
             if (systemAccentColor != mVectorifyPreferences.backgroundColor || systemAccentColor != mVectorifyPreferences.vectorColor) {
 
                 //update cards colors
-                if (isBackgroundAccented) mVectorView.updateBackgroundColor(systemAccentColor)
+                if (isBackgroundAccented) {
+                    mBackgroundColor = systemAccentColor
+                    mVectorView.updateBackgroundColor(systemAccentColor)
+                    setToolbarAndSeekbarColors()
+                }
                 if (isVectorAccented) mVectorView.updateVectorColor(systemAccentColor)
             }
             return true
         }
     }
 
+    private fun setToolbarAndSeekbarColors() {
+
+        if (Utils.isColorDark(mBackgroundColor)) toolbar.context.setTheme(R.style.ToolbarStyle_Dark)
+        else toolbar.context.setTheme(R.style.ToolbarStyle)
+
+        //determine if background color is dark or light and select
+        //the appropriate color for UI widgets
+        val widgetColors = Utils.getSecondaryColor(mBackgroundColor)
+
+        toolbar.setBackgroundColor(mBackgroundColor)
+        toolbar.setTitleTextColor(widgetColors)
+        toolbar.setNavigationIcon(R.drawable.ic_back)
+
+        //set seekbar colors
+        seekbar_card.setCardBackgroundColor(mBackgroundColor)
+        seek_size.progressTintList = ColorStateList.valueOf(widgetColors)
+        seek_size.thumbTintList = ColorStateList.valueOf(widgetColors)
+        seek_size.progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
+
+        seekbar_title.setTextColor(widgetColors)
+        scale_text.setTextColor(widgetColors)
+    }
+
     private fun handleWallpaperChanges(which: Int) {
         //do all the save shit here
+
+        if (mTempPreferences.isBackgroundAccentSet) {
+            mVectorifyPreferences.isBackgroundAccented = true
+            mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
+            mTempPreferences.isBackgroundAccentSet = false
+        }
+        if (mTempPreferences.isVectorAccentSet) {
+            mVectorifyPreferences.isVectorAccented = true
+            mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
+            mTempPreferences.isVectorAccentSet = false
+        }
 
         if (mTempPreferences.isBackgroundColorChanged) {
             mVectorifyPreferences.isBackgroundAccented = false
@@ -121,16 +159,6 @@ class SetWallpaperActivity : AppCompatActivity() {
             mVectorifyPreferences.isVectorAccented = false
             mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
             mTempPreferences.isVectorColorChanged = false
-        }
-        if (mTempPreferences.isBackgroundAccentSet) {
-            mVectorifyPreferences.isBackgroundAccented = true
-            mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
-            mTempPreferences.isBackgroundAccentSet = false
-        }
-        if (mTempPreferences.isVectorAccentSet) {
-            mVectorifyPreferences.isVectorAccented = true
-            mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
-            mTempPreferences.isVectorAccentSet = false
         }
 
         if (mTempPreferences.isVectorChanged) {
@@ -169,19 +197,9 @@ class SetWallpaperActivity : AppCompatActivity() {
         //get all the views
         mVectorView = vector_view
 
-        //determine if background color is dark or light and select
-        //the appropriate color for UI widgets
-        val widgetColors = Utils.getSecondaryColor(mBackgroundColor)
-
-
         //set toolbar shit
         //match theme with background luminance
-        if (Utils.isColorDark(mBackgroundColor)) toolbar.context.setTheme(R.style.ToolbarStyle_Dark)
-        else toolbar.context.setTheme(R.style.ToolbarStyle)
-
-        toolbar.setBackgroundColor(mBackgroundColor)
-        toolbar.setTitleTextColor(widgetColors)
-        toolbar.setNavigationIcon(R.drawable.ic_back)
+        setToolbarAndSeekbarColors()
 
         setSupportActionBar(toolbar)
 
@@ -189,11 +207,6 @@ class SetWallpaperActivity : AppCompatActivity() {
             supportActionBar!!.setHomeButtonEnabled(true)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
-
-        //set seekbar and seekbar card shit
-        seek_size.progressTintList = ColorStateList.valueOf(widgetColors)
-        seek_size.thumbTintList = ColorStateList.valueOf(widgetColors)
-        seek_size.progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
 
         //observe seekbar changes
         seek_size.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -219,14 +232,10 @@ class SetWallpaperActivity : AppCompatActivity() {
             }
         })
 
-        seekbar_title.setTextColor(widgetColors)
-        seekbar_card.setCardBackgroundColor(mBackgroundColor)
-
         //restore saved scale value
         seek_size.progress = (mScaleFactor * 100).toInt()
 
         //set scale text
-        scale_text.setTextColor(widgetColors)
         scale_text.text = Utils.getDecimalFormattedString(mScaleFactor)
     }
 
