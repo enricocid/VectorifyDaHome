@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="?attr/bottom_bar_color"
-            app:menu="@menu/bottom_menu"
             app:fabAlignmentMode="end"
             android:layout_gravity="bottom"/>
 

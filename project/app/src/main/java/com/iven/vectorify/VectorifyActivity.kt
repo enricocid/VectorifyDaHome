@@ -81,6 +81,7 @@ class VectorifyActivity : AppCompatActivity() {
 
         //set the bottom bar menu
         val bottomBar = bar
+        bottomBar.replaceMenu(R.menu.bottom_menu)
         bottomBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_bar_info -> openGitHubPage()
