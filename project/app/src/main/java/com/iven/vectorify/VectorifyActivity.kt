@@ -33,14 +33,14 @@ class VectorifyActivity : AppCompatActivity() {
 
     private var mTheme = R.style.AppTheme
 
-    private var mBackgroundColor = mVectorifyPreferences.backgroundColor
-    private var mVectorColor = mVectorifyPreferences.vectorColor
-    private var mVector = mVectorifyPreferences.vector
-
     private lateinit var mFab: FloatingActionButton
     private lateinit var mVectorFrame: ImageView
     private lateinit var mBackgroundSystemAccentGrabber: Chip
     private lateinit var mVectorSystemAccentGrabber: Chip
+
+    private var mBackgroundColor = Color.BLACK
+    private var mVectorColor = Color.WHITE
+    private var mVector = R.drawable.android
 
     override fun onResume() {
         super.onResume()
@@ -58,10 +58,10 @@ class VectorifyActivity : AppCompatActivity() {
 
         setContentView(R.layout.vectorify_activity)
 
-        //set temp preferecens to match preferences
-        mTempPreferences.tempBackgroundColor = mBackgroundColor
-        mTempPreferences.tempVectorColor = mVectorColor
-        mTempPreferences.tempVector = mVector
+        //get wallpaper shit
+        mBackgroundColor = mVectorifyPreferences.backgroundColor
+        mVectorColor = mVectorifyPreferences.vectorColor
+        mVector = mVectorifyPreferences.vector
 
         //get system accent grabbers
         mBackgroundSystemAccentGrabber = background_system_accent
@@ -129,14 +129,14 @@ class VectorifyActivity : AppCompatActivity() {
         vectorsAdapter.onVectorClick = { vector ->
 
             if (mVector != vector) {
+                runOnUiThread { mVectorFrame.setImageResource(vector!!) }
                 mVector = vector!!
-                mTempPreferences.isVectorChanged = true
                 mTempPreferences.tempVector = mVector
-                runOnUiThread { mVectorFrame.setImageResource(mVector) }
+                mTempPreferences.isVectorChanged = true
             }
         }
 
-        vectors_rv.scrollToPosition(vectorsAdapter.getVectorPosition(mVector))
+        vectors_rv.scrollToPosition(vectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
 
         //set vector frame height
         vectors_rv.afterMeasured {
@@ -153,8 +153,13 @@ class VectorifyActivity : AppCompatActivity() {
     private fun setVectorFrameColors() {
         mVectorFrame.setImageResource(mVector)
         mVectorFrame.setBackgroundColor(mBackgroundColor)
-        if (mBackgroundColor == mVectorColor) {
-            if (Utils.isColorDark(mVectorColor)) mVectorFrame.setColorFilter(Utils.lightenColor(mVectorColor, 0.20F))
+        if (checkIfColorsEquals()) {
+            if (Utils.isColorDark(mVectorColor)) mVectorFrame.setColorFilter(
+                Utils.lightenColor(
+                    mVectorColor,
+                    0.20F
+                )
+            )
             else mVectorFrame.setColorFilter(Utils.darkenColor(mVectorColor, 0.20F))
         } else {
             mVectorFrame.setColorFilter(mVectorColor)
@@ -167,7 +172,7 @@ class VectorifyActivity : AppCompatActivity() {
         mTempPreferences.tempBackgroundColor = mBackgroundColor
 
         //if system accent has changed update preferences on resume with the new accent
-        if (isSystemAccentChanged) mVectorifyPreferences.backgroundColor = mBackgroundColor
+        if (isSystemAccentChanged) mVectorifyPreferences.backgroundColor = color
 
         //update shit colors
         runOnUiThread {
@@ -179,7 +184,7 @@ class VectorifyActivity : AppCompatActivity() {
             mFab.backgroundTintList = ColorStateList.valueOf(color)
 
             //check if colors are the same so we enable stroke to make vector visible
-            val fabDrawableColor = if (checkIfColorsEquals()) textColor else mVectorColor
+            val fabDrawableColor = if (checkIfColorsEquals()) textColor else mTempPreferences.tempVectorColor
             mFab.drawable.setTint(fabDrawableColor)
 
             setVectorFrameColors()
@@ -192,7 +197,7 @@ class VectorifyActivity : AppCompatActivity() {
         mTempPreferences.tempVectorColor = mVectorColor
 
         //if system accent has changed update preferences on resume with the new accent
-        if (isSystemAccentChanged) mVectorifyPreferences.vectorColor = mVectorColor
+        if (isSystemAccentChanged) mVectorifyPreferences.vectorColor = color
 
         //update shit colors
         runOnUiThread {
@@ -247,29 +252,29 @@ class VectorifyActivity : AppCompatActivity() {
                 when (key) {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
-                        if (mBackgroundColor != color) {
-                            mVectorifyPreferences.isBackgroundAccented = false
+                        if (mTempPreferences.tempBackgroundColor != color) {
+                            mTempPreferences.isBackgroundAccentSet = false
                             mTempPreferences.isBackgroundColorChanged = true
                             setBackgroundColorForUI(color, false)
                         }
                     }
                     else -> {
                         //update the color only if it really changed
-                        if (mVectorColor != color) {
-                            mVectorifyPreferences.isVectorAccented = false
+                        if (mTempPreferences.tempVectorColor != color) {
+                            mTempPreferences.isVectorAccentSet = false
                             mTempPreferences.isVectorColorChanged = true
                             setVectorColorForUI(color, false)
                         }
                     }
                 }
             }
-            positiveButton(android.R.string.ok)
+            positiveButton()
         }
     }
 
     private fun setBackgroundAndVectorColorsChanged() {
-        mVectorifyPreferences.isBackgroundAccented = false
-        mVectorifyPreferences.isVectorAccented = false
+        mTempPreferences.isBackgroundAccentSet = false
+        mTempPreferences.isVectorAccentSet = false
         mTempPreferences.isBackgroundColorChanged = true
         mTempPreferences.isVectorColorChanged = true
     }
@@ -297,7 +302,7 @@ class VectorifyActivity : AppCompatActivity() {
 
     //check if background and vector colors are equals
     private fun checkIfColorsEquals(): Boolean {
-        return mBackgroundColor == mVectorColor
+        return mTempPreferences.tempBackgroundColor == mTempPreferences.tempVectorColor
     }
 
     //returns formatted hex string
@@ -308,8 +313,10 @@ class VectorifyActivity : AppCompatActivity() {
     //method to check if accent theme has changed on resume
     private fun checkSystemAccent(): Boolean {
 
-        val isBackgroundAccented = mVectorifyPreferences.isBackgroundAccented
-        val isVectorAccented = mVectorifyPreferences.isVectorAccented
+        val isBackgroundAccented =
+            mTempPreferences.isBackgroundAccentSet && !mTempPreferences.isBackgroundColorChanged || mVectorifyPreferences.isBackgroundAccented && !mTempPreferences.isBackgroundColorChanged
+        val isVectorAccented =
+            mTempPreferences.isVectorAccentSet && !mTempPreferences.isVectorColorChanged || mVectorifyPreferences.isVectorAccented && !mTempPreferences.isVectorColorChanged
 
         return if (!isBackgroundAccented && !isVectorAccented) {
             false
@@ -318,7 +325,7 @@ class VectorifyActivity : AppCompatActivity() {
             val systemAccentColor = Utils.getSystemAccentColor(this)
 
             //if changed, update it!
-            if (systemAccentColor != mVectorifyPreferences.backgroundColor || systemAccentColor != mVectorifyPreferences.vectorColor) {
+            if (systemAccentColor != mTempPreferences.tempBackgroundColor || systemAccentColor != mTempPreferences.tempVectorColor) {
 
                 //update cards colors
                 if (isBackgroundAccented) setBackgroundColorForUI(systemAccentColor, true)

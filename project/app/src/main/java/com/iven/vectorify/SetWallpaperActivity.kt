@@ -25,9 +25,7 @@ const val SET_LIVE_WALLPAPER = 2
 
 class SetWallpaperActivity : AppCompatActivity() {
 
-    private var mBackgroundColor = mTempPreferences.tempBackgroundColor
     private var sUserIsSeeking = false
-    private var mScaleFactor = mTempPreferences.tempScale
 
     private lateinit var mVectorView: VectorView
 
@@ -89,8 +87,10 @@ class SetWallpaperActivity : AppCompatActivity() {
     //method to check if accent theme has changed on resume
     private fun checkSystemAccent(): Boolean {
 
-        val isBackgroundAccented = mVectorifyPreferences.isBackgroundAccented
-        val isVectorAccented = mVectorifyPreferences.isVectorAccented
+        val isBackgroundAccented =
+            mTempPreferences.isBackgroundAccentSet && !mTempPreferences.isBackgroundColorChanged || mVectorifyPreferences.isBackgroundAccented && !mTempPreferences.isBackgroundColorChanged
+        val isVectorAccented =
+            mTempPreferences.isVectorAccentSet && !mTempPreferences.isVectorColorChanged || mVectorifyPreferences.isVectorAccented && !mTempPreferences.isVectorColorChanged
 
         return if (!isBackgroundAccented && !isVectorAccented) {
             false
@@ -99,15 +99,18 @@ class SetWallpaperActivity : AppCompatActivity() {
             val systemAccentColor = Utils.getSystemAccentColor(this)
 
             //if changed, update it!
-            if (systemAccentColor != mVectorifyPreferences.backgroundColor || systemAccentColor != mVectorifyPreferences.vectorColor) {
+            if (systemAccentColor != mTempPreferences.tempBackgroundColor || systemAccentColor != mTempPreferences.tempVectorColor) {
 
                 //update cards colors
                 if (isBackgroundAccented) {
-                    mBackgroundColor = systemAccentColor
+                    mTempPreferences.tempBackgroundColor = systemAccentColor
                     mVectorView.updateBackgroundColor(systemAccentColor)
                     setToolbarAndSeekbarColors()
                 }
-                if (isVectorAccented) mVectorView.updateVectorColor(systemAccentColor)
+                if (isVectorAccented) {
+                    mTempPreferences.tempVectorColor = systemAccentColor
+                    mVectorView.updateVectorColor(systemAccentColor)
+                }
             }
             return true
         }
@@ -115,19 +118,19 @@ class SetWallpaperActivity : AppCompatActivity() {
 
     private fun setToolbarAndSeekbarColors() {
 
-        if (Utils.isColorDark(mBackgroundColor)) toolbar.context.setTheme(R.style.ToolbarStyle_Dark)
+        if (Utils.isColorDark(mTempPreferences.tempBackgroundColor)) toolbar.context.setTheme(R.style.ToolbarStyle_Dark)
         else toolbar.context.setTheme(R.style.ToolbarStyle)
 
         //determine if background color is dark or light and select
         //the appropriate color for UI widgets
-        val widgetColors = Utils.getSecondaryColor(mBackgroundColor)
+        val widgetColors = Utils.getSecondaryColor(mTempPreferences.tempBackgroundColor)
 
-        toolbar.setBackgroundColor(mBackgroundColor)
+        toolbar.setBackgroundColor(mTempPreferences.tempBackgroundColor)
         toolbar.setTitleTextColor(widgetColors)
         toolbar.setNavigationIcon(R.drawable.ic_back)
 
         //set seekbar colors
-        seekbar_card.setCardBackgroundColor(mBackgroundColor)
+        seekbar_card.setCardBackgroundColor(mTempPreferences.tempBackgroundColor)
         seek_size.progressTintList = ColorStateList.valueOf(widgetColors)
         seek_size.thumbTintList = ColorStateList.valueOf(widgetColors)
         seek_size.progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
@@ -167,7 +170,7 @@ class SetWallpaperActivity : AppCompatActivity() {
         }
 
         if (mTempPreferences.isScaleChanged) {
-            mVectorifyPreferences.scale = mScaleFactor
+            mVectorifyPreferences.scale = mTempPreferences.tempScale
             mTempPreferences.isScaleChanged = false
         }
 
@@ -185,8 +188,6 @@ class SetWallpaperActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mBackgroundColor = mTempPreferences.tempBackgroundColor
 
         //set ui theme and immersive mode
         setTheme(mVectorifyPreferences.theme)
@@ -227,16 +228,15 @@ class SetWallpaperActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 sUserIsSeeking = false
                 mTempPreferences.isScaleChanged = true
-                mScaleFactor = userProgress.toFloat() / 100
-                mTempPreferences.tempScale = mScaleFactor
+                mTempPreferences.tempScale = userProgress.toFloat() / 100
             }
         })
 
         //restore saved scale value
-        seek_size.progress = (mScaleFactor * 100).toInt()
+        seek_size.progress = (mTempPreferences.tempScale * 100).toInt()
 
         //set scale text
-        scale_text.text = Utils.getDecimalFormattedString(mScaleFactor)
+        scale_text.text = Utils.getDecimalFormattedString(mTempPreferences.tempScale)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
