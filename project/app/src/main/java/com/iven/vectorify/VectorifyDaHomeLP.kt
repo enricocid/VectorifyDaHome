@@ -59,7 +59,7 @@ class VectorifyDaHomeLP : WallpaperService() {
         override fun onVisibilityChanged(visible: Boolean) {
             sVisible = visible
             if (visible) {
-                if (Utils.checkWallpaperChanged()) updatePaintProps()
+                updatePaintProps()
                 checkSystemAccent()
                 handler.post(drawRunner)
             } else {

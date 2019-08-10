@@ -24,7 +24,6 @@ import androidx.core.graphics.ColorUtils
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
-import com.iven.vectorify.mTempPreferences
 
 
 object Utils {
@@ -123,17 +122,6 @@ object Utils {
             e.printStackTrace()
         }
         return formattedNumber
-    }
-
-    //determine if wallpaper props changed
-    @JvmStatic
-    fun checkWallpaperChanged(): Boolean {
-        return mTempPreferences.isBackgroundColorChanged ||
-                mTempPreferences.isVectorColorChanged ||
-                mTempPreferences.isVectorChanged ||
-                mTempPreferences.isBackgroundAccentSet ||
-                mTempPreferences.isVectorAccentSet ||
-                mTempPreferences.isScaleChanged
     }
 
     //determine if the live wallpaper is already applied
