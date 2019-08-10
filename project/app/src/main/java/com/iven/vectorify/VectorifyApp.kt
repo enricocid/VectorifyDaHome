@@ -29,13 +29,6 @@ class VectorifyApp : Application() {
         prefs = VectorifyPreferences(applicationContext)
         tempPrefs = TempPreferences()
 
-        tempPrefs.tempBackgroundColor = prefs.backgroundColor
-        tempPrefs.tempVectorColor = prefs.vectorColor
-        tempPrefs.tempVector = prefs.vector
-        tempPrefs.isBackgroundAccentSet = prefs.isBackgroundAccented
-        tempPrefs.isVectorAccentSet = prefs.isVectorAccented
-        tempPrefs.tempScale = prefs.scale
-
         //retrieve display specifications
         val window = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val d = DisplayMetrics()

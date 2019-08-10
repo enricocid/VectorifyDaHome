@@ -63,6 +63,14 @@ class VectorifyActivity : AppCompatActivity() {
         mVectorColor = mVectorifyPreferences.vectorColor
         mVector = mVectorifyPreferences.vector
 
+        //init temp preferences
+        mTempPreferences.tempBackgroundColor = mBackgroundColor
+        mTempPreferences.tempVectorColor = mVectorColor
+        mTempPreferences.tempVector = mVector
+        mTempPreferences.isBackgroundAccentSet = mVectorifyPreferences.isBackgroundAccented
+        mTempPreferences.isVectorAccentSet = mVectorifyPreferences.isVectorAccented
+        mTempPreferences.tempScale = mVectorifyPreferences.scale
+
         //get system accent grabbers
         mBackgroundSystemAccentGrabber = background_system_accent
         mVectorSystemAccentGrabber = vector_system_accent
