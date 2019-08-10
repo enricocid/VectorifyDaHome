@@ -48,21 +48,18 @@ class SetWallpaperActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        val shouldShowRationale =
-            ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
         when (item.itemId) {
             R.id.save ->
                 if (Utils.hasToRequestWriteStoragePermission(this)) Utils.makeRationaleDialog(
                     this,
                     SAVE_WALLPAPER,
-                    shouldShowRationale
+                    true
                 ) else handleWallpaperChanges(SAVE_WALLPAPER)
 
             R.id.set -> if (Utils.hasToRequestWriteStoragePermission(this)) Utils.makeRationaleDialog(
                 this,
                 SET_WALLPAPER,
-                shouldShowRationale
+                true
             ) else handleWallpaperChanges(SET_WALLPAPER)
             R.id.go_live -> handleWallpaperChanges(SET_LIVE_WALLPAPER)
             android.R.id.home -> finishAndRemoveTask()
@@ -75,8 +72,10 @@ class SetWallpaperActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                Utils.makeRationaleDialog(this, requestCode, true) else
+            val shouldShowRationale =
+                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (!shouldShowRationale)
+                Utils.makeRationaleDialog(this, requestCode, shouldShowRationale) else
                 Toast.makeText(this, getString(R.string.boo), Toast.LENGTH_LONG)
                     .show()
         } else {
