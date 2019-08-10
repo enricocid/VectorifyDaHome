@@ -33,9 +33,9 @@ class VectorifyActivity : AppCompatActivity() {
 
     private var mTheme = R.style.AppTheme
 
-    private var mBackgroundColor = mTempPreferences.tempBackgroundColor
-    private var mVectorColor = mTempPreferences.tempVectorColor
-    private var mVector = mTempPreferences.tempVector
+    private var mBackgroundColor = mVectorifyPreferences.backgroundColor
+    private var mVectorColor = mVectorifyPreferences.vectorColor
+    private var mVector = mVectorifyPreferences.vector
 
     private lateinit var mFab: FloatingActionButton
     private lateinit var mVectorFrame: ImageView
@@ -53,9 +53,15 @@ class VectorifyActivity : AppCompatActivity() {
 
         //set theme
         mTheme = mVectorifyPreferences.theme
+
         setTheme(mTheme)
 
         setContentView(R.layout.vectorify_activity)
+
+        //set temp preferecens to match preferences
+        mTempPreferences.tempBackgroundColor = mBackgroundColor
+        mTempPreferences.tempVectorColor = mVectorColor
+        mTempPreferences.tempVector = mVector
 
         //get system accent grabbers
         mBackgroundSystemAccentGrabber = background_system_accent

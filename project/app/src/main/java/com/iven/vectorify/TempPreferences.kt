@@ -1,11 +1,13 @@
 package com.iven.vectorify
 
+import android.graphics.Color
+
 class TempPreferences {
 
-    var tempBackgroundColor = mVectorifyPreferences.backgroundColor
-    var tempVectorColor = mVectorifyPreferences.vectorColor
-    var tempVector = mVectorifyPreferences.vector
-    var tempScale = mVectorifyPreferences.scale
+    var tempBackgroundColor = Color.BLACK
+    var tempVectorColor = Color.WHITE
+    var tempVector = R.drawable.android
+    var tempScale = 0.35F
 
     var isBackgroundColorChanged = false
     var isVectorColorChanged = false
