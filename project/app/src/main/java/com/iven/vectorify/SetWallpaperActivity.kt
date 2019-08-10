@@ -116,23 +116,33 @@ class SetWallpaperActivity : AppCompatActivity() {
         if (mTempPreferences.isBackgroundColorChanged) {
             mVectorifyPreferences.isBackgroundAccented = false
             mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
+            mTempPreferences.isBackgroundColorChanged = false
         }
         if (mTempPreferences.isVectorColorChanged) {
             mVectorifyPreferences.isVectorAccented = false
             mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
+            mTempPreferences.isVectorColorChanged = false
         }
         if (mTempPreferences.isBackgroundAccentSet) {
             mVectorifyPreferences.isBackgroundAccented = true
             mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
+            mTempPreferences.isBackgroundAccentSet = false
         }
         if (mTempPreferences.isVectorAccentSet) {
             mVectorifyPreferences.isVectorAccented = true
             mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
+            mTempPreferences.isVectorAccentSet = false
         }
 
-        if (mTempPreferences.isVectorChanged) mVectorifyPreferences.vector = mTempPreferences.tempVector
+        if (mTempPreferences.isVectorChanged) {
+            mVectorifyPreferences.vector = mTempPreferences.tempVector
+            mTempPreferences.isVectorChanged = false
+        }
 
-        if (mTempPreferences.isScaleChanged) mVectorifyPreferences.scale = mScaleFactor
+        if (mTempPreferences.isScaleChanged) {
+            mVectorifyPreferences.scale = mScaleFactor
+            mTempPreferences.isScaleChanged = false
+        }
 
         when (which) {
             SAVE_WALLPAPER -> mVectorView.vectorifyDaHome(false)

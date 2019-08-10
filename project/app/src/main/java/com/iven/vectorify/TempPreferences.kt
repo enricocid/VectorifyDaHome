@@ -14,5 +14,5 @@ class TempPreferences {
     var isBackgroundAccentSet = false
     var isVectorAccentSet = false
     var isVectorChanged = false
-    var isScaleChanged = true
+    var isScaleChanged = false
 }
