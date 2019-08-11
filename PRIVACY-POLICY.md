@@ -4,9 +4,7 @@
 
 **Enrico D'Ortenzio** built the Vectorify da home! app as an Open Source app. This APP is provided by Enrico D'Ortenzio at no cost and is intended for use as is.
 
-This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my App.
-
-The present Privacy policy page is accessible also from within the app via a button. <hr>
+This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my App.<hr>
 
 
 ### Information Collection And Use
