@@ -29,6 +29,8 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.ladybug,
         R.drawable.fingerprint,
         R.drawable.bug,
+        R.drawable.posp,
+        R.drawable.posp_alt,
         R.drawable.robot,
         R.drawable.google_cardboard,
         R.drawable.memory,
