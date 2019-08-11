@@ -23,8 +23,7 @@
         personale mi sarà accessibile :)
     </string>
     <string name="rationale_denied">Recentemente hai scelto l\'opzione \"Non chiedermelo più\" quando ti ho chiesto il
-        permesso di accesso alla memoria interna. Vai nelle info dell\'app e dammi il permesso oppure resetta i suoi
-        dati.
+        permesso di accesso alla memoria interna. Vai nelle info dell\'app e dammi il permesso se vuoi salvare gli sfondi.
     </string>
     <string name="boo">Boo! No accesso no party! Usa il Live Wallpaper!</string>
 

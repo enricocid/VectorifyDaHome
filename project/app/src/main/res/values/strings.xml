@@ -41,7 +41,7 @@
         personal data will be accessed by me :)
     </string>
     <string name="rationale_denied">You have recently chose \"Don\'t ask me again\" option when storage access
-        permission was asked. Go to the app\'s info and grant me the permission or reset its data.
+        permission was asked. Go to the app\'s info and grant me the permission if You want to save wallpapers.
     </string>
     <string name="boo">Boo! No access no party! Use the live wallpaper!</string>
 
