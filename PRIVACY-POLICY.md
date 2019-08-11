@@ -1,6 +1,7 @@
 ## Privacy policy
 
 ###### Effective date: August 05, 2019
+###### Latest update: August 08, 2019
 
 **Enrico D'Ortenzio** built the Vectorify da home! app as an Open Source app. This APP is provided by Enrico D'Ortenzio at no cost and is intended for use as is.
 
