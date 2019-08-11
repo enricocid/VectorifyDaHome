@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageButton
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:contentDescription="@string/live_wallpaper_name"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        android:elevation="2dp"/>
+        android:layout_margin="4dp">
+
+    <ImageView
+            android:id="@+id/checkbox"
+            android:src="@drawable/ic_checked"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/live_wallpaper_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <ImageButton
+            android:id="@+id/vector_button"
+            android:contentDescription="@string/live_wallpaper_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:elevation="2dp"/>
+</FrameLayout>

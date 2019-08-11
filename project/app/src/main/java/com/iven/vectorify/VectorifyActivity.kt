@@ -123,7 +123,7 @@ class VectorifyActivity : AppCompatActivity() {
 
         //setup presets
         vectors_rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        val vectorsAdapter = VectorsAdapter(this)
+        val vectorsAdapter = VectorsAdapter()
         vectors_rv.adapter = vectorsAdapter
 
         vectorsAdapter.onVectorClick = { vector ->

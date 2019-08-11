@@ -1,17 +1,15 @@
 package com.iven.vectorify.adapters
 
-import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
 import com.iven.vectorify.mVectorifyPreferences
-import com.iven.vectorify.ui.Utils
 
-class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
+class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
     var onVectorClick: ((Int?) -> Unit)? = null
 
@@ -245,23 +243,24 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
 
     inner class VectorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val accent = Utils.getSystemAccentColor(context)
-
         fun bindItems(drawable: Int) {
 
-            val vectorButton = itemView as ImageButton
+            val vectorButton = itemView.findViewById<ImageButton>(R.id.vector_button)
+            val checkbox = itemView.findViewById<ImageView>(R.id.checkbox)
 
             vectorButton.setImageResource(drawable)
 
-            if (mSelectedDrawable == drawable) vectorButton.setBackgroundColor(accent)
+            if (mSelectedDrawable == drawable) checkbox.visibility = View.VISIBLE
             else
-                vectorButton.setBackgroundColor(Color.TRANSPARENT)
+                checkbox.visibility = View.GONE
 
-            itemView.setOnClickListener {
-                notifyItemChanged(getVectorPosition(mSelectedDrawable))
-                mSelectedDrawable = drawable
-                vectorButton.setBackgroundColor(accent)
-                onVectorClick?.invoke(drawable)
+            vectorButton.setOnClickListener {
+                if (mSelectedDrawable != drawable) {
+                    notifyItemChanged(getVectorPosition(mSelectedDrawable))
+                    mSelectedDrawable = drawable
+                    checkbox.visibility = View.VISIBLE
+                    onVectorClick?.invoke(drawable)
+                }
             }
         }
     }
