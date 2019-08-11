@@ -56,8 +56,10 @@ The app itself implements a dark/light theme switcher!
 
 - Aidan Follestad for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library
 
-- [Potato Open Sauce Project (POSP)](https://potatoproject.co/)team for POSP vectors, inspiration, suggestions and support!
+- [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team for POSP vectors, inspiration, suggestions and support!
 The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome)
+
+- [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support and suggestions!
 
 - [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on Music Player GO which I used here!
 
