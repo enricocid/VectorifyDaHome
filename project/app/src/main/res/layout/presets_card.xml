@@ -36,6 +36,7 @@
                 android:clipToPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
                 tools:context=".MainActivity"/>
     </LinearLayout>
 
