@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -95,6 +96,13 @@ class VectorifyActivity : AppCompatActivity() {
                 R.id.app_bar_restore -> setDefaultVectorColors()
             }
             return@setOnMenuItemClickListener true
+        }
+
+        bottomBar.afterMeasured {
+            val version = version
+            val lp = version.layoutParams as CoordinatorLayout.LayoutParams
+            lp.setMargins(0, 0, 0, height)
+            version.layoutParams = lp
         }
 
         //setup presets

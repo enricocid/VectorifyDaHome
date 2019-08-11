@@ -24,6 +24,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    applicationVariants.all { variant ->
+        variant.resValue "string", "versionName", "v" + variant.versionName
+    }
+
     buildTypes {
         release {
             minifyEnabled true

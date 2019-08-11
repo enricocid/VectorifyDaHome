@@ -9,6 +9,15 @@
 
     <include layout="@layout/cards_container"/>
 
+    <TextView android:id="@+id/version"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/versionName"
+              android:textColor="?attr/vectors_color"
+              android:textAppearance="@android:style/TextAppearance.Material.Small"
+              android:padding="16dp"
+              android:layout_gravity="bottom|start"/>
+
     <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bar"
             style="@style/Widget.MaterialComponents.BottomAppBar"
