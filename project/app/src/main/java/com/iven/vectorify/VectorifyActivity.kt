@@ -38,10 +38,26 @@ class VectorifyActivity : AppCompatActivity() {
     private lateinit var mVectorFrame: ImageView
     private lateinit var mBackgroundSystemAccentGrabber: Chip
     private lateinit var mVectorSystemAccentGrabber: Chip
+    private lateinit var mVectorsAdapter: VectorsAdapter
 
     private var mBackgroundColor = Color.BLACK
     private var mVectorColor = Color.WHITE
     private var mVector = R.drawable.android
+
+    //interface to let recent  setups UI to let VectorifyActivity to update its shit
+    private val recentSetupsInterface = object : BottomNavigationDrawerFragment.RecentSetupsInterface {
+        override fun onRecentSelected(backgroundColor: Int, vector: Int, vectorColor: Int) {
+
+            setBackgroundColorForUI(backgroundColor)
+            setVectorColorForUI(vectorColor)
+
+            setBackgroundAndVectorColorsChanged()
+
+            mVectorsAdapter.onVectorClick?.invoke(vector)
+            mVectorsAdapter.swapSelectedDrawable(mVector)
+            vectors_rv.scrollToPosition(mVectorsAdapter.getVectorPosition(mVector))
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,17 +90,16 @@ class VectorifyActivity : AppCompatActivity() {
 
         //apply live wallpaper on fab click!
         mFab.setOnClickListener {
-
             //start preview activity
             val intent = Intent(this, SetWallpaperActivity::class.java)
             startActivity(intent)
         }
 
         //update background card color and text from preferences
-        setBackgroundColorForUI(mBackgroundColor, false)
+        setBackgroundColorForUI(mBackgroundColor)
 
         //update vector card color and text from preferences
-        setVectorColorForUI(mVectorColor, false)
+        setVectorColorForUI(mVectorColor)
 
         //set the bottom bar menu
         val bottomBar = bar
@@ -96,6 +111,17 @@ class VectorifyActivity : AppCompatActivity() {
                 R.id.app_bar_restore -> setDefaultVectorColors()
             }
             return@setOnMenuItemClickListener true
+        }
+
+        bottomBar.setNavigationOnClickListener {
+            if (mVectorifyPreferences.recentSetups.isNotEmpty()) {
+                val bottomSheetDialogFragment = BottomNavigationDrawerFragment()
+                bottomSheetDialogFragment.setRecentSetupsInterface(recentSetupsInterface)
+                bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
+            } else {
+                Toast.makeText(this, getString(R.string.message_no_recent_setups), Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
 
         bottomBar.afterMeasured {
@@ -118,11 +144,11 @@ class VectorifyActivity : AppCompatActivity() {
 
                 //update background card color and fab tint
                 val comboBackgroundColor = ContextCompat.getColor(this, combo.first)
-                setBackgroundColorForUI(comboBackgroundColor, false)
+                setBackgroundColorForUI(comboBackgroundColor)
 
                 //update vector card color and fab check drawable
                 val comboVectorColor = ContextCompat.getColor(this, combo.second)
-                setVectorColorForUI(comboVectorColor, false)
+                setVectorColorForUI(comboVectorColor)
 
                 //update vector frame colors
                 setVectorFrameColors()
@@ -131,10 +157,10 @@ class VectorifyActivity : AppCompatActivity() {
 
         //setup presets
         vectors_rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        val vectorsAdapter = VectorsAdapter()
-        vectors_rv.adapter = vectorsAdapter
+        mVectorsAdapter = VectorsAdapter()
+        vectors_rv.adapter = mVectorsAdapter
 
-        vectorsAdapter.onVectorClick = { vector ->
+        mVectorsAdapter.onVectorClick = { vector ->
 
             if (mVector != vector) {
                 runOnUiThread { mVectorFrame.setImageResource(vector!!) }
@@ -144,7 +170,7 @@ class VectorifyActivity : AppCompatActivity() {
             }
         }
 
-        vectors_rv.scrollToPosition(vectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
+        vectors_rv.scrollToPosition(mVectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
 
         //set vector frame height
         vectors_rv.afterMeasured {
@@ -175,12 +201,9 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     //update background card colors
-    private fun setBackgroundColorForUI(color: Int, isSystemAccentChanged: Boolean) {
+    private fun setBackgroundColorForUI(color: Int) {
         mBackgroundColor = color
         mTempPreferences.tempBackgroundColor = mBackgroundColor
-
-        //if system accent has changed update preferences on resume with the new accent
-        if (isSystemAccentChanged) mVectorifyPreferences.backgroundColor = color
 
         //update shit colors
         runOnUiThread {
@@ -200,12 +223,9 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     //update vector card colors
-    private fun setVectorColorForUI(color: Int, isSystemAccentChanged: Boolean) {
+    private fun setVectorColorForUI(color: Int) {
         mVectorColor = color
         mTempPreferences.tempVectorColor = mVectorColor
-
-        //if system accent has changed update preferences on resume with the new accent
-        if (isSystemAccentChanged) mVectorifyPreferences.vectorColor = color
 
         //update shit colors
         runOnUiThread {
@@ -227,21 +247,21 @@ class VectorifyActivity : AppCompatActivity() {
     fun setSystemAccentForBackground(view: View) {
         mTempPreferences.isBackgroundColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
-        setBackgroundColorForUI(systemAccent, false)
+        setBackgroundColorForUI(systemAccent)
     }
 
     //set system accent as vector color
     fun setSystemAccentForVector(view: View) {
         mTempPreferences.isVectorColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
-        setVectorColorForUI(systemAccent, false)
+        setVectorColorForUI(systemAccent)
     }
 
     //restore default background and vector colors
     private fun setDefaultVectorColors() {
 
-        setBackgroundColorForUI(Color.BLACK, false)
-        setVectorColorForUI(Color.WHITE, false)
+        setBackgroundColorForUI(Color.BLACK)
+        setVectorColorForUI(Color.WHITE)
 
         setBackgroundAndVectorColorsChanged()
     }
@@ -262,14 +282,14 @@ class VectorifyActivity : AppCompatActivity() {
                         //update the color only if it really changed
                         if (mTempPreferences.tempBackgroundColor != color) {
                             mTempPreferences.isBackgroundColorChanged = true
-                            setBackgroundColorForUI(color, false)
+                            setBackgroundColorForUI(color)
                         }
                     }
                     else -> {
                         //update the color only if it really changed
                         if (mTempPreferences.tempVectorColor != color) {
                             mTempPreferences.isVectorColorChanged = true
-                            setVectorColorForUI(color, false)
+                            setVectorColorForUI(color)
                         }
                     }
                 }
@@ -306,7 +326,7 @@ class VectorifyActivity : AppCompatActivity() {
 
     //check if background and vector colors are equals
     private fun checkIfColorsEquals(): Boolean {
-        return mTempPreferences.tempBackgroundColor == mTempPreferences.tempVectorColor
+        return mBackgroundColor == mVectorColor
     }
 
     //returns formatted hex string

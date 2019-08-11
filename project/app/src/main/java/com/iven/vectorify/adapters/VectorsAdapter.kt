@@ -221,6 +221,12 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         mSelectedDrawable = mVectorifyPreferences.vector
     }
 
+    fun swapSelectedDrawable(newSelectedDrawable: Int) {
+        notifyItemChanged(getVectorPosition(mSelectedDrawable))
+        mSelectedDrawable = newSelectedDrawable
+        notifyItemChanged(getVectorPosition(mSelectedDrawable))
+    }
+
     fun getVectorPosition(drawable: Int): Int {
         return try {
             mVectors.indexOf(drawable)

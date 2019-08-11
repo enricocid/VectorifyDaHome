@@ -15,6 +15,7 @@ class VectorifyPreferences(context: Context) {
     private val prefVector = context.getString(R.string.vector_key)
     private val prefTheme = context.getString(R.string.theme_key)
     private val prefScale = context.getString(R.string.scale_key)
+    private val prefRecentSetups = context.getString(R.string.recent_setups_key)
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -37,4 +38,8 @@ class VectorifyPreferences(context: Context) {
     var scale: Float
         get() = mPrefs.getFloat(prefScale, 0.35F)
         set(value) = mPrefs.edit().putFloat(prefScale, value).apply()
+
+    var recentSetups: MutableSet<String>
+        get() = mPrefs.getStringSet(prefRecentSetups, mutableSetOf())!!
+        set(value) = mPrefs.edit().putStringSet(prefRecentSetups, value).apply()
 }

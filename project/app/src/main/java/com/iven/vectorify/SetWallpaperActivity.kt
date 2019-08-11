@@ -79,7 +79,7 @@ class SetWallpaperActivity : AppCompatActivity() {
         }
     }
 
-    private fun setToolbarAndSeekbarColors() {
+    private fun setToolbarAndSeekBarColors() {
 
         if (Utils.isColorDark(mTempPreferences.tempBackgroundColor)) toolbar.context.setTheme(R.style.ToolbarStyle_Dark)
         else toolbar.context.setTheme(R.style.ToolbarStyle)
@@ -103,8 +103,8 @@ class SetWallpaperActivity : AppCompatActivity() {
     }
 
     private fun handleWallpaperChanges(which: Int) {
-        //do all the save shit here
 
+        //do all the save shit here
         if (mTempPreferences.isBackgroundColorChanged) {
             mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
             mTempPreferences.isBackgroundColorChanged = false
@@ -125,6 +125,8 @@ class SetWallpaperActivity : AppCompatActivity() {
             mTempPreferences.isScaleChanged = false
         }
 
+        saveToRecentSetups()
+
         when (which) {
             SAVE_WALLPAPER -> mVectorView.vectorifyDaHome(false)
             SET_WALLPAPER -> mVectorView.vectorifyDaHome(true)
@@ -135,6 +137,18 @@ class SetWallpaperActivity : AppCompatActivity() {
                         .show()
             }
         }
+    }
+
+    private fun saveToRecentSetups() {
+        val recentSetups = mVectorifyPreferences.recentSetups.toMutableList()
+        val stringToSave = getString(
+            R.string.recent_setups_save_pattern,
+            mTempPreferences.tempBackgroundColor.toString(),
+            mTempPreferences.tempVector.toString(),
+            mTempPreferences.tempVectorColor.toString()
+        )
+        recentSetups.add(stringToSave)
+        mVectorifyPreferences.recentSetups = recentSetups.toMutableSet()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -151,7 +165,7 @@ class SetWallpaperActivity : AppCompatActivity() {
 
         //set toolbar shit
         //match theme with background luminance
-        setToolbarAndSeekbarColors()
+        setToolbarAndSeekBarColors()
 
         setSupportActionBar(toolbar)
 

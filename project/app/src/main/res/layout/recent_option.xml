@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        tools:context=".VectorifyActivity">
+
+    <ImageButton
+            android:id="@+id/recent_setups_vector"
+            android:layout_width="match_parent"
+            android:contentDescription="@string/live_wallpaper_name"
+            android:layout_height="@android:dimen/app_icon_size"/>
+
+</com.google.android.material.card.MaterialCardView>

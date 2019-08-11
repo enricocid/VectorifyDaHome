@@ -5,6 +5,11 @@
     <string name="title_vectors">Grafica</string>
     <string name="title_accent_me">ACCENTAMI!</string>
 
+    <!-- Recent setups things -->
+    <string name="title_recent_setups">Setup recenti</string>
+    <string name="message_no_recent_setups">Nessun setup recente trovato!</string>
+    <string name="message_clear_recent_setups">Tutti i setup recenti saranno cancellati. Sei sicuro?</string>
+
     <!-- Items del menu della BottomBar -->
     <string name="title_github">Pagina GitHub</string>
     <string name="title_theme">Tema</string>
