@@ -29,11 +29,6 @@ class SetWallpaperActivity : AppCompatActivity() {
 
     private lateinit var mVectorView: VectorView
 
-    override fun onResume() {
-        super.onResume()
-        checkSystemAccent()
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
         finishAndRemoveTask()
@@ -84,38 +79,6 @@ class SetWallpaperActivity : AppCompatActivity() {
         }
     }
 
-    //method to check if accent theme has changed on resume
-    private fun checkSystemAccent(): Boolean {
-
-        val isBackgroundAccented =
-            mTempPreferences.isBackgroundAccentSet && !mTempPreferences.isBackgroundColorChanged || mVectorifyPreferences.isBackgroundAccented && !mTempPreferences.isBackgroundColorChanged
-        val isVectorAccented =
-            mTempPreferences.isVectorAccentSet && !mTempPreferences.isVectorColorChanged || mVectorifyPreferences.isVectorAccented && !mTempPreferences.isVectorColorChanged
-
-        return if (!isBackgroundAccented && !isVectorAccented) {
-            false
-        } else {
-            //get system accent color
-            val systemAccentColor = Utils.getSystemAccentColor(this)
-
-            //if changed, update it!
-            if (systemAccentColor != mTempPreferences.tempBackgroundColor || systemAccentColor != mTempPreferences.tempVectorColor) {
-
-                //update cards colors
-                if (isBackgroundAccented) {
-                    mTempPreferences.tempBackgroundColor = systemAccentColor
-                    mVectorView.updateBackgroundColor(systemAccentColor)
-                    setToolbarAndSeekbarColors()
-                }
-                if (isVectorAccented) {
-                    mTempPreferences.tempVectorColor = systemAccentColor
-                    mVectorView.updateVectorColor(systemAccentColor)
-                }
-            }
-            return true
-        }
-    }
-
     private fun setToolbarAndSeekbarColors() {
 
         if (Utils.isColorDark(mTempPreferences.tempBackgroundColor)) toolbar.context.setTheme(R.style.ToolbarStyle_Dark)
@@ -142,24 +105,12 @@ class SetWallpaperActivity : AppCompatActivity() {
     private fun handleWallpaperChanges(which: Int) {
         //do all the save shit here
 
-        if (mTempPreferences.isBackgroundAccentSet) {
-            mVectorifyPreferences.isBackgroundAccented = true
-            mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
-            mTempPreferences.isBackgroundAccentSet = false
-        }
-        if (mTempPreferences.isVectorAccentSet) {
-            mVectorifyPreferences.isVectorAccented = true
-            mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
-            mTempPreferences.isVectorAccentSet = false
-        }
-
         if (mTempPreferences.isBackgroundColorChanged) {
-            mVectorifyPreferences.isBackgroundAccented = false
             mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
             mTempPreferences.isBackgroundColorChanged = false
         }
+
         if (mTempPreferences.isVectorColorChanged) {
-            mVectorifyPreferences.isVectorAccented = false
             mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
             mTempPreferences.isVectorColorChanged = false
         }

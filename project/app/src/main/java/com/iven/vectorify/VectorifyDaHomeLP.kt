@@ -34,27 +34,6 @@ class VectorifyDaHomeLP : WallpaperService() {
         mBackgroundColor = mVectorifyPreferences.backgroundColor
         mDrawableColor = mVectorifyPreferences.vectorColor
         mScaleFactor = mVectorifyPreferences.scale
-
-        checkSystemAccent()
-    }
-
-    private fun checkSystemAccent() {
-
-        val isBackgroundAccented = mVectorifyPreferences.isBackgroundAccented
-        val isDrawableAccented = mVectorifyPreferences.isVectorAccented
-
-        if (isBackgroundAccented || isDrawableAccented) {
-            //change only if system accent has changed
-            val systemAccentColor = Utils.getSystemAccentColor(this)
-            if (isBackgroundAccented && mBackgroundColor != systemAccentColor) {
-                mBackgroundColor = systemAccentColor
-                mVectorifyPreferences.backgroundColor = systemAccentColor
-            }
-            if (isDrawableAccented && mDrawableColor != systemAccentColor) {
-                mDrawableColor = systemAccentColor
-                mVectorifyPreferences.vectorColor = systemAccentColor
-            }
-        }
     }
 
     private inner class VectorifyEngine : WallpaperService.Engine() {

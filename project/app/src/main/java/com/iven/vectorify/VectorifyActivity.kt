@@ -42,12 +42,6 @@ class VectorifyActivity : AppCompatActivity() {
     private var mVectorColor = Color.WHITE
     private var mVector = R.drawable.android
 
-    override fun onResume() {
-        super.onResume()
-        //check if accent theme has changed
-        checkSystemAccent()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -67,8 +61,6 @@ class VectorifyActivity : AppCompatActivity() {
         mTempPreferences.tempBackgroundColor = mBackgroundColor
         mTempPreferences.tempVectorColor = mVectorColor
         mTempPreferences.tempVector = mVector
-        mTempPreferences.isBackgroundAccentSet = mVectorifyPreferences.isBackgroundAccented
-        mTempPreferences.isVectorAccentSet = mVectorifyPreferences.isVectorAccented
         mTempPreferences.tempScale = mVectorifyPreferences.scale
 
         //get system accent grabbers
@@ -225,14 +217,14 @@ class VectorifyActivity : AppCompatActivity() {
 
     //set system accent as background color
     fun setSystemAccentForBackground(view: View) {
-        mTempPreferences.isBackgroundAccentSet = true
+        mTempPreferences.isBackgroundColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setBackgroundColorForUI(systemAccent, false)
     }
 
     //set system accent as vector color
     fun setSystemAccentForVector(view: View) {
-        mTempPreferences.isVectorAccentSet = true
+        mTempPreferences.isVectorColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setVectorColorForUI(systemAccent, false)
     }
@@ -261,7 +253,6 @@ class VectorifyActivity : AppCompatActivity() {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
                         if (mTempPreferences.tempBackgroundColor != color) {
-                            mTempPreferences.isBackgroundAccentSet = false
                             mTempPreferences.isBackgroundColorChanged = true
                             setBackgroundColorForUI(color, false)
                         }
@@ -269,7 +260,6 @@ class VectorifyActivity : AppCompatActivity() {
                     else -> {
                         //update the color only if it really changed
                         if (mTempPreferences.tempVectorColor != color) {
-                            mTempPreferences.isVectorAccentSet = false
                             mTempPreferences.isVectorColorChanged = true
                             setVectorColorForUI(color, false)
                         }
@@ -281,8 +271,6 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     private fun setBackgroundAndVectorColorsChanged() {
-        mTempPreferences.isBackgroundAccentSet = false
-        mTempPreferences.isVectorAccentSet = false
         mTempPreferences.isBackgroundColorChanged = true
         mTempPreferences.isVectorColorChanged = true
     }
@@ -316,31 +304,6 @@ class VectorifyActivity : AppCompatActivity() {
     //returns formatted hex string
     private fun getHexCode(color: Int): String {
         return getString(R.string.hex, Integer.toHexString(color)).toUpperCase()
-    }
-
-    //method to check if accent theme has changed on resume
-    private fun checkSystemAccent(): Boolean {
-
-        val isBackgroundAccented =
-            mTempPreferences.isBackgroundAccentSet && !mTempPreferences.isBackgroundColorChanged || mVectorifyPreferences.isBackgroundAccented && !mTempPreferences.isBackgroundColorChanged
-        val isVectorAccented =
-            mTempPreferences.isVectorAccentSet && !mTempPreferences.isVectorColorChanged || mVectorifyPreferences.isVectorAccented && !mTempPreferences.isVectorColorChanged
-
-        return if (!isBackgroundAccented && !isVectorAccented) {
-            false
-        } else {
-            //get system accent color
-            val systemAccentColor = Utils.getSystemAccentColor(this)
-
-            //if changed, update it!
-            if (systemAccentColor != mTempPreferences.tempBackgroundColor || systemAccentColor != mTempPreferences.tempVectorColor) {
-
-                //update cards colors
-                if (isBackgroundAccented) setBackgroundColorForUI(systemAccentColor, true)
-                if (isVectorAccented) setVectorColorForUI(systemAccentColor, true)
-            }
-            return true
-        }
     }
 
     //method to open git page

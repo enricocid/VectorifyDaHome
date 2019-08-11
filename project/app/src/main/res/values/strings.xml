@@ -11,8 +11,6 @@
     <string name="background_color_key" translatable="false">background_key</string>
     <string name="vectors_color_key" translatable="false">icon_key</string>
     <string name="theme_key" translatable="false">theme_key</string>
-    <string name="accent_background_set" translatable="false">accent_background_set</string>
-    <string name="accent_vector_set" translatable="false">accent_icon_set</string>
     <string name="vector_key" translatable="false">icon_resource_key</string>
     <string name="scale_key" translatable="false">scale_key</string>
 

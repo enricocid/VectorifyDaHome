@@ -69,16 +69,4 @@ class VectorView @JvmOverloads constructor(
         mScaleFactor = scale
         invalidate()
     }
-
-    //update background color
-    fun updateBackgroundColor(color: Int) {
-        mBackgroundColor = color
-        invalidate()
-    }
-
-    //update vector color
-    fun updateVectorColor(color: Int) {
-        mDrawableColor = color
-        invalidate()
-    }
 }
