@@ -9,6 +9,7 @@
 
     <!-- Recent setups things -->
     <string name="title_recent_setups">Recent setups</string>
+    <string name="delimiter" translatable="false">&#59;</string>
     <string name="recent_setups_save_pattern" translatable="false">%1s&#59;%1s&#59;%1s</string>
     <string name="message_no_recent_setups">No recent setups found!</string>
     <string name="message_clear_recent_setups">All recent setups will be deleted. Are You sure?</string>
@@ -20,7 +21,6 @@
     <string name="vector_key" translatable="false">icon_resource_key</string>
     <string name="scale_key" translatable="false">scale_key</string>
     <string name="recent_setups_key" translatable="false">recent_setups_key</string>
-    <string name="delimiter" translatable="false">&#59;</string>
 
     <!-- BottomBar menu items -->
     <string name="title_github">GitHub page</string>
