@@ -24,7 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="?attr/bottom_bar_color"
-            app:fabAlignmentMode="center"
+            app:fabAlignmentMode="end"
+            app:navigationContentDescription="@string/title_recent_setups"
             app:navigationIcon="@drawable/ic_baseline_menu"
             android:layout_gravity="bottom"/>
 

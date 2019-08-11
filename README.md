@@ -10,10 +10,9 @@
 
 
 
-###### Current version: [(16) 1.3.3](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.3.3)
-###### Based on the project [Potate da home](https://github.com/enricocid/PotateDaHome)
+###### Current version: [(17) 1.4.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.4.0)
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh3.gif) 
+![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh17.gif) 
 
 
 # Downloads
@@ -27,6 +26,8 @@
 **Vectorify da home!** is a minimal and open source app to apply wallpapers from a vaste collection of vector graphics:
 
 - Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
+
+- Recent setups
 
 - Preview screen where you can customize the size of the vector graphic.
 
@@ -54,6 +55,9 @@ The app itself implements a dark/light theme switcher!
 - Colors combo taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
 
 - Aidan Follestad for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library
+
+- [Potato Open Sauce Project (POSP)](https://potatoproject.co/)team for POSP vectors, inspiration, suggestions and support!
+The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome)
 
 - [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on Music Player GO which I used here!
 
