@@ -10,7 +10,7 @@
 
 
 
-###### Current version: [(17) 1.4.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.4.0)
+###### Current version: [(18) 1.4.1](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.4.1)
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh17.gif) 
 
