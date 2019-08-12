@@ -27,15 +27,15 @@
 
 - Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
 
-- Recent setups
+- Recent setups.
 
 - Preview screen where you can customize the size of the vector graphic.
 
 - 3 ways to set the wallpaper:
 
-  - Save to internal memory and set it using your preferred gallery/app
+  - Save to internal memory and set it using your preferred gallery/app.
 
-  - Set it using the stock wallpaper picker (involves saving to internal memory for faster processing)
+  - Set it using the stock wallpaper picker (involves saving to internal memory for faster processing).
 
   - Set as LiveWallpaper: unlike classical Live Wallpapers the canvas is not updated continuously but only one time when the LP becomes visible (for example, when you come back to your home from an app or when you unlock the device). This means no battery draining!
 
@@ -49,11 +49,11 @@ The app itself implements a dark/light theme switcher!
 
 - Icons from [material.io](https://material.io/resources/icons), [materialdesignicons](https://materialdesignicons.com/) and [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page)!
 
-- [Naruto icon](https://iconscout.com/icon/naruto) by [Alexandru Stoica](https://iconscout.com/contributors/alexandru-stoica) on [iconscout.com](https://iconscout.com) 
+- [Naruto icon](https://iconscout.com/icon/naruto) by [Alexandru Stoica](https://iconscout.com/contributors/alexandru-stoica) on [iconscout.com](https://iconscout.com)!
 
 - Colors combo taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
 
-- Aidan Follestad for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library
+- Aidan Follestad for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team for POSP vectors, inspiration, suggestions and support!
 The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome)
