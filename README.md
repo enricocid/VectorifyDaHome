@@ -37,10 +37,7 @@
 
   - Set it using the stock wallpaper picker (involves saving to internal memory for faster processing)
 
-  - Set as LiveWallpaper
-Unlike classical Live Wallpapers the canvas is not updated continuously but only one time when the LP becomes visible (for example, when you come back to your home from an app or when you unlock the device).
-
-NO BATTERY DRAINING!
+  - Set as LiveWallpaper: unlike classical Live Wallpapers the canvas is not updated continuously but only one time when the LP becomes visible (for example, when you come back to your home from an app or when you unlock the device). This means no battery draining!
 
 
 - Other features?
