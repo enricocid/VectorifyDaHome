@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
 import com.iven.vectorify.mVectorifyPreferences
+import com.iven.vectorify.ui.Utils
 
 class RecentSetupsAdapter(private val delimiter: String) :
     RecyclerView.Adapter<RecentSetupsAdapter.RecentSetupsHolder>() {
@@ -41,7 +42,15 @@ class RecentSetupsAdapter(private val delimiter: String) :
 
             val drawable = recentButton.drawable.mutate()
             val vectorColor = Integer.parseInt(arr[2])
-            drawable.setTint(vectorColor)
+
+            val vectorColorForRecentItem = if (Utils.checkIfColorsEqual(backgroundColor, vectorColor)) {
+                if (Utils.isColorDark(vectorColor)) Utils.lightenColor(vectorColor, 0.20F)
+                else Utils.darkenColor(vectorColor, 0.20F)
+            } else {
+                vectorColor
+            }
+
+            drawable.setTint(vectorColorForRecentItem)
 
             recentButton.setOnClickListener {
                 onRecentClick?.invoke(listOf(backgroundColor, vector, vectorColor))
