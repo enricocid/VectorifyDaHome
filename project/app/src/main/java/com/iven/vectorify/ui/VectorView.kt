@@ -21,7 +21,7 @@ class VectorView @JvmOverloads constructor(
     private var mDeviceHeight = 0
 
     private var mBackgroundColor = Color.BLACK
-    private var mDrawableColor = Color.WHITE
+    private var mVectorColor = Color.WHITE
     private var mScaleFactor = 0.35F
 
     fun vectorifyDaHome(isSetAsWallpaper: Boolean) {
@@ -41,7 +41,7 @@ class VectorView @JvmOverloads constructor(
 
         mScaleFactor = mTempPreferences.tempScale
         mBackgroundColor = mTempPreferences.tempBackgroundColor
-        mDrawableColor = mTempPreferences.tempVectorColor
+        mVectorColor = mTempPreferences.tempVectorColor
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -50,15 +50,15 @@ class VectorView @JvmOverloads constructor(
         if (canvas != null && context != null) {
             //draw the vector!
             canvas.drawColor(mBackgroundColor)
-            setColorFilter(mDrawableColor)
+            setColorFilter(mVectorColor)
             val bit = ContextCompat.getDrawable(context, mTempPreferences.tempVector) as VectorDrawable
             bit.mutate()
-            bit.setTint(mDrawableColor)
+            bit.setTint(mVectorColor)
 
             //darken or lighten color to increase vector visibility when the colors are the same
-            if (mBackgroundColor == mDrawableColor) {
-                if (Utils.isColorDark(mDrawableColor)) bit.setTint(Utils.lightenColor(mDrawableColor, 0.20F))
-                else bit.setTint(Utils.darkenColor(mDrawableColor, 0.20F))
+            if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) {
+                if (Utils.isColorDark(mVectorColor)) bit.setTint(Utils.lightenColor(mVectorColor, 0.20F))
+                else bit.setTint(Utils.darkenColor(mVectorColor, 0.20F))
             }
             Utils.drawBitmap(bit, canvas, mDeviceWidth, mDeviceHeight, mScaleFactor)
         }

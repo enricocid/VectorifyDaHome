@@ -187,7 +187,7 @@ class VectorifyActivity : AppCompatActivity() {
     private fun setVectorFrameColors() {
         mVectorFrame.setImageResource(mVector)
         mVectorFrame.setBackgroundColor(mBackgroundColor)
-        if (checkIfColorsEquals()) {
+        if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) {
             if (Utils.isColorDark(mVectorColor)) mVectorFrame.setColorFilter(
                 Utils.lightenColor(
                     mVectorColor,
@@ -215,7 +215,11 @@ class VectorifyActivity : AppCompatActivity() {
             mFab.backgroundTintList = ColorStateList.valueOf(color)
 
             //check if colors are the same so we enable stroke to make vector visible
-            val fabDrawableColor = if (checkIfColorsEquals()) textColor else mTempPreferences.tempVectorColor
+            val fabDrawableColor = if (Utils.checkIfColorsEqual(
+                    mBackgroundColor,
+                    mVectorColor
+                )
+            ) textColor else mTempPreferences.tempVectorColor
             mFab.drawable.setTint(fabDrawableColor)
 
             setVectorFrameColors()
@@ -236,7 +240,7 @@ class VectorifyActivity : AppCompatActivity() {
             vector_color_subhead.text = getHexCode(color)
 
             //check if colors are the same so we enable stroke to make vector visible
-            val fabDrawableColor = if (checkIfColorsEquals()) textColor else color
+            val fabDrawableColor = if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) textColor else color
             mFab.drawable.setTint(fabDrawableColor)
 
             setVectorFrameColors()
@@ -322,11 +326,6 @@ class VectorifyActivity : AppCompatActivity() {
         val intent = Intent(this, VectorifyActivity::class.java)
         startActivity(intent)
         finish()
-    }
-
-    //check if background and vector colors are equals
-    private fun checkIfColorsEquals(): Boolean {
-        return mBackgroundColor == mVectorColor
     }
 
     //returns formatted hex string

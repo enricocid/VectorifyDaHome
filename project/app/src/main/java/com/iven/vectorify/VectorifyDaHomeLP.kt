@@ -12,7 +12,7 @@ import com.iven.vectorify.ui.Utils
 class VectorifyDaHomeLP : WallpaperService() {
 
     private var mBackgroundColor = Color.BLACK
-    private var mDrawableColor = Color.WHITE
+    private var mVectorColor = Color.WHITE
     private var mScaleFactor = 0.35F
 
     private var mDeviceWidth = 0
@@ -32,7 +32,7 @@ class VectorifyDaHomeLP : WallpaperService() {
     private fun updatePaintProps() {
         //set paints props
         mBackgroundColor = mVectorifyPreferences.backgroundColor
-        mDrawableColor = mVectorifyPreferences.vectorColor
+        mVectorColor = mVectorifyPreferences.vectorColor
         mScaleFactor = mVectorifyPreferences.scale
     }
 
@@ -75,11 +75,11 @@ class VectorifyDaHomeLP : WallpaperService() {
                     //draw potato!
                     canvas.drawColor(mBackgroundColor)
                     val bit = ContextCompat.getDrawable(baseContext, mVectorifyPreferences.vector) as VectorDrawable
-                    bit.setTint(mDrawableColor)
+                    bit.setTint(mVectorColor)
 
-                    if (mBackgroundColor == mDrawableColor) {
-                        if (Utils.isColorDark(mDrawableColor)) bit.setTint(Utils.lightenColor(mDrawableColor, 0.20F))
-                        else bit.setTint(Utils.darkenColor(mDrawableColor, 0.20F))
+                    if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) {
+                        if (Utils.isColorDark(mVectorColor)) bit.setTint(Utils.lightenColor(mVectorColor, 0.20F))
+                        else bit.setTint(Utils.darkenColor(mVectorColor, 0.20F))
                     }
                     Utils.drawBitmap(bit, canvas, mDeviceWidth, mDeviceHeight, mScaleFactor)
                 }

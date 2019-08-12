@@ -25,7 +25,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
 
-
 object Utils {
 
     //method to open live wallpaper intent
@@ -165,5 +164,11 @@ object Utils {
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
         }
+    }
+
+    //check if two colors are the same
+    @JvmStatic
+    fun checkIfColorsEqual(color1: Int, color2: Int): Boolean {
+        return color1 == color2
     }
 }
