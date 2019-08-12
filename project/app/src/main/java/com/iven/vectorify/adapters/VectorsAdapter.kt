@@ -193,6 +193,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.db_tenkaichi,
         R.drawable.kame_sennin_mark,
         R.drawable.dragon_sphere,
+        R.drawable.naruto,
         R.drawable.puzzle,
 
         //buildings
