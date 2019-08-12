@@ -51,7 +51,7 @@ The app itself implements a dark/light theme switcher!
 
 - [Naruto icon](https://iconscout.com/icon/naruto) by [Alexandru Stoica](https://iconscout.com/contributors/alexandru-stoica) on [iconscout.com](https://iconscout.com)!
 
-- Colors combo taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
+- Colors presets taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
 
 - Aidan Follestad for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
