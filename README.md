@@ -60,7 +60,7 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 
 - [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support and suggestions!
 
-- [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on Music Player GO which I used here!
+- [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on [Music Player GO](https://github.com/enricocid/Music-Player-GO) which I used here!
 
 
 # Notice:
