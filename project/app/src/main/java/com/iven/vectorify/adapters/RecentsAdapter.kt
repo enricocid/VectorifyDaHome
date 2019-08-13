@@ -80,6 +80,7 @@ class RecentSetupsAdapter(
                             try {
                                 mRecentSetups.remove(setup)
                                 notifyDataSetChanged()
+                                mVectorifyPreferences.recentSetups = mRecentSetups.toMutableSet()
                                 if (mRecentSetups.isEmpty()) bottomNavigationDrawerFragment.dismiss()
                             } catch (e: Exception) {
                                 e.printStackTrace()
