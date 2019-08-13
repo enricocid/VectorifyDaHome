@@ -36,7 +36,7 @@
     <string name="install_browser_message">Install a browser first!</string>
 
     <!-- Hex string -->
-    <string name="hex" translatable="false">#%1s</string>
+    <string name="hex" translatable="false">&#35;%1s</string>
 
     <!-- Dialog rationale things -->
     <string name="title_rationale">Storage access permission</string>
