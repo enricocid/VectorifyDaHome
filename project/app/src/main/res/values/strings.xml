@@ -43,6 +43,7 @@
     <string name="rationale_denied">You have recently chose \"Don\'t ask me again\" option when storage access
         permission was asked. Go to the app\'s info and grant me the permission if You want to save wallpapers.
     </string>
+    <string name="go_to_info">Go to info</string>
     <string name="boo">Boo! No access no party! Use the live wallpaper!</string>
 
     <!-- Set wallpaper things -->

@@ -133,6 +133,7 @@ object Utils {
 
     //make rationale permission dialog
     @JvmStatic
+    @Suppress("DEPRECATION")
     fun makeRationaleDialog(activity: Activity, which: Int, shouldRequestRationale: Boolean) {
 
         val message = if (shouldRequestRationale) R.string.rationale else R.string.rationale_denied
@@ -144,14 +145,16 @@ object Utils {
             message(message)
             positiveButton {
                 if (shouldRequestRationale) requestPermissions(activity, which)
-                else openVectorifyDaHomeDetails(activity)
-
             }
             negativeButton {
                 Toast.makeText(activity, activity.getString(R.string.boo), Toast.LENGTH_LONG)
                     .show()
                 dismiss()
             }
+            if (!shouldRequestRationale)
+                neutralButton(R.string.go_to_info) {
+                    openVectorifyDaHomeDetails(activity)
+                }
         }
     }
 
