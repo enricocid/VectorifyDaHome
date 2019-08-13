@@ -24,7 +24,7 @@
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/title_vectors"
+                  android:text="@string/title_vector"
                   android:id="@+id/vector_color_head"
                   android:paddingTop="4dp"
                   android:paddingBottom="4dp"
@@ -35,7 +35,6 @@
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:text="@string/title_vectors"
                   android:paddingStart="16dp"
                   android:paddingEnd="16dp"
                   android:id="@+id/vector_color_subhead"

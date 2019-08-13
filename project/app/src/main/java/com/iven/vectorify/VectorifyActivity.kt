@@ -271,9 +271,10 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     //start material dialog
-    private fun startColorPicker(key: String) {
+    private fun startColorPicker(key: String, title: Int) {
         MaterialDialog(this).show {
 
+            title(title)
             cornerRadius(res = R.dimen.md_corner_radius)
             colorChooser(
                 colors = ColorPalette.Primary,
@@ -310,12 +311,12 @@ class VectorifyActivity : AppCompatActivity() {
 
     //method to start background color picker for background
     fun startBackgroundColorPicker(view: View) {
-        startColorPicker(getString(R.string.background_color_key))
+        startColorPicker(getString(R.string.background_color_key), R.string.title_background_dialog)
     }
 
     //method to start vector color picker for background
     fun startVectorColorPicker(view: View) {
-        startColorPicker(getString(R.string.vectors_color_key))
+        startColorPicker(getString(R.string.vectors_color_key), R.string.title_vector_dialog)
     }
 
     //update theme

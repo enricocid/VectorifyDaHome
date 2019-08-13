@@ -2,7 +2,9 @@
 
     <!-- Titoli cards -->
     <string name="title_background">Sfondo</string>
-    <string name="title_vectors">Grafica</string>
+    <string name="title_background_dialog">Colore sfondo</string>
+    <string name="title_vector">Grafica</string>
+    <string name="title_vector_dialog">Colore grafica</string>
     <string name="title_accent_me">ACCENTAMI!</string>
 
     <!-- Recent setups things -->

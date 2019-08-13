@@ -3,7 +3,9 @@
 
     <!-- Card titles -->
     <string name="title_background">Background</string>
-    <string name="title_vectors">Vector</string>
+    <string name="title_background_dialog">Background color</string>
+    <string name="title_vector">Vector</string>
+    <string name="title_vector_dialog">Vector color</string>
     <string name="title_presets" translatable="false">Presets</string>
     <string name="title_accent_me">ACCENT ME!</string>
 
