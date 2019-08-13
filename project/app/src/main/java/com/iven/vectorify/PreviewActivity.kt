@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.iven.vectorify.ui.Utils
 import com.iven.vectorify.ui.VectorView
-import kotlinx.android.synthetic.main.save_activity.*
+import kotlinx.android.synthetic.main.preview_activity.*
 import kotlinx.android.synthetic.main.seekbar_card.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -23,7 +23,7 @@ const val SAVE_WALLPAPER = 0
 const val SET_WALLPAPER = 1
 const val SET_LIVE_WALLPAPER = 2
 
-class SetWallpaperActivity : AppCompatActivity() {
+class PreviewActivity : AppCompatActivity() {
 
     private var sUserIsSeeking = false
 
@@ -158,7 +158,7 @@ class SetWallpaperActivity : AppCompatActivity() {
         setTheme(mVectorifyPreferences.theme)
         hideSystemUI()
 
-        setContentView(R.layout.save_activity)
+        setContentView(R.layout.preview_activity)
 
         //get all the views
         mVectorView = vector_view

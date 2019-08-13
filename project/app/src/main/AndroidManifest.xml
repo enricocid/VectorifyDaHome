@@ -10,7 +10,7 @@
             android:required="true"/>
 
     <application
-            android:name="com.iven.vectorify.VectorifyApp"
+            android:name=".VectorifyApp"
             android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/live_wallpaper_name"
@@ -29,7 +29,7 @@
                     android:resource="@xml/provider_paths"/>
         </provider>
 
-        <activity android:name="com.iven.vectorify.VectorifyActivity"
+        <activity android:name=".VectorifyActivity"
                   android:theme="@style/AppTheme"
                   android:screenOrientation="portrait">
             <intent-filter>
@@ -39,12 +39,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.iven.vectorify.SetWallpaperActivity"
+        <activity android:name=".PreviewActivity"
                   android:theme="@style/AppTheme"
                   android:screenOrientation="portrait"/>
 
         <service
-                android:name="com.iven.vectorify.VectorifyDaHomeLP"
+                android:name=".VectorifyDaHomeLP"
                 android:label="@string/live_wallpaper_name"
                 android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>

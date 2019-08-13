@@ -91,7 +91,7 @@ class VectorifyActivity : AppCompatActivity() {
         //apply live wallpaper on fab click!
         mFab.setOnClickListener {
             //start preview activity
-            val intent = Intent(this, SetWallpaperActivity::class.java)
+            val intent = Intent(this, PreviewActivity::class.java)
             startActivity(intent)
         }
 
