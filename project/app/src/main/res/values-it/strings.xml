@@ -8,7 +8,8 @@
     <!-- Recent setups things -->
     <string name="title_recent_setups">Setup recenti</string>
     <string name="message_no_recent_setups">Nessun setup recente trovato!</string>
-    <string name="message_clear_recent_setups">Tutti i setup recenti saranno cancellati. Sei sicuro?</string>
+    <string name="message_clear_recent_setups">Tutti i setup recenti saranno cancellati. Sei sicuro? Per cancellare un setup specifico clicca su di esso a lungo! :)</string>
+    <string name="message_clear__single_recent_setup">Il setup &#35;%1d sarà cancellato. Sei sicuro?</string>
 
     <!-- Items del menu della BottomBar -->
     <string name="title_github">Pagina GitHub</string>

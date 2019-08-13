@@ -35,7 +35,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         }
 
         //setup recent setups
-        val recentSetupsAdapter = RecentSetupsAdapter(getString(R.string.delimiter))
+        val recentSetupsAdapter =
+            RecentSetupsAdapter(getString(R.string.delimiter), this@BottomNavigationDrawerFragment)
         recents_rv.layoutManager = GridLayoutManager(context, 4)
         recents_rv.adapter = recentSetupsAdapter
 

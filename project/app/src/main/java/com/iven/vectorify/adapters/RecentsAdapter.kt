@@ -5,11 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.iven.vectorify.BottomNavigationDrawerFragment
 import com.iven.vectorify.R
 import com.iven.vectorify.mVectorifyPreferences
 import com.iven.vectorify.ui.Utils
 
-class RecentSetupsAdapter(private val delimiter: String) :
+class RecentSetupsAdapter(
+    private val delimiter: String,
+    private val bottomNavigationDrawerFragment: BottomNavigationDrawerFragment
+) :
     RecyclerView.Adapter<RecentSetupsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((List<Int>) -> Unit)? = null
@@ -29,10 +34,10 @@ class RecentSetupsAdapter(private val delimiter: String) :
 
     inner class RecentSetupsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(set: String) {
+        fun bindItems(setup: String) {
 
             val recentButton = itemView.findViewById<ImageView>(R.id.recent_setups_vector)
-            val arr = set.split(delimiter)
+            val arr = setup.split(delimiter)
 
             val backgroundColor = Integer.parseInt(arr[0])
             recentButton.setBackgroundColor(backgroundColor)
@@ -54,6 +59,31 @@ class RecentSetupsAdapter(private val delimiter: String) :
 
             recentButton.setOnClickListener {
                 onRecentClick?.invoke(listOf(backgroundColor, vector, vectorColor))
+            }
+
+            recentButton.setOnLongClickListener {
+
+                if (bottomNavigationDrawerFragment.context != null) {
+                    val context = bottomNavigationDrawerFragment.context!!
+                    MaterialDialog(context).show {
+
+                        cornerRadius(res = R.dimen.md_corner_radius)
+                        title(R.string.title_recent_setups)
+                        message(text = context.getString(R.string.message_clear__single_recent_setup, adapterPosition))
+                        positiveButton {
+                            //add an empty list to preferences
+                            try {
+                                mRecentSetups.remove(setup)
+                                notifyDataSetChanged()
+                                if (mRecentSetups.isEmpty()) bottomNavigationDrawerFragment.dismiss()
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                        negativeButton { dismiss() }
+                    }
+                }
+                return@setOnLongClickListener true
             }
         }
     }
