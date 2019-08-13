@@ -15,7 +15,7 @@
     <string name="message_clear_recent_setups">All recent setups will be deleted. Are You sure? If You want to delete
         specific setups just long click on them :).
     </string>
-    <string name="message_clear__single_recent_setup">Setup &#35;%1d will be deleted. Are You sure?</string>
+    <string name="message_clear_single_recent_setup">Setup &#35;%1s will be deleted. Are You sure?</string>
 
     <!-- Preferences keys -->
     <string name="background_color_key" translatable="false">background_key</string>

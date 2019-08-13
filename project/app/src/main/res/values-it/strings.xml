@@ -8,8 +8,10 @@
     <!-- Recent setups things -->
     <string name="title_recent_setups">Setup recenti</string>
     <string name="message_no_recent_setups">Nessun setup recente trovato!</string>
-    <string name="message_clear_recent_setups">Tutti i setup recenti saranno cancellati. Sei sicuro? Per cancellare un setup specifico clicca su di esso a lungo! :)</string>
-    <string name="message_clear__single_recent_setup">Il setup &#35;%1d sarà cancellato. Sei sicuro?</string>
+    <string name="message_clear_recent_setups">Tutti i setup recenti saranno cancellati. Sei sicuro? Per cancellare un
+        setup specifico clicca su di esso a lungo! :)
+    </string>
+    <string name="message_clear_single_recent_setup">Il setup &#35;%1s sarà cancellato. Sei sicuro?</string>
 
     <!-- Items del menu della BottomBar -->
     <string name="title_github">Pagina GitHub</string>
@@ -24,7 +26,8 @@
         personale mi sarà accessibile :)
     </string>
     <string name="rationale_denied">Recentemente hai scelto l\'opzione \"Non chiedermelo più\" quando ti ho chiesto il
-        permesso di accesso alla memoria interna. Vai nelle info dell\'app e dammi il permesso se vuoi salvare gli sfondi.
+        permesso di accesso alla memoria interna. Vai nelle info dell\'app e dammi il permesso se vuoi salvare gli
+        sfondi.
     </string>
     <string name="go_to_info">Vai nelle info</string>
     <string name="boo">Boo! No accesso no party! Usa il Live Wallpaper!</string>

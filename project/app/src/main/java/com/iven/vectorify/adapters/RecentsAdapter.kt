@@ -69,7 +69,12 @@ class RecentSetupsAdapter(
 
                         cornerRadius(res = R.dimen.md_corner_radius)
                         title(R.string.title_recent_setups)
-                        message(text = context.getString(R.string.message_clear__single_recent_setup, adapterPosition))
+                        message(
+                            text = context.getString(
+                                R.string.message_clear_single_recent_setup,
+                                adapterPosition.toString()
+                            )
+                        )
                         positiveButton {
                             //add an empty list to preferences
                             try {
