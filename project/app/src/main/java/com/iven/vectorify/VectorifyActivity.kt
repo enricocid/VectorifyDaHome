@@ -274,6 +274,7 @@ class VectorifyActivity : AppCompatActivity() {
     private fun startColorPicker(key: String) {
         MaterialDialog(this).show {
 
+            cornerRadius(res = R.dimen.md_corner_radius)
             colorChooser(
                 colors = ColorPalette.Primary,
                 subColors = ColorPalette.PrimarySub,

@@ -138,6 +138,8 @@ object Utils {
         val message = if (shouldRequestRationale) R.string.rationale else R.string.rationale_denied
 
         MaterialDialog(activity).show {
+
+            cornerRadius(res = R.dimen.md_corner_radius)
             title(R.string.title_rationale)
             message(message)
             positiveButton {

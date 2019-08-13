@@ -49,6 +49,8 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     private fun clearRecentSetups() {
         if (context != null) {
             MaterialDialog(context!!).show {
+
+                cornerRadius(res = R.dimen.md_corner_radius)
                 title(R.string.title_recent_setups)
                 message(R.string.message_clear_recent_setups)
                 positiveButton {
