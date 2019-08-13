@@ -10,9 +10,9 @@
 
 
 
-###### Current version: [(18) 1.4.1](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.4.1)
+###### Current version: [(19) 1.4.2](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.4.2)
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh17.gif) 
+![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh19.gif) 
 
 
 # Downloads
@@ -27,7 +27,7 @@
 
 - Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
 
-- Recent setups.
+- Recent setups with deletion possibility (long click to delete a single setup).
 
 - Preview screen where you can customize the size of the vector graphic.
 
