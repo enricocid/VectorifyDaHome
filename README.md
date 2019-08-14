@@ -2,7 +2,9 @@
 
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid) 
 
-[PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md)
+[PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md) - [CREDITS](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
+
+### Another chapter in the series "I'm bored"
 
 ![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/bored2.png)
 
@@ -31,13 +33,7 @@
 
 - Preview screen where you can customize the size of the vector graphic.
 
-- 3 ways to set the wallpaper:
-
-  - Save to internal memory and set it using your preferred gallery/app.
-
-  - Set it using the stock wallpaper picker (involves saving to internal memory for faster processing).
-
-  - Set as LiveWallpaper: unlike classical Live Wallpapers the canvas is not updated continuously but only one time when the LP becomes visible (for example, when you come back to your home from an app or when you unlock the device). This means no battery draining!
+- 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper).
 
 
 - Other features?
