@@ -53,7 +53,7 @@ The app itself implements a dark/light theme switcher!
 
 - Colors presets taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
 
-- Aidan Follestad for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
+- [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team for POSP vectors, inspiration, suggestions and support!
 The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome)
