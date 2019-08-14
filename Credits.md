@@ -7,7 +7,7 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 
 - [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support and suggestions!
 
-- [**Toastcode**](https://toastco.de/) for the wunderbar [**Screener - Better screenshots**](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
+- [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
 
 - [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
