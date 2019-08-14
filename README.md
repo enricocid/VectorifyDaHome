@@ -1,4 +1,4 @@
-### <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
+# <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
 
 ###### Current version: [(19) 1.4.2](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.4.2)
