@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
-import com.iven.vectorify.BottomNavigationDrawerFragment
 import com.iven.vectorify.R
+import com.iven.vectorify.RecentSetupsFragment
 import com.iven.vectorify.mVectorifyPreferences
 import com.iven.vectorify.utils.Utils
 
 class RecentSetupsAdapter(
     private val delimiter: String,
-    private val bottomNavigationDrawerFragment: BottomNavigationDrawerFragment
+    private val recentSetupsFragment: RecentSetupsFragment
 ) :
     RecyclerView.Adapter<RecentSetupsAdapter.RecentSetupsHolder>() {
 
@@ -63,8 +63,8 @@ class RecentSetupsAdapter(
 
             recentButton.setOnLongClickListener {
 
-                if (bottomNavigationDrawerFragment.context != null) {
-                    val context = bottomNavigationDrawerFragment.context!!
+                if (recentSetupsFragment.context != null) {
+                    val context = recentSetupsFragment.context!!
                     MaterialDialog(context).show {
 
                         cornerRadius(res = R.dimen.md_corner_radius)
@@ -81,7 +81,7 @@ class RecentSetupsAdapter(
                                 mRecentSetups.remove(setup)
                                 notifyDataSetChanged()
                                 mVectorifyPreferences.recentSetups = mRecentSetups.toMutableSet()
-                                if (mRecentSetups.isEmpty()) bottomNavigationDrawerFragment.dismiss()
+                                if (mRecentSetups.isEmpty()) recentSetupsFragment.dismiss()
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
