@@ -1,6 +1,7 @@
-package com.iven.vectorify
+package com.iven.vectorify.preferences
 
 import android.graphics.Color
+import com.iven.vectorify.R
 
 class TempPreferences {
 

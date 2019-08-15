@@ -22,7 +22,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iven.vectorify.adapters.ColorsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
-import com.iven.vectorify.ui.Utils
+import com.iven.vectorify.utils.Utils
 import kotlinx.android.synthetic.main.background_color_pref_card.*
 import kotlinx.android.synthetic.main.presets_card.*
 import kotlinx.android.synthetic.main.vector_color_pref_card.*

@@ -1,4 +1,4 @@
-package com.iven.vectorify
+package com.iven.vectorify.utils
 
 import android.app.WallpaperManager
 import android.content.Context
@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
+import com.iven.vectorify.R
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream

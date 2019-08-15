@@ -1,9 +1,10 @@
-package com.iven.vectorify
+package com.iven.vectorify.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.preference.PreferenceManager
+import com.iven.vectorify.R
 
 class VectorifyPreferences(context: Context) {
 

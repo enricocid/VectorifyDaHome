@@ -1,6 +1,6 @@
 @file:JvmName("Utils")
 
-package com.iven.vectorify.ui
+package com.iven.vectorify.utils
 
 import android.Manifest
 import android.annotation.TargetApi

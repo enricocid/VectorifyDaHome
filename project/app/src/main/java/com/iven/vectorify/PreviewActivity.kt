@@ -13,8 +13,8 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.iven.vectorify.ui.Utils
-import com.iven.vectorify.ui.VectorView
+import com.iven.vectorify.utils.Utils
+import com.iven.vectorify.utils.VectorView
 import kotlinx.android.synthetic.main.preview_activity.*
 import kotlinx.android.synthetic.main.seekbar_card.*
 import kotlinx.android.synthetic.main.toolbar.*

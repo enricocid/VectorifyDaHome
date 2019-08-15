@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import com.iven.vectorify.preferences.TempPreferences
+import com.iven.vectorify.preferences.VectorifyPreferences
 
 val mVectorifyPreferences: VectorifyPreferences by lazy {
     VectorifyApp.prefs

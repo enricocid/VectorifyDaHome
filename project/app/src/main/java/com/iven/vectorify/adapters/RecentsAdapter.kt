@@ -9,7 +9,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.BottomNavigationDrawerFragment
 import com.iven.vectorify.R
 import com.iven.vectorify.mVectorifyPreferences
-import com.iven.vectorify.ui.Utils
+import com.iven.vectorify.utils.Utils
 
 class RecentSetupsAdapter(
     private val delimiter: String,

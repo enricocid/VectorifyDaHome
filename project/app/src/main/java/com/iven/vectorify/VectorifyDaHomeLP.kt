@@ -7,7 +7,7 @@ import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
 import androidx.core.content.ContextCompat
-import com.iven.vectorify.ui.Utils
+import com.iven.vectorify.utils.Utils
 
 class VectorifyDaHomeLP : WallpaperService() {
 
