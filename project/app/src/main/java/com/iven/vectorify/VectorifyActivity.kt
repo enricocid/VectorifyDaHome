@@ -45,7 +45,7 @@ class VectorifyActivity : AppCompatActivity() {
     private var mVector = R.drawable.android
 
     //interface to let recent  setups UI to let VectorifyActivity to update its shit
-    private val recentSetupsInterface = object : BottomNavigationDrawerFragment.RecentSetupsInterface {
+    private val recentSetupsInterface = object : RecentSetupsFragment.RecentSetupsInterface {
         override fun onRecentSelected(backgroundColor: Int, vector: Int, vectorColor: Int) {
 
             setBackgroundColorForUI(backgroundColor)
@@ -115,7 +115,7 @@ class VectorifyActivity : AppCompatActivity() {
 
         bottomBar.setNavigationOnClickListener {
             if (mVectorifyPreferences.recentSetups.isNotEmpty()) {
-                val bottomSheetDialogFragment = BottomNavigationDrawerFragment()
+                val bottomSheetDialogFragment = RecentSetupsFragment()
                 bottomSheetDialogFragment.setRecentSetupsInterface(recentSetupsInterface)
                 bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
             } else {

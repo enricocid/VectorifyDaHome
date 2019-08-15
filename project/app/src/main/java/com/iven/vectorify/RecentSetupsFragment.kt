@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.iven.vectorify.adapters.RecentSetupsAdapter
-import kotlinx.android.synthetic.main.navigation_view.*
+import kotlinx.android.synthetic.main.recent_setups_fragment.*
 
-class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
+class RecentSetupsFragment : BottomSheetDialogFragment() {
 
     private lateinit var mRecentSetupsInterface: RecentSetupsInterface
 
@@ -22,7 +22,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
     override fun getTheme(): Int = R.style.BottomSheetDialogTheme
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.navigation_view, container, false)
+        return inflater.inflate(R.layout.recent_setups_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         //setup recent setups
         val recentSetupsAdapter =
-            RecentSetupsAdapter(getString(R.string.delimiter), this@BottomNavigationDrawerFragment)
+            RecentSetupsAdapter(getString(R.string.delimiter), this@RecentSetupsFragment)
         recents_rv.layoutManager = GridLayoutManager(context, 4)
         recents_rv.adapter = recentSetupsAdapter
 
@@ -57,7 +57,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                 positiveButton {
                     //add an empty list to preferences
                     mVectorifyPreferences.recentSetups = mutableSetOf()
-                    this@BottomNavigationDrawerFragment.dismiss()
+                    this@RecentSetupsFragment.dismiss()
                 }
                 negativeButton { dismiss() }
             }
