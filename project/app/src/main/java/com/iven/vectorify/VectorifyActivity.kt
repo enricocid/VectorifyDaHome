@@ -5,10 +5,11 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -18,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
-import com.google.android.material.chip.Chip
+import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iven.vectorify.adapters.ColorsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
@@ -36,8 +37,8 @@ class VectorifyActivity : AppCompatActivity() {
 
     private lateinit var mFab: FloatingActionButton
     private lateinit var mVectorFrame: ImageView
-    private lateinit var mBackgroundSystemAccentGrabber: Chip
-    private lateinit var mVectorSystemAccentGrabber: Chip
+    private lateinit var mVectorsRecyclerView: RecyclerView
+    private lateinit var mVectorsRecyclerViewLayoutManager: LinearLayoutManager
     private lateinit var mVectorsAdapter: VectorsAdapter
 
     private var mBackgroundColor = Color.BLACK
@@ -55,7 +56,7 @@ class VectorifyActivity : AppCompatActivity() {
 
             mVectorsAdapter.onVectorClick?.invoke(vector)
             mVectorsAdapter.swapSelectedDrawable(mVector)
-            vectors_rv.scrollToPosition(mVectorsAdapter.getVectorPosition(mVector))
+            mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVector))
         }
     }
 
@@ -80,9 +81,6 @@ class VectorifyActivity : AppCompatActivity() {
         mTempPreferences.tempVector = mVector
         mTempPreferences.tempScale = mVectorifyPreferences.scale
 
-        //get system accent grabbers
-        mBackgroundSystemAccentGrabber = background_system_accent
-        mVectorSystemAccentGrabber = vector_system_accent
         mVectorFrame = vector_frame
 
         //get the fab (don't move from this position)
@@ -155,10 +153,12 @@ class VectorifyActivity : AppCompatActivity() {
             }
         }
 
-        //setup presets
-        vectors_rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        //setup vectors
+        mVectorsRecyclerView = vectors_rv
+        mVectorsRecyclerViewLayoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        mVectorsRecyclerView.layoutManager = mVectorsRecyclerViewLayoutManager
         mVectorsAdapter = VectorsAdapter()
-        vectors_rv.adapter = mVectorsAdapter
+        mVectorsRecyclerView.adapter = mVectorsAdapter
 
         mVectorsAdapter.onVectorClick = { vector ->
 
@@ -170,13 +170,23 @@ class VectorifyActivity : AppCompatActivity() {
             }
         }
 
-        vectors_rv.scrollToPosition(mVectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
+        mVectorsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                runOnUiThread {
+                    categories.text =
+                        Utils.getCategoryForPosition(resources, mVectorsRecyclerViewLayoutManager, mVectorsAdapter)
+                }
+            }
+        })
+
+        mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
 
         //set vector frame height
-        vectors_rv.afterMeasured {
+        mVectorsRecyclerView.afterMeasured {
 
-            val vectorFrameParams = mVectorFrame.layoutParams as LinearLayout.LayoutParams
-            vectorFrameParams.height = (height / 0.75F).toInt()
+            val vectorFrameParams = mVectorFrame.layoutParams as FrameLayout.LayoutParams
+            vectorFrameParams.height = (height / 0.75F).toInt() + categories.height / 2
             mVectorFrame.layoutParams = vectorFrameParams
 
             setVectorFrameColors()
@@ -319,6 +329,35 @@ class VectorifyActivity : AppCompatActivity() {
         startColorPicker(getString(R.string.vectors_color_key), R.string.title_vector_dialog)
     }
 
+
+    //method to start categories chooser
+    fun startCategoryChooser(view: View) {
+        MaterialDialog(this).show {
+            listItems(R.array.categories) { _, index, _ ->
+                val vector = Utils.getCategoryStartPosition(index)
+                val vectorPosition = mVectorsAdapter.getVectorPosition(vector)
+                if (mVectorsRecyclerViewLayoutManager.findFirstVisibleItemPosition() < vectorPosition) {
+
+                    mVectorsRecyclerView.afterMeasured {
+
+                        mVectorsAdapter.itemCount.takeIf { it > 0 }?.let {
+
+                            val timeMillis =
+                                executeAndMeasureTimeMillis { mVectorsRecyclerView.scrollToPosition(it - 1) }
+
+                            Handler().postDelayed(
+                                { mVectorsRecyclerView.scrollToPosition(vectorPosition) },
+                                timeMillis.second
+                            )
+                        }
+                    }
+                } else {
+                    mVectorsRecyclerView.scrollToPosition(vectorPosition)
+                }
+            }
+        }
+    }
+
     //update theme
     private fun setNewTheme() {
         val newTheme = if (mTheme == R.style.AppTheme) R.style.AppTheme_Dark else R.style.AppTheme
@@ -358,5 +397,12 @@ class VectorifyActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    //measure the time a function takes to run
+    private inline fun <R> executeAndMeasureTimeMillis(block: () -> R): Pair<R, Long> {
+        val start = System.currentTimeMillis()
+        val result = block()
+        return result to (System.currentTimeMillis() - start)
     }
 }

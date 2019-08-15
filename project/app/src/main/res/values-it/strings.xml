@@ -7,7 +7,24 @@
     <string name="title_vector_dialog">Colore grafica</string>
     <string name="title_accent_me">ACCENTAMI!</string>
 
-    <!-- Recent setups things -->
+    <!-- Categorie -->
+    <string name="title_tech">Tech</string>
+    <string name="title_symbols">Figure e simboli</string>
+    <string name="title_animals">Animali</string>
+    <string name="title_emoticons">Emoticons</string>
+    <string name="title_fun">Divertimento</string>
+    <string name="title_food">Cibo e bevande</string>
+    <string name="title_nature">Natura</string>
+    <string name="title_math">Matematica</string>
+    <string name="title_science">Scienza</string>
+    <string name="title_music">Musica</string>
+    <string name="title_nerdy">Nerdy</string>
+    <string name="title_buildings">Costruzioni</string>
+    <string name="title_zodiac">Segni zodiacali</string>
+    <string name="title_alert">Allerta</string>
+    <string name="title_others">Altri</string>
+
+    <!-- Setup recenti -->
     <string name="title_recent_setups">Setup recenti</string>
     <string name="message_no_recent_setups">Nessun setup recente trovato!</string>
     <string name="message_clear_recent_setups">Tutti i setup recenti saranno cancellati. Sei sicuro? Per cancellare un
@@ -22,7 +39,7 @@
 
     <string name="install_browser_message">Installa un browser prima!</string>
 
-    <!-- Dialog rationale things -->
+    <!-- Razionali dialog permessi -->
     <string name="title_rationale">Permessi accesso storage</string>
     <string name="rationale">Permettimi di accedere alla tua memoria interna per potervi salvare gli sfondi. Nessun dato
         personale mi sarà accessibile :)
@@ -34,7 +51,7 @@
     <string name="go_to_info">Vai nelle info</string>
     <string name="boo">Boo! No accesso no party! Usa il Live Wallpaper!</string>
 
-    <!-- Set wallpaper things -->
+    <!-- Preview -->
     <string name="title_size">Dimensione</string>
     <string name="title_save_to">Salva nella memoria interna</string>
     <string name="title_crop">Crop e setta come sfondo</string>

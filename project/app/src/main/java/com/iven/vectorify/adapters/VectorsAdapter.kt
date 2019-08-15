@@ -39,7 +39,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.place,
         R.drawable.map_marker_check,
 
-        //figures and simbols
+        //figures and symbols
         R.drawable.dot,
         R.drawable.origin,
         R.drawable.triangle_inverted,
@@ -50,12 +50,10 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.heart_pulse,
         R.drawable.charity,
         R.drawable.bubble,
-        R.drawable.high,
-        R.drawable.help,
-        R.drawable.alert,
-        R.drawable.alert_outline,
-        R.drawable.alert_circle,
-        R.drawable.block,
+        R.drawable.yin_yang,
+        R.drawable.flash,
+        R.drawable.fire,
+        R.drawable.sticker,
 
         //animals
         R.drawable.cat,
@@ -91,7 +89,6 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.sticker_emoji,
         R.drawable.star_face,
         R.drawable.alien,
-        R.drawable.ufo,
 
         //let's have fun, parties and relax
         R.drawable.toys,
@@ -158,20 +155,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.cloud,
         R.drawable.cloud_outline,
 
-        //other
-        R.drawable.school,
-        R.drawable.tie,
-        R.drawable.brain,
-        R.drawable.thumb_up,
-        R.drawable.human_greeting,
-        R.drawable.airballoon,
-        R.drawable.sunglasses,
-        R.drawable.edit,
-        R.drawable.brush,
-        R.drawable.quote,
-
-        //other symbols
-        R.drawable.yin_yang,
+        //math
         R.drawable.pi,
         R.drawable.alpha,
         R.drawable.beta,
@@ -179,9 +163,6 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.sigma,
         R.drawable.sigma_lower,
         R.drawable.infinity,
-        R.drawable.flash,
-        R.drawable.fire,
-        R.drawable.sticker,
 
         //science
         R.drawable.periodic_table,
@@ -245,7 +226,6 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.bank,
         R.drawable.stadium,
 
-        //alert
         //zodiac
         R.drawable.zodiac_aries,
         R.drawable.zodiac_cancer,
@@ -257,7 +237,28 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.zodiac_sagittarius,
         R.drawable.zodiac_scorpio,
         R.drawable.zodiac_taurus,
-        R.drawable.zodiac_virgo
+        R.drawable.zodiac_virgo,
+
+        //alert
+        R.drawable.high,
+        R.drawable.help,
+        R.drawable.alert,
+        R.drawable.alert_outline,
+        R.drawable.alert_circle,
+        R.drawable.block,
+
+        //others
+        R.drawable.school,
+        R.drawable.tie,
+        R.drawable.brain,
+        R.drawable.thumb_up,
+        R.drawable.human_greeting,
+        R.drawable.airballoon,
+        R.drawable.sunglasses,
+        R.drawable.edit,
+        R.drawable.brush,
+        R.drawable.quote,
+        R.drawable.ufo
     )
 
     private var mSelectedDrawable = R.drawable.android

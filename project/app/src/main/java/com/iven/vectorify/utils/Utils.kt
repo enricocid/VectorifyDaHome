@@ -11,6 +11,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -21,9 +22,11 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
+import com.iven.vectorify.adapters.VectorsAdapter
 
 object Utils {
 
@@ -175,5 +178,80 @@ object Utils {
     @JvmStatic
     fun checkIfColorsEqual(color1: Int, color2: Int): Boolean {
         return color1 == color2
+    }
+
+    //get categories start position
+    @JvmStatic
+    fun getCategoryStartPosition(index: Int): Int {
+        return when (index) {
+            0 -> R.drawable.android
+            1 -> R.drawable.dot
+            2 -> R.drawable.cat
+            3 -> R.drawable.face
+            4 -> R.drawable.toys
+            5 -> R.drawable.ice_pop
+            6 -> R.drawable.nature
+            7 -> R.drawable.pi
+            8 -> R.drawable.periodic_table
+            9 -> R.drawable.music_note
+            10 -> R.drawable.space_invaders
+            11 -> R.drawable.factory
+            12 -> R.drawable.zodiac_aries
+            else -> R.drawable.high
+        }
+    }
+
+    //get categories labels while scrolling recycler view
+    @JvmStatic
+    fun getCategoryForPosition(
+        resources: Resources,
+        layoutManager: LinearLayoutManager,
+        vectorsAdapter: VectorsAdapter
+    ): String {
+        return when (layoutManager.findFirstCompletelyVisibleItemPosition()) {
+            in vectorsAdapter.getVectorPosition(R.drawable.android)..vectorsAdapter.getVectorPosition(R.drawable.map_marker_check)
+            -> resources.getString(R.string.title_tech)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.dot)..vectorsAdapter.getVectorPosition(R.drawable.sticker)
+            -> resources.getString(R.string.title_symbols)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.cat)..vectorsAdapter.getVectorPosition(R.drawable.jellyfish)
+            -> resources.getString(R.string.title_animals)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.face)..vectorsAdapter.getVectorPosition(R.drawable.alien)
+            -> resources.getString(R.string.title_emoticons)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.toys)..vectorsAdapter.getVectorPosition(R.drawable.balloon)
+            -> resources.getString(R.string.title_fun)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.ice_pop)..vectorsAdapter.getVectorPosition(R.drawable.carrot)
+            -> resources.getString(R.string.title_food)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.nature)..vectorsAdapter.getVectorPosition(R.drawable.cloud_outline)
+            -> resources.getString(R.string.title_nature)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.pi)..vectorsAdapter.getVectorPosition(R.drawable.infinity)
+            -> resources.getString(R.string.title_math)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.periodic_table)..vectorsAdapter.getVectorPosition(R.drawable.chart_bell_curve)
+            -> resources.getString(R.string.title_science)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.music_note)..vectorsAdapter.getVectorPosition(R.drawable.saxophone)
+            -> resources.getString(R.string.title_music)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.space_invaders)..vectorsAdapter.getVectorPosition(R.drawable.ocarina)
+            -> resources.getString(R.string.title_nerdy)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.factory)..vectorsAdapter.getVectorPosition(R.drawable.stadium)
+            -> resources.getString(R.string.title_buildings)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.zodiac_aries)..vectorsAdapter.getVectorPosition(R.drawable.zodiac_virgo)
+            -> resources.getString(R.string.title_zodiac)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.high)..vectorsAdapter.getVectorPosition(R.drawable.block)
+            -> resources.getString(R.string.title_alert)
+
+            else -> resources.getString(R.string.title_others)
+        }
     }
 }

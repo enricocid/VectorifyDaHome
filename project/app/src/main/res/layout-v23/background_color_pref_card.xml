@@ -42,7 +42,6 @@
                   android:textAppearance="@android:style/TextAppearance.Material.Small"/>
 
         <com.google.android.material.chip.Chip
-                android:id="@+id/background_system_accent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
