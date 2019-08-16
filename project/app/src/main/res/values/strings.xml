@@ -1,5 +1,19 @@
 <resources>
+
     <string name="live_wallpaper_name" translatable="false">Vectorify da home!</string>
+
+    <!-- Hex string -->
+    <string name="hex" translatable="false">&#35;%1s</string>
+
+    <!-- Preferences keys -->
+    <string name="background_color_key" translatable="false">background_key</string>
+    <string name="vectors_color_key" translatable="false">icon_key</string>
+    <string name="theme_key" translatable="false">theme_key</string>
+    <string name="vector_key" translatable="false">icon_resource_key</string>
+    <string name="scale_key" translatable="false">scale_key</string>
+    <string name="horizontal_offset_key" translatable="false">horizontal_offset_key</string>
+    <string name="vertical_offset_key" translatable="false">vertical_offset_key</string>
+    <string name="recent_setups_key" translatable="false">recent_setups_key</string>
 
     <!-- Card titles -->
     <string name="title_background">Background</string>
@@ -8,6 +22,37 @@
     <string name="title_vector_dialog">Vector color</string>
     <string name="title_presets" translatable="false">Presets</string>
     <string name="title_accent_me">ACCENT ME!</string>
+
+    <!-- Recent setups things -->
+    <string name="title_recent_setups">Recent setups</string>
+    <string name="delimiter" translatable="false">&#59;</string>
+    <string name="recent_setups_save_pattern" translatable="false">%1s&#59;%1s&#59;%1s</string>
+    <string name="message_no_recent_setups">No recent setups found!</string>
+    <string name="message_clear_recent_setups">All recent setups will be deleted. Are You sure? If You want to delete
+        specific setups just long click on them :).
+    </string>
+    <string name="message_clear_single_recent_setup">Setup &#35;%1s will be deleted. Are You sure?</string>
+
+    <!-- BottomBar menu items -->
+    <string name="title_github">GitHub page</string>
+    <string name="title_theme">Theme</string>
+    <string name="title_restore">Restore default colors!</string>
+    <string name="app_github_link" translatable="false">
+        https://github.com/enricocid/VectorifyDaHome
+    </string>
+    <string name="install_browser_message">Install a browser first!</string>
+
+    <!-- Preview things -->
+    <string name="save_pattern" translatable="false">vectorify_da_home_</string>
+    <string name="time_pattern" translatable="false">dd_MM_yy_hh-ss</string>
+    <string name="title_preview" translatable="false">Preview</string>
+    <string name="title_size">Size and position</string>
+    <string name="title_save_to">Save to internal memory</string>
+    <string name="title_crop">Crop and set as wallpaper</string>
+    <string name="title_go_live">Set as LiveWallpaper</string>
+    <string name="title_already_live">Applying changes&#8230;</string>
+    <string name="message_saved_to">%1s saved to %1s</string>
+    <string name="loading" translatable="false">Vectorifying da home&#8230;</string>
 
     <!-- Categories -->
     <string name="title_tech">Tech</string>
@@ -26,37 +71,6 @@
     <string name="title_alert">Alert</string>
     <string name="title_others">Others</string>
 
-    <!-- Recent setups things -->
-    <string name="title_recent_setups">Recent setups</string>
-    <string name="delimiter" translatable="false">&#59;</string>
-    <string name="recent_setups_save_pattern" translatable="false">%1s&#59;%1s&#59;%1s</string>
-    <string name="message_no_recent_setups">No recent setups found!</string>
-    <string name="message_clear_recent_setups">All recent setups will be deleted. Are You sure? If You want to delete
-        specific setups just long click on them :).
-    </string>
-    <string name="message_clear_single_recent_setup">Setup &#35;%1s will be deleted. Are You sure?</string>
-
-    <!-- Preferences keys -->
-    <string name="background_color_key" translatable="false">background_key</string>
-    <string name="vectors_color_key" translatable="false">icon_key</string>
-    <string name="theme_key" translatable="false">theme_key</string>
-    <string name="vector_key" translatable="false">icon_resource_key</string>
-    <string name="scale_key" translatable="false">scale_key</string>
-    <string name="recent_setups_key" translatable="false">recent_setups_key</string>
-
-    <!-- BottomBar menu items -->
-    <string name="title_github">GitHub page</string>
-    <string name="title_theme">Theme</string>
-    <string name="title_restore">Restore default colors!</string>
-
-    <string name="app_github_link" translatable="false">
-        https://github.com/enricocid/VectorifyDaHome
-    </string>
-    <string name="install_browser_message">Install a browser first!</string>
-
-    <!-- Hex string -->
-    <string name="hex" translatable="false">&#35;%1s</string>
-
     <!-- Dialog rationale things -->
     <string name="title_rationale">Storage access permission</string>
     <string name="rationale">Let me access to Your storage in order to save wallpapers to Your internal memory. No
@@ -67,16 +81,4 @@
     </string>
     <string name="go_to_info">Go to info</string>
     <string name="boo">Boo! No access no party! Use the live wallpaper!</string>
-
-    <!-- Preview things -->
-    <string name="save_pattern" translatable="false">vectorify_da_home_</string>
-    <string name="time_pattern" translatable="false">dd_MM_yy_hh-ss</string>
-    <string name="title_preview" translatable="false">Preview</string>
-    <string name="title_size">Size</string>
-    <string name="title_save_to">Save to internal memory</string>
-    <string name="title_crop">Crop and set as wallpaper</string>
-    <string name="title_go_live">Set as LiveWallpaper</string>
-    <string name="title_already_live">Applying changes&#8230;</string>
-    <string name="message_saved_to">%1s saved to %1s</string>
-    <string name="loading" translatable="false">Vectorifying da home&#8230;</string>
 </resources>

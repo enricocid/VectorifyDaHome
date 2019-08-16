@@ -11,5 +11,5 @@
             android:id="@+id/vector_view"
             android:layout_height="match_parent"/>
 
-    <include layout="@layout/seekbar_card"/>
+    <include layout="@layout/size_position_card"/>
 </merge>

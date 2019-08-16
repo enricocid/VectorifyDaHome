@@ -22,8 +22,6 @@
 
     </LinearLayout>
 
-
     <include layout="@layout/presets_card"/>
-
 
 </LinearLayout>

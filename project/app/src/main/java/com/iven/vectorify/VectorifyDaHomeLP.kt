@@ -81,7 +81,7 @@ class VectorifyDaHomeLP : WallpaperService() {
                         if (Utils.isColorDark(mVectorColor)) bit.setTint(Utils.lightenColor(mVectorColor, 0.20F))
                         else bit.setTint(Utils.darkenColor(mVectorColor, 0.20F))
                     }
-                    Utils.drawBitmap(bit, canvas, mDeviceWidth, mDeviceHeight, mScaleFactor)
+                    Utils.drawBitmap(bit, canvas, mDeviceWidth, mDeviceHeight, mScaleFactor, mVectorifyPreferences.horizontalOffset, mVectorifyPreferences.verticalOffset)
                 }
             } finally {
                 if (canvas != null)

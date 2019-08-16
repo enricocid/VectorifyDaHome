@@ -79,7 +79,15 @@ object Utils {
     }
 
     @JvmStatic
-    fun drawBitmap(vectorDrawable: VectorDrawable, canvas: Canvas, deviceWidth: Int, deviceHeight: Int, scale: Float) {
+    fun drawBitmap(
+        vectorDrawable: VectorDrawable,
+        canvas: Canvas,
+        deviceWidth: Int,
+        deviceHeight: Int,
+        scale: Float,
+        horizontalOffset: Float,
+        verticalOffset: Float
+    ): Float {
 
         val dimension = if (deviceWidth > deviceHeight) deviceHeight else deviceWidth
         val bitmap = Bitmap.createBitmap(
@@ -92,12 +100,16 @@ object Utils {
 
         vectorDrawable.draw(drawableCanvas)
 
+        val left = canvas.width / 2F - drawableCanvas.width / 2F + horizontalOffset
+        val top = canvas.height / 2F - drawableCanvas.width / 2F + verticalOffset
+
         canvas.drawBitmap(
             bitmap,
-            canvas.width / 2F - drawableCanvas.width / 2F,
-            canvas.height / 2F - drawableCanvas.width / 2F,
+            left,
+            top,
             null
         )
+        return drawableCanvas.width * 0.05F
     }
 
     @JvmStatic
@@ -112,18 +124,6 @@ object Utils {
     @JvmStatic
     fun requestPermissions(activity: Activity, code: Int) {
         ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), code)
-    }
-
-    //method to get rounded float string
-    @JvmStatic
-    fun getDecimalFormattedString(number: Float): String {
-        var formattedNumber = ""
-        try {
-            formattedNumber = String.format("%.2f", number)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return formattedNumber
     }
 
     //determine if the live wallpaper is already applied

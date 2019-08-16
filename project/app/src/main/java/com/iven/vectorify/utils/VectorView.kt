@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.drawToBitmap
 import com.iven.vectorify.mDeviceMetrics
 import com.iven.vectorify.mTempPreferences
+import com.iven.vectorify.mVectorifyPreferences
 import java.lang.ref.WeakReference
 
 class VectorView @JvmOverloads constructor(
@@ -22,6 +23,11 @@ class VectorView @JvmOverloads constructor(
     private var mBackgroundColor = Color.BLACK
     private var mVectorColor = Color.WHITE
     private var mScaleFactor = 0.35F
+
+    private var mVerticalOffset = 0F
+    private var mHorizontalOffset = 0F
+
+    private var mStep = 0F
 
     fun vectorifyDaHome(isSetAsWallpaper: Boolean) {
         SaveWallpaperAsync(
@@ -38,9 +44,11 @@ class VectorView @JvmOverloads constructor(
         mDeviceWidth = mDeviceMetrics.first
         mDeviceHeight = mDeviceMetrics.second
 
-        mScaleFactor = mTempPreferences.tempScale
         mBackgroundColor = mTempPreferences.tempBackgroundColor
         mVectorColor = mTempPreferences.tempVectorColor
+        mScaleFactor = mTempPreferences.tempScale
+        mHorizontalOffset = mTempPreferences.tempHorizontalOffset
+        mVerticalOffset = mTempPreferences.tempVerticalOffset
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -59,13 +67,74 @@ class VectorView @JvmOverloads constructor(
                 if (Utils.isColorDark(mVectorColor)) bit.setTint(Utils.lightenColor(mVectorColor, 0.20F))
                 else bit.setTint(Utils.darkenColor(mVectorColor, 0.20F))
             }
-            Utils.drawBitmap(bit, canvas, mDeviceWidth, mDeviceHeight, mScaleFactor)
+            mStep = Utils.drawBitmap(
+                bit,
+                canvas,
+                mDeviceWidth,
+                mDeviceHeight,
+                mScaleFactor,
+                mHorizontalOffset,
+                mVerticalOffset
+            )
         }
     }
 
     //update scale factor when the user stop seeking
     fun setScaleFactor(scale: Float) {
         mScaleFactor = scale
+        invalidate()
+    }
+
+    fun moveUp() {
+        mVerticalOffset -= mStep
+        mTempPreferences.isVerticalOffsetChanged = true
+        mTempPreferences.tempVerticalOffset = mVerticalOffset
+        invalidate()
+    }
+
+    fun moveDown() {
+        mVerticalOffset += mStep
+        mTempPreferences.isVerticalOffsetChanged = true
+        mTempPreferences.tempVerticalOffset = mVerticalOffset
+        invalidate()
+    }
+
+    fun moveLeft() {
+        mHorizontalOffset -= mStep
+        mTempPreferences.isHorizontalOffsetChanged = true
+        mTempPreferences.tempHorizontalOffset = mHorizontalOffset
+        invalidate()
+    }
+
+    fun moveRight() {
+        mHorizontalOffset += mStep
+        mTempPreferences.isHorizontalOffsetChanged = true
+        mTempPreferences.tempHorizontalOffset = mHorizontalOffset
+        invalidate()
+    }
+
+    fun centerHorizontal() {
+        mHorizontalOffset = 0F
+        mTempPreferences.tempHorizontalOffset = mHorizontalOffset
+        mTempPreferences.isHorizontalOffsetChanged = true
+        invalidate()
+    }
+
+    fun centerVertical() {
+        mVerticalOffset = 0F
+        mTempPreferences.tempVerticalOffset = mVerticalOffset
+        mTempPreferences.isVerticalOffsetChanged = true
+        invalidate()
+    }
+
+    fun resetPosition() {
+        mHorizontalOffset = mVectorifyPreferences.horizontalOffset
+        mTempPreferences.tempHorizontalOffset = mHorizontalOffset
+        mTempPreferences.isHorizontalOffsetChanged = true
+        mVerticalOffset = mVectorifyPreferences.verticalOffset
+        mTempPreferences.tempVerticalOffset = mVerticalOffset
+        mTempPreferences.isVerticalOffsetChanged = true
+        mTempPreferences.isScaleChanged = true
         invalidate()
     }
 }

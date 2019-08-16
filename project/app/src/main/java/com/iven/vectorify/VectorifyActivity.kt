@@ -80,6 +80,8 @@ class VectorifyActivity : AppCompatActivity() {
         mTempPreferences.tempVectorColor = mVectorColor
         mTempPreferences.tempVector = mVector
         mTempPreferences.tempScale = mVectorifyPreferences.scale
+        mTempPreferences.tempHorizontalOffset = mVectorifyPreferences.horizontalOffset
+        mTempPreferences.tempVerticalOffset = mVectorifyPreferences.verticalOffset
 
         mVectorFrame = vector_frame
 
@@ -336,6 +338,9 @@ class VectorifyActivity : AppCompatActivity() {
             listItems(R.array.categories) { _, index, _ ->
                 val vector = Utils.getCategoryStartPosition(index)
                 val vectorPosition = mVectorsAdapter.getVectorPosition(vector)
+
+                //if the first item position of the selected category is > of the actual position
+                //first scroll to the bottom, then go to the item position
                 if (mVectorsRecyclerViewLayoutManager.findFirstVisibleItemPosition() < vectorPosition) {
 
                     mVectorsRecyclerView.afterMeasured {

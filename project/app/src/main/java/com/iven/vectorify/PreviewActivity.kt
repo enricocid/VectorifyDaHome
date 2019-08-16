@@ -15,19 +15,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorView
+import kotlinx.android.synthetic.main.position_controls.*
 import kotlinx.android.synthetic.main.preview_activity.*
-import kotlinx.android.synthetic.main.seekbar_card.*
+import kotlinx.android.synthetic.main.size_position_card.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 const val SAVE_WALLPAPER = 0
 const val SET_WALLPAPER = 1
 const val SET_LIVE_WALLPAPER = 2
 
+@Suppress("UNUSED_PARAMETER")
 class PreviewActivity : AppCompatActivity() {
 
     private var sUserIsSeeking = false
 
     private lateinit var mVectorView: VectorView
+    private lateinit var mSeekBar: SeekBar
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -58,6 +61,57 @@ class PreviewActivity : AppCompatActivity() {
             android.R.id.home -> finishAndRemoveTask()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        //set ui theme and immersive mode
+        setTheme(mVectorifyPreferences.theme)
+        hideSystemUI()
+
+        setContentView(R.layout.preview_activity)
+
+        //get all the views
+        mVectorView = vector_view
+
+        mSeekBar = seek_size
+
+        //set toolbar shit
+        //match theme with background luminance
+        setToolbarAndSeekBarColors()
+
+        setSupportActionBar(toolbar)
+
+        if (supportActionBar != null) {
+            supportActionBar!!.setHomeButtonEnabled(true)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        }
+
+        //observe seekbar changes
+        mSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+            var userProgress = 0
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                sUserIsSeeking = true
+            }
+
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser && progress >= 10) {
+                    userProgress = progress
+                    mVectorView.setScaleFactor(progress.toFloat() / 100)
+                }
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                sUserIsSeeking = false
+                mTempPreferences.isScaleChanged = true
+                mTempPreferences.tempScale = userProgress.toFloat() / 100
+            }
+        })
+
+        //restore saved scale value
+        mSeekBar.progress = (mTempPreferences.tempScale * 100).toInt()
     }
 
     //manage request permission result, continue loading ui if permissions was granted
@@ -99,7 +153,14 @@ class PreviewActivity : AppCompatActivity() {
         seek_size.progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
 
         seekbar_title.setTextColor(widgetColors)
-        scale_text.setTextColor(widgetColors)
+
+        up.drawable.mutate().setTint(widgetColors)
+        down.drawable.mutate().setTint(widgetColors)
+        left.drawable.mutate().setTint(widgetColors)
+        right.drawable.mutate().setTint(widgetColors)
+        center_horizontal.drawable.mutate().setTint(widgetColors)
+        center_vertical.drawable.mutate().setTint(widgetColors)
+        reset_position.drawable.mutate().setTint(widgetColors)
     }
 
     private fun handleWallpaperChanges(which: Int) {
@@ -123,6 +184,16 @@ class PreviewActivity : AppCompatActivity() {
         if (mTempPreferences.isScaleChanged) {
             mVectorifyPreferences.scale = mTempPreferences.tempScale
             mTempPreferences.isScaleChanged = false
+        }
+
+        if (mTempPreferences.isHorizontalOffsetChanged) {
+            mVectorifyPreferences.horizontalOffset = mTempPreferences.tempHorizontalOffset
+            mTempPreferences.isHorizontalOffsetChanged = false
+        }
+
+        if (mTempPreferences.isVerticalOffsetChanged) {
+            mVectorifyPreferences.verticalOffset = mTempPreferences.tempVerticalOffset
+            mTempPreferences.isVerticalOffsetChanged = false
         }
 
         saveToRecentSetups()
@@ -151,57 +222,35 @@ class PreviewActivity : AppCompatActivity() {
         mVectorifyPreferences.recentSetups = recentSetups.toMutableSet()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    fun moveVectorUp(view: View) {
+        mVectorView.moveUp()
+    }
 
-        //set ui theme and immersive mode
-        setTheme(mVectorifyPreferences.theme)
-        hideSystemUI()
+    fun moveVectorDown(view: View) {
+        mVectorView.moveDown()
+    }
 
-        setContentView(R.layout.preview_activity)
+    fun moveVectorLeft(view: View) {
+        mVectorView.moveLeft()
+    }
 
-        //get all the views
-        mVectorView = vector_view
+    fun moveVectorRight(view: View) {
+        mVectorView.moveRight()
+    }
 
-        //set toolbar shit
-        //match theme with background luminance
-        setToolbarAndSeekBarColors()
+    fun centerHorizontalVectorPosition(view: View) {
+        mVectorView.centerHorizontal()
+    }
 
-        setSupportActionBar(toolbar)
+    fun centerVerticalVectorPosition(view: View) {
+        mVectorView.centerVertical()
+    }
 
-        if (supportActionBar != null) {
-            supportActionBar!!.setHomeButtonEnabled(true)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        }
-
-        //observe seekbar changes
-        seek_size.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-
-            var userProgress = 0
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                sUserIsSeeking = true
-            }
-
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser && progress >= 10) {
-                    userProgress = progress
-                    scale_text.text = Utils.getDecimalFormattedString(progress.toFloat() / 100)
-                    mVectorView.setScaleFactor(progress.toFloat() / 100)
-                }
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                sUserIsSeeking = false
-                mTempPreferences.isScaleChanged = true
-                mTempPreferences.tempScale = userProgress.toFloat() / 100
-            }
-        })
-
-        //restore saved scale value
-        seek_size.progress = (mTempPreferences.tempScale * 100).toInt()
-
-        //set scale text
-        scale_text.text = Utils.getDecimalFormattedString(mTempPreferences.tempScale)
+    fun resetVectorPosition(view: View) {
+        mVectorView.resetPosition()
+        val savedScale = mVectorifyPreferences.scale
+        mSeekBar.progress = (savedScale * 100).toInt()
+        mVectorView.setScaleFactor(savedScale)
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
