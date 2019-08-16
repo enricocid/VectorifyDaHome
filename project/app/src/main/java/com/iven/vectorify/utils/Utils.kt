@@ -109,7 +109,7 @@ object Utils {
             top,
             null
         )
-        return drawableCanvas.width * 0.05F
+        return drawableCanvas.width * 0.10F
     }
 
     @JvmStatic
@@ -208,8 +208,10 @@ object Utils {
             9 -> R.drawable.music_note
             10 -> R.drawable.space_invaders
             11 -> R.drawable.factory
-            12 -> R.drawable.zodiac_aries
-            else -> R.drawable.high
+            12 -> R.drawable.high
+            13 -> R.drawable.alpha_a
+            14 -> R.drawable.zodiac_aries
+            else -> R.drawable.school
         }
     }
 
@@ -257,11 +259,14 @@ object Utils {
             in vectorsAdapter.getVectorPosition(R.drawable.factory)..vectorsAdapter.getVectorPosition(R.drawable.stadium)
             -> resources.getString(R.string.title_buildings)
 
-            in vectorsAdapter.getVectorPosition(R.drawable.zodiac_aries)..vectorsAdapter.getVectorPosition(R.drawable.zodiac_virgo)
-            -> resources.getString(R.string.title_zodiac)
-
             in vectorsAdapter.getVectorPosition(R.drawable.high)..vectorsAdapter.getVectorPosition(R.drawable.block)
             -> resources.getString(R.string.title_alert)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.alpha_a)..vectorsAdapter.getVectorPosition(R.drawable.alpha_z)
+            -> resources.getString(R.string.title_zodiac)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.zodiac_aries)..vectorsAdapter.getVectorPosition(R.drawable.zodiac_virgo)
+            -> resources.getString(R.string.title_zodiac)
 
             else -> resources.getString(R.string.title_others)
         }
