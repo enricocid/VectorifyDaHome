@@ -117,27 +117,6 @@ class PreviewActivity : AppCompatActivity() {
 
         //set scale text
         scale_text.text = Utils.getDecimalFormattedString(mTempPreferences.tempScale)
-
-        //allow to move vector on touch
-        up.setOnTouchListener { view, _ ->
-            moveVectorUp(view)
-            return@setOnTouchListener false
-        }
-
-        down.setOnTouchListener { view, _ ->
-            moveVectorDown(view)
-            return@setOnTouchListener false
-        }
-
-        left.setOnTouchListener { view, _ ->
-            moveVectorLeft(view)
-            return@setOnTouchListener false
-        }
-
-        right.setOnTouchListener { view, _ ->
-            moveVectorRight(view)
-            return@setOnTouchListener false
-        }
     }
 
     //manage request permission result, continue loading ui if permissions was granted
