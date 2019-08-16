@@ -151,7 +151,7 @@ class VectorifyActivity : AppCompatActivity() {
                 setVectorColorForUI(comboVectorColor)
 
                 //update vector frame colors
-                setVectorFrameColors()
+                setVectorFrameColors(true)
             }
         }
 
@@ -165,8 +165,12 @@ class VectorifyActivity : AppCompatActivity() {
         mVectorsAdapter.onVectorClick = { vector ->
 
             if (mVector != vector) {
-                runOnUiThread { mVectorFrame.setImageResource(vector!!) }
+                runOnUiThread { mVectorFrame.setImageResource(Utils.getVectorProps(vector!!).first) }
                 mVector = vector!!
+
+                //update drawable tint
+                setVectorFrameColors(false)
+
                 mTempPreferences.tempVector = mVector
                 mTempPreferences.isVectorChanged = true
             }
@@ -190,26 +194,14 @@ class VectorifyActivity : AppCompatActivity() {
             val vectorFrameParams = mVectorFrame.layoutParams as FrameLayout.LayoutParams
             vectorFrameParams.height = (height / 0.75F).toInt() + categories.height / 2
             mVectorFrame.layoutParams = vectorFrameParams
-
-            setVectorFrameColors()
         }
     }
 
     //update vector frame
-    private fun setVectorFrameColors() {
-        mVectorFrame.setImageResource(mVector)
-        mVectorFrame.setBackgroundColor(mBackgroundColor)
-        if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) {
-            if (Utils.isColorDark(mVectorColor)) mVectorFrame.setColorFilter(
-                Utils.lightenColor(
-                    mVectorColor,
-                    0.20F
-                )
-            )
-            else mVectorFrame.setColorFilter(Utils.darkenColor(mVectorColor, 0.20F))
-        } else {
-            mVectorFrame.setColorFilter(mVectorColor)
-        }
+    private fun setVectorFrameColors(tintBackground: Boolean) {
+        if (tintBackground) mVectorFrame.setBackgroundColor(mBackgroundColor)
+        val vectorDrawable = Utils.tintVectorDrawable(this, mVector, mBackgroundColor, mVectorColor)
+        mVectorFrame.setImageDrawable(vectorDrawable)
     }
 
     //update background card colors
@@ -233,8 +225,6 @@ class VectorifyActivity : AppCompatActivity() {
                 )
             ) textColor else mTempPreferences.tempVectorColor
             mFab.drawable.setTint(fabDrawableColor)
-
-            setVectorFrameColors()
         }
     }
 
@@ -255,7 +245,7 @@ class VectorifyActivity : AppCompatActivity() {
             val fabDrawableColor = if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) textColor else color
             mFab.drawable.setTint(fabDrawableColor)
 
-            setVectorFrameColors()
+            setVectorFrameColors(true)
         }
     }
 

@@ -15,6 +15,7 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.VectorDrawable
 import android.net.Uri
 import android.os.Build
@@ -270,5 +271,62 @@ object Utils {
 
             else -> resources.getString(R.string.title_others)
         }
+    }
+
+    @JvmStatic
+    fun getVectorProps(vector: Int): Pair<Int, Boolean> {
+
+        var isSpecial = false
+        var returnedVector = vector
+        when (vector) {
+
+            R.drawable.m_original -> {
+                returnedVector = R.drawable.m
+                isSpecial = true
+            }
+
+            R.drawable.n_original -> {
+                returnedVector = R.drawable.n
+                isSpecial = true
+            }
+
+            R.drawable.o_original -> {
+                returnedVector = R.drawable.o
+                isSpecial = true
+            }
+        }
+        return Pair(returnedVector, isSpecial)
+    }
+
+    @JvmStatic
+    fun tintVectorDrawable(context: Context, vector: Int, backgroundColor: Int, vectorColor: Int): VectorDrawable {
+
+        //determine if we are facing android m, n, o vectors
+        //so we can apply multiply tint mode to drawable
+        val vectorProps = getVectorProps(vector)
+
+        val bit = ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
+
+        //to avoid shared drawables get tinted too!
+        bit.mutate()
+
+        //set tint mode multiply for special vectors
+        if (vectorProps.second) bit.setTintMode(PorterDuff.Mode.MULTIPLY)
+
+        //darken or lighten color to increase vector visibility when the colors are the same
+        val finalVectorColor = if (checkIfColorsEqual(backgroundColor, vectorColor)) {
+            if (isColorDark(vectorColor))
+                lightenColor(
+                    vectorColor,
+                    if (vectorProps.second) 0.05F else 0.20F
+                )
+            else darkenColor(vectorColor, if (vectorProps.second) 0.05F else 0.20F)
+        } else {
+            vectorColor
+        }
+
+        bit.setTint(finalVectorColor)
+
+        return bit
     }
 }
