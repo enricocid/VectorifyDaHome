@@ -169,10 +169,13 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.cloud_outline,
 
         //math & greek
-        R.drawable.pi,
         R.drawable.alpha,
         R.drawable.beta,
+        R.drawable.gamma,
+        R.drawable.delta,
+        R.drawable.epsilon,
         R.drawable.lambda,
+        R.drawable.pi,
         R.drawable.sigma,
         R.drawable.sigma_lower,
         R.drawable.infinity,
