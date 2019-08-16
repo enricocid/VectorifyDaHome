@@ -13,6 +13,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.graphics.ColorUtils
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorView
 import kotlinx.android.synthetic.main.position_controls.*
@@ -147,10 +148,10 @@ class PreviewActivity : AppCompatActivity() {
         toolbar.setNavigationIcon(R.drawable.ic_back)
 
         //set seekbar colors
-        seekbar_card.setCardBackgroundColor(mTempPreferences.tempBackgroundColor)
-        seek_size.progressTintList = ColorStateList.valueOf(widgetColors)
-        seek_size.thumbTintList = ColorStateList.valueOf(widgetColors)
-        seek_size.progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
+        seekbar_card.setCardBackgroundColor(ColorUtils.setAlphaComponent(mTempPreferences.tempBackgroundColor, 100))
+        mSeekBar.progressTintList = ColorStateList.valueOf(widgetColors)
+        mSeekBar.thumbTintList = ColorStateList.valueOf(widgetColors)
+        mSeekBar.progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
 
         seekbar_title.setTextColor(widgetColors)
 
