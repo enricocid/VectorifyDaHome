@@ -62,13 +62,14 @@
     <string name="title_fun">Fun</string>
     <string name="title_food">Food</string>
     <string name="title_nature">Nature</string>
-    <string name="title_math">Math</string>
+    <string name="title_math">Math &amp; Greek</string>
     <string name="title_science">Science</string>
     <string name="title_music">Music</string>
     <string name="title_nerdy">Nerdy</string>
     <string name="title_buildings">Buildings</string>
-    <string name="title_zodiac">Zodiac</string>
     <string name="title_alert">Alert</string>
+    <string name="title_alpha">Letters</string>
+    <string name="title_zodiac">Zodiac</string>
     <string name="title_others">Others</string>
 
     <!-- Dialog rationale things -->

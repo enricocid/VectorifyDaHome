@@ -23,6 +23,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.android,
         R.drawable.android_debug_bridge,
         R.drawable.android_head,
+        R.drawable.q,
         R.drawable.android_studio,
         R.drawable.github_face,
         R.drawable.linux,
@@ -35,9 +36,13 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.robot,
         R.drawable.google_cardboard,
         R.drawable.memory,
+        R.drawable.gesture,
+        R.drawable.touch,
+        R.drawable.email,
         R.drawable.navigation,
         R.drawable.place,
         R.drawable.map_marker_check,
+        R.drawable.alarm,
 
         //figures and symbols
         R.drawable.dot,
@@ -54,6 +59,11 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.flash,
         R.drawable.fire,
         R.drawable.sticker,
+        R.drawable.ampersand,
+        R.drawable.money,
+        R.drawable.euro,
+        R.drawable.gbp,
+        R.drawable.cny,
 
         //animals
         R.drawable.cat,
@@ -86,6 +96,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.emoticon_tongue,
         R.drawable.emoticon_poop,
         R.drawable.sentiment_very_satisfied,
+        R.drawable.child,
         R.drawable.sticker_emoji,
         R.drawable.star_face,
         R.drawable.alien,
@@ -115,6 +126,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.tea,
         R.drawable.tea_outline,
         R.drawable.cupcake,
+        R.drawable.cake,
         R.drawable.lollipop,
         R.drawable.pizza,
         R.drawable.hamburger,
@@ -123,6 +135,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.bar,
         R.drawable.chef_hat,
         R.drawable.fastfood,
+        R.drawable.restaurant,
         R.drawable.rice,
         R.drawable.sausage,
         R.drawable.baguette,
@@ -155,7 +168,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.cloud,
         R.drawable.cloud_outline,
 
-        //math
+        //math & greek
         R.drawable.pi,
         R.drawable.alpha,
         R.drawable.beta,
@@ -163,6 +176,9 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.sigma,
         R.drawable.sigma_lower,
         R.drawable.infinity,
+        R.drawable.integral,
+        R.drawable.compass,
+        R.drawable.angle,
 
         //science
         R.drawable.periodic_table,
@@ -197,6 +213,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.music,
         R.drawable.music_clef_treble,
         R.drawable.headset,
+        R.drawable.equalizer,
         R.drawable.speaker,
         R.drawable.guitar_electric,
         R.drawable.violin,
@@ -226,6 +243,43 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.bank,
         R.drawable.stadium,
 
+        //alert
+        R.drawable.high,
+        R.drawable.help,
+        R.drawable.alert,
+        R.drawable.alert_outline,
+        R.drawable.alert_circle,
+        R.drawable.block,
+        R.drawable.pan_tool,
+
+        //alphabet
+        R.drawable.alpha_a,
+        R.drawable.alpha_b,
+        R.drawable.alpha_c,
+        R.drawable.alpha_d,
+        R.drawable.alpha_e,
+        R.drawable.alpha_f,
+        R.drawable.alpha_g,
+        R.drawable.alpha_h,
+        R.drawable.alpha_i,
+        R.drawable.alpha_j,
+        R.drawable.alpha_k,
+        R.drawable.alpha_l,
+        R.drawable.alpha_m,
+        R.drawable.alpha_n,
+        R.drawable.alpha_o,
+        R.drawable.alpha_p,
+        R.drawable.alpha_q,
+        R.drawable.alpha_r,
+        R.drawable.alpha_s,
+        R.drawable.alpha_t,
+        R.drawable.alpha_u,
+        R.drawable.alpha_v,
+        R.drawable.alpha_w,
+        R.drawable.alpha_x,
+        R.drawable.alpha_y,
+        R.drawable.alpha_z,
+
         //zodiac
         R.drawable.zodiac_aries,
         R.drawable.zodiac_cancer,
@@ -239,14 +293,6 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.zodiac_taurus,
         R.drawable.zodiac_virgo,
 
-        //alert
-        R.drawable.high,
-        R.drawable.help,
-        R.drawable.alert,
-        R.drawable.alert_outline,
-        R.drawable.alert_circle,
-        R.drawable.block,
-
         //others
         R.drawable.school,
         R.drawable.tie,
@@ -256,8 +302,10 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.airballoon,
         R.drawable.sunglasses,
         R.drawable.edit,
+        R.drawable.paint,
         R.drawable.brush,
         R.drawable.quote,
+        R.drawable.weekend,
         R.drawable.ufo
     )
 

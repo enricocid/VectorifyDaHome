@@ -13,8 +13,9 @@
         <item>@string/title_music</item>
         <item>@string/title_nerdy</item>
         <item>@string/title_buildings</item>
-        <item>@string/title_zodiac</item>
         <item>@string/title_alert</item>
+        <item>@string/title_alpha</item>
+        <item>@string/title_zodiac</item>
         <item>@string/title_others</item>
     </string-array>
 </resources>

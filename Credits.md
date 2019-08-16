@@ -2,6 +2,8 @@
 
 - [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on [Music Player GO](https://github.com/enricocid/Music-Player-GO) which I used here!
 
+- [HrX](https://github.com/HrX03) for Android versions vectors!
+
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team for POSP vectors, inspiration, suggestions and support!
 The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome)
 
