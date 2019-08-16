@@ -2,11 +2,9 @@ package com.iven.vectorify
 
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.drawable.VectorDrawable
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
-import androidx.core.content.ContextCompat
 import com.iven.vectorify.utils.Utils
 
 class VectorifyDaHomeLP : WallpaperService() {
@@ -72,16 +70,24 @@ class VectorifyDaHomeLP : WallpaperService() {
                 //draw wallpaper
                 canvas = holder.lockCanvas()
                 if (canvas != null && baseContext != null) {
+
                     //draw potato!
                     canvas.drawColor(mBackgroundColor)
-                    val bit = ContextCompat.getDrawable(baseContext, mVectorifyPreferences.vector) as VectorDrawable
-                    bit.setTint(mVectorColor)
 
-                    if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) {
-                        if (Utils.isColorDark(mVectorColor)) bit.setTint(Utils.lightenColor(mVectorColor, 0.20F))
-                        else bit.setTint(Utils.darkenColor(mVectorColor, 0.20F))
-                    }
-                    Utils.drawBitmap(bit, canvas, mDeviceWidth, mDeviceHeight, mScaleFactor, mVectorifyPreferences.horizontalOffset, mVectorifyPreferences.verticalOffset)
+                    val vectorDrawable = Utils.tintVectorDrawable(
+                        baseContext,
+                        mVectorifyPreferences.vector, mBackgroundColor, mVectorColor
+                    )
+
+                    Utils.drawBitmap(
+                        vectorDrawable,
+                        canvas,
+                        mDeviceWidth,
+                        mDeviceHeight,
+                        mScaleFactor,
+                        mVectorifyPreferences.horizontalOffset,
+                        mVectorifyPreferences.verticalOffset
+                    )
                 }
             } finally {
                 if (canvas != null)
