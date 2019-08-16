@@ -100,6 +100,7 @@ class PreviewActivity : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser && progress >= 10) {
                     userProgress = progress
+                    scale_text.text = Utils.getDecimalFormattedString(progress.toFloat() / 100)
                     mVectorView.setScaleFactor(progress.toFloat() / 100)
                 }
             }
@@ -113,6 +114,9 @@ class PreviewActivity : AppCompatActivity() {
 
         //restore saved scale value
         mSeekBar.progress = (mTempPreferences.tempScale * 100).toInt()
+
+        //set scale text
+        scale_text.text = Utils.getDecimalFormattedString(mTempPreferences.tempScale)
     }
 
     //manage request permission result, continue loading ui if permissions was granted
@@ -154,6 +158,7 @@ class PreviewActivity : AppCompatActivity() {
         mSeekBar.progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
 
         seekbar_title.setTextColor(widgetColors)
+        scale_text.setTextColor(widgetColors)
 
         up.drawable.mutate().setTint(widgetColors)
         down.drawable.mutate().setTint(widgetColors)

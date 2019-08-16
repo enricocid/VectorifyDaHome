@@ -126,6 +126,18 @@ object Utils {
         ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), code)
     }
 
+    //method to get rounded float string
+    @JvmStatic
+    fun getDecimalFormattedString(number: Float): String {
+        var formattedNumber = ""
+        try {
+            formattedNumber = String.format("%.2f", number)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedNumber
+    }
+
     //determine if the live wallpaper is already applied
     @JvmStatic
     fun isLiveWallpaperRunning(context: Context): Boolean {
