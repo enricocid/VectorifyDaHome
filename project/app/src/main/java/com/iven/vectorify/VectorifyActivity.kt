@@ -54,9 +54,7 @@ class VectorifyActivity : AppCompatActivity() {
 
             setBackgroundAndVectorColorsChanged()
 
-            mVectorsAdapter.onVectorClick?.invoke(vector)
-            mVectorsAdapter.swapSelectedDrawable(mVector)
-            mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVector))
+            scrollToVector(vector)
         }
     }
 
@@ -108,7 +106,7 @@ class VectorifyActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.app_bar_info -> openGitHubPage()
                 R.id.app_bar_theme -> setNewTheme()
-                R.id.app_bar_restore -> setDefaultVectorColors()
+                R.id.app_bar_restore -> restoreDefaultWallpaper()
             }
             return@setOnMenuItemClickListener true
         }
@@ -266,15 +264,21 @@ class VectorifyActivity : AppCompatActivity() {
         setVectorColorForUI(systemAccent)
     }
 
+    private fun scrollToVector(vector: Int) {
+        mVectorsAdapter.onVectorClick?.invoke(vector)
+        mVectorsAdapter.swapSelectedDrawable(mVector)
+        mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVector))
+    }
+
     //restore default wallpaper
-    private fun setDefaultVectorColors() {
+    private fun restoreDefaultWallpaper() {
 
         setBackgroundColorForUI(Color.BLACK)
         setVectorColorForUI(Color.WHITE)
 
         setBackgroundAndVectorColorsChanged()
 
-        mVectorsAdapter.onVectorClick?.invoke(R.drawable.android)
+        scrollToVector(Utils.getDefaultVectorForApi())
 
         mTempPreferences.tempScale = 0.35F
         mTempPreferences.isScaleChanged = true
