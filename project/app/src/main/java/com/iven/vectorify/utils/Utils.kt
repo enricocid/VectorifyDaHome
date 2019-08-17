@@ -347,9 +347,9 @@ object Utils {
             if (isColorDark(vectorColor))
                 lightenColor(
                     vectorColor,
-                    if (vectorProps.second) 0.05F else 0.20F
+                    0.20F
                 )
-            else darkenColor(vectorColor, if (vectorProps.second) 0.05F else 0.20F)
+            else darkenColor(vectorColor, 0.20F)
         } else {
             vectorColor
         }
