@@ -2,6 +2,10 @@
 
     <string name="live_wallpaper_name" translatable="false">Vectorify da home!</string>
 
+    <string name="info_error">New vectors have been added! You have to reapply the wallpaper and rebuild recent
+        setups (if any) list. Sorry.
+    </string>
+
     <!-- Hex string -->
     <string name="hex" translatable="false">&#35;%1s</string>
 

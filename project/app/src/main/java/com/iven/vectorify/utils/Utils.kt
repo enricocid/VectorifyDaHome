@@ -299,7 +299,13 @@ object Utils {
     }
 
     @JvmStatic
-    fun tintVectorDrawable(context: Context, vector: Int, backgroundColor: Int, vectorColor: Int): VectorDrawable {
+    fun tintVectorDrawable(
+        context: Context,
+        vector: Int,
+        backgroundColor: Int,
+        vectorColor: Int,
+        showErrorDialog: Boolean
+    ): VectorDrawable {
 
         //determine if we are facing android m, n, o vectors
         //so we can apply multiply tint mode to drawable
@@ -309,6 +315,7 @@ object Utils {
             ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
         } catch (e: Exception) {
             e.printStackTrace()
+            if (showErrorDialog) makeInfoDialog(context)
             ContextCompat.getDrawable(context, R.drawable.android) as VectorDrawable
         }
 
@@ -333,5 +340,18 @@ object Utils {
         bit.setTint(finalVectorColor)
 
         return bit
+    }
+
+    //make rationale permission dialog
+    @JvmStatic
+    private fun makeInfoDialog(context: Context) {
+
+        MaterialDialog(context).show {
+
+            cornerRadius(res = R.dimen.md_corner_radius)
+            title(R.string.live_wallpaper_name)
+            message(R.string.info_error)
+            positiveButton {}
+        }
     }
 }

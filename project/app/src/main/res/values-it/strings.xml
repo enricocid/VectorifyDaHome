@@ -1,5 +1,9 @@
 <resources>
 
+    <string name="info_error">Sono state aggiunte delle nuove grafiche! Dovrai riapplicare lo sfondo e ricostruire la
+        lista dei setup recenti (se ne avevi). Sorry.
+    </string>
+
     <!-- Titoli cards -->
     <string name="title_background">Sfondo</string>
     <string name="title_background_dialog">Colore sfondo</string>

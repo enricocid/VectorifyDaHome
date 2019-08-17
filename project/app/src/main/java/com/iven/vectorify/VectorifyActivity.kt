@@ -200,7 +200,7 @@ class VectorifyActivity : AppCompatActivity() {
     //update vector frame
     private fun setVectorFrameColors(tintBackground: Boolean) {
         if (tintBackground) mVectorFrame.setBackgroundColor(mBackgroundColor)
-        val vectorDrawable = Utils.tintVectorDrawable(this, mVector, mBackgroundColor, mVectorColor)
+        val vectorDrawable = Utils.tintVectorDrawable(this, mVector, mBackgroundColor, mVectorColor, true)
         mVectorFrame.setImageDrawable(vectorDrawable)
     }
 
