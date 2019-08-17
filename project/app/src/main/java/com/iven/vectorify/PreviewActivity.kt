@@ -147,12 +147,16 @@ class PreviewActivity : AppCompatActivity() {
         //the appropriate color for UI widgets
         val widgetColors = Utils.getSecondaryColor(mTempPreferences.tempBackgroundColor)
 
-        toolbar.setBackgroundColor(mTempPreferences.tempBackgroundColor)
+        val cardColor = ColorUtils.setAlphaComponent(mTempPreferences.tempBackgroundColor, 100)
+
+        toolbar.setBackgroundColor(cardColor)
+
         toolbar.setTitleTextColor(widgetColors)
         toolbar.setNavigationIcon(R.drawable.ic_back)
 
         //set seekbar colors
-        seekbar_card.setCardBackgroundColor(ColorUtils.setAlphaComponent(mTempPreferences.tempBackgroundColor, 100))
+        seekbar_card.setCardBackgroundColor(cardColor)
+        seekbar_card.strokeColor = ColorUtils.setAlphaComponent(widgetColors, 25)
         mSeekBar.progressTintList = ColorStateList.valueOf(widgetColors)
         mSeekBar.thumbTintList = ColorStateList.valueOf(widgetColors)
         mSeekBar.progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
