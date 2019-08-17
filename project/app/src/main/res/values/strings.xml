@@ -6,6 +6,8 @@
         setups (if any) list. Sorry.
     </string>
 
+    <string name="info_error_ok">Don\'t show again</string>
+
     <!-- Hex string -->
     <string name="hex" translatable="false">&#35;%1s</string>
 
@@ -18,6 +20,7 @@
     <string name="horizontal_offset_key" translatable="false">horizontal_offset_key</string>
     <string name="vertical_offset_key" translatable="false">vertical_offset_key</string>
     <string name="recent_setups_key" translatable="false">recent_setups_key</string>
+    <string name="error_show_message_key" translatable="false">error_show_message_key</string>
 
     <!-- Card titles -->
     <string name="title_background">Background</string>

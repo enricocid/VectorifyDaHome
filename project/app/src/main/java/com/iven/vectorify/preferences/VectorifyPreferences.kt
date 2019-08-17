@@ -21,6 +21,8 @@ class VectorifyPreferences(context: Context) {
     private val prefHorizontalOffset = context.getString(R.string.horizontal_offset_key)
     private val prefVerticalOffset = context.getString(R.string.vertical_offset_key)
 
+    private val prefShowError = context.getString(R.string.error_show_message_key)
+
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     var backgroundColor: Int
@@ -54,4 +56,8 @@ class VectorifyPreferences(context: Context) {
     var recentSetups: MutableSet<String>
         get() = mPrefs.getStringSet(prefRecentSetups, mutableSetOf())!!
         set(value) = mPrefs.edit().putStringSet(prefRecentSetups, value).apply()
+
+    var hasToShowError: Boolean
+        get() = mPrefs.getBoolean(prefShowError, true)
+        set(value) = mPrefs.edit().putBoolean(prefShowError, value).apply()
 }

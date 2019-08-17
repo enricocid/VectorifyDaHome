@@ -28,6 +28,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
 import com.iven.vectorify.adapters.VectorsAdapter
+import com.iven.vectorify.mVectorifyPreferences
 
 object Utils {
 
@@ -330,7 +331,7 @@ object Utils {
             ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
         } catch (e: Exception) {
             e.printStackTrace()
-            if (showErrorDialog) makeInfoDialog(context)
+            if (showErrorDialog && mVectorifyPreferences.hasToShowError) makeErrorDialog(context)
             vectorProps = getVectorProps(getDefaultVectorForApi())
             ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
         }
@@ -360,14 +361,15 @@ object Utils {
 
     //make rationale permission dialog
     @JvmStatic
-    private fun makeInfoDialog(context: Context) {
+    private fun makeErrorDialog(context: Context) {
 
         MaterialDialog(context).show {
-
             cornerRadius(res = R.dimen.md_corner_radius)
             title(R.string.live_wallpaper_name)
             message(R.string.info_error)
-            positiveButton {}
+            positiveButton(R.string.info_error_ok) {
+                mVectorifyPreferences.hasToShowError = false
+            }
         }
     }
 }

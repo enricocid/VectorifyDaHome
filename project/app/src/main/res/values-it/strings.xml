@@ -4,6 +4,8 @@
         lista dei setup recenti (se ne avevi). Sorry.
     </string>
 
+    <string name="info_error_ok">Non mostrare più</string>
+
     <!-- Titoli cards -->
     <string name="title_background">Sfondo</string>
     <string name="title_background_dialog">Colore sfondo</string>
