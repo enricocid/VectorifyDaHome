@@ -245,7 +245,7 @@ object Utils {
             in vectorsAdapter.getVectorPosition(R.drawable.nature)..vectorsAdapter.getVectorPosition(R.drawable.cloud_outline)
             -> resources.getString(R.string.title_nature)
 
-            in vectorsAdapter.getVectorPosition(R.drawable.pi)..vectorsAdapter.getVectorPosition(R.drawable.infinity)
+            in vectorsAdapter.getVectorPosition(R.drawable.alpha)..vectorsAdapter.getVectorPosition(R.drawable.integral)
             -> resources.getString(R.string.title_math)
 
             in vectorsAdapter.getVectorPosition(R.drawable.periodic_table)..vectorsAdapter.getVectorPosition(R.drawable.chart_bell_curve)
