@@ -9,8 +9,8 @@ import android.os.AsyncTask
 import android.os.Environment
 import android.widget.Toast
 import androidx.annotation.NonNull
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
+import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import java.io.File
 import java.io.FileOutputStream
@@ -28,7 +28,7 @@ class SaveWallpaperAsync(
     private val isSetAsWallpaper: Boolean
 ) : AsyncTask<Void, Void, Pair<String, String>>() {
 
-    private lateinit var progressDialog: AlertDialog
+    private lateinit var mMaterialDialog: MaterialDialog
 
     // Method to save an image to external storage
     private fun saveImageToExternalStorage(bitmap: Bitmap): Pair<String, String>? {
@@ -81,12 +81,15 @@ class SaveWallpaperAsync(
     override fun onPreExecute() {
         super.onPreExecute()
 
-        val progressDialogBuilder = AlertDialog.Builder(contextReference?.get()!!)
-        progressDialogBuilder.setView(R.layout.progress_dialog)
-        progressDialogBuilder.setCancelable(false)
-        progressDialog = progressDialogBuilder.create()
-        progressDialog.setCanceledOnTouchOutside(false)
-        if (!progressDialog.isShowing) progressDialog.show()
+        mMaterialDialog = MaterialDialog(contextReference?.get()!!)
+        mMaterialDialog.cornerRadius(res = R.dimen.md_corner_radius)
+        mMaterialDialog.title(R.string.live_wallpaper_name)
+        mMaterialDialog.message(R.string.loading)
+
+        mMaterialDialog.cancelOnTouchOutside(false)
+        mMaterialDialog.cancelable(false)
+
+        if (!mMaterialDialog.isShowing) mMaterialDialog.show()
     }
 
     override fun doInBackground(vararg p0: Void?): Pair<String, String>? {
@@ -96,7 +99,7 @@ class SaveWallpaperAsync(
 
     override fun onPostExecute(path: Pair<String, String>?) {
 
-        if (progressDialog.isShowing) progressDialog.dismiss()
+        if (mMaterialDialog.isShowing) mMaterialDialog.dismiss()
 
         Toast.makeText(
             contextReference!!.get(),
