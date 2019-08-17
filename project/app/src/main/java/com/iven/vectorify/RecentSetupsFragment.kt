@@ -34,15 +34,18 @@ class RecentSetupsFragment : BottomSheetDialogFragment() {
             clearRecentSetups()
         }
 
-        //setup recent setups
-        val recentSetupsAdapter =
-            RecentSetupsAdapter(getString(R.string.delimiter), this@RecentSetupsFragment)
-        recents_rv.layoutManager = GridLayoutManager(context, 4)
-        recents_rv.adapter = recentSetupsAdapter
+        if (context != null) {
 
-        recentSetupsAdapter.onRecentClick = { recent ->
-            mRecentSetupsInterface.onRecentSelected(recent[0], recent[1], recent[2])
-            dismiss()
+            //setup recent setups
+            val recentSetupsAdapter =
+                RecentSetupsAdapter(context!!, getString(R.string.delimiter), this@RecentSetupsFragment)
+            recents_rv.layoutManager = GridLayoutManager(context, 4)
+            recents_rv.adapter = recentSetupsAdapter
+
+            recentSetupsAdapter.onRecentClick = { recent ->
+                mRecentSetupsInterface.onRecentSelected(recent[0], recent[1], recent[2])
+                dismiss()
+            }
         }
     }
 

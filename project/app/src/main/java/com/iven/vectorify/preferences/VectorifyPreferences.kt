@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.preference.PreferenceManager
 import com.iven.vectorify.R
+import com.iven.vectorify.utils.Utils
 
 class VectorifyPreferences(context: Context) {
 
@@ -31,7 +32,7 @@ class VectorifyPreferences(context: Context) {
         set(value) = mPrefs.edit().putInt(prefVectorColor, value).apply()
 
     var vector: Int
-        get() = mPrefs.getInt(prefVector, R.drawable.android)
+        get() = mPrefs.getInt(prefVector, Utils.getDefaultVectorForApi())
         set(value) = mPrefs.edit().putInt(prefVector, value).apply()
 
     var theme: Int

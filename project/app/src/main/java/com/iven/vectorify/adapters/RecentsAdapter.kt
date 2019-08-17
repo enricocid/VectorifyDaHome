@@ -1,5 +1,6 @@
 package com.iven.vectorify.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.iven.vectorify.mVectorifyPreferences
 import com.iven.vectorify.utils.Utils
 
 class RecentSetupsAdapter(
+    private val context: Context,
     private val delimiter: String,
     private val recentSetupsFragment: RecentSetupsFragment
 ) :
@@ -42,27 +44,13 @@ class RecentSetupsAdapter(
             val backgroundColor = Integer.parseInt(arr[0])
             recentButton.setBackgroundColor(backgroundColor)
 
-            var vector = Integer.parseInt(arr[1])
+            val vector = Integer.parseInt(arr[1])
 
-            try {
-                recentButton.setImageResource(vector)
-            } catch (e: Exception) {
-                vector = R.drawable.android
-                recentButton.setImageResource(vector)
-                e.printStackTrace()
-            }
-
-            val drawable = recentButton.drawable.mutate()
             val vectorColor = Integer.parseInt(arr[2])
 
-            val vectorColorForRecentItem = if (Utils.checkIfColorsEqual(backgroundColor, vectorColor)) {
-                if (Utils.isColorDark(vectorColor)) Utils.lightenColor(vectorColor, 0.20F)
-                else Utils.darkenColor(vectorColor, 0.20F)
-            } else {
-                vectorColor
-            }
+            val vectorDrawable = Utils.tintVectorDrawable(context, vector, backgroundColor, vectorColor, false)
 
-            drawable.setTint(vectorColorForRecentItem)
+            recentButton.setImageDrawable(vectorDrawable)
 
             recentButton.setOnClickListener {
                 onRecentClick?.invoke(listOf(backgroundColor, vector, vectorColor))
