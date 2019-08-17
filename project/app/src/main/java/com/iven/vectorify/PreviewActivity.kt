@@ -260,6 +260,7 @@ class PreviewActivity : AppCompatActivity() {
         mVectorView.resetPosition()
         val savedScale = mVectorifyPreferences.scale
         mSeekBar.progress = (savedScale * 100).toInt()
+        scale_text.text = Utils.getDecimalFormattedString(mSeekBar.progress.toFloat() / 100)
         mVectorView.setScaleFactor(savedScale)
     }
 
