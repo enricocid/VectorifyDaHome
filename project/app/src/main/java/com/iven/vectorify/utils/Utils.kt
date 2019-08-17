@@ -305,7 +305,12 @@ object Utils {
         //so we can apply multiply tint mode to drawable
         val vectorProps = getVectorProps(vector)
 
-        val bit = ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
+        val bit = try {
+            ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ContextCompat.getDrawable(context, R.drawable.android) as VectorDrawable
+        }
 
         //to avoid shared drawables get tinted too!
         bit.mutate()

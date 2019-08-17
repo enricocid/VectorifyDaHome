@@ -42,8 +42,15 @@ class RecentSetupsAdapter(
             val backgroundColor = Integer.parseInt(arr[0])
             recentButton.setBackgroundColor(backgroundColor)
 
-            val vector = Integer.parseInt(arr[1])
-            recentButton.setImageResource(vector)
+            var vector = Integer.parseInt(arr[1])
+
+            try {
+                recentButton.setImageResource(vector)
+            } catch (e: Exception) {
+                vector = R.drawable.android
+                recentButton.setImageResource(vector)
+                e.printStackTrace()
+            }
 
             val drawable = recentButton.drawable.mutate()
             val vectorColor = Integer.parseInt(arr[2])
