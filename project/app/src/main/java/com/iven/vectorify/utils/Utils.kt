@@ -329,8 +329,8 @@ object Utils {
         val bit = try {
             ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
         } catch (e: Exception) {
-            e.printStackTrace()
             if (showErrorDialog && mVectorifyPreferences.hasToShowError) makeErrorDialog(context)
+            e.printStackTrace()
             vectorProps = getVectorProps(getDefaultVectorForApi())
             ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
         }

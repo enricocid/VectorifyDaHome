@@ -149,7 +149,7 @@ class VectorifyActivity : AppCompatActivity() {
                 setVectorColorForUI(comboVectorColor)
 
                 //update vector frame colors
-                setVectorFrameColors(true)
+                setVectorFrameColors(tintBackground = true, showErrorDialog = false)
             }
         }
 
@@ -167,7 +167,7 @@ class VectorifyActivity : AppCompatActivity() {
                 mVector = vector!!
 
                 //update drawable tint
-                setVectorFrameColors(false)
+                setVectorFrameColors(tintBackground = false, showErrorDialog = false)
 
                 mTempPreferences.tempVector = mVector
                 mTempPreferences.isVectorChanged = true
@@ -196,9 +196,9 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     //update vector frame
-    private fun setVectorFrameColors(tintBackground: Boolean) {
+    private fun setVectorFrameColors(tintBackground: Boolean, showErrorDialog: Boolean) {
         if (tintBackground) mVectorFrame.setBackgroundColor(mBackgroundColor)
-        val vectorDrawable = Utils.tintVectorDrawable(this, mVector, mBackgroundColor, mVectorColor, true)
+        val vectorDrawable = Utils.tintVectorDrawable(this, mVector, mBackgroundColor, mVectorColor, showErrorDialog)
         mVectorFrame.setImageDrawable(vectorDrawable)
     }
 
@@ -217,7 +217,7 @@ class VectorifyActivity : AppCompatActivity() {
             mFab.backgroundTintList = ColorStateList.valueOf(color)
 
             //update vector frame colors
-            setVectorFrameColors(true)
+            setVectorFrameColors(tintBackground = true, showErrorDialog = false)
 
             //check if colors are the same so we enable stroke to make vector visible
             val fabDrawableColor = if (Utils.checkIfColorsEqual(
@@ -246,7 +246,7 @@ class VectorifyActivity : AppCompatActivity() {
             val fabDrawableColor = if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) textColor else color
             mFab.drawable.setTint(fabDrawableColor)
 
-            setVectorFrameColors(true)
+            setVectorFrameColors(tintBackground = false, showErrorDialog = true)
         }
     }
 
