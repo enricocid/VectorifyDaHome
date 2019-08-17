@@ -89,7 +89,7 @@ object Utils {
         scale: Float,
         horizontalOffset: Float,
         verticalOffset: Float
-    ): Float {
+    ) {
 
         val dimension = if (deviceWidth > deviceHeight) deviceHeight else deviceWidth
         val bitmap = Bitmap.createBitmap(
@@ -111,7 +111,6 @@ object Utils {
             top,
             null
         )
-        return drawableCanvas.width * 0.10F
     }
 
     @JvmStatic

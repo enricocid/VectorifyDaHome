@@ -25,7 +25,7 @@ class VectorView @JvmOverloads constructor(
     private var mVerticalOffset = 0F
     private var mHorizontalOffset = 0F
 
-    private var mStep = 0F
+    private var mStep = 15F
 
     fun vectorifyDaHome(isSetAsWallpaper: Boolean) {
         SaveWallpaperAsync(
@@ -60,7 +60,7 @@ class VectorView @JvmOverloads constructor(
             val vectorDrawable =
                 Utils.tintVectorDrawable(context, mTempPreferences.tempVector, mBackgroundColor, mVectorColor, false)
 
-            mStep = Utils.drawBitmap(
+            Utils.drawBitmap(
                 vectorDrawable,
                 canvas,
                 mDeviceWidth,
