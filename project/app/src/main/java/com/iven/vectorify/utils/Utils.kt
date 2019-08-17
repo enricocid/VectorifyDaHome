@@ -364,7 +364,7 @@ object Utils {
 
         MaterialDialog(context).show {
             cornerRadius(res = R.dimen.md_corner_radius)
-            title(R.string.live_wallpaper_name)
+            title(R.string.title_info_error)
             message(R.string.info_error)
             positiveButton(R.string.info_error_ok) {
                 mVectorifyPreferences.hasToShowError = false
