@@ -218,6 +218,9 @@ class VectorifyActivity : AppCompatActivity() {
             background_color_subhead.text = getHexCode(color)
             mFab.backgroundTintList = ColorStateList.valueOf(color)
 
+            //update vector frame colors
+            setVectorFrameColors(true)
+
             //check if colors are the same so we enable stroke to make vector visible
             val fabDrawableColor = if (Utils.checkIfColorsEqual(
                     mBackgroundColor,
