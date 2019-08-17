@@ -263,13 +263,23 @@ class VectorifyActivity : AppCompatActivity() {
         setVectorColorForUI(systemAccent)
     }
 
-    //restore default background and vector colors
+    //restore default wallpaper
     private fun setDefaultVectorColors() {
 
         setBackgroundColorForUI(Color.BLACK)
         setVectorColorForUI(Color.WHITE)
 
         setBackgroundAndVectorColorsChanged()
+
+        mVectorsAdapter.onVectorClick?.invoke(R.drawable.android)
+
+        mTempPreferences.tempScale = 0.35F
+        mTempPreferences.isScaleChanged = true
+
+        mTempPreferences.tempHorizontalOffset = 0F
+        mTempPreferences.isHorizontalOffsetChanged = true
+        mTempPreferences.tempVerticalOffset = 0F
+        mTempPreferences.isVerticalOffsetChanged = true
     }
 
     //start material dialog
