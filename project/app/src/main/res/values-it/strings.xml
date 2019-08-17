@@ -36,6 +36,7 @@
     <string name="message_saved_to">%1s salvato in %1s</string>
 
     <!-- Categorie -->
+    <string name="title_categories">Categorie</string>
     <string name="title_tech">Tech</string>
     <string name="title_symbols">Simboli</string>
     <string name="title_animals">Animali</string>

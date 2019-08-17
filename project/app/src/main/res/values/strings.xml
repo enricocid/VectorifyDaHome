@@ -62,6 +62,7 @@
     <string name="loading" translatable="false">Vectorifying da home&#8230;</string>
 
     <!-- Categories -->
+    <string name="title_categories">Categories</string>
     <string name="title_tech">Tech</string>
     <string name="title_symbols">Symbols</string>
     <string name="title_animals">Animals</string>

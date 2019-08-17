@@ -335,6 +335,9 @@ class VectorifyActivity : AppCompatActivity() {
     //method to start categories chooser
     fun startCategoryChooser(view: View) {
         MaterialDialog(this).show {
+
+            title(R.string.title_categories)
+
             listItems(R.array.categories) { _, index, _ ->
                 val vector = Utils.getCategoryStartPosition(index)
                 val vectorPosition = mVectorsAdapter.getVectorPosition(vector)
