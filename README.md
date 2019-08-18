@@ -1,14 +1,14 @@
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
 
-###### Current version: [(19) 1.4.2](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.4.2)
+###### Current version: [(20) 1.5.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.0)
 
 
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid) 
 
 [PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md) - [CREDITS](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh19.gif) 
+![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh20.gif) 
 
 
 # Downloads
@@ -19,13 +19,15 @@
 
 # Description:
 
-**Vectorify da home!** is a minimal and open source app to apply wallpapers from a vaste collection of vector graphics:
+**Vectorify da home!** is a minimal and open source app to apply wallpapers from a vaste (200+) collection of vector graphics:
 
 - Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
 
+- Category chooser.
+
 - Recent setups with deletion possibility (long click to delete a single setup).
 
-- Preview screen where you can customize the size of the vector graphic.
+- Preview screen where you can customize the size and position of the vector graphic.
 
 - 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper).
 
