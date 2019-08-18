@@ -11,8 +11,8 @@ android {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 20
-        versionName "1.5.0"
+        versionCode 21
+        versionName "1.5.1"
     }
 
     // Configure only for each module that uses Java 8
