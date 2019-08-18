@@ -13,7 +13,7 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 
 - [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
-- Icons from [material.io](https://material.io/resources/icons), [materialdesignicons](https://materialdesignicons.com/) and [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page)!
+- Icons from [material.io](https://material.io/resources/icons), [materialdesignicons](https://materialdesignicons.com/), [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page) and [svgrepo](https://www.svgrepo.com)!
 
 - [Naruto icon](https://iconscout.com/icon/naruto) by [Alexandru Stoica](https://iconscout.com/contributors/alexandru-stoica) on [iconscout.com](https://iconscout.com)!
 
