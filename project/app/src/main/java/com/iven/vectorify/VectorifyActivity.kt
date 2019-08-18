@@ -163,8 +163,15 @@ class VectorifyActivity : AppCompatActivity() {
         mVectorsAdapter.onVectorClick = { vector ->
 
             if (mVector != vector) {
-                runOnUiThread { mVectorFrame.setImageResource(Utils.getVectorProps(vector!!).first) }
-                mVector = vector!!
+                runOnUiThread {
+                    try {
+                        mVectorFrame.setImageResource(Utils.getVectorProps(vector!!).first)
+                        mVector = vector
+                    } catch (e: Exception) {
+                        mVector = Utils.getDefaultVectorForApi()
+                        mVectorFrame.setImageResource(Utils.getVectorProps(mVector).first)
+                    }
+                }
 
                 //update drawable tint
                 setVectorFrameColors(tintBackground = false, showErrorDialog = false)
