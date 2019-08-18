@@ -264,7 +264,7 @@ object Utils {
             -> resources.getString(R.string.title_alert)
 
             in vectorsAdapter.getVectorPosition(R.drawable.alpha_a)..vectorsAdapter.getVectorPosition(R.drawable.alpha_z)
-            -> resources.getString(R.string.title_zodiac)
+            -> resources.getString(R.string.title_alpha)
 
             in vectorsAdapter.getVectorPosition(R.drawable.zodiac_aries)..vectorsAdapter.getVectorPosition(R.drawable.zodiac_virgo)
             -> resources.getString(R.string.title_zodiac)
