@@ -204,7 +204,7 @@ object Utils {
             4 -> R.drawable.toys
             5 -> R.drawable.ice_pop
             6 -> R.drawable.nature
-            7 -> R.drawable.pi
+            7 -> R.drawable.alpha
             8 -> R.drawable.periodic_table
             9 -> R.drawable.music_note
             10 -> R.drawable.space_invaders
@@ -224,10 +224,10 @@ object Utils {
         vectorsAdapter: VectorsAdapter
     ): String {
         return when (layoutManager.findFirstCompletelyVisibleItemPosition()) {
-            in vectorsAdapter.getVectorPosition(R.drawable.android)..vectorsAdapter.getVectorPosition(R.drawable.map_marker_check)
+            in vectorsAdapter.getVectorPosition(R.drawable.android)..vectorsAdapter.getVectorPosition(R.drawable.alarm)
             -> resources.getString(R.string.title_tech)
 
-            in vectorsAdapter.getVectorPosition(R.drawable.dot)..vectorsAdapter.getVectorPosition(R.drawable.sticker)
+            in vectorsAdapter.getVectorPosition(R.drawable.dot)..vectorsAdapter.getVectorPosition(R.drawable.cny)
             -> resources.getString(R.string.title_symbols)
 
             in vectorsAdapter.getVectorPosition(R.drawable.cat)..vectorsAdapter.getVectorPosition(R.drawable.jellyfish)
@@ -245,7 +245,7 @@ object Utils {
             in vectorsAdapter.getVectorPosition(R.drawable.nature)..vectorsAdapter.getVectorPosition(R.drawable.cloud_outline)
             -> resources.getString(R.string.title_nature)
 
-            in vectorsAdapter.getVectorPosition(R.drawable.alpha)..vectorsAdapter.getVectorPosition(R.drawable.integral)
+            in vectorsAdapter.getVectorPosition(R.drawable.alpha)..vectorsAdapter.getVectorPosition(R.drawable.angle)
             -> resources.getString(R.string.title_math)
 
             in vectorsAdapter.getVectorPosition(R.drawable.periodic_table)..vectorsAdapter.getVectorPosition(R.drawable.chart_bell_curve)
@@ -260,7 +260,7 @@ object Utils {
             in vectorsAdapter.getVectorPosition(R.drawable.factory)..vectorsAdapter.getVectorPosition(R.drawable.stadium)
             -> resources.getString(R.string.title_buildings)
 
-            in vectorsAdapter.getVectorPosition(R.drawable.high)..vectorsAdapter.getVectorPosition(R.drawable.block)
+            in vectorsAdapter.getVectorPosition(R.drawable.high)..vectorsAdapter.getVectorPosition(R.drawable.pan_tool)
             -> resources.getString(R.string.title_alert)
 
             in vectorsAdapter.getVectorPosition(R.drawable.alpha_a)..vectorsAdapter.getVectorPosition(R.drawable.alpha_z)
