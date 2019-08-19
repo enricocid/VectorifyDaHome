@@ -44,6 +44,7 @@
     <string name="title_fun">Divertimento</string>
     <string name="title_food">Cibo</string>
     <string name="title_nature">Natura</string>
+    <string name="title_weather">Meteo</string>
     <string name="title_math">Math</string>
     <string name="title_science">Scienza</string>
     <string name="title_music">Musica</string>
@@ -51,6 +52,7 @@
     <string name="title_buildings">Edifici</string>
     <string name="title_alert">Allerta</string>
     <string name="title_alpha">Lettere</string>
+    <string name="title_roman">Romani</string>
     <string name="title_zodiac">Zodiaco</string>
     <string name="title_others">Altri</string>
 

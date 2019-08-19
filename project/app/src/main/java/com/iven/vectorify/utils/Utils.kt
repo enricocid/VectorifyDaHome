@@ -197,22 +197,25 @@ object Utils {
     @JvmStatic
     fun getCategoryStartPosition(index: Int): Int {
         return when (index) {
-            0 -> R.drawable.android
-            1 -> R.drawable.dot
-            2 -> R.drawable.cat
-            3 -> R.drawable.face
-            4 -> R.drawable.toys
-            5 -> R.drawable.ice_pop
-            6 -> R.drawable.nature
-            7 -> R.drawable.alpha
-            8 -> R.drawable.periodic_table
-            9 -> R.drawable.music_note
-            10 -> R.drawable.space_invaders
-            11 -> R.drawable.factory
-            12 -> R.drawable.high
-            13 -> R.drawable.alpha_a
-            14 -> R.drawable.zodiac_aries
-            else -> R.drawable.school
+            0 -> R.drawable.android //tech
+            1 -> R.drawable.dot //symbols
+            2 -> R.drawable.cat //animals
+            3 -> R.drawable.face //emoticons
+            4 -> R.drawable.toys //fun
+            5 -> R.drawable.ice_pop //food
+            6 -> R.drawable.nature //nature
+            7 -> R.drawable.looks //weather
+            8 -> R.drawable.baseball //sport
+            9 -> R.drawable.alpha //math
+            10 -> R.drawable.periodic_table //science
+            11 -> R.drawable.music_note //music
+            12 -> R.drawable.space_invaders //nerdy
+            13 -> R.drawable.factory //buildings
+            14 -> R.drawable.high //alert
+            15 -> R.drawable.alpha_a //letters
+            16 -> R.drawable.roman_numeral_1 //roman
+            17 -> R.drawable.zodiac_aries //zodiac
+            else -> R.drawable.school //others
         }
     }
 
@@ -242,8 +245,14 @@ object Utils {
             in vectorsAdapter.getVectorPosition(R.drawable.ice_pop)..vectorsAdapter.getVectorPosition(R.drawable.carrot)
             -> resources.getString(R.string.title_food)
 
-            in vectorsAdapter.getVectorPosition(R.drawable.nature)..vectorsAdapter.getVectorPosition(R.drawable.cloud_outline)
+            in vectorsAdapter.getVectorPosition(R.drawable.nature)..vectorsAdapter.getVectorPosition(R.drawable.clover)
             -> resources.getString(R.string.title_nature)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.looks)..vectorsAdapter.getVectorPosition(R.drawable.weather_windy_variant)
+            -> resources.getString(R.string.title_weather)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.baseball)..vectorsAdapter.getVectorPosition(R.drawable.volleyball)
+            -> resources.getString(R.string.title_sport)
 
             in vectorsAdapter.getVectorPosition(R.drawable.alpha)..vectorsAdapter.getVectorPosition(R.drawable.angle)
             -> resources.getString(R.string.title_math)
@@ -265,6 +274,9 @@ object Utils {
 
             in vectorsAdapter.getVectorPosition(R.drawable.alpha_a)..vectorsAdapter.getVectorPosition(R.drawable.alpha_z)
             -> resources.getString(R.string.title_alpha)
+
+            in vectorsAdapter.getVectorPosition(R.drawable.roman_numeral_1)..vectorsAdapter.getVectorPosition(R.drawable.roman_numeral_10)
+            -> resources.getString(R.string.title_roman)
 
             in vectorsAdapter.getVectorPosition(R.drawable.zodiac_aries)..vectorsAdapter.getVectorPosition(R.drawable.zodiac_virgo)
             -> resources.getString(R.string.title_zodiac)

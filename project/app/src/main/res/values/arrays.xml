@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="categories">
-        <item>@string/title_tech</item>
-        <item>@string/title_symbols</item>
-        <item>@string/title_animals</item>
-        <item>@string/title_emoticons</item>
-        <item>@string/title_fun</item>
-        <item>@string/title_food</item>
-        <item>@string/title_nature</item>
-        <item>@string/title_math</item>
-        <item>@string/title_science</item>
-        <item>@string/title_music</item>
-        <item>@string/title_nerdy</item>
-        <item>@string/title_buildings</item>
-        <item>@string/title_alert</item>
-        <item>@string/title_alpha</item>
-        <item>@string/title_zodiac</item>
-        <item>@string/title_others</item>
+        <item>@string/title_tech</item> <!--0-->
+        <item>@string/title_symbols</item> <!--1-->
+        <item>@string/title_animals</item> <!--2-->
+        <item>@string/title_emoticons</item> <!--3-->
+        <item>@string/title_fun</item> <!--4-->
+        <item>@string/title_food</item> <!--5-->
+        <item>@string/title_nature</item> <!--6-->
+        <item>@string/title_weather</item> <!--7-->
+        <item>@string/title_sport</item> <!--8-->
+        <item>@string/title_math</item> <!--9-->
+        <item>@string/title_science</item> <!--10-->
+        <item>@string/title_music</item> <!--11-->
+        <item>@string/title_nerdy</item> <!--12-->
+        <item>@string/title_buildings</item> <!--13-->
+        <item>@string/title_alert</item> <!--14-->
+        <item>@string/title_alpha</item> <!--15-->
+        <item>@string/title_roman</item> <!--16-->
+        <item>@string/title_zodiac</item> <!--17-->
+        <item>@string/title_others</item> <!--18-->
     </string-array>
 </resources>

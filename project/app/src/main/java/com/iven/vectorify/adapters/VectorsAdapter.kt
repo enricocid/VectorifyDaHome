@@ -16,8 +16,11 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
     //first = background color, second = vector color
     private val mVectors = listOf(
         //from https://material.io/resources/icons
-        //and
         //https://materialdesignicons.com/
+        //https://commons.wikimedia.org/wiki/Main_Page
+        //https://www.svgrepo.com/
+        //https://iconscout.com/icon/naruto
+        //https://github.com/PotatoProject/website/blob/master/src/assets/
 
         //android or tech related
         R.drawable.android,
@@ -36,6 +39,8 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.ladybug,
         R.drawable.fingerprint,
         R.drawable.bug,
+        R.drawable.code_braces,
+        R.drawable.code_tags,
         R.drawable.posp,
         R.drawable.posp_alt,
         R.drawable.posp_full,
@@ -50,6 +55,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.place,
         R.drawable.map_marker_check,
         R.drawable.alarm,
+
 
         //figures and symbols
         R.drawable.dot,
@@ -72,12 +78,15 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.gbp,
         R.drawable.cny,
 
+
         //animals
         R.drawable.cat,
         R.drawable.dog,
         R.drawable.dog_side,
+        R.drawable.bone,
         R.drawable.pets,
         R.drawable.fish,
+        R.drawable.fishbowl,
         R.drawable.cow,
         R.drawable.rabbit,
         R.drawable.sheep,
@@ -94,6 +103,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.bee_flower,
         R.drawable.jellyfish,
 
+
         //emoticons
         R.drawable.face,
         R.drawable.emoticon,
@@ -101,12 +111,21 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.emoticon_excited,
         R.drawable.emoticon_happy,
         R.drawable.emoticon_tongue,
+        R.drawable.emoticon_kiss,
+        R.drawable.emoticon_neutral,
+        R.drawable.emoticon_wink,
+        R.drawable.emoticon_angry,
+        R.drawable.emoticon_confused,
+        R.drawable.emoticon_cry,
+        R.drawable.emoticon_dead,
+        R.drawable.emoticon_devil,
         R.drawable.emoticon_poop,
         R.drawable.sentiment_very_satisfied,
         R.drawable.child,
         R.drawable.sticker_emoji,
         R.drawable.star_face,
         R.drawable.alien,
+
 
         //let's have fun, parties and relax
         R.drawable.toys,
@@ -122,6 +141,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.lifebuoy,
         R.drawable.ship_wheel,
         R.drawable.balloon,
+
 
         //food
         R.drawable.ice_pop,
@@ -142,18 +162,28 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.bar,
         R.drawable.chef_hat,
         R.drawable.fastfood,
+        R.drawable.popcorn,
         R.drawable.restaurant,
+        R.drawable.food_fork_drink,
+        R.drawable.shaker_outline,
+        R.drawable.glass_flute,
+        R.drawable.glass_wine,
+        R.drawable.kettle,
         R.drawable.rice,
         R.drawable.sausage,
         R.drawable.baguette,
         R.drawable.chili_mild,
         R.drawable.corn,
+        R.drawable.peanut,
         R.drawable.mushroom,
         R.drawable.food_apple,
         R.drawable.cherries,
+        R.drawable.fruit_citrus,
+        R.drawable.fruit_pineapple,
         R.drawable.grapes,
         R.drawable.watermelon,
         R.drawable.carrot,
+
 
         //nature
         R.drawable.nature,
@@ -171,9 +201,89 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.seed,
         R.drawable.leaf_maple,
         R.drawable.clover,
+
+
+        //weather
+        R.drawable.looks,
         R.drawable.wb_sunny,
         R.drawable.cloud,
         R.drawable.cloud_outline,
+        R.drawable.moon_first_quarter,
+        R.drawable.moon_full,
+        R.drawable.moon_last_quarter,
+        R.drawable.moon_new,
+        R.drawable.moon_waning_crescent,
+        R.drawable.moon_waning_gibbous,
+        R.drawable.moon_waxing_crescent,
+        R.drawable.moon_waxing_gibbous,
+        R.drawable.snowflake,
+        R.drawable.snowflake_variant,
+        R.drawable.temperature_celsius,
+        R.drawable.temperature_fahrenheit,
+        R.drawable.temperature_kelvin,
+        R.drawable.thermometer,
+        R.drawable.weather_hail,
+        R.drawable.weather_hazy,
+        R.drawable.weather_hurricane,
+        R.drawable.weather_lightning,
+        R.drawable.weather_lightning_rainy,
+        R.drawable.weather_night,
+        R.drawable.weather_night_partly_cloudy,
+        R.drawable.weather_partly_cloudy,
+        R.drawable.weather_partly_lightning,
+        R.drawable.weather_partly_rainy,
+        R.drawable.weather_partly_snowy,
+        R.drawable.weather_partly_snowy_rainy,
+        R.drawable.weather_pouring,
+        R.drawable.weather_snowy,
+        R.drawable.weather_snowy_heavy,
+        R.drawable.weather_snowy_rainy,
+        R.drawable.weather_sunny,
+        R.drawable.weather_sunset,
+        R.drawable.weather_tornado,
+        R.drawable.weather_windy,
+        R.drawable.weather_windy_variant,
+
+
+        //sport
+        R.drawable.baseball,
+        R.drawable.basketball,
+        R.drawable.basketball_hoop,
+        R.drawable.bike,
+        R.drawable.billiards,
+        R.drawable.bowling,
+        R.drawable.boxing_glove,
+        R.drawable.football,
+        R.drawable.go_kart,
+        R.drawable.golf,
+        R.drawable.golf_tee,
+        R.drawable.handball,
+        R.drawable.hiking,
+        R.drawable.hockey_puck,
+        R.drawable.hockey_sticks,
+        R.drawable.karate,
+        R.drawable.medal,
+        R.drawable.car_sports,
+        R.drawable.motorbike,
+        R.drawable.podium,
+        R.drawable.podium_bronze,
+        R.drawable.podium_gold,
+        R.drawable.podium_silver,
+        R.drawable.racing_helmet,
+        R.drawable.rollerblade,
+        R.drawable.bullseye_arrow,
+        R.drawable.rugby,
+        R.drawable.skate,
+        R.drawable.diving_flippers,
+        R.drawable.rowing,
+        R.drawable.swim,
+        R.drawable.table_tennis,
+        R.drawable.tennis,
+        R.drawable.tennis_ball,
+        R.drawable.tournament,
+        R.drawable.trophy,
+        R.drawable.volleyball,
+
 
         //math & greek
         R.drawable.alpha,
@@ -187,13 +297,35 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.sigma_lower,
         R.drawable.infinity,
         R.drawable.integral,
+        R.drawable.calculator,
+        R.drawable.approximately_equal,
+        R.drawable.equal,
+        R.drawable.greater_than,
+        R.drawable.greater_than_or_equal,
+        R.drawable.exclamation,
+        R.drawable.math_cos,
+        R.drawable.math_sin,
+        R.drawable.math_tan,
+        R.drawable.math_log,
+        R.drawable.plus,
+        R.drawable.minus,
+        R.drawable.plus_minus,
+        R.drawable.circle_small,
+        R.drawable.close,
+        R.drawable.division,
+        R.drawable.square_root,
+        R.drawable.format_superscript,
+        R.drawable.chart_scatter_plot,
         R.drawable.compass,
+        R.drawable.ruler_square_compass,
         R.drawable.angle,
 
         //science
         R.drawable.periodic_table,
         R.drawable.co2,
         R.drawable.hexagon_outline,
+        R.drawable.benzene,
+        R.drawable.graphene,
         R.drawable.diamond,
         R.drawable.safety_goggles,
         R.drawable.flask,
@@ -213,9 +345,12 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.atom,
         R.drawable.atom_variant,
         R.drawable.orbit,
+        R.drawable.orbit_alt,
         R.drawable.meteor,
+        R.drawable.planet,
         R.drawable.telescope,
         R.drawable.rocket,
+        R.drawable.chart_bar,
         R.drawable.chart_bell_curve,
 
         //music
@@ -225,6 +360,7 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.headset,
         R.drawable.equalizer,
         R.drawable.speaker,
+        R.drawable.radio,
         R.drawable.guitar,
         R.drawable.guitar_electric,
         R.drawable.electric_guitar,
@@ -240,7 +376,9 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.space_invaders,
         R.drawable.ghost,
         R.drawable.one_up,
+        R.drawable.pac_man,
         R.drawable.pokeball,
+        R.drawable.pokemon_go,
         R.drawable.death_star,
         R.drawable.death_star_variant,
         R.drawable.db_tenkaichi,
@@ -295,6 +433,18 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
         R.drawable.alpha_y,
         R.drawable.alpha_z,
 
+        //roman
+        R.drawable.roman_numeral_1,
+        R.drawable.roman_numeral_2,
+        R.drawable.roman_numeral_3,
+        R.drawable.roman_numeral_4,
+        R.drawable.roman_numeral_5,
+        R.drawable.roman_numeral_6,
+        R.drawable.roman_numeral_7,
+        R.drawable.roman_numeral_8,
+        R.drawable.roman_numeral_9,
+        R.drawable.roman_numeral_10,
+
         //zodiac
         R.drawable.zodiac_aries,
         R.drawable.zodiac_cancer,
@@ -310,15 +460,22 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
         //others
         R.drawable.school,
+        R.drawable.water_pump,
         R.drawable.tie,
         R.drawable.brain,
         R.drawable.thumb_up,
         R.drawable.human_greeting,
+        R.drawable.silo,
         R.drawable.airballoon,
         R.drawable.sunglasses,
+        R.drawable.car,
+        R.drawable.car_traction_control,
+        R.drawable.car_side,
+        R.drawable.tractor,
         R.drawable.edit,
         R.drawable.paint,
         R.drawable.brush,
+        R.drawable.eyedropper,
         R.drawable.quote,
         R.drawable.weekend,
         R.drawable.ufo

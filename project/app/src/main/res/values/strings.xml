@@ -72,6 +72,8 @@
     <string name="title_fun">Fun</string>
     <string name="title_food">Food</string>
     <string name="title_nature">Nature</string>
+    <string name="title_weather">Weather</string>
+    <string name="title_sport" translatable="false">Sport</string>
     <string name="title_math">Math &amp; Greek</string>
     <string name="title_science">Science</string>
     <string name="title_music">Music</string>
@@ -79,6 +81,7 @@
     <string name="title_buildings">Buildings</string>
     <string name="title_alert">Alert</string>
     <string name="title_alpha">Letters</string>
+    <string name="title_roman">Roman</string>
     <string name="title_zodiac">Zodiac</string>
     <string name="title_others">Others</string>
 
