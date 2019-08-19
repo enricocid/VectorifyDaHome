@@ -157,7 +157,7 @@ class VectorifyActivity : AppCompatActivity() {
         mVectorsRecyclerView = vectors_rv
         mVectorsRecyclerViewLayoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         mVectorsRecyclerView.layoutManager = mVectorsRecyclerViewLayoutManager
-        mVectorsAdapter = VectorsAdapter()
+        mVectorsAdapter = VectorsAdapter(this)
         mVectorsRecyclerView.adapter = mVectorsAdapter
 
         mVectorsAdapter.onVectorClick = { vector ->

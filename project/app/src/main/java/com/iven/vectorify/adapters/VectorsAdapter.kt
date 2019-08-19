@@ -1,15 +1,17 @@
 package com.iven.vectorify.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
 import com.iven.vectorify.mVectorifyPreferences
 
-class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
+class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
     var onVectorClick: ((Int?) -> Unit)? = null
 
@@ -533,6 +535,21 @@ class VectorsAdapter : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
                     checkbox.visibility = View.VISIBLE
                     onVectorClick?.invoke(drawable)
                 }
+            }
+            vectorButton.setOnLongClickListener {
+                val resourceName = try {
+                    context.resources.getResourceEntryName(drawable)
+                        .replace(
+                            context.getString(R.string.underscore_delimiter),
+                            context.getString(R.string.space_delimiter)
+                        )
+                        .capitalize()
+                } catch (e: Exception) {
+                    context.getString(R.string.error_get_resource)
+                }
+                Toast.makeText(context, resourceName, Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnLongClickListener false
             }
         }
     }

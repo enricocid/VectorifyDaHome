@@ -5,6 +5,7 @@
     </string>
 
     <string name="info_error_ok">Non mostrare più</string>
+    <string name="error_get_resource">Oops!! Non trovato!</string>
 
     <!-- Titoli cards -->
     <string name="title_background">Sfondo</string>

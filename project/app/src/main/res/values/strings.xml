@@ -10,6 +10,10 @@
 
     <string name="info_error_ok">Don\'t show again</string>
 
+    <string name="space_delimiter" translatable="false">&#160;</string>
+    <string name="underscore_delimiter" translatable="false">&#95;</string>
+    <string name="error_get_resource">Oops!! Not found!</string>
+
     <!-- Hex string -->
     <string name="hex" translatable="false">&#35;%1s</string>
 
