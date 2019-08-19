@@ -1,7 +1,7 @@
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
 
-###### Current version: [(21) 1.5.1](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.1)
+###### Current version: [(22) 1.5.2](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.2)
 
 
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid) 
@@ -19,7 +19,7 @@
 
 # Description:
 
-**Vectorify da home!** is a minimal and open source app to apply wallpapers from a vaste (200+) collection of vector graphics:
+**Vectorify da home!** is a minimal and open source app to apply wallpapers from a vaste (400+) collection of vector graphics:
 
 - Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
 

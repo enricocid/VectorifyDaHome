@@ -53,6 +53,8 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
         R.drawable.gesture,
         R.drawable.touch,
         R.drawable.email,
+        R.drawable.telegram,
+        R.drawable.telegram_alt,
         R.drawable.navigation,
         R.drawable.place,
         R.drawable.map_marker_check,
