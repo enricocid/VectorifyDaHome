@@ -1,0 +1,1 @@
+Minimal app to apply wallpapers from vector images :)
