@@ -1,14 +1,14 @@
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
 
-###### Current version: [(22) 1.5.2](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.2)
+###### Current version: [(23) 1.5.3](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.3)
 
 
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid) 
 
 [PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md) - [CREDITS](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh20.gif) 
+![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh22.gif) 
 
 
 # Downloads
