@@ -1,21 +1,16 @@
 Vectorify da home! è una applicazione minimale ed open source per applicare wallpapers da una vasta (400+) collezione di grafiche vettoriali:
 
-• Lo sfondo e il colore della grafica sono personalizzabili grazie ad un fantastico color picker, dei presets o il colore di accento del dispositivo!
+- Lo sfondo e il colore della grafica sono personalizzabili grazie ad un fantastico color picker, dei presets o il colore di accento del dispositivo!
 
-• Selettore categoria.
+- Selettore categoria.
 
-• Schermata di preview dove puoi modificare la grandezza e la posizione della grafica.
+- Schermata di preview dove puoi modificare la grandezza e la posizione della grafica.
 
-• Setup recenti (clicca a lungo sui singoli setup per cancellarli).
+- Setup recenti (clicca a lungo sui singoli setup per cancellarli).
 
-• 3 modi per impostare il wallpaper (salva, applica direttamente - comporta il salvataggio, live wallpaper).
-
-
-• E' open source!
-
-https://github.com/enricocid/VectorifyDaHome
+- 3 modi per impostare il wallpaper (salva, applica direttamente - comporta il salvataggio, live wallpaper).
 
 
-• Altre features?
+- Altre features?
 
 L'app implementa un pulsante per cambiare tra tema light e dark!
