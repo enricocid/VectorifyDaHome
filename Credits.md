@@ -1,6 +1,6 @@
 # Credits:
 
-- [Pranav Pandey](https://github.com/pranavpandey) for beautiful [Dynamic toasts](https://github.com/pranavpandey/dynamic-toasts] library!
+- [Pranav Pandey](https://github.com/pranavpandey) for beautiful [Dynamic toasts](https://github.com/pranavpandey/dynamic-toasts) library!
 
 - [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
