@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -403,7 +404,7 @@ class VectorifyActivity : AppCompatActivity() {
 
         //check if a browser is present
         if (openGitHubPageIntent.resolveActivity(packageManager) != null) startActivity(openGitHubPageIntent) else
-            DynamicToast.makeError(this, getString(R.string.install_browser_message))
+            DynamicToast.makeError(this, getString(R.string.install_browser_message), Toast.LENGTH_LONG)
                 .show()
     }
 

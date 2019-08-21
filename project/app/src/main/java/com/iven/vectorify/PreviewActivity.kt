@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.graphics.ColorUtils
@@ -130,7 +131,7 @@ class PreviewActivity : AppCompatActivity() {
                 ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             if (!shouldShowRationale)
                 Utils.makeRationaleDialog(this, requestCode, shouldShowRationale) else
-                DynamicToast.makeError(this, getString(R.string.boo))
+                DynamicToast.makeError(this, getString(R.string.boo), Toast.LENGTH_LONG)
                     .show()
         } else {
             when (requestCode) {
