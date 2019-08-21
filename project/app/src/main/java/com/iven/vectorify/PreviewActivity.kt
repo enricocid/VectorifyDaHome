@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 const val SAVE_WALLPAPER = 0
 const val SET_WALLPAPER = 1
-const val SET_LIVE_WALLPAPER = 2
 
 @Suppress("UNUSED_PARAMETER")
 class PreviewActivity : AppCompatActivity() {
@@ -51,16 +50,19 @@ class PreviewActivity : AppCompatActivity() {
                     this,
                     SAVE_WALLPAPER,
                     true
-                ) else handleWallpaperChanges(SAVE_WALLPAPER)
+                ) else mVectorView.vectorifyDaHome(false)
 
             R.id.set -> if (Utils.hasToRequestWriteStoragePermission(this)) Utils.makeRationaleDialog(
                 this,
                 SET_WALLPAPER,
                 true
-            ) else handleWallpaperChanges(SET_WALLPAPER)
-            R.id.go_live -> handleWallpaperChanges(SET_LIVE_WALLPAPER)
+            ) else mVectorView.vectorifyDaHome(true)
+            R.id.go_live -> updatePrefsAndSetLiveWallpaper()
             android.R.id.home -> finishAndRemoveTask()
         }
+
+        updateRecentSetups()
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -132,8 +134,8 @@ class PreviewActivity : AppCompatActivity() {
                     .show()
         } else {
             when (requestCode) {
-                SAVE_WALLPAPER -> handleWallpaperChanges(SAVE_WALLPAPER)
-                SET_WALLPAPER -> handleWallpaperChanges(SET_WALLPAPER)
+                SAVE_WALLPAPER -> mVectorView.vectorifyDaHome(false)
+                SET_WALLPAPER -> mVectorView.vectorifyDaHome(true)
             }
         }
     }
@@ -173,9 +175,9 @@ class PreviewActivity : AppCompatActivity() {
         reset_position.drawable.mutate().setTint(widgetColors)
     }
 
-    private fun handleWallpaperChanges(which: Int) {
+    private fun updatePrefsAndSetLiveWallpaper() {
 
-        //do all the save shit here
+        //do all the save shit here when live wallpaper is applied
         if (mTempPreferences.isBackgroundColorChanged) {
             mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
             mTempPreferences.isBackgroundColorChanged = false
@@ -206,21 +208,15 @@ class PreviewActivity : AppCompatActivity() {
             mTempPreferences.isVerticalOffsetChanged = false
         }
 
-        saveToRecentSetups()
-
-        when (which) {
-            SAVE_WALLPAPER -> mVectorView.vectorifyDaHome(false)
-            SET_WALLPAPER -> mVectorView.vectorifyDaHome(true)
-            SET_LIVE_WALLPAPER -> {
-                if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
-                else
-                    Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_SHORT)
-                        .show()
-            }
-        }
+        //check if the live wallpaper is already running
+        //if so, don't open the live wallpaper picker, just updated preferences
+        if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
+        else
+            Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_SHORT)
+                .show()
     }
 
-    private fun saveToRecentSetups() {
+    private fun updateRecentSetups() {
         val recentSetups = mVectorifyPreferences.recentSetups.toMutableList()
         val stringToSave = getString(
             R.string.recent_setups_save_pattern,
