@@ -212,7 +212,7 @@ class PreviewActivity : AppCompatActivity() {
         //if so, don't open the live wallpaper picker, just updated preferences
         if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
         else
-            DynamicToast.makeSuccess(this, getString(R.string.boo))
+            DynamicToast.makeSuccess(this, getString(R.string.title_already_live))
                 .show()
     }
 

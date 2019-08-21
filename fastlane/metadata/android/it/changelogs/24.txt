@@ -1,0 +1,3 @@
+- Il live wallpaper non viene aggiornato anche quando si salva/applica lo sfondo
+- Aggiunti toast di notifica colorati
+- Riviste alcune traduzioni
