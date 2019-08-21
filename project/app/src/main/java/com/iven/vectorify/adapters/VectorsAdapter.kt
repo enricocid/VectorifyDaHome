@@ -563,9 +563,9 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
                         .show()
 
                 } catch (e: Exception) {
+                    e.printStackTrace()
                     DynamicToast.makeError(context, context.getString(R.string.error_get_resource), Toast.LENGTH_LONG)
                         .show()
-                    context.getString(R.string.error_get_resource)
                 }
                 return@setOnLongClickListener false
             }
