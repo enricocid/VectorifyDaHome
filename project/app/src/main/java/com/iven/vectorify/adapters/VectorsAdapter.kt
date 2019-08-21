@@ -507,6 +507,7 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
         return try {
             mVectors.indexOf(drawable)
         } catch (e: Exception) {
+            e.printStackTrace()
             0
         }
     }

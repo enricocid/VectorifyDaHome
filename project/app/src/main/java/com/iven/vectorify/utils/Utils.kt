@@ -56,6 +56,7 @@ object Utils {
                 context.resources.getIdentifier("accent_device_default_dark", "color", "android")
             )
         } catch (e: Exception) {
+            e.printStackTrace()
             ContextCompat.getColor(context, R.color.default_accent_color)
         }
     }
@@ -131,13 +132,12 @@ object Utils {
     //method to get rounded float string
     @JvmStatic
     fun getDecimalFormattedString(number: Float): String {
-        var formattedNumber = ""
-        try {
-            formattedNumber = String.format("%.2f", number)
+        return try {
+            String.format("%.2f", number)
         } catch (e: Exception) {
             e.printStackTrace()
+            ""
         }
-        return formattedNumber
     }
 
     //determine if the live wallpaper is already applied
@@ -342,8 +342,8 @@ object Utils {
         val bit = try {
             ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
         } catch (e: Exception) {
-            if (showErrorDialog && mVectorifyPreferences.hasToShowError) makeErrorDialog(context)
             e.printStackTrace()
+            if (showErrorDialog && mVectorifyPreferences.hasToShowError) makeErrorDialog(context)
             vectorProps = getVectorProps(getDefaultVectorForApi())
             ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
         }

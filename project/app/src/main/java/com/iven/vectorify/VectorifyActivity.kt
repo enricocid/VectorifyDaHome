@@ -169,6 +169,7 @@ class VectorifyActivity : AppCompatActivity() {
                         mVectorFrame.setImageResource(Utils.getVectorProps(vector!!).first)
                         mVector = vector
                     } catch (e: Exception) {
+                        e.printStackTrace()
                         mVector = Utils.getDefaultVectorForApi()
                         mVectorFrame.setImageResource(Utils.getVectorProps(mVector).first)
                     }
