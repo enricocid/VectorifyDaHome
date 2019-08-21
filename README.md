@@ -1,7 +1,7 @@
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
 
-###### Current version: [(24) 1.5.4](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.4)
+###### Current version: [(25) 1.5.5](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.5)
 
 
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid) 
