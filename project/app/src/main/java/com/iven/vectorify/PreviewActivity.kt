@@ -91,7 +91,7 @@ class PreviewActivity : AppCompatActivity() {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
 
-        //observe seekbar changes
+        //observe SeekBar changes
         mSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             var userProgress = 0
@@ -156,7 +156,7 @@ class PreviewActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(widgetColors)
         toolbar.setNavigationIcon(R.drawable.ic_back)
 
-        //set seekbar colors
+        //set SeekBar colors
         seekbar_card.setCardBackgroundColor(cardColor)
         seekbar_card.strokeColor = ColorUtils.setAlphaComponent(widgetColors, 25)
         mSeekBar.progressTintList = ColorStateList.valueOf(widgetColors)
