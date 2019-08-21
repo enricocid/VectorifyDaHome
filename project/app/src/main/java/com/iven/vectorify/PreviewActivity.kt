@@ -10,12 +10,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.SeekBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.graphics.ColorUtils
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorView
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import kotlinx.android.synthetic.main.position_controls.*
 import kotlinx.android.synthetic.main.preview_activity.*
 import kotlinx.android.synthetic.main.size_position_card.*
@@ -130,7 +130,7 @@ class PreviewActivity : AppCompatActivity() {
                 ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             if (!shouldShowRationale)
                 Utils.makeRationaleDialog(this, requestCode, shouldShowRationale) else
-                Toast.makeText(this, getString(R.string.boo), Toast.LENGTH_LONG)
+                DynamicToast.makeError(this, getString(R.string.boo))
                     .show()
         } else {
             when (requestCode) {
@@ -212,7 +212,7 @@ class PreviewActivity : AppCompatActivity() {
         //if so, don't open the live wallpaper picker, just updated preferences
         if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
         else
-            Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_SHORT)
+            DynamicToast.makeSuccess(this, getString(R.string.boo))
                 .show()
     }
 

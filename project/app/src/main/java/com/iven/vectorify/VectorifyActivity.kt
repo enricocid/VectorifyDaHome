@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -24,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iven.vectorify.adapters.ColorsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.utils.Utils
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import kotlinx.android.synthetic.main.background_color_pref_card.*
 import kotlinx.android.synthetic.main.presets_card.*
 import kotlinx.android.synthetic.main.vector_color_pref_card.*
@@ -117,7 +117,7 @@ class VectorifyActivity : AppCompatActivity() {
                 bottomSheetDialogFragment.setRecentSetupsInterface(recentSetupsInterface)
                 bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
             } else {
-                Toast.makeText(this, getString(R.string.message_no_recent_setups), Toast.LENGTH_SHORT)
+                DynamicToast.makeWarning(this, getString(R.string.message_no_recent_setups))
                     .show()
             }
         }
@@ -403,7 +403,7 @@ class VectorifyActivity : AppCompatActivity() {
 
         //check if a browser is present
         if (openGitHubPageIntent.resolveActivity(packageManager) != null) startActivity(openGitHubPageIntent) else
-            Toast.makeText(this, getString(R.string.install_browser_message), Toast.LENGTH_SHORT)
+            DynamicToast.makeError(this, getString(R.string.install_browser_message))
                 .show()
     }
 

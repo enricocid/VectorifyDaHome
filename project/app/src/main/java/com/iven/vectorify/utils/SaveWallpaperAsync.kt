@@ -12,6 +12,7 @@ import androidx.annotation.NonNull
 import androidx.core.content.FileProvider
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
@@ -101,9 +102,10 @@ class SaveWallpaperAsync(
 
         if (mMaterialDialog.isShowing) mMaterialDialog.dismiss()
 
-        Toast.makeText(
-            contextReference!!.get(),
-            contextReference.get()!!.getString(R.string.message_saved_to, path!!.first, path.second),
+        val context = contextReference?.get()!!
+        DynamicToast.makeSuccess(
+            context,
+            context.getString(R.string.message_saved_to, path!!.first, path.second),
             Toast.LENGTH_LONG
         )
             .show()

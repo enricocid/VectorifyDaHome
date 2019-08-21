@@ -9,7 +9,9 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
+import com.iven.vectorify.mTempPreferences
 import com.iven.vectorify.mVectorifyPreferences
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
@@ -543,18 +545,28 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
                 }
             }
             vectorButton.setOnLongClickListener {
-                val resourceName = try {
-                    context.resources.getResourceEntryName(drawable)
+                try {
+                    val iconName = context.resources.getResourceEntryName(drawable)
                         .replace(
                             context.getString(R.string.underscore_delimiter),
                             context.getString(R.string.space_delimiter)
                         )
                         .capitalize()
+
+                    DynamicToast.make(
+                        context,
+                        iconName,
+                        context.getDrawable(drawable),
+                        mTempPreferences.tempVectorColor,
+                        mTempPreferences.tempBackgroundColor
+                    )
+                        .show()
+
                 } catch (e: Exception) {
+                    DynamicToast.makeError(context, context.getString(R.string.error_get_resource), Toast.LENGTH_LONG)
+                        .show()
                     context.getString(R.string.error_get_resource)
                 }
-                Toast.makeText(context, resourceName, Toast.LENGTH_SHORT)
-                    .show()
                 return@setOnLongClickListener false
             }
         }

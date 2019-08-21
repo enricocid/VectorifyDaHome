@@ -1,5 +1,9 @@
 # Credits:
 
+- [Pranav Pandey](https://github.com/pranavpandey) for beautiful [Dynamic toasts](https://github.com/pranavpandey/dynamic-toasts] library!
+
+- [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
+
 - [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on [Music Player GO](https://github.com/enricocid/Music-Player-GO) which I used here!
 
 - [HrX](https://github.com/HrX03) for Android versions vectors!
@@ -10,8 +14,6 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 - [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support and suggestions!
 
 - [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
-
-- [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
 - Icons from [material.io](https://material.io/resources/icons), [materialdesignicons](https://materialdesignicons.com/), [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page) and [svgrepo](https://www.svgrepo.com)!
 

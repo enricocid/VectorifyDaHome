@@ -29,6 +29,7 @@ import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.mVectorifyPreferences
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 object Utils {
 
@@ -163,7 +164,7 @@ object Utils {
                 if (shouldRequestRationale) requestPermissions(activity, which)
             }
             negativeButton {
-                Toast.makeText(activity, activity.getString(R.string.boo), Toast.LENGTH_LONG)
+                DynamicToast.makeError(context, activity.getString(R.string.boo), Toast.LENGTH_LONG)
                     .show()
                 dismiss()
             }
