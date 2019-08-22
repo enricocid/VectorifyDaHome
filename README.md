@@ -35,3 +35,12 @@
 - Other features?
 
 The app itself implements a dark/light theme switcher!
+
+
+# Other info
+
+- The characters depicted in Star Wars vectors are © by Lucasfilm Ltd.
+
+- The symbols depicted in Dragon Ball vectors are © by Akira Toriyama/Sh?eisha.
+
+- The symbols depited in Naruto vector are © by Masashi Kishimoto/Sh?eisha.
