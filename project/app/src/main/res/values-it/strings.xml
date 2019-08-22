@@ -68,4 +68,6 @@
     </string>
     <string name="go_to_info">Vai nelle info</string>
     <string name="boo">Boo! No accesso no party! Usa il live wallpaper!</string>
+    <string name="boo_info">Boo! Giusto perché tu lo sappia!</string>
+    <string name="boo_almost_there">Ora vai nelle Autorizzazioni e abilita l\'accesso all\'Archiviazione!</string>
 </resources>

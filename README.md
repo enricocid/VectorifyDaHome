@@ -1,7 +1,7 @@
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
 
-###### Current version: [(25) 1.5.5](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.5)
+###### Current version: [(26) 1.5.6](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.5.6)
 
 
 [![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid) 
@@ -37,10 +37,15 @@
 The app itself implements a dark/light theme switcher!
 
 
-# Other info
+# License
 
-- The characters depicted in Star Wars vectors are © by Lucasfilm Ltd.
+Copyright 2019 Enrico D'Ortenzio
 
-- The symbols depicted in Dragon Ball vectors are © by Akira Toriyama/Sh?eisha.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-- The symbols depited in Naruto vector are © by Masashi Kishimoto/Sh?eisha.
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License.

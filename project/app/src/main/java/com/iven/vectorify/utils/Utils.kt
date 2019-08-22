@@ -150,7 +150,6 @@ object Utils {
 
     //make rationale permission dialog
     @JvmStatic
-    @Suppress("DEPRECATION")
     fun makeRationaleDialog(activity: Activity, which: Int, shouldRequestRationale: Boolean) {
 
         val message = if (shouldRequestRationale) R.string.rationale else R.string.rationale_denied
@@ -160,18 +159,18 @@ object Utils {
             cornerRadius(res = R.dimen.md_corner_radius)
             title(R.string.title_rationale)
             message(message)
-            positiveButton {
-                if (shouldRequestRationale) requestPermissions(activity, which)
+            positiveButton(if (shouldRequestRationale) android.R.string.ok else R.string.go_to_info) {
+                if (shouldRequestRationale) requestPermissions(activity, which) else
+                    openVectorifyDaHomeDetails(activity)
             }
             negativeButton {
-                DynamicToast.makeError(context, activity.getString(R.string.boo), Toast.LENGTH_LONG)
-                    .show()
-                dismiss()
+                if (shouldRequestRationale)
+                    DynamicToast.makeError(context, activity.getString(R.string.boo), Toast.LENGTH_LONG)
+                        .show()
+                else
+                    DynamicToast.makeWarning(context, activity.getString(R.string.boo_info), Toast.LENGTH_LONG)
+                        .show()
             }
-            if (!shouldRequestRationale)
-                neutralButton(R.string.go_to_info) {
-                    openVectorifyDaHomeDetails(activity)
-                }
         }
     }
 
@@ -183,6 +182,8 @@ object Utils {
             val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             intent.data = Uri.parse("package:" + context.packageName)
             context.startActivity(intent)
+            DynamicToast.make(context, context.getString(R.string.boo_almost_there), Toast.LENGTH_LONG)
+                .show()
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
         }

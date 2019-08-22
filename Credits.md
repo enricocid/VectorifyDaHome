@@ -20,3 +20,15 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 - [Naruto icon](https://iconscout.com/icon/naruto) by [Alexandru Stoica](https://iconscout.com/contributors/alexandru-stoica) on [iconscout.com](https://iconscout.com)!
 
 - Colors presets taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
+
+- The characters depicted in Star Wars vectors are © by Lucasfilm Ltd.
+
+- The symbols depicted in Dragon Ball vectors are © by Akira Toriyama/Shueisha.
+
+- The symbols depicted in Naruto vector are © by Masashi Kishimoto/Shueisha.
+
+- The symbols/logos depicted in Android versions and other google products vectors are © by Google LLC.
+
+- The symbols/logos depicted in videogame vectors are © by Nintendo, Atari, Bandai Namco.
+
+- The symbols depicted in Android versions and other google products are © by Google LLC.

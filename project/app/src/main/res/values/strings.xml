@@ -99,4 +99,6 @@
     </string>
     <string name="go_to_info">Go to info</string>
     <string name="boo">Boo! No access no party! Use the live wallpaper!</string>
+    <string name="boo_info">Boo! Just so You know!</string>
+    <string name="boo_almost_there">Now navigate to Permissions and enable storage access!</string>
 </resources>

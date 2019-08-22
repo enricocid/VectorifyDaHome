@@ -1,0 +1,2 @@
+- Aggiunte nuove grafiche nerdy e di simboli
+- Revisione dialog permessi
