@@ -21,14 +21,14 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 
 - Colors presets taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
 
-- The characters depicted in Star Wars vectors are © by Lucasfilm Ltd.
+- The characters depicted in Star Wars vectors are Â© by Lucasfilm Ltd.
 
-- The symbols depicted in Dragon Ball vectors are © by Akira Toriyama/Shueisha.
+- The symbols depicted in Dragon Ball vectors are Â© by Akira Toriyama/Shueisha.
 
-- The symbols depicted in Naruto vector are © by Masashi Kishimoto/Shueisha.
+- The symbols depicted in Naruto vector are Â© by Masashi Kishimoto/Shueisha.
 
-- The symbols/logos depicted in Android versions and other google products vectors are © by Google LLC.
+- The symbols/logos depicted in Android versions and other google products vectors are Â© by Google LLC.
 
-- The symbols/logos depicted in videogame vectors are © by Nintendo, Atari, Bandai Namco.
+- The symbols/logos depicted in videogame vectors are Â© by Nintendo, Atari, Bandai Namco.
 
-- The symbols depicted in Android versions and other google products are © by Google LLC.
+- The symbols depicted in Android versions and other Google products are Â© by Google LLC.
