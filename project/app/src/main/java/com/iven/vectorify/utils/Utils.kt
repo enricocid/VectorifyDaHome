@@ -28,6 +28,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
 import com.iven.vectorify.adapters.VectorsAdapter
+import com.iven.vectorify.mTempPreferences
 import com.iven.vectorify.mVectorifyPreferences
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
@@ -384,5 +385,20 @@ object Utils {
                 mVectorifyPreferences.hasToShowError = false
             }
         }
+    }
+
+    //update recent setups
+    @JvmStatic
+    fun updateRecentSetups(context: Context) {
+        val recentSetups = mVectorifyPreferences.recentSetups.toMutableList()
+        val stringToSave = context.getString(
+            R.string.recent_setups_save_pattern,
+            mTempPreferences.tempBackgroundColor.toString(),
+            mTempPreferences.tempVector.toString(),
+            mTempPreferences.tempVectorColor.toString()
+        )
+
+        recentSetups.add(stringToSave)
+        mVectorifyPreferences.recentSetups = recentSetups.toMutableSet()
     }
 }

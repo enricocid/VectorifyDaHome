@@ -62,8 +62,6 @@ class PreviewActivity : AppCompatActivity() {
             android.R.id.home -> finishAndRemoveTask()
         }
 
-        updateRecentSetups()
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -215,18 +213,9 @@ class PreviewActivity : AppCompatActivity() {
         else
             DynamicToast.makeSuccess(this, getString(R.string.title_already_live))
                 .show()
-    }
 
-    private fun updateRecentSetups() {
-        val recentSetups = mVectorifyPreferences.recentSetups.toMutableList()
-        val stringToSave = getString(
-            R.string.recent_setups_save_pattern,
-            mTempPreferences.tempBackgroundColor.toString(),
-            mTempPreferences.tempVector.toString(),
-            mTempPreferences.tempVectorColor.toString()
-        )
-        recentSetups.add(stringToSave)
-        mVectorifyPreferences.recentSetups = recentSetups.toMutableSet()
+        //update recent setups
+        Utils.updateRecentSetups(this)
     }
 
     fun moveVectorUp(view: View) {
