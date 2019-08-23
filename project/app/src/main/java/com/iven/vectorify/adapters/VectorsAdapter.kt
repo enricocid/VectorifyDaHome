@@ -23,6 +23,7 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
         //https://materialdesignicons.com/
         //https://commons.wikimedia.org/wiki/Main_Page
         //https://www.svgrepo.com/
+        //https://www.iconfinder.com
         //https://iconscout.com/icon/naruto
         //https://github.com/PotatoProject/website/blob/master/src/assets/
 
