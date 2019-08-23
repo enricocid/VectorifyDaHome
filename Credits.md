@@ -32,3 +32,5 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 - The symbols/logos depicted in videogame vectors are © by Nintendo, Atari, Bandai Namco.
 
 - The symbols depicted in Android versions and other Google products are © by Google LLC.
+
+- The colors Android green, blue and navy are part of the Google's brand and are © by Google LLC.

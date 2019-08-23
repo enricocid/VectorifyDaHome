@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.iven.vectorify.R
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 class ColorsAdapter(@NonNull private val context: Context) :
     RecyclerView.Adapter<ColorsAdapter.ColorsHolder>() {
@@ -69,11 +71,47 @@ class ColorsAdapter(@NonNull private val context: Context) :
 
             val colorItem = itemView as MaterialCardView
 
-            colorItem.setCardBackgroundColor(ContextCompat.getColor(context, combo.second))
-            colorItem.strokeColor = ContextCompat.getColor(context, combo.first)
+            val vectorColor = ContextCompat.getColor(context, combo.second)
+            colorItem.setCardBackgroundColor(vectorColor)
+
+            val backgroundColor = ContextCompat.getColor(context, combo.first)
+            colorItem.strokeColor = backgroundColor
 
             itemView.setOnClickListener {
                 onColorClick?.invoke(combo)
+            }
+            itemView.setOnLongClickListener {
+
+                try {
+                    val backgroundColorName = context.resources.getResourceEntryName(combo.first)
+                        .replace(
+                            context.getString(R.string.underscore_delimiter),
+                            context.getString(R.string.space_delimiter)
+                        )
+                        .capitalize()
+
+                    val vectorColorName = context.resources.getResourceEntryName(combo.second)
+                        .replace(
+                            context.getString(R.string.underscore_delimiter),
+                            context.getString(R.string.space_delimiter)
+                        )
+                        .capitalize()
+
+                    DynamicToast.make(
+                        context,
+                        context.getString(R.string.selected_preset, backgroundColorName, vectorColorName),
+                        null,
+                        backgroundColor,
+                        vectorColor
+                    )
+                        .show()
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    DynamicToast.makeError(context, context.getString(R.string.error_get_resource), Toast.LENGTH_LONG)
+                        .show()
+                }
+                return@setOnLongClickListener false
             }
         }
     }

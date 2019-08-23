@@ -13,6 +13,7 @@
     <string name="title_vector">Grafica</string>
     <string name="title_vector_dialog">Colore grafica</string>
     <string name="title_accent_me">ACCENTAMI!</string>
+    <string name="selected_preset">Sfondo: %1s, Grafica: %1s</string>
 
     <!-- Setup recenti -->
     <string name="title_recent_setups">Setup recenti</string>
