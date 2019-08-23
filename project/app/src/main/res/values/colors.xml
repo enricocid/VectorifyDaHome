@@ -35,6 +35,10 @@
     <color name="blue_pine">#324851</color>
     <color name="reflection">#34675C</color>
 
+    <color name="navy">#073042</color>
+    <color name="android_green">#3DDC84</color>
+    <color name="android_blue">#4285F4</color>
+
     <color name="cocoa">#301B28</color>
     <color name="chocolate">#523634</color>
     <color name="toffee">#B6452C</color>
@@ -67,7 +71,6 @@
 
     <color name="branch">#5D535E</color>
     <color name="berry">#EC96A4</color>
-
 
     <color name="ice">#A1D6E2</color>
     <color name="overcast">#F1F1F2</color>
