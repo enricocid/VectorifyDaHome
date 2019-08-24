@@ -12,13 +12,14 @@
         <item>@string/title_sport</item> <!--8-->
         <item>@string/title_math</item> <!--9-->
         <item>@string/title_science</item> <!--10-->
-        <item>@string/title_music</item> <!--11-->
-        <item>@string/title_nerdy</item> <!--12-->
-        <item>@string/title_buildings</item> <!--13-->
-        <item>@string/title_alert</item> <!--14-->
-        <item>@string/title_alpha</item> <!--15-->
-        <item>@string/title_roman</item> <!--16-->
-        <item>@string/title_zodiac</item> <!--17-->
-        <item>@string/title_others</item> <!--18-->
+        <item>@string/title_chernoff</item> <!--11-->
+        <item>@string/title_music</item> <!--12-->
+        <item>@string/title_nerdy</item> <!--13-->
+        <item>@string/title_buildings</item> <!--14-->
+        <item>@string/title_alert</item> <!--15-->
+        <item>@string/title_alpha</item> <!--16-->
+        <item>@string/title_roman</item> <!--17-->
+        <item>@string/title_zodiac</item> <!--18-->
+        <item>@string/title_others</item> <!--others-->
     </string-array>
 </resources>

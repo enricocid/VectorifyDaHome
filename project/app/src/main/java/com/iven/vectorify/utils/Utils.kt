@@ -209,13 +209,14 @@ object Utils {
             8 -> Pair(context.getString(R.string.title_sport), VectorsCategories.SPORT) //sport
             9 -> Pair(context.getString(R.string.title_math), VectorsCategories.MATH) //math
             10 -> Pair(context.getString(R.string.title_science), VectorsCategories.SCIENCE) //science
-            11 -> Pair(context.getString(R.string.title_music), VectorsCategories.MUSIC) //music
-            12 -> Pair(context.getString(R.string.title_nerdy), VectorsCategories.NERDY) //nerdy
-            13 -> Pair(context.getString(R.string.title_buildings), VectorsCategories.BUILDINGS) //buildings
-            14 -> Pair(context.getString(R.string.title_alert), VectorsCategories.ALERT) //alert
-            15 -> Pair(context.getString(R.string.title_alpha), VectorsCategories.ALPHABET) //letters
-            16 -> Pair(context.getString(R.string.title_roman), VectorsCategories.ROMAN) //roman
-            17 -> Pair(context.getString(R.string.title_zodiac), VectorsCategories.ZODIAC) //zodiac
+            11 -> Pair(context.getString(R.string.title_chernoff), VectorsCategories.CHERNOFF) //Chernoff faceS
+            12 -> Pair(context.getString(R.string.title_music), VectorsCategories.MUSIC) //music
+            13 -> Pair(context.getString(R.string.title_nerdy), VectorsCategories.NERDY) //nerdy
+            14 -> Pair(context.getString(R.string.title_buildings), VectorsCategories.BUILDINGS) //buildings
+            15 -> Pair(context.getString(R.string.title_alert), VectorsCategories.ALERT) //alert
+            16 -> Pair(context.getString(R.string.title_alpha), VectorsCategories.ALPHABET) //letters
+            17 -> Pair(context.getString(R.string.title_roman), VectorsCategories.ROMAN) //roman
+            18 -> Pair(context.getString(R.string.title_zodiac), VectorsCategories.ZODIAC) //zodiac
             else -> Pair(context.getString(R.string.title_others), VectorsCategories.OTHERS)
         }
     }

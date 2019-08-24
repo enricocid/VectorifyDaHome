@@ -15,7 +15,7 @@ object VectorsCategories {
     //https://github.com/PotatoProject/website/blob/master/src/assets/
 
     @JvmStatic
-    val TECH = listOf(  //android or tech related
+    val TECH = listOf(
         R.drawable.android,
         R.drawable.android_debug_bridge,
         R.drawable.android_head,
@@ -53,7 +53,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val SYMBOLS = listOf(//figures and symbols
+    val SYMBOLS = listOf(
         R.drawable.dot,
         R.drawable.origin,
         R.drawable.yin_yang,
@@ -79,7 +79,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val ANIMALS = listOf(//animals
+    val ANIMALS = listOf(
         R.drawable.cat,
         R.drawable.dog,
         R.drawable.dog_side,
@@ -105,7 +105,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val EMOTICONS = listOf( //emoticons
+    val EMOTICONS = listOf(
         R.drawable.face,
         R.drawable.emoticon,
         R.drawable.emoticon_cool,
@@ -129,7 +129,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val FUN = listOf( //let's have fun, parties and relax
+    val FUN = listOf(
         R.drawable.toys,
         R.drawable.category,
         R.drawable.drawing,
@@ -146,7 +146,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val FOOD = listOf( //food
+    val FOOD = listOf(
         R.drawable.ice_pop,
         R.drawable.ice_cream,
         R.drawable.cookie,
@@ -190,7 +190,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val NATURE = listOf( //nature
+    val NATURE = listOf(
         R.drawable.nature,
         R.drawable.nature_people,
         R.drawable.pine_tree,
@@ -209,7 +209,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val WEATHER = listOf(//weather
+    val WEATHER = listOf(
         R.drawable.looks,
         R.drawable.wb_sunny,
         R.drawable.cloud,
@@ -252,7 +252,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val SPORT = listOf(//sport
+    val SPORT = listOf(
         R.drawable.baseball,
         R.drawable.basketball,
         R.drawable.basketball_hoop,
@@ -293,7 +293,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val MATH = listOf(  //math
+    val MATH = listOf(
         R.drawable.alpha,
         R.drawable.beta,
         R.drawable.gamma,
@@ -334,7 +334,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val SCIENCE = listOf( //science
+    val SCIENCE = listOf(
         R.drawable.periodic_table,
         R.drawable.co2,
         R.drawable.hexagon_outline,
@@ -369,7 +369,23 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val MUSIC = listOf( //music
+    val CHERNOFF = listOf(
+        R.drawable.aaronson,
+        R.drawable.alexander,
+        R.drawable.armentano,
+        R.drawable.berdon,
+        R.drawable.bracken,
+        R.drawable.burns,
+        R.drawable.callahan,
+        R.drawable.cohen,
+        R.drawable.daly,
+        R.drawable.dannehy,
+        R.drawable.dean,
+        R.drawable.devita
+    )
+
+    @JvmStatic
+    val MUSIC = listOf(
         R.drawable.music_note,
         R.drawable.music,
         R.drawable.music_clef_treble,
@@ -390,7 +406,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val NERDY = listOf(  //nerdy
+    val NERDY = listOf(
         R.drawable.space_invaders,
         R.drawable.ghost,
         R.drawable.one_up,
@@ -419,7 +435,6 @@ object VectorsCategories {
 
     @JvmStatic
     val BUILDINGS = listOf(
-        //buildings
         R.drawable.factory,
         R.drawable.city,
         R.drawable.city_variant,
@@ -434,7 +449,6 @@ object VectorsCategories {
 
     @JvmStatic
     val ALERT = listOf(
-        //alert
         R.drawable.high,
         R.drawable.help,
         R.drawable.alert,
@@ -445,7 +459,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val ALPHABET = listOf(//alphabet
+    val ALPHABET = listOf(
         R.drawable.alpha_a,
         R.drawable.alpha_b,
         R.drawable.alpha_c,
@@ -475,7 +489,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val ROMAN = listOf(//roman
+    val ROMAN = listOf(
         R.drawable.roman_numeral_1,
         R.drawable.roman_numeral_2,
         R.drawable.roman_numeral_3,
@@ -489,7 +503,7 @@ object VectorsCategories {
     )
 
     @JvmStatic
-    val ZODIAC = listOf( //zodiac
+    val ZODIAC = listOf(
         R.drawable.zodiac_aries,
         R.drawable.zodiac_cancer,
         R.drawable.zodiac_capricorn,
@@ -505,7 +519,7 @@ object VectorsCategories {
 
 
     @JvmStatic
-    val OTHERS = listOf( //others
+    val OTHERS = listOf(
         R.drawable.school,
         R.drawable.water_pump,
         R.drawable.tie,

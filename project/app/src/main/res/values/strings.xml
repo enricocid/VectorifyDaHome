@@ -86,6 +86,7 @@
     <string name="title_sport" translatable="false">Sport</string>
     <string name="title_math">Math</string>
     <string name="title_science">Science</string>
+    <string name="title_chernoff">Chernoff faces</string>
     <string name="title_music">Music</string>
     <string name="title_nerdy">Nerdy</string>
     <string name="title_buildings">Buildings</string>
