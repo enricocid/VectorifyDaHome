@@ -1,0 +1,7 @@
+- Nuova UI: ottimizzato lo spazio dello schermo disponibile rendendo la grafica più grande e 
+mostrando la lista delle grafiche su due righe. Ora le categorie sono separate: ciò che significa
+che per accedervi dovrai usare il selettore di categoria.
+- Nuove grafiche (Facce di Chernoff)
+- Corretto reset preview
+- Corretti colori sbagliati nella notifica di toast dei presets
+- Rivisto ordine presets
