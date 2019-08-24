@@ -127,7 +127,6 @@ class VectorView @JvmOverloads constructor(
         mVerticalOffset = mVectorifyPreferences.verticalOffset
         mTempPreferences.tempVerticalOffset = mVerticalOffset
         mTempPreferences.isVerticalOffsetChanged = true
-        mTempPreferences.isScaleChanged = true
         invalidate()
     }
 }

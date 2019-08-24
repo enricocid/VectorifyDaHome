@@ -248,11 +248,13 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     fun resetVectorPosition(view: View) {
-        mVectorView.resetPosition()
         val savedScale = mVectorifyPreferences.scale
+        mVectorView.setScaleFactor(savedScale)
+        mTempPreferences.tempScale = savedScale
+        mTempPreferences.isScaleChanged = true
         mSeekBar.progress = (savedScale * 100).toInt()
         scale_text.text = Utils.getDecimalFormattedString(mSeekBar.progress.toFloat() / 100)
-        mVectorView.setScaleFactor(savedScale)
+        mVectorView.resetPosition()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
