@@ -5,21 +5,24 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         app:cardCornerRadius="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:cardBackgroundColor="?attr/presets_card_color"
         app:cardElevation="4dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         tools:context=".VectorifyActivity">
 
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         <FrameLayout android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
+                     android:layout_height="0dp"
+                     android:layout_weight="1.5"
                      android:orientation="vertical">
 
             <ImageView android:layout_width="match_parent"
@@ -27,7 +30,7 @@
                        android:src="@drawable/android"
                        android:padding="8dp"
                        android:contentDescription="@string/live_wallpaper_name"
-                       android:layout_height="wrap_content"/>
+                       android:layout_height="match_parent"/>
 
             <com.google.android.material.chip.Chip
                     android:id="@+id/categories"
@@ -48,7 +51,8 @@
                 android:id="@+id/vectors_rv"
                 android:clipToPadding="false"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 tools:context=".MainActivity"/>
     </LinearLayout>
 

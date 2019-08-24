@@ -8,12 +8,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -26,6 +26,7 @@ import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.utils.Utils
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import kotlinx.android.synthetic.main.background_color_pref_card.*
+import kotlinx.android.synthetic.main.cards_container.*
 import kotlinx.android.synthetic.main.presets_card.*
 import kotlinx.android.synthetic.main.vector_color_pref_card.*
 import kotlinx.android.synthetic.main.vectorify_activity.*
@@ -128,6 +129,8 @@ class VectorifyActivity : AppCompatActivity() {
             val lp = version.layoutParams as CoordinatorLayout.LayoutParams
             lp.setMargins(0, 0, 0, height)
             version.layoutParams = lp
+
+            cards_container.setPadding(0, 0, 0, height + version.height)
         }
 
         //setup presets
@@ -156,7 +159,8 @@ class VectorifyActivity : AppCompatActivity() {
 
         //setup vectors
         mVectorsRecyclerView = vectors_rv
-        mVectorsRecyclerViewLayoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        val gridSize = mDeviceMetrics.second / resources.getDimensionPixelSize(R.dimen.vector_size)
+        mVectorsRecyclerViewLayoutManager = GridLayoutManager(this, gridSize / 2)
         mVectorsRecyclerView.layoutManager = mVectorsRecyclerViewLayoutManager
         mVectorsAdapter = VectorsAdapter(this)
         mVectorsRecyclerView.adapter = mVectorsAdapter
@@ -194,14 +198,6 @@ class VectorifyActivity : AppCompatActivity() {
         })
 
         mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
-
-        //set vector frame height
-        mVectorsRecyclerView.afterMeasured {
-
-            val vectorFrameParams = mVectorFrame.layoutParams as FrameLayout.LayoutParams
-            vectorFrameParams.height = (height / 0.75F).toInt() + categories.height / 2
-            mVectorFrame.layoutParams = vectorFrameParams
-        }
     }
 
     //update vector frame
