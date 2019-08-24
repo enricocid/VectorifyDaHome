@@ -11,7 +11,7 @@ android {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 27
+        versionCode 28
         versionName "1.6.0"
     }
 
