@@ -13,6 +13,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="@string/versionName"
+              android:alpha="0.25"
               android:textColor="?attr/vectors_color"
               android:textAppearance="@android:style/TextAppearance.Material.Small"
               android:padding="16dp"
