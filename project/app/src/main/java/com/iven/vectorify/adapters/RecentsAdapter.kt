@@ -14,7 +14,6 @@ import com.iven.vectorify.utils.Utils
 
 class RecentSetupsAdapter(
     private val context: Context,
-    private val delimiter: String,
     private val recentSetupsFragment: RecentSetupsFragment
 ) :
     RecyclerView.Adapter<RecentSetupsAdapter.RecentSetupsHolder>() {
@@ -31,39 +30,45 @@ class RecentSetupsAdapter(
     }
 
     override fun onBindViewHolder(holder: RecentSetupsHolder, position: Int) {
-        holder.bindItems(mRecentSetups[holder.adapterPosition])
+
+        val rawSetupString = mRecentSetups[holder.adapterPosition]
+        val arr = rawSetupString.split(context.getString(R.string.delimiter))
+
+        try {
+            val selectedBackgroundColor = Integer.parseInt(arr[0])
+            val selectedVector = Integer.parseInt(arr[1])
+            val selectedVectorColor = Integer.parseInt(arr[2])
+            val selectedVectorCategory = Integer.parseInt(arr[3])
+
+            holder.bindItems(
+                rawSetupString, listOf(
+                    selectedBackgroundColor,
+                    selectedVector,
+                    selectedVectorColor,
+                    selectedVectorCategory
+                )
+            )
+        } catch (e: Exception) {
+            recentSetupsFragment.dismissWithError()
+            e.printStackTrace()
+        }
     }
 
     inner class RecentSetupsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(setup: String) {
+        fun bindItems(rawSetupString: String, recentSetup: List<Int>) {
 
             val recentButton = itemView.findViewById<ImageView>(R.id.recent_setups_vector)
-            val arr = setup.split(delimiter)
 
-            val selectedBackgroundColor = Integer.parseInt(arr[0])
-            recentButton.setBackgroundColor(selectedBackgroundColor)
-
-            val selectedVector = Integer.parseInt(arr[1])
-
-            val selectedVectorColor = Integer.parseInt(arr[2])
-
-            val selectedVectorCategory = Integer.parseInt(arr[3])
+            recentButton.setBackgroundColor(recentSetup[0])
 
             val vectorDrawable =
-                Utils.tintVectorDrawable(context, selectedVector, selectedBackgroundColor, selectedVectorColor, false)
+                Utils.tintVectorDrawable(context, recentSetup[1], recentSetup[0], recentSetup[2], false)
 
             recentButton.setImageDrawable(vectorDrawable)
 
             recentButton.setOnClickListener {
-                onRecentClick?.invoke(
-                    listOf(
-                        selectedBackgroundColor,
-                        selectedVector,
-                        selectedVectorColor,
-                        selectedVectorCategory
-                    )
-                )
+                onRecentClick?.invoke(recentSetup)
             }
 
             recentButton.setOnLongClickListener {
@@ -83,7 +88,7 @@ class RecentSetupsAdapter(
                         positiveButton {
                             //add an empty list to preferences
                             try {
-                                mRecentSetups.remove(setup)
+                                mRecentSetups.remove(rawSetupString)
                                 notifyDataSetChanged()
                                 mVectorifyPreferences.recentSetups = mRecentSetups.toMutableSet()
                                 if (mRecentSetups.isEmpty()) recentSetupsFragment.dismiss()

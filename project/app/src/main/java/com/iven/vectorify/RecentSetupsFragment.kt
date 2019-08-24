@@ -1,5 +1,6 @@
 package com.iven.vectorify
 
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.recent_setups_fragment.*
 class RecentSetupsFragment : BottomSheetDialogFragment() {
 
     private lateinit var mRecentSetupsInterface: RecentSetupsInterface
+    private var sError = false
 
     fun setRecentSetupsInterface(recentSetupsInterface: RecentSetupsInterface) {
         mRecentSetupsInterface = recentSetupsInterface
@@ -40,15 +42,33 @@ class RecentSetupsFragment : BottomSheetDialogFragment() {
             recents_rv.layoutManager = GridLayoutManager(context, 4)
             recents_rv.setHasFixedSize(true)
 
-            val recentSetupsAdapter =
-                RecentSetupsAdapter(context!!, getString(R.string.delimiter), this@RecentSetupsFragment)
+            val recentSetupsAdapter = RecentSetupsAdapter(context!!, this@RecentSetupsFragment)
             recents_rv.adapter = recentSetupsAdapter
-
             recentSetupsAdapter.onRecentClick = { recent ->
                 mRecentSetupsInterface.onRecentSelected(recent[0], recent[1], recent[2], recent[3])
                 dismiss()
             }
         }
+    }
+
+    fun dismissWithError() {
+        sError = true
+        dismiss()
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        if (sError) {
+            MaterialDialog(context!!).show {
+                cornerRadius(res = R.dimen.md_corner_radius)
+                title(R.string.title_info_error)
+                message(R.string.info_error_alt)
+                positiveButton {
+                    mVectorifyPreferences.recentSetups = mutableSetOf()
+                }
+            }
+            sError = false
+        }
+        super.onDismiss(dialog)
     }
 
     //clear recent setups
