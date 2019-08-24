@@ -136,6 +136,7 @@ class VectorifyActivity : AppCompatActivity() {
 
         //setup presets
         presets_rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        presets_rv.setHasFixedSize(true)
         val presetsAdapter = PresetsAdapter(this)
         presets_rv.adapter = presetsAdapter
 
@@ -170,6 +171,7 @@ class VectorifyActivity : AppCompatActivity() {
             )
         )
         mVectorsRecyclerView.layoutManager = mVectorsRecyclerViewLayoutManager
+        mVectorsRecyclerView.setHasFixedSize(true)
         mVectorsAdapter = VectorsAdapter(this)
         mVectorsRecyclerView.adapter = mVectorsAdapter
 

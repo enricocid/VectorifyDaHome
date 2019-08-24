@@ -37,9 +37,11 @@ class RecentSetupsFragment : BottomSheetDialogFragment() {
         if (context != null) {
 
             //setup recent setups
+            recents_rv.layoutManager = GridLayoutManager(context, 4)
+            recents_rv.setHasFixedSize(true)
+
             val recentSetupsAdapter =
                 RecentSetupsAdapter(context!!, getString(R.string.delimiter), this@RecentSetupsFragment)
-            recents_rv.layoutManager = GridLayoutManager(context, 4)
             recents_rv.adapter = recentSetupsAdapter
 
             recentSetupsAdapter.onRecentClick = { recent ->
