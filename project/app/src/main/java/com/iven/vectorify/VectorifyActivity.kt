@@ -23,6 +23,7 @@ import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
+import com.iven.vectorify.utils.GridItemDecoration
 import com.iven.vectorify.utils.Utils
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import kotlinx.android.synthetic.main.background_color_pref_card.*
@@ -160,7 +161,14 @@ class VectorifyActivity : AppCompatActivity() {
         //setup vectors
         mVectorsRecyclerView = vectors_rv
         val gridSize = mDeviceMetrics.second / resources.getDimensionPixelSize(R.dimen.vector_size)
-        mVectorsRecyclerViewLayoutManager = GridLayoutManager(this, gridSize / 2)
+        val spanCount = gridSize / 2
+        mVectorsRecyclerViewLayoutManager = GridLayoutManager(this, spanCount)
+        mVectorsRecyclerView.addItemDecoration(
+            GridItemDecoration(
+                resources.getDimensionPixelSize(R.dimen.vector_spacing),
+                spanCount
+            )
+        )
         mVectorsRecyclerView.layoutManager = mVectorsRecyclerViewLayoutManager
         mVectorsAdapter = VectorsAdapter(this)
         mVectorsRecyclerView.adapter = mVectorsAdapter

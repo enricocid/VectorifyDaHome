@@ -3,5 +3,6 @@
     <dimen name="activity_padding">16dp</dimen>
     <dimen name="preset_option_dim">28dp</dimen>
     <dimen name="vector_size">40sp</dimen>
+    <dimen name="vector_spacing">2dp</dimen>
     <dimen name="md_corner_radius">16dp</dimen>
 </resources>
