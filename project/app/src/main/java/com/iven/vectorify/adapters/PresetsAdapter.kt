@@ -12,8 +12,8 @@ import com.google.android.material.card.MaterialCardView
 import com.iven.vectorify.R
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
-class ColorsAdapter(@NonNull private val context: Context) :
-    RecyclerView.Adapter<ColorsAdapter.ColorsHolder>() {
+class PresetsAdapter(@NonNull private val context: Context) :
+    RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
 
     var onColorClick: ((Pair<Int, Int>) -> Unit)? = null
 

@@ -21,7 +21,7 @@ import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
 import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.iven.vectorify.adapters.ColorsAdapter
+import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.utils.Utils
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -131,11 +131,11 @@ class VectorifyActivity : AppCompatActivity() {
         }
 
         //setup presets
-        colors_rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        val colorsAdapter = ColorsAdapter(this)
-        colors_rv.adapter = colorsAdapter
+        presets_rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        val presetsAdapter = PresetsAdapter(this)
+        presets_rv.adapter = presetsAdapter
 
-        colorsAdapter.onColorClick = { combo ->
+        presetsAdapter.onColorClick = { combo ->
 
             setBackgroundAndVectorColorsChanged()
 
