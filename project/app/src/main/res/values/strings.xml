@@ -22,6 +22,7 @@
     <string name="vectors_color_key" translatable="false">icon_key</string>
     <string name="theme_key" translatable="false">theme_key</string>
     <string name="vector_key" translatable="false">icon_resource_key</string>
+    <string name="category_key" translatable="false">category_key</string>
     <string name="scale_key" translatable="false">scale_key</string>
     <string name="horizontal_offset_key" translatable="false">horizontal_offset_key</string>
     <string name="vertical_offset_key" translatable="false">vertical_offset_key</string>
@@ -40,7 +41,7 @@
     <!-- Recent setups things -->
     <string name="title_recent_setups">Recent setups</string>
     <string name="delimiter" translatable="false">&#59;</string>
-    <string name="recent_setups_save_pattern" translatable="false">%1s&#59;%1s&#59;%1s</string>
+    <string name="recent_setups_save_pattern" translatable="false">%1s&#59;%1s&#59;%1s&#59;%1s</string>
     <string name="message_no_recent_setups">No recent setups found!</string>
     <string name="message_clear_recent_setups">All recent setups will be deleted. Are You sure? If You want to delete
         specific setups just long click on them :).

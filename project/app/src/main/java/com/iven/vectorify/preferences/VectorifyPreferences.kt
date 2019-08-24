@@ -15,6 +15,7 @@ class VectorifyPreferences(context: Context) {
     private val prefBackgroundColor = context.getString(R.string.background_color_key)
     private val prefVectorColor = context.getString(R.string.vectors_color_key)
     private val prefVector = context.getString(R.string.vector_key)
+    private val prefCategory = context.getString(R.string.category_key)
     private val prefTheme = context.getString(R.string.theme_key)
     private val prefScale = context.getString(R.string.scale_key)
     private val prefRecentSetups = context.getString(R.string.recent_setups_key)
@@ -36,6 +37,10 @@ class VectorifyPreferences(context: Context) {
     var vector: Int
         get() = mPrefs.getInt(prefVector, Utils.getDefaultVectorForApi())
         set(value) = mPrefs.edit().putInt(prefVector, value).apply()
+
+    var category: Int
+        get() = mPrefs.getInt(prefCategory, 0)
+        set(value) = mPrefs.edit().putInt(prefCategory, value).apply()
 
     var theme: Int
         get() = mPrefs.getInt(prefTheme, R.style.AppTheme)

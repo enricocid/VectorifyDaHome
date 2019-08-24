@@ -11,7 +11,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -23,11 +22,10 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
-import com.iven.vectorify.adapters.VectorsAdapter
+import com.iven.vectorify.adapters.VectorsCategories
 import com.iven.vectorify.mTempPreferences
 import com.iven.vectorify.mVectorifyPreferences
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -198,93 +196,27 @@ object Utils {
 
     //get categories start position
     @JvmStatic
-    fun getCategoryStartPosition(index: Int): Int {
+    fun getCategory(context: Context, index: Int): Pair<String, List<Int>> {
         return when (index) {
-            0 -> R.drawable.android //tech
-            1 -> R.drawable.dot //symbols
-            2 -> R.drawable.cat //animals
-            3 -> R.drawable.face //emoticons
-            4 -> R.drawable.toys //fun
-            5 -> R.drawable.ice_pop //food
-            6 -> R.drawable.nature //nature
-            7 -> R.drawable.looks //weather
-            8 -> R.drawable.baseball //sport
-            9 -> R.drawable.alpha //math
-            10 -> R.drawable.periodic_table //science
-            11 -> R.drawable.music_note //music
-            12 -> R.drawable.space_invaders //nerdy
-            13 -> R.drawable.factory //buildings
-            14 -> R.drawable.high //alert
-            15 -> R.drawable.alpha_a //letters
-            16 -> R.drawable.roman_numeral_1 //roman
-            17 -> R.drawable.zodiac_aries //zodiac
-            else -> R.drawable.school //others
-        }
-    }
-
-    //get categories labels while scrolling recycler view
-    @JvmStatic
-    fun getCategoryForPosition(
-        resources: Resources,
-        layoutManager: LinearLayoutManager,
-        vectorsAdapter: VectorsAdapter
-    ): String {
-        return when (layoutManager.findFirstCompletelyVisibleItemPosition()) {
-            in vectorsAdapter.getVectorPosition(R.drawable.android)..vectorsAdapter.getVectorPosition(R.drawable.alarm)
-            -> resources.getString(R.string.title_tech)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.dot)..vectorsAdapter.getVectorPosition(R.drawable.cny)
-            -> resources.getString(R.string.title_symbols)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.cat)..vectorsAdapter.getVectorPosition(R.drawable.jellyfish)
-            -> resources.getString(R.string.title_animals)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.face)..vectorsAdapter.getVectorPosition(R.drawable.alien)
-            -> resources.getString(R.string.title_emoticons)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.toys)..vectorsAdapter.getVectorPosition(R.drawable.balloon)
-            -> resources.getString(R.string.title_fun)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.ice_pop)..vectorsAdapter.getVectorPosition(R.drawable.carrot)
-            -> resources.getString(R.string.title_food)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.nature)..vectorsAdapter.getVectorPosition(R.drawable.clover)
-            -> resources.getString(R.string.title_nature)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.looks)..vectorsAdapter.getVectorPosition(R.drawable.weather_windy_variant)
-            -> resources.getString(R.string.title_weather)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.baseball)..vectorsAdapter.getVectorPosition(R.drawable.volleyball)
-            -> resources.getString(R.string.title_sport)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.alpha)..vectorsAdapter.getVectorPosition(R.drawable.angle)
-            -> resources.getString(R.string.title_math)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.periodic_table)..vectorsAdapter.getVectorPosition(R.drawable.chart_bell_curve)
-            -> resources.getString(R.string.title_science)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.music_note)..vectorsAdapter.getVectorPosition(R.drawable.saxophone)
-            -> resources.getString(R.string.title_music)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.space_invaders)..vectorsAdapter.getVectorPosition(R.drawable.ocarina)
-            -> resources.getString(R.string.title_nerdy)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.factory)..vectorsAdapter.getVectorPosition(R.drawable.stadium)
-            -> resources.getString(R.string.title_buildings)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.high)..vectorsAdapter.getVectorPosition(R.drawable.pan_tool)
-            -> resources.getString(R.string.title_alert)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.alpha_a)..vectorsAdapter.getVectorPosition(R.drawable.alpha_z)
-            -> resources.getString(R.string.title_alpha)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.roman_numeral_1)..vectorsAdapter.getVectorPosition(R.drawable.roman_numeral_10)
-            -> resources.getString(R.string.title_roman)
-
-            in vectorsAdapter.getVectorPosition(R.drawable.zodiac_aries)..vectorsAdapter.getVectorPosition(R.drawable.zodiac_virgo)
-            -> resources.getString(R.string.title_zodiac)
-
-            else -> resources.getString(R.string.title_others)
+            0 -> Pair(context.getString(R.string.title_tech), VectorsCategories.TECH) //tech
+            1 -> Pair(context.getString(R.string.title_symbols), VectorsCategories.SYMBOLS) //symbols
+            2 -> Pair(context.getString(R.string.title_animals), VectorsCategories.ANIMALS) //animals
+            3 -> Pair(context.getString(R.string.title_emoticons), VectorsCategories.EMOTICONS) //emoticons
+            4 -> Pair(context.getString(R.string.title_fun), VectorsCategories.FUN) //fun
+            5 -> Pair(context.getString(R.string.title_food), VectorsCategories.FOOD) //food
+            6 -> Pair(context.getString(R.string.title_nature), VectorsCategories.NATURE) //nature
+            7 -> Pair(context.getString(R.string.title_weather), VectorsCategories.WEATHER) //weather
+            8 -> Pair(context.getString(R.string.title_sport), VectorsCategories.SPORT) //sport
+            9 -> Pair(context.getString(R.string.title_math), VectorsCategories.MATH) //math
+            10 -> Pair(context.getString(R.string.title_science), VectorsCategories.SCIENCE) //science
+            11 -> Pair(context.getString(R.string.title_music), VectorsCategories.MUSIC) //music
+            12 -> Pair(context.getString(R.string.title_nerdy), VectorsCategories.NERDY) //nerdy
+            13 -> Pair(context.getString(R.string.title_buildings), VectorsCategories.BUILDINGS) //buildings
+            14 -> Pair(context.getString(R.string.title_alert), VectorsCategories.ALERT) //alert
+            15 -> Pair(context.getString(R.string.title_alpha), VectorsCategories.ALPHABET) //letters
+            16 -> Pair(context.getString(R.string.title_roman), VectorsCategories.ROMAN) //roman
+            17 -> Pair(context.getString(R.string.title_zodiac), VectorsCategories.ZODIAC) //zodiac
+            else -> Pair(context.getString(R.string.title_others), VectorsCategories.OTHERS)
         }
     }
 
@@ -395,7 +327,8 @@ object Utils {
             R.string.recent_setups_save_pattern,
             mTempPreferences.tempBackgroundColor.toString(),
             mTempPreferences.tempVector.toString(),
-            mTempPreferences.tempVectorColor.toString()
+            mTempPreferences.tempVectorColor.toString(),
+            mTempPreferences.tempCategory.toString()
         )
 
         recentSetups.add(stringToSave)

@@ -5,7 +5,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
@@ -20,10 +19,10 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
 import com.afollestad.materialdialogs.list.listItems
+import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
-import com.iven.vectorify.utils.GridItemDecoration
 import com.iven.vectorify.utils.Utils
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import kotlinx.android.synthetic.main.background_color_pref_card.*
@@ -40,24 +39,33 @@ class VectorifyActivity : AppCompatActivity() {
 
     private lateinit var mFab: FloatingActionButton
     private lateinit var mVectorFrame: ImageView
+    private lateinit var mCategoriesChip: Chip
     private lateinit var mVectorsRecyclerView: RecyclerView
     private lateinit var mVectorsRecyclerViewLayoutManager: LinearLayoutManager
     private lateinit var mVectorsAdapter: VectorsAdapter
 
-    private var mBackgroundColor = Color.BLACK
-    private var mVectorColor = Color.WHITE
-    private var mVector = R.drawable.android
+    private var mSelectedBackgroundColor = Color.BLACK
+    private var mSelectedVectorColor = Color.WHITE
+    private var mSelectedVector = R.drawable.android
+    private var mSelectedCategory = 0
 
     //interface to let recent  setups UI to let VectorifyActivity to update its shit
     private val recentSetupsInterface = object : RecentSetupsFragment.RecentSetupsInterface {
-        override fun onRecentSelected(backgroundColor: Int, vector: Int, vectorColor: Int) {
+        override fun onRecentSelected(
+            selectedBackgroundColor: Int,
+            selectedVector: Int,
+            selectedVectorColor: Int,
+            selectedCategory: Int
+        ) {
 
-            setBackgroundColorForUI(backgroundColor)
-            setVectorColorForUI(vectorColor)
+            setBackgroundColorForUI(selectedBackgroundColor)
+            setVectorColorForUI(selectedVectorColor)
 
             setBackgroundAndVectorColorsChanged()
 
-            scrollToVector(vector)
+            updateSelectedCategory(selectedCategory)
+
+            scrollToVector(selectedVector)
         }
     }
 
@@ -72,19 +80,22 @@ class VectorifyActivity : AppCompatActivity() {
         setContentView(R.layout.vectorify_activity)
 
         //get wallpaper shit
-        mBackgroundColor = mVectorifyPreferences.backgroundColor
-        mVectorColor = mVectorifyPreferences.vectorColor
-        mVector = mVectorifyPreferences.vector
+        mSelectedBackgroundColor = mVectorifyPreferences.backgroundColor
+        mSelectedVectorColor = mVectorifyPreferences.vectorColor
+        mSelectedVector = mVectorifyPreferences.vector
+        mSelectedCategory = mVectorifyPreferences.category
 
         //init temp preferences
-        mTempPreferences.tempBackgroundColor = mBackgroundColor
-        mTempPreferences.tempVectorColor = mVectorColor
-        mTempPreferences.tempVector = mVector
+        mTempPreferences.tempBackgroundColor = mSelectedBackgroundColor
+        mTempPreferences.tempVectorColor = mSelectedVectorColor
+        mTempPreferences.tempVector = mSelectedVector
+        mTempPreferences.tempCategory = mSelectedCategory
         mTempPreferences.tempScale = mVectorifyPreferences.scale
         mTempPreferences.tempHorizontalOffset = mVectorifyPreferences.horizontalOffset
         mTempPreferences.tempVerticalOffset = mVectorifyPreferences.verticalOffset
 
         mVectorFrame = vector_frame
+        mCategoriesChip = categories_chip
 
         //get the fab (don't move from this position)
         mFab = fab
@@ -97,10 +108,10 @@ class VectorifyActivity : AppCompatActivity() {
         }
 
         //update background card color and text from preferences
-        setBackgroundColorForUI(mBackgroundColor)
+        setBackgroundColorForUI(mSelectedBackgroundColor)
 
         //update vector card color and text from preferences
-        setVectorColorForUI(mVectorColor)
+        setVectorColorForUI(mSelectedVectorColor)
 
         //set the bottom bar menu
         val bottomBar = bar
@@ -140,7 +151,7 @@ class VectorifyActivity : AppCompatActivity() {
         val presetsAdapter = PresetsAdapter(this)
         presets_rv.adapter = presetsAdapter
 
-        presetsAdapter.onColorClick = { combo ->
+        presetsAdapter.onPresetClick = { combo ->
 
             setBackgroundAndVectorColorsChanged()
 
@@ -161,15 +172,8 @@ class VectorifyActivity : AppCompatActivity() {
 
         //setup vectors
         mVectorsRecyclerView = vectors_rv
-        val gridSize = mDeviceMetrics.second / resources.getDimensionPixelSize(R.dimen.vector_size)
-        val spanCount = gridSize / 2
-        mVectorsRecyclerViewLayoutManager = GridLayoutManager(this, spanCount)
-        mVectorsRecyclerView.addItemDecoration(
-            GridItemDecoration(
-                resources.getDimensionPixelSize(R.dimen.vector_spacing),
-                spanCount
-            )
-        )
+        mVectorsRecyclerViewLayoutManager = GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false)
+
         mVectorsRecyclerView.layoutManager = mVectorsRecyclerViewLayoutManager
         mVectorsRecyclerView.setHasFixedSize(true)
         mVectorsAdapter = VectorsAdapter(this)
@@ -177,50 +181,49 @@ class VectorifyActivity : AppCompatActivity() {
 
         mVectorsAdapter.onVectorClick = { vector ->
 
-            if (mVector != vector) {
+            if (mSelectedVector != vector) {
                 runOnUiThread {
                     try {
                         mVectorFrame.setImageResource(Utils.getVectorProps(vector!!).first)
-                        mVector = vector
+                        mSelectedVector = vector
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        mVector = Utils.getDefaultVectorForApi()
-                        mVectorFrame.setImageResource(Utils.getVectorProps(mVector).first)
+                        mSelectedVector = Utils.getDefaultVectorForApi()
+                        mVectorFrame.setImageResource(Utils.getVectorProps(mSelectedVector).first)
                     }
                 }
 
                 //update drawable tint
                 setVectorFrameColors(tintBackground = false, showErrorDialog = false)
 
-                mTempPreferences.tempVector = mVector
+                mTempPreferences.tempVector = mSelectedVector
                 mTempPreferences.isVectorChanged = true
             }
         }
 
-        mVectorsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                runOnUiThread {
-                    categories.text =
-                        Utils.getCategoryForPosition(resources, mVectorsRecyclerViewLayoutManager, mVectorsAdapter)
-                }
-            }
-        })
-
-        mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
+        runOnUiThread {
+            mCategoriesChip.text = Utils.getCategory(this, mSelectedCategory).first
+            mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
+        }
     }
 
     //update vector frame
     private fun setVectorFrameColors(tintBackground: Boolean, showErrorDialog: Boolean) {
-        if (tintBackground) mVectorFrame.setBackgroundColor(mBackgroundColor)
-        val vectorDrawable = Utils.tintVectorDrawable(this, mVector, mBackgroundColor, mVectorColor, showErrorDialog)
+        if (tintBackground) mVectorFrame.setBackgroundColor(mSelectedBackgroundColor)
+        val vectorDrawable = Utils.tintVectorDrawable(
+            this,
+            mSelectedVector,
+            mSelectedBackgroundColor,
+            mSelectedVectorColor,
+            showErrorDialog
+        )
         mVectorFrame.setImageDrawable(vectorDrawable)
     }
 
     //update background card colors
     private fun setBackgroundColorForUI(color: Int) {
-        mBackgroundColor = color
-        mTempPreferences.tempBackgroundColor = mBackgroundColor
+        mSelectedBackgroundColor = color
+        mTempPreferences.tempBackgroundColor = mSelectedBackgroundColor
 
         //update shit colors
         runOnUiThread {
@@ -236,8 +239,8 @@ class VectorifyActivity : AppCompatActivity() {
 
             //check if colors are the same so we enable stroke to make vector visible
             val fabDrawableColor = if (Utils.checkIfColorsEqual(
-                    mBackgroundColor,
-                    mVectorColor
+                    mSelectedBackgroundColor,
+                    mSelectedVectorColor
                 )
             ) textColor else mTempPreferences.tempVectorColor
             mFab.drawable.setTint(fabDrawableColor)
@@ -246,8 +249,8 @@ class VectorifyActivity : AppCompatActivity() {
 
     //update vector card colors
     private fun setVectorColorForUI(color: Int) {
-        mVectorColor = color
-        mTempPreferences.tempVectorColor = mVectorColor
+        mSelectedVectorColor = color
+        mTempPreferences.tempVectorColor = mSelectedVectorColor
 
         //update shit colors
         runOnUiThread {
@@ -258,7 +261,8 @@ class VectorifyActivity : AppCompatActivity() {
             vector_color_subhead.text = getHexCode(color)
 
             //check if colors are the same so we enable stroke to make vector visible
-            val fabDrawableColor = if (Utils.checkIfColorsEqual(mBackgroundColor, mVectorColor)) textColor else color
+            val fabDrawableColor =
+                if (Utils.checkIfColorsEqual(mSelectedBackgroundColor, mSelectedVectorColor)) textColor else color
             mFab.drawable.setTint(fabDrawableColor)
 
             setVectorFrameColors(tintBackground = false, showErrorDialog = true)
@@ -281,8 +285,8 @@ class VectorifyActivity : AppCompatActivity() {
 
     private fun scrollToVector(vector: Int) {
         mVectorsAdapter.onVectorClick?.invoke(vector)
-        mVectorsAdapter.swapSelectedDrawable(mVector)
-        mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVector))
+        mVectorsAdapter.swapSelectedDrawable(mSelectedVector)
+        mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mSelectedVector))
     }
 
     //restore default wallpaper
@@ -353,37 +357,31 @@ class VectorifyActivity : AppCompatActivity() {
         startColorPicker(getString(R.string.vectors_color_key), R.string.title_vector_dialog)
     }
 
-
     //method to start categories chooser
     fun startCategoryChooser(view: View) {
         MaterialDialog(this).show {
             cornerRadius(res = R.dimen.md_corner_radius)
             title(R.string.title_categories)
             listItems(R.array.categories) { _, index, _ ->
-                val vector = Utils.getCategoryStartPosition(index)
-                val vectorPosition = mVectorsAdapter.getVectorPosition(vector)
-
-                //if the first item position of the selected category is > of the actual position
-                //first scroll to the bottom, then go to the item position
-                if (mVectorsRecyclerViewLayoutManager.findFirstVisibleItemPosition() < vectorPosition) {
-
-                    mVectorsRecyclerView.afterMeasured {
-
-                        mVectorsAdapter.itemCount.takeIf { it > 0 }?.let {
-
-                            val timeMillis =
-                                executeAndMeasureTimeMillis { mVectorsRecyclerView.scrollToPosition(it - 1) }
-
-                            Handler().postDelayed(
-                                { mVectorsRecyclerView.scrollToPosition(vectorPosition) },
-                                timeMillis.second
-                            )
-                        }
-                    }
-                } else {
-                    mVectorsRecyclerView.scrollToPosition(vectorPosition)
-                }
+                updateSelectedCategory(index)
             }
+        }
+    }
+
+    private fun updateSelectedCategory(index: Int) {
+        if (mSelectedCategory != index) {
+
+            val category = Utils.getCategory(this@VectorifyActivity, index)
+
+            runOnUiThread {
+                mVectorsRecyclerView.scrollToPosition(0)
+                mVectorsAdapter.swapCategory(category.second)
+                mCategoriesChip.text = category.first
+            }
+
+            mSelectedCategory = index
+            mTempPreferences.tempCategory = mSelectedCategory
+            mTempPreferences.isCategoryChanged = true
         }
     }
 
@@ -426,12 +424,5 @@ class VectorifyActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    //measure the time a function takes to run
-    private inline fun <R> executeAndMeasureTimeMillis(block: () -> R): Pair<R, Long> {
-        val start = System.currentTimeMillis()
-        val result = block()
-        return result to (System.currentTimeMillis() - start)
     }
 }

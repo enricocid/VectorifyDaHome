@@ -9,9 +9,9 @@ import com.iven.vectorify.utils.Utils
 
 class VectorifyDaHomeLP : WallpaperService() {
 
-    private var mBackgroundColor = Color.BLACK
-    private var mVectorColor = Color.WHITE
-    private var mScaleFactor = 0.35F
+    private var mSelectedBackgroundColor = Color.BLACK
+    private var mSelectedVectorColor = Color.WHITE
+    private var mSelectedScaleFactor = 0.35F
 
     private var mDeviceWidth = 0
     private var mDeviceHeight = 0
@@ -29,9 +29,9 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private fun updatePaintProps() {
         //set paints props
-        mBackgroundColor = mVectorifyPreferences.backgroundColor
-        mVectorColor = mVectorifyPreferences.vectorColor
-        mScaleFactor = mVectorifyPreferences.scale
+        mSelectedBackgroundColor = mVectorifyPreferences.backgroundColor
+        mSelectedVectorColor = mVectorifyPreferences.vectorColor
+        mSelectedScaleFactor = mVectorifyPreferences.scale
     }
 
     private inner class VectorifyEngine : WallpaperService.Engine() {
@@ -72,11 +72,11 @@ class VectorifyDaHomeLP : WallpaperService() {
                 if (canvas != null && baseContext != null) {
 
                     //draw potato!
-                    canvas.drawColor(mBackgroundColor)
+                    canvas.drawColor(mSelectedBackgroundColor)
 
                     val vectorDrawable = Utils.tintVectorDrawable(
                         baseContext,
-                        mVectorifyPreferences.vector, mBackgroundColor, mVectorColor, false
+                        mVectorifyPreferences.vector, mSelectedBackgroundColor, mSelectedVectorColor, false
                     )
 
                     Utils.drawBitmap(
@@ -84,7 +84,7 @@ class VectorifyDaHomeLP : WallpaperService() {
                         canvas,
                         mDeviceWidth,
                         mDeviceHeight,
-                        mScaleFactor,
+                        mSelectedScaleFactor,
                         mVectorifyPreferences.horizontalOffset,
                         mVectorifyPreferences.verticalOffset
                     )

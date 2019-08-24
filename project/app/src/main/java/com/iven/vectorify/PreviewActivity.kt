@@ -192,6 +192,11 @@ class PreviewActivity : AppCompatActivity() {
             mTempPreferences.isVectorChanged = false
         }
 
+        if (mTempPreferences.isCategoryChanged) {
+            mVectorifyPreferences.category = mTempPreferences.tempCategory
+            mTempPreferences.isCategoryChanged = false
+        }
+
         if (mTempPreferences.isScaleChanged) {
             mVectorifyPreferences.scale = mTempPreferences.tempScale
             mTempPreferences.isScaleChanged = false

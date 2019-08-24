@@ -15,10 +15,10 @@ import com.pranavpandey.android.dynamic.toasts.DynamicToast
 class PresetsAdapter(@NonNull private val context: Context) :
     RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
 
-    var onColorClick: ((Pair<Int, Int>) -> Unit)? = null
+    var onPresetClick: ((Pair<Int, Int>) -> Unit)? = null
 
     //first = background color, second = vector color
-    private val mColors = listOf(
+    private val mPresets = listOf(
         //from https://www.canva.com/learn/100-color-combinations/
         Pair(R.color.midnight_blue, R.color.ink),
         Pair(R.color.dark_navy, R.color.blue_berry),
@@ -59,11 +59,11 @@ class PresetsAdapter(@NonNull private val context: Context) :
     }
 
     override fun getItemCount(): Int {
-        return mColors.size
+        return mPresets.size
     }
 
     override fun onBindViewHolder(holder: ColorsHolder, position: Int) {
-        holder.bindItems(mColors[holder.adapterPosition])
+        holder.bindItems(mPresets[holder.adapterPosition])
     }
 
     inner class ColorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -72,15 +72,16 @@ class PresetsAdapter(@NonNull private val context: Context) :
 
             val colorItem = itemView as MaterialCardView
 
-            val vectorColor = ContextCompat.getColor(context, combo.second)
-            colorItem.setCardBackgroundColor(vectorColor)
+            val selectedVectorColor = ContextCompat.getColor(context, combo.second)
+            colorItem.setCardBackgroundColor(selectedVectorColor)
 
-            val backgroundColor = ContextCompat.getColor(context, combo.first)
-            colorItem.strokeColor = backgroundColor
+            val selectedBackgroundColor = ContextCompat.getColor(context, combo.first)
+            colorItem.strokeColor = selectedBackgroundColor
 
             itemView.setOnClickListener {
-                onColorClick?.invoke(combo)
+                onPresetClick?.invoke(combo)
             }
+
             itemView.setOnLongClickListener {
 
                 try {
@@ -102,8 +103,8 @@ class PresetsAdapter(@NonNull private val context: Context) :
                         context,
                         context.getString(R.string.selected_preset, backgroundColorName, vectorColorName),
                         null,
-                        vectorColor,
-                        backgroundColor
+                        selectedVectorColor,
+                        selectedBackgroundColor
                     )
                         .show()
 

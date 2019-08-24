@@ -33,7 +33,7 @@
                        android:layout_height="match_parent"/>
 
             <com.google.android.material.chip.Chip
-                    android:id="@+id/categories"
+                    android:id="@+id/categories_chip"
                     android:layout_width="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:layout_height="wrap_content"
@@ -50,10 +50,12 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/vectors_rv"
                 android:clipToPadding="false"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                tools:context=".MainActivity"/>
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:overScrollMode="never"
+                android:layout_height="wrap_content"
+                tools:context=".VectorifyActivity"/>
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

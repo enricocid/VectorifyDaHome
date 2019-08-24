@@ -45,7 +45,7 @@ class RecentSetupsFragment : BottomSheetDialogFragment() {
             recents_rv.adapter = recentSetupsAdapter
 
             recentSetupsAdapter.onRecentClick = { recent ->
-                mRecentSetupsInterface.onRecentSelected(recent[0], recent[1], recent[2])
+                mRecentSetupsInterface.onRecentSelected(recent[0], recent[1], recent[2], recent[3])
                 dismiss()
             }
         }
@@ -70,6 +70,11 @@ class RecentSetupsFragment : BottomSheetDialogFragment() {
     }
 
     interface RecentSetupsInterface {
-        fun onRecentSelected(backgroundColor: Int, vector: Int, vectorColor: Int)
+        fun onRecentSelected(
+            selectedBackgroundColor: Int,
+            selectedVector: Int,
+            selectedVectorColor: Int,
+            selectedCategory: Int
+        )
     }
 }

@@ -41,19 +41,29 @@ class RecentSetupsAdapter(
             val recentButton = itemView.findViewById<ImageView>(R.id.recent_setups_vector)
             val arr = setup.split(delimiter)
 
-            val backgroundColor = Integer.parseInt(arr[0])
-            recentButton.setBackgroundColor(backgroundColor)
+            val selectedBackgroundColor = Integer.parseInt(arr[0])
+            recentButton.setBackgroundColor(selectedBackgroundColor)
 
-            val vector = Integer.parseInt(arr[1])
+            val selectedVector = Integer.parseInt(arr[1])
 
-            val vectorColor = Integer.parseInt(arr[2])
+            val selectedVectorColor = Integer.parseInt(arr[2])
 
-            val vectorDrawable = Utils.tintVectorDrawable(context, vector, backgroundColor, vectorColor, false)
+            val selectedVectorCategory = Integer.parseInt(arr[3])
+
+            val vectorDrawable =
+                Utils.tintVectorDrawable(context, selectedVector, selectedBackgroundColor, selectedVectorColor, false)
 
             recentButton.setImageDrawable(vectorDrawable)
 
             recentButton.setOnClickListener {
-                onRecentClick?.invoke(listOf(backgroundColor, vector, vectorColor))
+                onRecentClick?.invoke(
+                    listOf(
+                        selectedBackgroundColor,
+                        selectedVector,
+                        selectedVectorColor,
+                        selectedVectorCategory
+                    )
+                )
             }
 
             recentButton.setOnLongClickListener {
