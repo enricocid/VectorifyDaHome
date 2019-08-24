@@ -13,6 +13,8 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 
 - [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support and suggestions!
 
+- [Stefan Möller](https://github.com/stupo) for his [suggestions](https://github.com/enricocid/VectorifyDaHome/issues/2)!
+
 - [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
 
 - Icons from [material.io](https://material.io/resources/icons), [materialdesignicons](https://materialdesignicons.com/), [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page), [svgrepo](https://www.svgrepo.com) and [iconfinder](https://www.iconfinder.com)!
