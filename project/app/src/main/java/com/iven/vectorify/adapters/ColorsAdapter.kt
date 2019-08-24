@@ -101,8 +101,8 @@ class ColorsAdapter(@NonNull private val context: Context) :
                         context,
                         context.getString(R.string.selected_preset, backgroundColorName, vectorColorName),
                         null,
-                        backgroundColor,
-                        vectorColor
+                        vectorColor,
+                        backgroundColor
                     )
                         .show()
 
