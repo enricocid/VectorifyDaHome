@@ -25,7 +25,6 @@ import androidx.core.graphics.ColorUtils
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
-import com.iven.vectorify.adapters.VectorsCategories
 import com.iven.vectorify.mTempPreferences
 import com.iven.vectorify.mVectorifyPreferences
 import com.pranavpandey.android.dynamic.toasts.DynamicToast

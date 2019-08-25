@@ -12,6 +12,7 @@ import com.iven.vectorify.R
 import com.iven.vectorify.mTempPreferences
 import com.iven.vectorify.mVectorifyPreferences
 import com.iven.vectorify.utils.Utils
+import com.iven.vectorify.utils.VectorsCategories
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
