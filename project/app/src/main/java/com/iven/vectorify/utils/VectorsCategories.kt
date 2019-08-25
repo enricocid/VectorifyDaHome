@@ -289,7 +289,12 @@ object VectorsCategories {
         R.drawable.tennis_ball,
         R.drawable.tournament,
         R.drawable.trophy,
-        R.drawable.volleyball
+        R.drawable.volleyball,
+        R.drawable.weightlifting_tools,
+        R.drawable.weightlifting_tools_alt,
+        R.drawable.weightlifting_0,
+        R.drawable.weightlifting_1,
+        R.drawable.weightlifting_2
     )
 
     @JvmStatic
@@ -300,10 +305,14 @@ object VectorsCategories {
         R.drawable.delta,
         R.drawable.epsilon,
         R.drawable.lambda,
+        R.drawable.lambda_alt,
         R.drawable.pi,
         R.drawable.sigma,
         R.drawable.sigma_lower,
+        R.drawable.phi,
+        R.drawable.psi,
         R.drawable.infinity,
+        R.drawable.function_mathematical,
         R.drawable.integral,
         R.drawable.calculator,
         R.drawable.approximately_equal,
@@ -356,6 +365,8 @@ object VectorsCategories {
         R.drawable.nuke,
         R.drawable.biohazard,
         R.drawable.bacteria,
+        R.drawable.physics,
+        R.drawable.reduced_planck_costant,
         R.drawable.atom,
         R.drawable.atom_variant,
         R.drawable.orbit,
@@ -429,6 +440,7 @@ object VectorsCategories {
         R.drawable.db_tenkaichi,
         R.drawable.kame_sennin_mark,
         R.drawable.dragon_sphere,
+        R.drawable.goku,
         R.drawable.naruto,
         R.drawable.ocarina
     )
@@ -516,7 +528,6 @@ object VectorsCategories {
         R.drawable.zodiac_taurus,
         R.drawable.zodiac_virgo
     )
-
 
     @JvmStatic
     val OTHERS = listOf(

@@ -21,6 +21,8 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 
 - [Chernoff faces](https://commons.wikimedia.org/wiki/File:Chernoff_faces_for_evaluations_of_US_judges.svg) by [Chernoff (1973)](https://en.wikipedia.org/wiki/Chernoff_face)!
 
+- [Goku icon](https://iconscout.com/icon/goku-1596554) by [Vectors Point](https://iconscout.com/contributors/hana-arif) on [iconscout.com](https://iconscout.com)!
+
 - [Naruto icon](https://iconscout.com/icon/naruto) by [Alexandru Stoica](https://iconscout.com/contributors/alexandru-stoica) on [iconscout.com](https://iconscout.com)!
 
 - Colors presets taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
