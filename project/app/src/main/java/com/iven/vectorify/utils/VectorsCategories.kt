@@ -17,8 +17,12 @@ object VectorsCategories {
     @JvmStatic
     val TECH = listOf(
         R.drawable.android,
-        R.drawable.android_debug_bridge,
+        R.drawable.android_alt,
         R.drawable.android_head,
+        R.drawable.android_logo_2019,
+        R.drawable.android_logo_2019_head,
+        R.drawable.android_logo_2019_logo,
+        R.drawable.android_debug_bridge,
         R.drawable.l,
         R.drawable.m_original,
         R.drawable.n_original,
