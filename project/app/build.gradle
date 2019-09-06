@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.iven.iconify"
         minSdkVersion 21
@@ -39,10 +39,10 @@ android {
 
 dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'androidx.preference:preference-ktx:1.0.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.preference:preference-ktx:1.1.0'
     implementation 'com.afollestad.material-dialogs:core:3.1.0'
     implementation 'com.afollestad.material-dialogs:color:3.1.0'
     api 'com.google.android.material:material:1.0.0'
