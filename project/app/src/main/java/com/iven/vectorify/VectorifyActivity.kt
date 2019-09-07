@@ -1,5 +1,6 @@
 package com.iven.vectorify
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -397,6 +398,7 @@ class VectorifyActivity : AppCompatActivity() {
     }
 
     //returns formatted hex string
+    @SuppressLint("DefaultLocale")
     private fun getHexCode(color: Int): String {
         return getString(R.string.hex, Integer.toHexString(color)).toUpperCase()
     }

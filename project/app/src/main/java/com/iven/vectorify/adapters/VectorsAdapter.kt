@@ -1,5 +1,6 @@
 package com.iven.vectorify.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -61,6 +62,7 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
 
     inner class VectorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        @SuppressLint("DefaultLocale")
         fun bindItems(drawable: Int) {
 
             val vectorButton = itemView.findViewById<ImageButton>(R.id.vector_button)

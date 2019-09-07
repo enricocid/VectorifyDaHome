@@ -23,7 +23,11 @@ class RecentSetupsFragment : BottomSheetDialogFragment() {
 
     override fun getTheme(): Int = R.style.BottomSheetDialogTheme
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.recent_setups_fragment, container, false)
     }
 
@@ -56,7 +60,7 @@ class RecentSetupsFragment : BottomSheetDialogFragment() {
         dismiss()
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
+    override fun onDismiss(dialog: DialogInterface) {
         if (sError) {
             MaterialDialog(context!!).show {
                 cornerRadius(res = R.dimen.md_corner_radius)

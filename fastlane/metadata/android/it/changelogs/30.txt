@@ -1,0 +1,4 @@
+- Aggiunti 4 nuovi loghi Android
+- Aggiornate dipendenze
+
+Grazie a Jnss98b (https://github.com/Jnss98b) per il supporto :D

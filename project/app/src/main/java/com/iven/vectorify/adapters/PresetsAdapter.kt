@@ -1,5 +1,6 @@
 package com.iven.vectorify.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,13 @@ class PresetsAdapter(@NonNull private val context: Context) :
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorsHolder {
-        return ColorsHolder(LayoutInflater.from(parent.context).inflate(R.layout.preset_option, parent, false))
+        return ColorsHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.preset_option,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
@@ -68,6 +75,7 @@ class PresetsAdapter(@NonNull private val context: Context) :
 
     inner class ColorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+        @SuppressLint("DefaultLocale")
         fun bindItems(combo: Pair<Int, Int>) {
 
             val colorItem = itemView as MaterialCardView
@@ -101,7 +109,11 @@ class PresetsAdapter(@NonNull private val context: Context) :
 
                     DynamicToast.make(
                         context,
-                        context.getString(R.string.selected_preset, backgroundColorName, vectorColorName),
+                        context.getString(
+                            R.string.selected_preset,
+                            backgroundColorName,
+                            vectorColorName
+                        ),
                         null,
                         selectedVectorColor,
                         selectedBackgroundColor
@@ -110,7 +122,11 @@ class PresetsAdapter(@NonNull private val context: Context) :
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    DynamicToast.makeError(context, context.getString(R.string.error_get_resource), Toast.LENGTH_LONG)
+                    DynamicToast.makeError(
+                        context,
+                        context.getString(R.string.error_get_resource),
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
                 return@setOnLongClickListener false
