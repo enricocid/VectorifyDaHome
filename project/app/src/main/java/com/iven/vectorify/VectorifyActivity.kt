@@ -298,6 +298,8 @@ class VectorifyActivity : AppCompatActivity() {
 
         setBackgroundAndVectorColorsChanged()
 
+        updateSelectedCategory(0)
+
         scrollToVector(Utils.getDefaultVectorForApi())
 
         mTempPreferences.tempScale = 0.35F
