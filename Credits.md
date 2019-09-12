@@ -7,11 +7,11 @@
 
 - [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
-- Colors presets taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
+- [Canva](https://www.canva.com/learn/100-color-combinations) for some color presets!
 
 - [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on [Music Player GO](https://github.com/enricocid/Music-Player-GO) which I used here!
 
-- [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support and suggestions!
+- [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team and [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support, inspirations and suggestions! The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome) that was built thanks to the team/community feedbacks!
 
 - [Stefan Möller](https://github.com/stupo) for his [suggestions](https://github.com/enricocid/VectorifyDaHome/issues/2)!
 
@@ -28,9 +28,7 @@
 
 - Android new 2019 logo was taken from [seeklogo.com](https://seeklogo.com/vector-logo/359569/android-new-2019). Modified versions of the logo are hosted [here](https://github.com/enricocid/VectorifyDaHome/tree/master/android-assets/android-logos)
 
-- [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team for POSP vectors, inspiration, suggestions and support!
-The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome).
-POSP vectors:
+- [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team for POSP vectors:
   - [Potato](https://github.com/PotatoProject/website/blob/master/src/assets/potato.svg)
   - [Potato alt is a revisitation of potato svg](https://github.com/PotatoProject/website/blob/master/src/assets/potato.svg)
   - [Potato full logo](https://github.com/PotatoProject/website/blob/master/src/assets/potato_full.svg)
