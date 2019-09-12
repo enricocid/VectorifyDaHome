@@ -19,13 +19,25 @@ The app itself is based on the original iteration [Potate da home!](https://gith
 
 - [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
 
-
 - Icons from [material.io](https://material.io/resources/icons), [materialdesignicons](https://materialdesignicons.com/), [Wikimedia](https://commons.wikimedia.org/wiki/Main_Page), [svgrepo](https://www.svgrepo.com) and [iconfinder](https://www.iconfinder.com)!
+
+- Star Wars vectors are free and taken from:
+  - [Star wars icon pack by Symbolicons - iconfinder](https://www.iconfinder.com/iconsets/star-wars)
+  - [Star wars 1977 US - wikimedia](https://commons.wikimedia.org/wiki/File:Star_wars_1977_us.svg)
+  - [Star wars logo - wikimedia](https://commons.wikimedia.org/wiki/File:Star_Wars_Logo.svg)
+  - [Stormtrooper helmet icon - wikimedia](https://commons.wikimedia.org/wiki/File:StormtrooperHelmetIcon.svg)
+  - [Emblem of the first galactic empire - wikimedia](https://commons.wikimedia.org/wiki/File:Emblem_of_the_First_Galactic_Empire.svg)
 
 - [Chernoff faces](https://commons.wikimedia.org/wiki/File:Chernoff_faces_for_evaluations_of_US_judges.svg) by [Chernoff (1973)](https://en.wikipedia.org/wiki/Chernoff_face)!
 
 - [Goku icon](https://iconscout.com/icon/goku-1596554) by [Vectors Point](https://iconscout.com/contributors/hana-arif) on [iconscout.com](https://iconscout.com)!
 
+- [Dragon sphere icon - ssbwiki.com](https://www.ssbwiki.com/File:DragonBallSymbol.svg)
+
+- [Dragon Ball Tenkaichi - wikimedia](https://commons.wikimedia.org/wiki/File:Dragon_Ball_Tenkaichi_Budokai.svg)
+
+- [Kame sennin mark - wikimedia](https://commons.wikimedia.org/wiki/File:Kame-sennin_mark.svg)
+ 
 - [Naruto icon](https://iconscout.com/icon/naruto) by [Alexandru Stoica](https://iconscout.com/contributors/alexandru-stoica) on [iconscout.com](https://iconscout.com)!
 
 - Colors presets taken from [Canva](https://www.canva.com/learn/100-color-combinations)!
