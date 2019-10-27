@@ -130,7 +130,10 @@ class VectorifyActivity : AppCompatActivity() {
             if (mVectorifyPreferences.recentSetups.isNotEmpty()) {
                 val bottomSheetDialogFragment = RecentSetupsFragment()
                 bottomSheetDialogFragment.setRecentSetupsInterface(recentSetupsInterface)
-                bottomSheetDialogFragment.show(supportFragmentManager, bottomSheetDialogFragment.tag)
+                bottomSheetDialogFragment.show(
+                    supportFragmentManager,
+                    bottomSheetDialogFragment.tag
+                )
             } else {
                 DynamicToast.makeWarning(this, getString(R.string.message_no_recent_setups))
                     .show()
@@ -173,7 +176,8 @@ class VectorifyActivity : AppCompatActivity() {
 
         //setup vectors
         mVectorsRecyclerView = vectors_rv
-        mVectorsRecyclerViewLayoutManager = GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false)
+        mVectorsRecyclerViewLayoutManager =
+            GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false)
 
         mVectorsRecyclerView.layoutManager = mVectorsRecyclerViewLayoutManager
         mVectorsRecyclerView.setHasFixedSize(true)
@@ -204,21 +208,25 @@ class VectorifyActivity : AppCompatActivity() {
 
         runOnUiThread {
             mCategoriesChip.text = Utils.getCategory(this, mSelectedCategory).first
-            mVectorsRecyclerView.scrollToPosition(mVectorsAdapter.getVectorPosition(mVectorifyPreferences.vector))
+            mVectorsRecyclerView.scrollToPosition(
+                mVectorsAdapter.getVectorPosition(
+                    mVectorifyPreferences.vector
+                )
+            )
         }
     }
 
     //update vector frame
     private fun setVectorFrameColors(tintBackground: Boolean, showErrorDialog: Boolean) {
         if (tintBackground) mVectorFrame.setBackgroundColor(mSelectedBackgroundColor)
-        val vectorDrawable = Utils.tintVectorDrawable(
+        val vector = Utils.tintDrawable(
             this,
             mSelectedVector,
             mSelectedBackgroundColor,
             mSelectedVectorColor,
             showErrorDialog
         )
-        mVectorFrame.setImageDrawable(vectorDrawable)
+        mVectorFrame.setImageDrawable(vector)
     }
 
     //update background card colors
@@ -263,7 +271,11 @@ class VectorifyActivity : AppCompatActivity() {
 
             //check if colors are the same so we enable stroke to make vector visible
             val fabDrawableColor =
-                if (Utils.checkIfColorsEqual(mSelectedBackgroundColor, mSelectedVectorColor)) textColor else color
+                if (Utils.checkIfColorsEqual(
+                        mSelectedBackgroundColor,
+                        mSelectedVectorColor
+                    )
+                ) textColor else color
             mFab.drawable.setTint(fabDrawableColor)
 
             setVectorFrameColors(tintBackground = false, showErrorDialog = true)
@@ -412,15 +424,22 @@ class VectorifyActivity : AppCompatActivity() {
         openGitHubPageIntent.data = Uri.parse(getString(R.string.app_github_link))
 
         //check if a browser is present
-        if (openGitHubPageIntent.resolveActivity(packageManager) != null) startActivity(openGitHubPageIntent) else
-            DynamicToast.makeError(this, getString(R.string.install_browser_message), Toast.LENGTH_LONG)
+        if (openGitHubPageIntent.resolveActivity(packageManager) != null) startActivity(
+            openGitHubPageIntent
+        ) else
+            DynamicToast.makeError(
+                this,
+                getString(R.string.install_browser_message),
+                Toast.LENGTH_LONG
+            )
                 .show()
     }
 
     //Generified function to measure layout params
     //https://antonioleiva.com/kotlin-ongloballayoutlistener/
     private inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
-        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 if (measuredWidth > 0 && measuredHeight > 0) {
                     viewTreeObserver.removeOnGlobalLayoutListener(this)

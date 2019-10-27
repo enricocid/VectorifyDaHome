@@ -122,11 +122,18 @@ class PreviewActivity : AppCompatActivity() {
 
     //manage request permission result, continue loading ui if permissions was granted
     @TargetApi(Build.VERSION_CODES.M)
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             val shouldShowRationale =
-                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
             if (!shouldShowRationale)
                 Utils.makeRationaleDialog(this, requestCode, shouldShowRationale) else
                 DynamicToast.makeError(this, getString(R.string.boo), Toast.LENGTH_LONG)

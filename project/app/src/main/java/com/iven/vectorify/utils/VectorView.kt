@@ -57,11 +57,17 @@ class VectorView @JvmOverloads constructor(
             //draw the vector!
             canvas.drawColor(mBackgroundColor)
 
-            val vectorDrawable =
-                Utils.tintVectorDrawable(context, mTempPreferences.tempVector, mBackgroundColor, mVectorColor, false)
+            val drawable =
+                Utils.tintDrawable(
+                    context,
+                    mTempPreferences.tempVector,
+                    mBackgroundColor,
+                    mVectorColor,
+                    false
+                )
 
             Utils.drawBitmap(
-                vectorDrawable,
+                drawable,
                 canvas,
                 mDeviceWidth,
                 mDeviceHeight,

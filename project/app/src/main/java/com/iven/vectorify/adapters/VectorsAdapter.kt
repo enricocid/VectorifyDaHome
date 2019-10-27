@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
 import com.iven.vectorify.mTempPreferences
@@ -16,7 +17,8 @@ import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
-class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
+class VectorsAdapter(private val context: Context) :
+    RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
     var onVectorClick: ((Int?) -> Unit)? = null
 
@@ -49,7 +51,13 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VectorsHolder {
-        return VectorsHolder(LayoutInflater.from(parent.context).inflate(R.layout.vector_option, parent, false))
+        return VectorsHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.vector_option,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
@@ -94,7 +102,7 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
                     DynamicToast.make(
                         context,
                         iconName,
-                        context.getDrawable(drawable),
+                        AppCompatResources.getDrawable(context, drawable),
                         mTempPreferences.tempVectorColor,
                         mTempPreferences.tempBackgroundColor
                     )
@@ -102,7 +110,11 @@ class VectorsAdapter(private val context: Context) : RecyclerView.Adapter<Vector
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    DynamicToast.makeError(context, context.getString(R.string.error_get_resource), Toast.LENGTH_LONG)
+                    DynamicToast.makeError(
+                        context,
+                        context.getString(R.string.error_get_resource),
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
                 return@setOnLongClickListener false

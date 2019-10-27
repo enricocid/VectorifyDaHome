@@ -15,10 +15,11 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.VectorDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
@@ -82,7 +83,7 @@ object Utils {
 
     @JvmStatic
     fun drawBitmap(
-        vectorDrawable: VectorDrawable,
+        drawable: Drawable?,
         canvas: Canvas,
         deviceWidth: Int,
         deviceHeight: Int,
@@ -98,9 +99,9 @@ object Utils {
         )
 
         val drawableCanvas = Canvas(bitmap)
-        vectorDrawable.setBounds(0, 0, drawableCanvas.width, drawableCanvas.height)
+        drawable?.setBounds(0, 0, drawableCanvas.width, drawableCanvas.height)
 
-        vectorDrawable.draw(drawableCanvas)
+        drawable?.draw(drawableCanvas)
 
         val left = canvas.width / 2F - drawableCanvas.width / 2F + horizontalOffset
         val top = canvas.height / 2F - drawableCanvas.width / 2F + verticalOffset
@@ -124,7 +125,11 @@ object Utils {
     @TargetApi(Build.VERSION_CODES.M)
     @JvmStatic
     fun requestPermissions(activity: Activity, code: Int) {
-        ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), code)
+        ActivityCompat.requestPermissions(
+            activity,
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            code
+        )
     }
 
     //method to get rounded float string
@@ -163,10 +168,18 @@ object Utils {
             }
             negativeButton {
                 if (shouldRequestRationale)
-                    DynamicToast.makeError(context, activity.getString(R.string.boo), Toast.LENGTH_LONG)
+                    DynamicToast.makeError(
+                        context,
+                        activity.getString(R.string.boo),
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 else
-                    DynamicToast.makeWarning(context, activity.getString(R.string.boo_info), Toast.LENGTH_LONG)
+                    DynamicToast.makeWarning(
+                        context,
+                        activity.getString(R.string.boo_info),
+                        Toast.LENGTH_LONG
+                    )
                         .show()
             }
         }
@@ -180,7 +193,11 @@ object Utils {
             val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             intent.data = Uri.parse("package:" + context.packageName)
             context.startActivity(intent)
-            DynamicToast.make(context, context.getString(R.string.boo_almost_there), Toast.LENGTH_LONG)
+            DynamicToast.make(
+                context,
+                context.getString(R.string.boo_almost_there),
+                Toast.LENGTH_LONG
+            )
                 .show()
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
@@ -198,22 +215,46 @@ object Utils {
     fun getCategory(context: Context, index: Int): Pair<String, List<Int>> {
         return when (index) {
             0 -> Pair(context.getString(R.string.title_tech), VectorsCategories.TECH) //tech
-            1 -> Pair(context.getString(R.string.title_symbols), VectorsCategories.SYMBOLS) //symbols
-            2 -> Pair(context.getString(R.string.title_animals), VectorsCategories.ANIMALS) //animals
-            3 -> Pair(context.getString(R.string.title_emoticons), VectorsCategories.EMOTICONS) //emoticons
+            1 -> Pair(
+                context.getString(R.string.title_symbols),
+                VectorsCategories.SYMBOLS
+            ) //symbols
+            2 -> Pair(
+                context.getString(R.string.title_animals),
+                VectorsCategories.ANIMALS
+            ) //animals
+            3 -> Pair(
+                context.getString(R.string.title_emoticons),
+                VectorsCategories.EMOTICONS
+            ) //emoticons
             4 -> Pair(context.getString(R.string.title_fun), VectorsCategories.FUN) //fun
             5 -> Pair(context.getString(R.string.title_food), VectorsCategories.FOOD) //food
             6 -> Pair(context.getString(R.string.title_nature), VectorsCategories.NATURE) //nature
-            7 -> Pair(context.getString(R.string.title_weather), VectorsCategories.WEATHER) //weather
+            7 -> Pair(
+                context.getString(R.string.title_weather),
+                VectorsCategories.WEATHER
+            ) //weather
             8 -> Pair(context.getString(R.string.title_sport), VectorsCategories.SPORT) //sport
             9 -> Pair(context.getString(R.string.title_math), VectorsCategories.MATH) //math
-            10 -> Pair(context.getString(R.string.title_science), VectorsCategories.SCIENCE) //science
-            11 -> Pair(context.getString(R.string.title_chernoff), VectorsCategories.CHERNOFF) //Chernoff faceS
+            10 -> Pair(
+                context.getString(R.string.title_science),
+                VectorsCategories.SCIENCE
+            ) //science
+            11 -> Pair(
+                context.getString(R.string.title_chernoff),
+                VectorsCategories.CHERNOFF
+            ) //Chernoff faceS
             12 -> Pair(context.getString(R.string.title_music), VectorsCategories.MUSIC) //music
             13 -> Pair(context.getString(R.string.title_nerdy), VectorsCategories.NERDY) //nerdy
-            14 -> Pair(context.getString(R.string.title_buildings), VectorsCategories.BUILDINGS) //buildings
+            14 -> Pair(
+                context.getString(R.string.title_buildings),
+                VectorsCategories.BUILDINGS
+            ) //buildings
             15 -> Pair(context.getString(R.string.title_alert), VectorsCategories.ALERT) //alert
-            16 -> Pair(context.getString(R.string.title_alpha), VectorsCategories.ALPHABET) //letters
+            16 -> Pair(
+                context.getString(R.string.title_alpha),
+                VectorsCategories.ALPHABET
+            ) //letters
             17 -> Pair(context.getString(R.string.title_roman), VectorsCategories.ROMAN) //roman
             18 -> Pair(context.getString(R.string.title_zodiac), VectorsCategories.ZODIAC) //zodiac
             else -> Pair(context.getString(R.string.title_others), VectorsCategories.OTHERS)
@@ -261,46 +302,52 @@ object Utils {
     }
 
     @JvmStatic
-    fun tintVectorDrawable(
+    fun tintDrawable(
         context: Context,
         vector: Int,
         backgroundColor: Int,
         vectorColor: Int,
         showErrorDialog: Boolean
-    ): VectorDrawable {
+    ): Drawable? {
 
         //determine if we are facing android m, n, o vectors
         //so we can apply multiply tint mode to drawable
         var vectorProps = getVectorProps(vector)
 
         val bit = try {
-            ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
+            AppCompatResources.getDrawable(context, vectorProps.first)
         } catch (e: Exception) {
             e.printStackTrace()
             if (showErrorDialog && mVectorifyPreferences.hasToShowError) makeErrorDialog(context)
             vectorProps = getVectorProps(getDefaultVectorForApi())
-            ContextCompat.getDrawable(context, vectorProps.first) as VectorDrawable
+            AppCompatResources.getDrawable(context, vectorProps.first)
         }
 
-        //to avoid shared drawables get tinted too!
-        bit.mutate()
+        if (bit != null) {
+            try {
+                //to avoid shared drawables get tinted too!
+                bit.mutate()
 
-        //set tint mode multiply for special vectors
-        if (vectorProps.second) bit.setTintMode(PorterDuff.Mode.MULTIPLY)
+                //set tint mode multiply for special vectors
+                if (vectorProps.second) bit.setTintMode(PorterDuff.Mode.MULTIPLY)
 
-        //darken or lighten color to increase vector visibility when the colors are the same
-        val finalVectorColor = if (checkIfColorsEqual(backgroundColor, vectorColor)) {
-            if (isColorDark(vectorColor))
-                lightenColor(
-                    vectorColor,
-                    0.20F
-                )
-            else darkenColor(vectorColor, 0.20F)
-        } else {
-            vectorColor
+                //darken or lighten color to increase vector visibility when the colors are the same
+                val finalVectorColor = if (checkIfColorsEqual(backgroundColor, vectorColor)) {
+                    if (isColorDark(vectorColor))
+                        lightenColor(
+                            vectorColor,
+                            0.20F
+                        )
+                    else darkenColor(vectorColor, 0.20F)
+                } else {
+                    vectorColor
+                }
+
+                bit.setTint(finalVectorColor)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
-
-        bit.setTint(finalVectorColor)
 
         return bit
     }

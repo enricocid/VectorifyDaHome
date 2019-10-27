@@ -74,13 +74,16 @@ class VectorifyDaHomeLP : WallpaperService() {
                     //draw potato!
                     canvas.drawColor(mSelectedBackgroundColor)
 
-                    val vectorDrawable = Utils.tintVectorDrawable(
+                    val drawable = Utils.tintDrawable(
                         baseContext,
-                        mVectorifyPreferences.vector, mSelectedBackgroundColor, mSelectedVectorColor, false
+                        mVectorifyPreferences.vector,
+                        mSelectedBackgroundColor,
+                        mSelectedVectorColor,
+                        false
                     )
 
                     Utils.drawBitmap(
-                        vectorDrawable,
+                        drawable,
                         canvas,
                         mDeviceWidth,
                         mDeviceHeight,

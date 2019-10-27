@@ -19,10 +19,17 @@ class RecentSetupsAdapter(
     RecyclerView.Adapter<RecentSetupsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((List<Int>) -> Unit)? = null
-    private var mRecentSetups: MutableList<String> = mVectorifyPreferences.recentSetups.toMutableList()
+    private var mRecentSetups: MutableList<String> =
+        mVectorifyPreferences.recentSetups.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
-        return RecentSetupsHolder(LayoutInflater.from(parent.context).inflate(R.layout.recent_option, parent, false))
+        return RecentSetupsHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.recent_option,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {
@@ -62,10 +69,10 @@ class RecentSetupsAdapter(
 
             recentButton.setBackgroundColor(recentSetup[0])
 
-            val vectorDrawable =
-                Utils.tintVectorDrawable(context, recentSetup[1], recentSetup[0], recentSetup[2], false)
+            val drawable =
+                Utils.tintDrawable(context, recentSetup[1], recentSetup[0], recentSetup[2], false)
 
-            recentButton.setImageDrawable(vectorDrawable)
+            recentButton.setImageDrawable(drawable)
 
             recentButton.setOnClickListener {
                 onRecentClick?.invoke(recentSetup)
