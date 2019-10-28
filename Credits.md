@@ -19,6 +19,8 @@
 
 - [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
 
+- Abdul Kahlawi for reporting an issue on Lollipop
+
 
 ### SVG sources
 

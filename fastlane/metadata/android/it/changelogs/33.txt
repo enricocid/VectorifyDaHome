@@ -1,0 +1,3 @@
+- Lollipop: corretto un crash 
+Grazie Abdul Kahlawi per la segnalazione
+- Aggiornate le dipendenze
