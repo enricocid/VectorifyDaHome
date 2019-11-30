@@ -1,0 +1,111 @@
+<resources>
+
+    <string name="live_wallpaper_name" translatable="false">Vectorify da home!</string>
+
+    <string name="title_info_error" translatable="false">No pain no gain</string>
+
+    <string name="info_error">Er zijn nieuwe vectors toegevoegd! Je moet de achtergrond opnieuw instellen recente voorinstellingen
+        (indien aanwezig) opnieuw toepassen. Sorry.
+    </string>
+
+    <string name="info_error_alt">Er hebben grote veranderingen plaatsgevonden sinds de laatste update. Alle recente
+        voorinstellingen worden gewist om crashes te voorkomen. Sorry.
+    </string>
+
+    <string name="info_error_ok">Niet meer tonen</string>
+
+    <string name="space_delimiter" translatable="false">&#160;</string>
+    <string name="underscore_delimiter" translatable="false">&#95;</string>
+    <string name="error_get_resource">Oeps, niet gevonden!</string>
+
+    <!-- Hex string -->
+    <string name="hex" translatable="false">&#35;%1s</string>
+
+    <!-- Preferences keys -->
+    <string name="background_color_key" translatable="false">background_key</string>
+    <string name="vectors_color_key" translatable="false">icon_key</string>
+    <string name="theme_key" translatable="false">theme_key</string>
+    <string name="vector_key" translatable="false">icon_resource_key</string>
+    <string name="category_key" translatable="false">category_key</string>
+    <string name="scale_key" translatable="false">scale_key</string>
+    <string name="horizontal_offset_key" translatable="false">horizontal_offset_key</string>
+    <string name="vertical_offset_key" translatable="false">vertical_offset_key</string>
+    <string name="recent_setups_key" translatable="false">recent_setups_key</string>
+    <string name="error_show_message_key" translatable="false">error_show_message_key</string>
+
+    <!-- Card titles -->
+    <string name="title_background">Achtergrond</string>
+    <string name="title_background_dialog">Achtergrondkleur</string>
+    <string name="title_vector">Vector</string>
+    <string name="title_vector_dialog">Vectorkleur</string>
+    <string name="title_presets" translatable="false">Presets</string>
+    <string name="selected_preset">Achtergrond: %1s, Vector: %1s</string>
+    <string name="title_accent_me">KLEUR ME!</string>
+
+    <!-- Recent setups things -->
+    <string name="title_recent_setups">Recente voorinstellingen</string>
+    <string name="delimiter" translatable="false">&#59;</string>
+    <string name="recent_setups_save_pattern" translatable="false">%1s&#59;%1s&#59;%1s&#59;%1s</string>
+    <string name="message_no_recent_setups">Geen recente voorinstellingen aangetroffen!</string>
+    <string name="message_clear_recent_setups">Alle recente voorinstellingen worden verwijderd. Weet je het zeker? Als je alleen bepaalde
+        voorinstellingen wilt wissen, houd ze dat lang ingedrukt! :).
+    </string>
+    <string name="message_clear_single_recent_setup">De voorinstelling &#35;%1s wordt verwijderd. Weet je het zeker?</string>
+
+    <!-- BottomBar menu items -->
+    <string name="title_github">GitHub-pagina</string>
+    <string name="title_theme">Thema</string>
+    <string name="title_restore">Standaardachtergrond herstellen</string>
+    <string name="app_github_link" translatable="false">
+        https://github.com/enricocid/VectorifyDaHome
+    </string>
+    <string name="install_browser_message">Installeer een webbrowser!</string>
+
+    <!-- Preview things -->
+    <string name="save_pattern" translatable="false">vectorify_da_home_</string>
+    <string name="time_pattern" translatable="false">dd_MM_yy_hh-ss</string>
+    <string name="title_preview" translatable="false">Preview</string>
+    <string name="title_size">Grootte en positie</string>
+    <string name="title_save_to">Opslaan op interne opslag</string>
+    <string name="title_crop">Bijsnijden en instellen als achtergrond</string>
+    <string name="title_go_live">Instellen als live-achtergrond</string>
+    <string name="title_already_live">Bezig met toepassen&#8230;</string>
+    <string name="message_saved_to">%1s is opgeslagen in %1s</string>
+    <string name="loading" translatable="false">Vectorifying da home&#8230;</string>
+
+    <!-- Categories -->
+    <string name="title_categories">Categorieën</string>
+    <string name="title_tech">Technologie</string>
+    <string name="title_symbols">Symbolen</string>
+    <string name="title_animals">Dieren</string>
+    <string name="title_emoticons">Emoticons</string>
+    <string name="title_fun">Komedie</string>
+    <string name="title_food">Eten en drinken</string>
+    <string name="title_nature">Natuur</string>
+    <string name="title_weather">Weer</string>
+    <string name="title_sport" translatable="false">Sport</string>
+    <string name="title_math">Wiskunde</string>
+    <string name="title_science">Wetenschap</string>
+    <string name="title_chernoff">Chernoff-gezichten</string>
+    <string name="title_music">Muziek</string>
+    <string name="title_nerdy">Nerderig</string>
+    <string name="title_buildings">Gebouwen</string>
+    <string name="title_alert">Alarm</string>
+    <string name="title_alpha">Letters</string>
+    <string name="title_roman">Romeins</string>
+    <string name="title_zodiac">Dierenriem</string>
+    <string name="title_others">Overig</string>
+
+    <!-- Dialog rationale things -->
+    <string name="title_rationale">Toegang tot opslag</string>
+    <string name="rationale">Geef de app toegang tot je opslag om achtergronden op te slaan op de interne opslag. De app
+        leest geen persoonlijke gegevens uit :)
+    </string>
+    <string name="rationale_denied">Je hebt onlangs gekozen voor \'Niet opnieuw vragen\' bij de opslagmachtiging.
+        Ga naar de app-informatie en machtig de app als je achtergronden wilt opslaan.
+    </string>
+    <string name="go_to_info">Ga naar informatie</string>
+    <string name="boo">Verdorie! Geen toegang, geen feest! Gebruik de live-achtergrond!</string>
+    <string name="boo_info">Verdorie! Gewoon om even mijn ei kwijt te kunnen!</string>
+    <string name="boo_almost_there">Ga naar '\Machtigingen\' en geef toegang tot de opslag!</string>
+</resources>
