@@ -4,10 +4,6 @@
         (indien aanwezig) opnieuw toepassen. Sorry.
     </string>
 
-    <string name="info_error_alt">Er hebben grote veranderingen plaatsgevonden sinds de laatste update. Alle recente
-        voorinstellingen worden gewist om crashes te voorkomen. Sorry.
-    </string>
-
     <string name="info_error_ok">Niet meer tonen</string>
     <string name="error_get_resource">Oeps, niet gevonden!</string>
 

@@ -8,15 +8,13 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
-import com.iven.vectorify.RecentSetupsFragment
 import com.iven.vectorify.mVectorifyPreferences
 import com.iven.vectorify.utils.Utils
 
-class RecentSetupsAdapter(
-    private val context: Context,
-    private val recentSetupsFragment: RecentSetupsFragment
+class RecentsAdapter(
+    private val context: Context
 ) :
-    RecyclerView.Adapter<RecentSetupsAdapter.RecentSetupsHolder>() {
+    RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((List<Int>) -> Unit)? = null
     private var mRecentSetups: MutableList<String> =
@@ -56,7 +54,6 @@ class RecentSetupsAdapter(
                 )
             )
         } catch (e: Exception) {
-            recentSetupsFragment.dismissWithError()
             e.printStackTrace()
         }
     }
@@ -80,32 +77,29 @@ class RecentSetupsAdapter(
 
             recentButton.setOnLongClickListener {
 
-                if (recentSetupsFragment.context != null) {
-                    val context = recentSetupsFragment.context!!
-                    MaterialDialog(context).show {
+                MaterialDialog(context).show {
 
-                        cornerRadius(res = R.dimen.md_corner_radius)
-                        title(R.string.title_recent_setups)
-                        message(
-                            text = context.getString(
-                                R.string.message_clear_single_recent_setup,
-                                adapterPosition.toString()
-                            )
+                    cornerRadius(res = R.dimen.md_corner_radius)
+                    title(R.string.title_recent_setups)
+                    message(
+                        text = context.getString(
+                            R.string.message_clear_single_recent_setup,
+                            adapterPosition.toString()
                         )
-                        positiveButton {
-                            //add an empty list to preferences
-                            try {
-                                mRecentSetups.remove(rawSetupString)
-                                notifyDataSetChanged()
-                                mVectorifyPreferences.recentSetups = mRecentSetups.toMutableSet()
-                                if (mRecentSetups.isEmpty()) recentSetupsFragment.dismiss()
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
+                    )
+                    positiveButton {
+                        //add an empty list to preferences
+                        try {
+                            mRecentSetups.remove(rawSetupString)
+                            notifyDataSetChanged()
+                            mVectorifyPreferences.recentSetups = mRecentSetups.toMutableSet()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
                         }
-                        negativeButton { dismiss() }
                     }
+                    negativeButton { dismiss() }
                 }
+
                 return@setOnLongClickListener true
             }
         }

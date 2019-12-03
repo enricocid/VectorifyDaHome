@@ -8,10 +8,6 @@
         setups (if any) list. Sorry.
     </string>
 
-    <string name="info_error_alt">Oops!! Major changes have been done since the last update. As result all
-        the recent setups will be wiped to avoid crashes. Sorry.
-    </string>
-
     <string name="info_error_ok">Don\'t show again</string>
 
     <string name="space_delimiter" translatable="false">&#160;</string>

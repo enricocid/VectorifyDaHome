@@ -2,9 +2,11 @@ package com.iven.vectorify
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
@@ -13,16 +15,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
+import com.afollestad.materialdialogs.list.customListAdapter
+import com.afollestad.materialdialogs.list.getRecyclerView
 import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iven.vectorify.adapters.PresetsAdapter
+import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.utils.Utils
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -34,7 +42,7 @@ import kotlinx.android.synthetic.main.vectorify_activity.*
 import kotlinx.android.synthetic.main.vectors_card.*
 
 @Suppress("UNUSED_PARAMETER")
-class VectorifyActivity : AppCompatActivity() {
+class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private var mTheme = R.style.AppTheme
 
@@ -50,23 +58,41 @@ class VectorifyActivity : AppCompatActivity() {
     private var mSelectedVector = R.drawable.android
     private var mSelectedCategory = 0
 
+    private lateinit var mRecentSetupsDialog: MaterialDialog
+
     //interface to let recent  setups UI to let VectorifyActivity to update its shit
-    private val recentSetupsInterface = object : RecentSetupsFragment.RecentSetupsInterface {
-        override fun onRecentSelected(
-            selectedBackgroundColor: Int,
-            selectedVector: Int,
-            selectedVectorColor: Int,
-            selectedCategory: Int
-        ) {
+    private fun onRecentSelected(
+        selectedBackgroundColor: Int,
+        selectedVector: Int,
+        selectedVectorColor: Int,
+        selectedCategory: Int
+    ) {
 
-            setBackgroundColorForUI(selectedBackgroundColor)
-            setVectorColorForUI(selectedVectorColor)
+        setBackgroundColorForUI(selectedBackgroundColor)
+        setVectorColorForUI(selectedVectorColor)
 
-            setBackgroundAndVectorColorsChanged()
+        setBackgroundAndVectorColorsChanged()
 
-            updateSelectedCategory(selectedCategory)
+        updateSelectedCategory(selectedCategory)
 
-            scrollToVector(selectedVector)
+        scrollToVector(selectedVector)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .registerOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key == getString(R.string.recent_setups_key) && mVectorifyPreferences.recentSetups.isEmpty()) {
+            if (::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing) mRecentSetupsDialog.dismiss()
         }
     }
 
@@ -127,17 +153,11 @@ class VectorifyActivity : AppCompatActivity() {
         }
 
         bottomBar.setNavigationOnClickListener {
-            if (mVectorifyPreferences.recentSetups.isNotEmpty()) {
-                val bottomSheetDialogFragment = RecentSetupsFragment()
-                bottomSheetDialogFragment.setRecentSetupsInterface(recentSetupsInterface)
-                bottomSheetDialogFragment.show(
-                    supportFragmentManager,
-                    bottomSheetDialogFragment.tag
-                )
-            } else {
+            if (mVectorifyPreferences.recentSetups.isNotEmpty())
+                startRecentsDialog()
+            else
                 DynamicToast.makeWarning(this, getString(R.string.message_no_recent_setups))
                     .show()
-            }
         }
 
         bottomBar.afterMeasured {
@@ -214,6 +234,16 @@ class VectorifyActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) Utils.handleEdgeToEdge(
+            this,
+            window,
+            vectorifyView,
+            true
+        )
     }
 
     //update vector frame
@@ -397,6 +427,33 @@ class VectorifyActivity : AppCompatActivity() {
             mSelectedCategory = index
             mTempPreferences.tempCategory = mSelectedCategory
             mTempPreferences.isCategoryChanged = true
+        }
+    }
+
+    private fun startRecentsDialog() {
+        mRecentSetupsDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+
+            cornerRadius(res = R.dimen.md_corner_radius)
+
+            title(res = R.string.title_recent_setups)
+
+            val recentsAdapter = RecentsAdapter(this@VectorifyActivity)
+
+            recentsAdapter.onRecentClick = { recent ->
+                onRecentSelected(recent[0], recent[1], recent[2], recent[3])
+                dismiss()
+            }
+
+            customListAdapter(recentsAdapter)
+            getRecyclerView().layoutManager =
+                GridLayoutManager(this@VectorifyActivity, 3, RecyclerView.VERTICAL, false)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) Utils.handleEdgeToEdge(
+                this@VectorifyActivity,
+                this.window,
+                view,
+                false
+            )
         }
     }
 

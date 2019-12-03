@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
     <com.iven.vectorify.utils.VectorView
-            android:layout_width="match_parent"
-            android:id="@+id/vector_view"
-            android:layout_height="match_parent"/>
+        android:id="@+id/vector_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <include layout="@layout/size_position_card"/>
+    <include layout="@layout/size_position_card" />
 </merge>

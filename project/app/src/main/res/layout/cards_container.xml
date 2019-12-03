@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/cards_container"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/activity_padding"
-        android:paddingBottom="@dimen/activity_padding">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cards_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_padding"
+    android:paddingBottom="@dimen/activity_padding">
 
-    <include layout="@layout/vectors_card"/>
+    <include layout="@layout/vectors_card" />
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <include layout="@layout/background_color_pref_card"/>
+        <include layout="@layout/background_color_pref_card" />
 
-        <include layout="@layout/vector_color_pref_card"/>
+        <include layout="@layout/vector_color_pref_card" />
 
     </LinearLayout>
 
-    <include layout="@layout/presets_card"/>
+    <include layout="@layout/presets_card" />
 
 </LinearLayout>

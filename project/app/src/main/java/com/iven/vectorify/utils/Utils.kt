@@ -18,6 +18,8 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
+import android.view.View
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
@@ -79,6 +81,38 @@ object Utils {
     @JvmStatic
     fun lightenColor(color: Int, factor: Float): Int {
         return ColorUtils.blendARGB(color, Color.WHITE, factor)
+    }
+
+    @JvmStatic
+    fun handleEdgeToEdge(context: Context, window: Window?, view: View, isMainView: Boolean) {
+
+        val isThemeDark = mVectorifyPreferences.theme == R.style.AppTheme_Dark
+
+        val color = if (isMainView) ContextCompat.getColor(
+            context,
+            if (isThemeDark) R.color.bottom_bar_color_dark else R.color.bottom_bar_color
+        ) else Color.TRANSPARENT
+        window?.statusBarColor = color
+        window?.navigationBarColor = color
+
+        var flags =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1 -> {
+
+                val systemBarsFlag =
+                    if (isThemeDark) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                flags =
+                    flags or systemBarsFlag
+            }
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
+
+
+                flags =
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            }
+        }
+        view.systemUiVisibility = flags
     }
 
     @JvmStatic

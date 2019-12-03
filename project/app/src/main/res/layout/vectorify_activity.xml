@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
-        android:layout_height="match_parent">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/vectorifyView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <include layout="@layout/cards_container"/>
+    <include layout="@layout/cards_container" />
 
-    <TextView android:id="@+id/version"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/versionName"
-              android:alpha="0.25"
-              android:textColor="?attr/vectors_color"
-              android:textAppearance="@android:style/TextAppearance.Material.Small"
-              android:padding="16dp"
-              android:layout_gravity="bottom|start"/>
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:alpha="0.25"
+        android:padding="16dp"
+        android:text="@string/versionName"
+        android:textAppearance="@android:style/TextAppearance.Material.Small"
+        android:textColor="?attr/vectors_color" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bar"
-            style="@style/Widget.MaterialComponents.BottomAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="?attr/bottom_bar_color"
-            app:fabAlignmentMode="end"
-            app:navigationContentDescription="@string/title_recent_setups"
-            app:navigationIcon="@drawable/ic_baseline_menu"
-            android:layout_gravity="bottom"/>
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="?attr/bottom_bar_color"
+        app:fabAlignmentMode="end"
+        app:navigationContentDescription="@string/title_recent_setups"
+        app:navigationIcon="@drawable/ic_baseline_menu" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:src="@drawable/ic_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_anchor="@id/bar"/>
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_check"
+        app:layout_anchor="@id/bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

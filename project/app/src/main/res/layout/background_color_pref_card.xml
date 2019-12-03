@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/background_color"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@android:color/black"
-        app:cardElevation="4dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        app:cardCornerRadius="8dp"
-        tools:context=".VectorifyActivity">
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background_color"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    android:layout_weight="1"
+    android:padding="2dp"
+    app:cardBackgroundColor="@android:color/black"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    tools:context=".VectorifyActivity">
 
     <LinearLayout
-            android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:onClick="startBackgroundColorPicker"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/background_color_head"
             android:layout_width="match_parent"
-            android:onClick="startBackgroundColorPicker"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="4dp"
+            android:text="@string/title_background"
+            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:textStyle="bold" />
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="@string/title_background"
-                  android:paddingTop="4dp"
-                  android:paddingBottom="4dp"
-                  android:paddingStart="16dp"
-                  android:paddingEnd="16dp"
-                  android:textAppearance="@android:style/TextAppearance.Material.Title"
-                  android:textStyle="bold"
-                  android:id="@+id/background_color_head"/>
-
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/background_color_subhead"
-                  android:paddingStart="16dp"
-                  android:paddingEnd="16dp"
-                  android:textAppearance="@android:style/TextAppearance.Material.Small"/>
+        <TextView
+            android:id="@+id/background_color_subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Small" />
 
         <com.google.android.material.chip.Chip
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                app:chipBackgroundColor="@color/activity_background_color_dark"
-                android:alpha="0.5"
-                android:textColor="@color/bottom_bar_color"
-                android:onClick="setSystemAccentForBackground"
-                android:textAppearance="@style/chipTextAppearance"
-                android:text="@string/title_accent_me"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:alpha="0.5"
+            android:onClick="setSystemAccentForBackground"
+            android:text="@string/title_accent_me"
+            android:textAppearance="@style/chipTextAppearance"
+            android:textColor="@color/bottom_bar_color"
+            app:chipBackgroundColor="@color/activity_background_color_dark" />
     </LinearLayout>
 
 

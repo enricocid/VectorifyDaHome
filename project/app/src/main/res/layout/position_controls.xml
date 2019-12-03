@@ -1,77 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- POSITION BUTTONS -->
+<?xml version="1.0" encoding="utf-8"?><!-- POSITION BUTTONS -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
-    <ImageButton android:layout_width="0dp"
-                 android:layout_weight="1"
-                 android:padding="8dp"
-                 android:layout_height="wrap_content"
-                 android:src="@drawable/ic_up"
-                 android:onClick="moveVectorUp"
-                 android:background="?android:attr/selectableItemBackground"
-                 android:contentDescription="@string/live_wallpaper_name"
-                 android:id="@+id/up"/>
+    <ImageButton
+        android:id="@+id/up"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/live_wallpaper_name"
+        android:onClick="moveVectorUp"
+        android:padding="8dp"
+        android:src="@drawable/ic_up" />
 
-    <ImageButton android:layout_width="0dp"
-                 android:layout_weight="1"
-                 android:padding="8dp"
-                 android:layout_height="wrap_content"
-                 android:src="@drawable/ic_down"
-                 android:onClick="moveVectorDown"
-                 android:background="?android:attr/selectableItemBackground"
-                 android:contentDescription="@string/live_wallpaper_name"
-                 android:id="@+id/down"/>
+    <ImageButton
+        android:id="@+id/down"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/live_wallpaper_name"
+        android:onClick="moveVectorDown"
+        android:padding="8dp"
+        android:src="@drawable/ic_down" />
 
-    <ImageButton android:layout_width="0dp"
-                 android:layout_weight="1"
-                 android:padding="8dp"
-                 android:layout_height="wrap_content"
-                 android:src="@drawable/ic_left"
-                 android:onClick="moveVectorLeft"
-                 android:background="?android:attr/selectableItemBackground"
-                 android:contentDescription="@string/live_wallpaper_name"
-                 android:id="@+id/left"/>
+    <ImageButton
+        android:id="@+id/left"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/live_wallpaper_name"
+        android:onClick="moveVectorLeft"
+        android:padding="8dp"
+        android:src="@drawable/ic_left" />
 
-    <ImageButton android:layout_width="0dp"
-                 android:layout_weight="1"
-                 android:padding="8dp"
-                 android:layout_height="wrap_content"
-                 android:src="@drawable/ic_right"
-                 android:onClick="moveVectorRight"
-                 android:background="?android:attr/selectableItemBackground"
-                 android:contentDescription="@string/live_wallpaper_name"
-                 android:id="@+id/right"/>
+    <ImageButton
+        android:id="@+id/right"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/live_wallpaper_name"
+        android:onClick="moveVectorRight"
+        android:padding="8dp"
+        android:src="@drawable/ic_right" />
 
-    <ImageButton android:layout_width="0dp"
-                 android:layout_weight="1"
-                 android:padding="8dp"
-                 android:layout_height="wrap_content"
-                 android:src="@drawable/ic_horizontal_align_center"
-                 android:onClick="centerHorizontalVectorPosition"
-                 android:background="?android:attr/selectableItemBackground"
-                 android:contentDescription="@string/live_wallpaper_name"
-                 android:id="@+id/center_horizontal"/>
+    <ImageButton
+        android:id="@+id/center_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/live_wallpaper_name"
+        android:onClick="centerHorizontalVectorPosition"
+        android:padding="8dp"
+        android:src="@drawable/ic_horizontal_align_center" />
 
-    <ImageButton android:layout_width="0dp"
-                 android:layout_weight="1"
-                 android:padding="8dp"
-                 android:layout_height="wrap_content"
-                 android:src="@drawable/ic_vertical_align_center"
-                 android:onClick="centerVerticalVectorPosition"
-                 android:background="?android:attr/selectableItemBackground"
-                 android:contentDescription="@string/live_wallpaper_name"
-                 android:id="@+id/center_vertical"/>
+    <ImageButton
+        android:id="@+id/center_vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/live_wallpaper_name"
+        android:onClick="centerVerticalVectorPosition"
+        android:padding="8dp"
+        android:src="@drawable/ic_vertical_align_center" />
 
-    <ImageButton android:layout_width="0dp"
-                 android:layout_weight="1"
-                 android:padding="8dp"
-                 android:layout_height="wrap_content"
-                 android:src="@drawable/ic_restore"
-                 android:onClick="resetVectorPosition"
-                 android:background="?android:attr/selectableItemBackground"
-                 android:contentDescription="@string/live_wallpaper_name"
-                 android:id="@+id/reset_position"/>
+    <ImageButton
+        android:id="@+id/reset_position"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="@string/live_wallpaper_name"
+        android:onClick="resetVectorPosition"
+        android:padding="8dp"
+        android:src="@drawable/ic_restore" />
 </LinearLayout>
