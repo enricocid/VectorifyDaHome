@@ -42,8 +42,12 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.preference:preference-ktx:1.1.0'
+
+    api 'com.google.android.material:material:1.0.0'
+
     implementation 'com.afollestad.material-dialogs:core:3.1.1'
     implementation 'com.afollestad.material-dialogs:color:3.1.1'
-    api 'com.google.android.material:material:1.0.0'
+    implementation 'com.afollestad.material-dialogs:bottomsheets:3.1.1'
+
     implementation 'com.pranavpandey.android:dynamic-toasts:3.0.1'
 }
