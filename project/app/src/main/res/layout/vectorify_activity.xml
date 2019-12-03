@@ -14,11 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
-        android:alpha="0.25"
-        android:padding="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
         android:text="@string/versionName"
-        android:textAppearance="@android:style/TextAppearance.Material.Small"
-        android:textColor="?attr/vectors_color" />
+        android:textAppearance="@android:style/TextAppearance.Material.Caption"
+        android:textColor="?android:attr/textColorSecondary" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"
