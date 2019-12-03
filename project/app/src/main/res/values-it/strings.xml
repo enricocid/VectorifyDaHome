@@ -26,6 +26,7 @@
     <string name="title_github">Pagina GitHub</string>
     <string name="title_theme">Tema</string>
     <string name="title_restore">Ripristina wallpaper di default</string>
+    <string name="title_reset_recents">Cancella recenti</string>
     <string name="install_browser_message">Installa un browser prima!</string>
 
     <!-- Preview -->

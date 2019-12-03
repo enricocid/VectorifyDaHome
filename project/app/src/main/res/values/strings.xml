@@ -52,6 +52,7 @@
     <string name="title_github">GitHub page</string>
     <string name="title_theme">Theme</string>
     <string name="title_restore">Restore default wallpaper!</string>
+    <string name="title_reset_recents">Clear recents</string>
     <string name="app_github_link" translatable="false">
         https://github.com/enricocid/VectorifyDaHome
     </string>
