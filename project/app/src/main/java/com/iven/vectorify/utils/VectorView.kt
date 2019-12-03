@@ -6,9 +6,9 @@ import android.graphics.Color
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.drawToBitmap
-import com.iven.vectorify.mDeviceMetrics
-import com.iven.vectorify.mTempPreferences
-import com.iven.vectorify.mVectorifyPreferences
+import com.iven.vectorify.deviceMetrics
+import com.iven.vectorify.tempPreferences
+import com.iven.vectorify.vectorifyPreferences
 import java.lang.ref.WeakReference
 
 class VectorView @JvmOverloads constructor(
@@ -39,14 +39,14 @@ class VectorView @JvmOverloads constructor(
 
     init {
         //retrieve display specifications
-        mDeviceWidth = mDeviceMetrics.first
-        mDeviceHeight = mDeviceMetrics.second
+        mDeviceWidth = deviceMetrics.first
+        mDeviceHeight = deviceMetrics.second
 
-        mBackgroundColor = mTempPreferences.tempBackgroundColor
-        mVectorColor = mTempPreferences.tempVectorColor
-        mScaleFactor = mTempPreferences.tempScale
-        mHorizontalOffset = mTempPreferences.tempHorizontalOffset
-        mVerticalOffset = mTempPreferences.tempVerticalOffset
+        mBackgroundColor = tempPreferences.tempBackgroundColor
+        mVectorColor = tempPreferences.tempVectorColor
+        mScaleFactor = tempPreferences.tempScale
+        mHorizontalOffset = tempPreferences.tempHorizontalOffset
+        mVerticalOffset = tempPreferences.tempVerticalOffset
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -60,7 +60,7 @@ class VectorView @JvmOverloads constructor(
             val drawable =
                 Utils.tintDrawable(
                     context,
-                    mTempPreferences.tempVector,
+                    tempPreferences.tempVector,
                     mBackgroundColor,
                     mVectorColor,
                     false
@@ -86,53 +86,53 @@ class VectorView @JvmOverloads constructor(
 
     fun moveUp() {
         mVerticalOffset -= mStep
-        mTempPreferences.isVerticalOffsetChanged = true
-        mTempPreferences.tempVerticalOffset = mVerticalOffset
+        tempPreferences.isVerticalOffsetChanged = true
+        tempPreferences.tempVerticalOffset = mVerticalOffset
         invalidate()
     }
 
     fun moveDown() {
         mVerticalOffset += mStep
-        mTempPreferences.isVerticalOffsetChanged = true
-        mTempPreferences.tempVerticalOffset = mVerticalOffset
+        tempPreferences.isVerticalOffsetChanged = true
+        tempPreferences.tempVerticalOffset = mVerticalOffset
         invalidate()
     }
 
     fun moveLeft() {
         mHorizontalOffset -= mStep
-        mTempPreferences.isHorizontalOffsetChanged = true
-        mTempPreferences.tempHorizontalOffset = mHorizontalOffset
+        tempPreferences.isHorizontalOffsetChanged = true
+        tempPreferences.tempHorizontalOffset = mHorizontalOffset
         invalidate()
     }
 
     fun moveRight() {
         mHorizontalOffset += mStep
-        mTempPreferences.isHorizontalOffsetChanged = true
-        mTempPreferences.tempHorizontalOffset = mHorizontalOffset
+        tempPreferences.isHorizontalOffsetChanged = true
+        tempPreferences.tempHorizontalOffset = mHorizontalOffset
         invalidate()
     }
 
     fun centerHorizontal() {
         mHorizontalOffset = 0F
-        mTempPreferences.tempHorizontalOffset = mHorizontalOffset
-        mTempPreferences.isHorizontalOffsetChanged = true
+        tempPreferences.tempHorizontalOffset = mHorizontalOffset
+        tempPreferences.isHorizontalOffsetChanged = true
         invalidate()
     }
 
     fun centerVertical() {
         mVerticalOffset = 0F
-        mTempPreferences.tempVerticalOffset = mVerticalOffset
-        mTempPreferences.isVerticalOffsetChanged = true
+        tempPreferences.tempVerticalOffset = mVerticalOffset
+        tempPreferences.isVerticalOffsetChanged = true
         invalidate()
     }
 
     fun resetPosition() {
-        mHorizontalOffset = mVectorifyPreferences.horizontalOffset
-        mTempPreferences.tempHorizontalOffset = mHorizontalOffset
-        mTempPreferences.isHorizontalOffsetChanged = true
-        mVerticalOffset = mVectorifyPreferences.verticalOffset
-        mTempPreferences.tempVerticalOffset = mVerticalOffset
-        mTempPreferences.isVerticalOffsetChanged = true
+        mHorizontalOffset = vectorifyPreferences.horizontalOffset
+        tempPreferences.tempHorizontalOffset = mHorizontalOffset
+        tempPreferences.isHorizontalOffsetChanged = true
+        mVerticalOffset = vectorifyPreferences.verticalOffset
+        tempPreferences.tempVerticalOffset = mVerticalOffset
+        tempPreferences.isVerticalOffsetChanged = true
         invalidate()
     }
 }

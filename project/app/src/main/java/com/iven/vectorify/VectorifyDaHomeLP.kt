@@ -19,8 +19,8 @@ class VectorifyDaHomeLP : WallpaperService() {
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
 
-        mDeviceWidth = mDeviceMetrics.first
-        mDeviceHeight = mDeviceMetrics.second
+        mDeviceWidth = deviceMetrics.first
+        mDeviceHeight = deviceMetrics.second
 
         updatePaintProps()
 
@@ -29,9 +29,9 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private fun updatePaintProps() {
         //set paints props
-        mSelectedBackgroundColor = mVectorifyPreferences.backgroundColor
-        mSelectedVectorColor = mVectorifyPreferences.vectorColor
-        mSelectedScaleFactor = mVectorifyPreferences.scale
+        mSelectedBackgroundColor = vectorifyPreferences.backgroundColor
+        mSelectedVectorColor = vectorifyPreferences.vectorColor
+        mSelectedScaleFactor = vectorifyPreferences.scale
     }
 
     private inner class VectorifyEngine : WallpaperService.Engine() {
@@ -76,7 +76,7 @@ class VectorifyDaHomeLP : WallpaperService() {
 
                     val drawable = Utils.tintDrawable(
                         baseContext,
-                        mVectorifyPreferences.vector,
+                        vectorifyPreferences.vector,
                         mSelectedBackgroundColor,
                         mSelectedVectorColor,
                         false
@@ -88,8 +88,8 @@ class VectorifyDaHomeLP : WallpaperService() {
                         mDeviceWidth,
                         mDeviceHeight,
                         mSelectedScaleFactor,
-                        mVectorifyPreferences.horizontalOffset,
-                        mVectorifyPreferences.verticalOffset
+                        vectorifyPreferences.horizontalOffset,
+                        vectorifyPreferences.verticalOffset
                     )
                 }
             } finally {

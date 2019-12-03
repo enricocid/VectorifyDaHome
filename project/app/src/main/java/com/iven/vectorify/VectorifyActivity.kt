@@ -94,7 +94,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == getString(R.string.recent_setups_key) && mVectorifyPreferences.recentSetups.isEmpty()) {
+        if (key == getString(R.string.recent_setups_key) && vectorifyPreferences.recentSetups.isEmpty()) {
             if (::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing) mRecentSetupsDialog.dismiss()
         }
     }
@@ -103,26 +103,26 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         super.onCreate(savedInstanceState)
 
         //set theme
-        mTheme = mVectorifyPreferences.theme
+        mTheme = vectorifyPreferences.theme
 
         setTheme(mTheme)
 
         setContentView(R.layout.vectorify_activity)
 
         //get wallpaper shit
-        mSelectedBackgroundColor = mVectorifyPreferences.backgroundColor
-        mSelectedVectorColor = mVectorifyPreferences.vectorColor
-        mSelectedVector = mVectorifyPreferences.vector
-        mSelectedCategory = mVectorifyPreferences.category
+        mSelectedBackgroundColor = vectorifyPreferences.backgroundColor
+        mSelectedVectorColor = vectorifyPreferences.vectorColor
+        mSelectedVector = vectorifyPreferences.vector
+        mSelectedCategory = vectorifyPreferences.category
 
         //init temp preferences
-        mTempPreferences.tempBackgroundColor = mSelectedBackgroundColor
-        mTempPreferences.tempVectorColor = mSelectedVectorColor
-        mTempPreferences.tempVector = mSelectedVector
-        mTempPreferences.tempCategory = mSelectedCategory
-        mTempPreferences.tempScale = mVectorifyPreferences.scale
-        mTempPreferences.tempHorizontalOffset = mVectorifyPreferences.horizontalOffset
-        mTempPreferences.tempVerticalOffset = mVectorifyPreferences.verticalOffset
+        tempPreferences.tempBackgroundColor = mSelectedBackgroundColor
+        tempPreferences.tempVectorColor = mSelectedVectorColor
+        tempPreferences.tempVector = mSelectedVector
+        tempPreferences.tempCategory = mSelectedCategory
+        tempPreferences.tempScale = vectorifyPreferences.scale
+        tempPreferences.tempHorizontalOffset = vectorifyPreferences.horizontalOffset
+        tempPreferences.tempVerticalOffset = vectorifyPreferences.verticalOffset
 
         mVectorFrame = vector_frame
         mCategoriesChip = categories_chip
@@ -159,7 +159,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         }
 
         bottomBar.setNavigationOnClickListener {
-            if (mVectorifyPreferences.recentSetups.isNotEmpty())
+            if (vectorifyPreferences.recentSetups.isNotEmpty())
                 startRecentsDialog()
             else
                 DynamicToast.makeWarning(this, getString(R.string.message_no_recent_setups))
@@ -227,8 +227,8 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
                 //update drawable tint
                 setVectorFrameColors(tintBackground = false, showErrorDialog = false)
 
-                mTempPreferences.tempVector = mSelectedVector
-                mTempPreferences.isVectorChanged = true
+                tempPreferences.tempVector = mSelectedVector
+                tempPreferences.isVectorChanged = true
             }
         }
 
@@ -236,7 +236,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             mCategoriesChip.text = Utils.getCategory(this, mSelectedCategory).first
             mVectorsRecyclerView.scrollToPosition(
                 mVectorsAdapter.getVectorPosition(
-                    mVectorifyPreferences.vector
+                    vectorifyPreferences.vector
                 )
             )
         }
@@ -257,7 +257,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             return@setOnMenuItemClickListener true
         }
         popup.inflate(R.menu.menu_do_something)
-        if (mVectorifyPreferences.recentSetups.isNullOrEmpty()) popup.menu.removeItem(R.id.clear_recents)
+        if (vectorifyPreferences.recentSetups.isNullOrEmpty()) popup.menu.removeItem(R.id.clear_recents)
         popup.gravity = Gravity.END
         popup.show()
     }
@@ -288,7 +288,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     //update background card colors
     private fun setBackgroundColorForUI(color: Int) {
         mSelectedBackgroundColor = color
-        mTempPreferences.tempBackgroundColor = mSelectedBackgroundColor
+        tempPreferences.tempBackgroundColor = mSelectedBackgroundColor
 
         //update shit colors
         runOnUiThread {
@@ -307,7 +307,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
                     mSelectedBackgroundColor,
                     mSelectedVectorColor
                 )
-            ) textColor else mTempPreferences.tempVectorColor
+            ) textColor else tempPreferences.tempVectorColor
             mFab.drawable.setTint(fabDrawableColor)
         }
     }
@@ -315,7 +315,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     //update vector card colors
     private fun setVectorColorForUI(color: Int) {
         mSelectedVectorColor = color
-        mTempPreferences.tempVectorColor = mSelectedVectorColor
+        tempPreferences.tempVectorColor = mSelectedVectorColor
 
         //update shit colors
         runOnUiThread {
@@ -340,14 +340,14 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
     //set system accent as background color
     fun setSystemAccentForBackground(view: View) {
-        mTempPreferences.isBackgroundColorChanged = true
+        tempPreferences.isBackgroundColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setBackgroundColorForUI(systemAccent)
     }
 
     //set system accent as vector color
     fun setSystemAccentForVector(view: View) {
-        mTempPreferences.isVectorColorChanged = true
+        tempPreferences.isVectorColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setVectorColorForUI(systemAccent)
     }
@@ -370,13 +370,13 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
         scrollToVector(Utils.getDefaultVectorForApi())
 
-        mTempPreferences.tempScale = 0.35F
-        mTempPreferences.isScaleChanged = true
+        tempPreferences.tempScale = 0.35F
+        tempPreferences.isScaleChanged = true
 
-        mTempPreferences.tempHorizontalOffset = 0F
-        mTempPreferences.isHorizontalOffsetChanged = true
-        mTempPreferences.tempVerticalOffset = 0F
-        mTempPreferences.isVerticalOffsetChanged = true
+        tempPreferences.tempHorizontalOffset = 0F
+        tempPreferences.isHorizontalOffsetChanged = true
+        tempPreferences.tempVerticalOffset = 0F
+        tempPreferences.isVerticalOffsetChanged = true
     }
 
     //start material dialog
@@ -395,15 +395,15 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
                 when (key) {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
-                        if (mTempPreferences.tempBackgroundColor != color) {
-                            mTempPreferences.isBackgroundColorChanged = true
+                        if (tempPreferences.tempBackgroundColor != color) {
+                            tempPreferences.isBackgroundColorChanged = true
                             setBackgroundColorForUI(color)
                         }
                     }
                     else -> {
                         //update the color only if it really changed
-                        if (mTempPreferences.tempVectorColor != color) {
-                            mTempPreferences.isVectorColorChanged = true
+                        if (tempPreferences.tempVectorColor != color) {
+                            tempPreferences.isVectorColorChanged = true
                             setVectorColorForUI(color)
                         }
                     }
@@ -414,8 +414,8 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     }
 
     private fun setBackgroundAndVectorColorsChanged() {
-        mTempPreferences.isBackgroundColorChanged = true
-        mTempPreferences.isVectorColorChanged = true
+        tempPreferences.isBackgroundColorChanged = true
+        tempPreferences.isVectorColorChanged = true
     }
 
     //method to start background color picker for background
@@ -451,8 +451,8 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             }
 
             mSelectedCategory = index
-            mTempPreferences.tempCategory = mSelectedCategory
-            mTempPreferences.isCategoryChanged = true
+            tempPreferences.tempCategory = mSelectedCategory
+            tempPreferences.isCategoryChanged = true
         }
     }
 
@@ -486,7 +486,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     //update theme
     private fun setNewTheme() {
         val newTheme = if (mTheme == R.style.AppTheme) R.style.AppTheme_Dark else R.style.AppTheme
-        mVectorifyPreferences.theme = newTheme
+        vectorifyPreferences.theme = newTheme
 
         //smoothly set app theme
         val intent = Intent(this, VectorifyActivity::class.java)

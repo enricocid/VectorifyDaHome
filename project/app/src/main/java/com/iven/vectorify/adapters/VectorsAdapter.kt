@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
-import com.iven.vectorify.mTempPreferences
-import com.iven.vectorify.mVectorifyPreferences
+import com.iven.vectorify.tempPreferences
+import com.iven.vectorify.vectorifyPreferences
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -26,8 +26,8 @@ class VectorsAdapter(private val context: Context) :
     private var mSelectedCategory = VectorsCategories.TECH
 
     init {
-        mSelectedCategory = Utils.getCategory(context, mVectorifyPreferences.category).second
-        mSelectedDrawable = mVectorifyPreferences.vector
+        mSelectedCategory = Utils.getCategory(context, vectorifyPreferences.category).second
+        mSelectedDrawable = vectorifyPreferences.vector
     }
 
     fun swapCategory(selectedCategory: List<Int>) {
@@ -103,8 +103,8 @@ class VectorsAdapter(private val context: Context) :
                         context,
                         iconName,
                         AppCompatResources.getDrawable(context, drawable),
-                        mTempPreferences.tempVectorColor,
-                        mTempPreferences.tempBackgroundColor
+                        tempPreferences.tempVectorColor,
+                        tempPreferences.tempBackgroundColor
                     )
                         .show()
 

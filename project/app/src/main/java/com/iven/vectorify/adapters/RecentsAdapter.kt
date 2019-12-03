@@ -8,7 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
-import com.iven.vectorify.mVectorifyPreferences
+import com.iven.vectorify.vectorifyPreferences
 import com.iven.vectorify.utils.Utils
 
 class RecentsAdapter(
@@ -18,7 +18,7 @@ class RecentsAdapter(
 
     var onRecentClick: ((List<Int>) -> Unit)? = null
     private var mRecentSetups: MutableList<String> =
-        mVectorifyPreferences.recentSetups.toMutableList()
+        vectorifyPreferences.recentSetups.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
         return RecentSetupsHolder(
@@ -92,7 +92,7 @@ class RecentsAdapter(
                         try {
                             mRecentSetups.remove(rawSetupString)
                             notifyDataSetChanged()
-                            mVectorifyPreferences.recentSetups = mRecentSetups.toMutableSet()
+                            vectorifyPreferences.recentSetups = mRecentSetups.toMutableSet()
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }

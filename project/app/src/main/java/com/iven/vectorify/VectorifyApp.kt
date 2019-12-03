@@ -7,15 +7,15 @@ import android.view.WindowManager
 import com.iven.vectorify.preferences.TempPreferences
 import com.iven.vectorify.preferences.VectorifyPreferences
 
-val mVectorifyPreferences: VectorifyPreferences by lazy {
+val vectorifyPreferences: VectorifyPreferences by lazy {
     VectorifyApp.prefs
 }
 
-val mTempPreferences: TempPreferences by lazy {
+val tempPreferences: TempPreferences by lazy {
     VectorifyApp.tempPrefs
 }
 
-val mDeviceMetrics: Pair<Int, Int> by lazy {
+val deviceMetrics: Pair<Int, Int> by lazy {
     VectorifyApp.metrics
 }
 

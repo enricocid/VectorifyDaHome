@@ -28,8 +28,8 @@ import androidx.core.graphics.ColorUtils
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
-import com.iven.vectorify.mTempPreferences
-import com.iven.vectorify.mVectorifyPreferences
+import com.iven.vectorify.tempPreferences
+import com.iven.vectorify.vectorifyPreferences
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 object Utils {
@@ -86,7 +86,7 @@ object Utils {
     @JvmStatic
     fun handleEdgeToEdge(context: Context, window: Window?, view: View, isMainView: Boolean) {
 
-        val isThemeDark = mVectorifyPreferences.theme == R.style.AppTheme_Dark
+        val isThemeDark = vectorifyPreferences.theme == R.style.AppTheme_Dark
 
         val color = if (isMainView) ContextCompat.getColor(
             context,
@@ -352,7 +352,7 @@ object Utils {
             AppCompatResources.getDrawable(context, vectorProps.first)
         } catch (e: Exception) {
             e.printStackTrace()
-            if (showErrorDialog && mVectorifyPreferences.hasToShowError) makeErrorDialog(context)
+            if (showErrorDialog && vectorifyPreferences.hasToShowError) makeErrorDialog(context)
             vectorProps = getVectorProps(getDefaultVectorForApi())
             AppCompatResources.getDrawable(context, vectorProps.first)
         }
@@ -395,7 +395,7 @@ object Utils {
             title(R.string.title_info_error)
             message(R.string.info_error)
             positiveButton(R.string.info_error_ok) {
-                mVectorifyPreferences.hasToShowError = false
+                vectorifyPreferences.hasToShowError = false
             }
         }
     }
@@ -403,17 +403,17 @@ object Utils {
     //update recent setups
     @JvmStatic
     fun updateRecentSetups(context: Context) {
-        val recentSetups = mVectorifyPreferences.recentSetups.toMutableList()
+        val recentSetups = vectorifyPreferences.recentSetups.toMutableList()
         val stringToSave = context.getString(
             R.string.recent_setups_save_pattern,
-            mTempPreferences.tempBackgroundColor.toString(),
-            mTempPreferences.tempVector.toString(),
-            mTempPreferences.tempVectorColor.toString(),
-            mTempPreferences.tempCategory.toString()
+            tempPreferences.tempBackgroundColor.toString(),
+            tempPreferences.tempVector.toString(),
+            tempPreferences.tempVectorColor.toString(),
+            tempPreferences.tempCategory.toString()
         )
 
         recentSetups.add(stringToSave)
-        mVectorifyPreferences.recentSetups = recentSetups.toMutableSet()
+        vectorifyPreferences.recentSetups = recentSetups.toMutableSet()
     }
 
     //clear recent setups
@@ -427,7 +427,7 @@ object Utils {
             message(R.string.message_clear_recent_setups)
             positiveButton {
                 //add an empty list to preferences
-                mVectorifyPreferences.recentSetups = mutableSetOf()
+                vectorifyPreferences.recentSetups = mutableSetOf()
             }
             negativeButton { dismiss() }
         }

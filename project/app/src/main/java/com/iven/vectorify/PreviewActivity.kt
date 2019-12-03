@@ -69,7 +69,7 @@ class PreviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //set ui theme and immersive mode
-        setTheme(mVectorifyPreferences.theme)
+        setTheme(vectorifyPreferences.theme)
         hideSystemUI()
 
         setContentView(R.layout.preview_activity)
@@ -108,16 +108,16 @@ class PreviewActivity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 sUserIsSeeking = false
-                mTempPreferences.isScaleChanged = true
-                mTempPreferences.tempScale = userProgress.toFloat() / 100
+                tempPreferences.isScaleChanged = true
+                tempPreferences.tempScale = userProgress.toFloat() / 100
             }
         })
 
         //restore saved scale value
-        mSeekBar.progress = (mTempPreferences.tempScale * 100).toInt()
+        mSeekBar.progress = (tempPreferences.tempScale * 100).toInt()
 
         //set scale text
-        scale_text.text = Utils.getDecimalFormattedString(mTempPreferences.tempScale)
+        scale_text.text = Utils.getDecimalFormattedString(tempPreferences.tempScale)
     }
 
     //manage request permission result, continue loading ui if permissions was granted
@@ -148,14 +148,14 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun setToolbarAndSeekBarColors() {
 
-        if (Utils.isColorDark(mTempPreferences.tempBackgroundColor)) toolbar.context.setTheme(R.style.ToolbarStyle_Dark)
+        if (Utils.isColorDark(tempPreferences.tempBackgroundColor)) toolbar.context.setTheme(R.style.ToolbarStyle_Dark)
         else toolbar.context.setTheme(R.style.ToolbarStyle)
 
         //determine if background color is dark or light and select
         //the appropriate color for UI widgets
-        val widgetColors = Utils.getSecondaryColor(mTempPreferences.tempBackgroundColor)
+        val widgetColors = Utils.getSecondaryColor(tempPreferences.tempBackgroundColor)
 
-        val cardColor = ColorUtils.setAlphaComponent(mTempPreferences.tempBackgroundColor, 100)
+        val cardColor = ColorUtils.setAlphaComponent(tempPreferences.tempBackgroundColor, 100)
 
         toolbar.setBackgroundColor(cardColor)
 
@@ -184,39 +184,39 @@ class PreviewActivity : AppCompatActivity() {
     private fun updatePrefsAndSetLiveWallpaper() {
 
         //do all the save shit here when live wallpaper is applied
-        if (mTempPreferences.isBackgroundColorChanged) {
-            mVectorifyPreferences.backgroundColor = mTempPreferences.tempBackgroundColor
-            mTempPreferences.isBackgroundColorChanged = false
+        if (tempPreferences.isBackgroundColorChanged) {
+            vectorifyPreferences.backgroundColor = tempPreferences.tempBackgroundColor
+            tempPreferences.isBackgroundColorChanged = false
         }
 
-        if (mTempPreferences.isVectorColorChanged) {
-            mVectorifyPreferences.vectorColor = mTempPreferences.tempVectorColor
-            mTempPreferences.isVectorColorChanged = false
+        if (tempPreferences.isVectorColorChanged) {
+            vectorifyPreferences.vectorColor = tempPreferences.tempVectorColor
+            tempPreferences.isVectorColorChanged = false
         }
 
-        if (mTempPreferences.isVectorChanged) {
-            mVectorifyPreferences.vector = mTempPreferences.tempVector
-            mTempPreferences.isVectorChanged = false
+        if (tempPreferences.isVectorChanged) {
+            vectorifyPreferences.vector = tempPreferences.tempVector
+            tempPreferences.isVectorChanged = false
         }
 
-        if (mTempPreferences.isCategoryChanged) {
-            mVectorifyPreferences.category = mTempPreferences.tempCategory
-            mTempPreferences.isCategoryChanged = false
+        if (tempPreferences.isCategoryChanged) {
+            vectorifyPreferences.category = tempPreferences.tempCategory
+            tempPreferences.isCategoryChanged = false
         }
 
-        if (mTempPreferences.isScaleChanged) {
-            mVectorifyPreferences.scale = mTempPreferences.tempScale
-            mTempPreferences.isScaleChanged = false
+        if (tempPreferences.isScaleChanged) {
+            vectorifyPreferences.scale = tempPreferences.tempScale
+            tempPreferences.isScaleChanged = false
         }
 
-        if (mTempPreferences.isHorizontalOffsetChanged) {
-            mVectorifyPreferences.horizontalOffset = mTempPreferences.tempHorizontalOffset
-            mTempPreferences.isHorizontalOffsetChanged = false
+        if (tempPreferences.isHorizontalOffsetChanged) {
+            vectorifyPreferences.horizontalOffset = tempPreferences.tempHorizontalOffset
+            tempPreferences.isHorizontalOffsetChanged = false
         }
 
-        if (mTempPreferences.isVerticalOffsetChanged) {
-            mVectorifyPreferences.verticalOffset = mTempPreferences.tempVerticalOffset
-            mTempPreferences.isVerticalOffsetChanged = false
+        if (tempPreferences.isVerticalOffsetChanged) {
+            vectorifyPreferences.verticalOffset = tempPreferences.tempVerticalOffset
+            tempPreferences.isVerticalOffsetChanged = false
         }
 
         //check if the live wallpaper is already running
@@ -255,10 +255,10 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     fun resetVectorPosition(view: View) {
-        val savedScale = mVectorifyPreferences.scale
+        val savedScale = vectorifyPreferences.scale
         mVectorView.setScaleFactor(savedScale)
-        mTempPreferences.tempScale = savedScale
-        mTempPreferences.isScaleChanged = true
+        tempPreferences.tempScale = savedScale
+        tempPreferences.isScaleChanged = true
         mSeekBar.progress = (savedScale * 100).toInt()
         scale_text.text = Utils.getDecimalFormattedString(mSeekBar.progress.toFloat() / 100)
         mVectorView.resetPosition()
