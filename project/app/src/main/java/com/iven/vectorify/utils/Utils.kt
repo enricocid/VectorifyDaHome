@@ -415,4 +415,21 @@ object Utils {
         recentSetups.add(stringToSave)
         mVectorifyPreferences.recentSetups = recentSetups.toMutableSet()
     }
+
+    //clear recent setups
+    @JvmStatic
+    fun clearRecentSetups(context: Context) {
+
+        MaterialDialog(context).show {
+
+            cornerRadius(res = R.dimen.md_corner_radius)
+            title(res = R.string.title_recent_setups)
+            message(R.string.message_clear_recent_setups)
+            positiveButton {
+                //add an empty list to preferences
+                mVectorifyPreferences.recentSetups = mutableSetOf()
+            }
+            negativeButton { dismiss() }
+        }
+    }
 }

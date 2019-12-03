@@ -1,6 +1,7 @@
 package com.iven.vectorify
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
@@ -8,11 +9,13 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
@@ -147,7 +150,10 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             when (it.itemId) {
                 R.id.app_bar_info -> openGitHubPage()
                 R.id.app_bar_theme -> setNewTheme()
-                R.id.app_bar_restore -> restoreDefaultWallpaper()
+                R.id.app_bar_restore -> showOptionsPopups(
+                    this,
+                    bottomBar.findViewById(R.id.app_bar_restore)
+                )
             }
             return@setOnMenuItemClickListener true
         }
@@ -234,6 +240,26 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
                 )
             )
         }
+    }
+
+    private fun showOptionsPopups(
+        context: Context,
+        view: View
+    ) {
+        val popup = PopupMenu(context, view)
+        popup.setOnMenuItemClickListener {
+
+            when (it.itemId) {
+                R.id.clear_recents -> Utils.clearRecentSetups(context)
+                else -> restoreDefaultWallpaper()
+            }
+
+            return@setOnMenuItemClickListener true
+        }
+        popup.inflate(R.menu.menu_do_something)
+        if (mVectorifyPreferences.recentSetups.isNullOrEmpty()) popup.menu.removeItem(R.id.clear_recents)
+        popup.gravity = Gravity.END
+        popup.show()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
