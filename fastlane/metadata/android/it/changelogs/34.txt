@@ -1,0 +1,8 @@
+- Per i dispositivi >= Android 8.1: implementato edge-to-edge per uniformare le barre di sistema
+al tema dell'app. Grazie Jnss98b (https://github.com/Jnss98b) per il suo supporto!
+- Estremamente semplificata l'implementazione del dialog dei recenti.
+- Il pulsante reset ora mostra due opzioni: reset wallpaper default e cancellazione recenti.
+- Aggiunte traduzioni Paesi Bassi (grazie ad Heimen Stoffels).
+
+Nota: sfortunatamente i recenti e lo sfondo corrente potrebbero risultare influenzati da questo 
+aggiornamento. Grazie per la pazienza!

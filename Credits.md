@@ -11,15 +11,17 @@
 
 - [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on [Music Player GO](https://github.com/enricocid/Music-Player-GO) which I used here!
 
+- [Jnss98b](https://github.com/Jnss98b) for helping me with edge-to-edge implementation!
+
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team and [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support, inspirations and suggestions! The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome) that was built thanks to the team/community feedbacks!
 
 - [Stefan Möller](https://github.com/stupo) for his [suggestions](https://github.com/enricocid/VectorifyDaHome/issues/2)!
 
+- [Heimen Stoffels](https://github.com/Vistaus) for Dutch translations!
+
 - [Jnss98b](https://github.com/Jnss98b) for his [support](https://github.com/enricocid/VectorifyDaHome/issues/3)!
 
-- [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
-
-- Abdul Kahlawi for reporting an issue on Lollipop
+- Abdul Kahlawi for reporting and letting me to fix an issue on Lollipop!
 
 
 ### SVG sources
