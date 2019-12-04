@@ -28,6 +28,7 @@
     <string name="title_theme">Thema</string>
     <string name="title_restore">Standaardachtergrond herstellen</string>
     <string name="title_reset_recents">Recente wissen</string>
+    <string name="title_reset">Extra instellingen</string>
     <string name="install_browser_message">Installeer een webbrowser!</string>
 
     <!-- Preview things -->

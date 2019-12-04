@@ -146,6 +146,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         //set the bottom bar menu
         val bottomBar = bar
         bottomBar.replaceMenu(R.menu.bottom_menu)
+        bottomBar.menu.findItem(R.id.app_bar_restore).title = getString(R.string.title_reset)
         bottomBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_bar_info -> openGitHubPage()
