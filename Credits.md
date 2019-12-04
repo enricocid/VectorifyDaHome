@@ -11,6 +11,8 @@
 
 - [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on [Music Player GO](https://github.com/enricocid/Music-Player-GO) which I used here!
 
+- [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
+
 - [Jnss98b](https://github.com/Jnss98b) for helping me with edge-to-edge implementation!
 
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team and [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support, inspirations and suggestions! The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome) that was built thanks to the team/community feedbacks!
