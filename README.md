@@ -4,7 +4,7 @@
 ###### Current version: [(34) 1.7.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.7.0)
 
 
-[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21) [![Donate on PayPal](https://img.shields.io/badge/PayPal-Donate%20Now-brightgreen.svg)](https://paypal.me/enricocid) 
+[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21)
 
 [PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md) - [CREDITS](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
 
