@@ -1,6 +1,5 @@
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
-
 ###### Current version: [(34) 1.7.0](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.7.0)
 
 
@@ -8,8 +7,7 @@
 
 [PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md) - [CREDITS](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh34.gif) 
-
+<img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh34.gif" height="500px"/>
 
 # Downloads
 
