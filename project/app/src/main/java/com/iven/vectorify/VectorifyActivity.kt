@@ -186,19 +186,16 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
             setBackgroundAndVectorColorsChanged()
 
-            runOnUiThread {
+            //update background card color and fab tint
+            val comboBackgroundColor = ContextCompat.getColor(this, combo.first)
+            setBackgroundColorForUI(comboBackgroundColor)
 
-                //update background card color and fab tint
-                val comboBackgroundColor = ContextCompat.getColor(this, combo.first)
-                setBackgroundColorForUI(comboBackgroundColor)
+            //update vector card color and fab check drawable
+            val comboVectorColor = ContextCompat.getColor(this, combo.second)
+            setVectorColorForUI(comboVectorColor)
 
-                //update vector card color and fab check drawable
-                val comboVectorColor = ContextCompat.getColor(this, combo.second)
-                setVectorColorForUI(comboVectorColor)
-
-                //update vector frame colors
-                setVectorFrameColors(tintBackground = true, showErrorDialog = false)
-            }
+            //update vector frame colors
+            setVectorFrameColors(tintBackground = true, showErrorDialog = false)
         }
 
         //setup vectors
@@ -214,15 +211,13 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         mVectorsAdapter.onVectorClick = { vector ->
 
             if (mSelectedVector != vector) {
-                runOnUiThread {
-                    try {
-                        mVectorFrame.setImageResource(Utils.getVectorProps(vector!!).first)
-                        mSelectedVector = vector
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        mSelectedVector = Utils.getDefaultVectorForApi()
-                        mVectorFrame.setImageResource(Utils.getVectorProps(mSelectedVector).first)
-                    }
+                try {
+                    mVectorFrame.setImageResource(Utils.getVectorProps(vector!!).first)
+                    mSelectedVector = vector
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    mSelectedVector = Utils.getDefaultVectorForApi()
+                    mVectorFrame.setImageResource(Utils.getVectorProps(mSelectedVector).first)
                 }
 
                 //update drawable tint
@@ -233,14 +228,12 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             }
         }
 
-        runOnUiThread {
-            mCategoriesChip.text = Utils.getCategory(this, mSelectedCategory).first
-            mVectorsRecyclerView.scrollToPosition(
-                mVectorsAdapter.getVectorPosition(
-                    vectorifyPreferences.vector
-                )
+        mCategoriesChip.text = Utils.getCategory(this, mSelectedCategory).first
+        mVectorsRecyclerView.scrollToPosition(
+            mVectorsAdapter.getVectorPosition(
+                vectorifyPreferences.vector
             )
-        }
+        )
     }
 
     private fun showOptionsPopups(
@@ -292,25 +285,23 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         tempPreferences.tempBackgroundColor = mSelectedBackgroundColor
 
         //update shit colors
-        runOnUiThread {
-            background_color.setCardBackgroundColor(color)
-            val textColor = Utils.getSecondaryColor(color)
-            background_color_head.setTextColor(textColor)
-            background_color_subhead.setTextColor(textColor)
-            background_color_subhead.text = getHexCode(color)
-            mFab.backgroundTintList = ColorStateList.valueOf(color)
+        background_color.setCardBackgroundColor(color)
+        val textColor = Utils.getSecondaryColor(color)
+        background_color_head.setTextColor(textColor)
+        background_color_subhead.setTextColor(textColor)
+        background_color_subhead.text = getHexCode(color)
+        mFab.backgroundTintList = ColorStateList.valueOf(color)
 
-            //update vector frame colors
-            setVectorFrameColors(tintBackground = true, showErrorDialog = false)
+        //update vector frame colors
+        setVectorFrameColors(tintBackground = true, showErrorDialog = false)
 
-            //check if colors are the same so we enable stroke to make vector visible
-            val fabDrawableColor = if (Utils.checkIfColorsEqual(
-                    mSelectedBackgroundColor,
-                    mSelectedVectorColor
-                )
-            ) textColor else tempPreferences.tempVectorColor
-            mFab.drawable.setTint(fabDrawableColor)
-        }
+        //check if colors are the same so we enable stroke to make vector visible
+        val fabDrawableColor = if (Utils.checkIfColorsEqual(
+                mSelectedBackgroundColor,
+                mSelectedVectorColor
+            )
+        ) textColor else tempPreferences.tempVectorColor
+        mFab.drawable.setTint(fabDrawableColor)
     }
 
     //update vector card colors
@@ -319,24 +310,22 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         tempPreferences.tempVectorColor = mSelectedVectorColor
 
         //update shit colors
-        runOnUiThread {
-            vector_color.setCardBackgroundColor(color)
-            val textColor = Utils.getSecondaryColor(color)
-            vector_color_head.setTextColor(textColor)
-            vector_color_subhead.setTextColor(textColor)
-            vector_color_subhead.text = getHexCode(color)
+        vector_color.setCardBackgroundColor(color)
+        val textColor = Utils.getSecondaryColor(color)
+        vector_color_head.setTextColor(textColor)
+        vector_color_subhead.setTextColor(textColor)
+        vector_color_subhead.text = getHexCode(color)
 
-            //check if colors are the same so we enable stroke to make vector visible
-            val fabDrawableColor =
-                if (Utils.checkIfColorsEqual(
-                        mSelectedBackgroundColor,
-                        mSelectedVectorColor
-                    )
-                ) textColor else color
-            mFab.drawable.setTint(fabDrawableColor)
+        //check if colors are the same so we enable stroke to make vector visible
+        val fabDrawableColor =
+            if (Utils.checkIfColorsEqual(
+                    mSelectedBackgroundColor,
+                    mSelectedVectorColor
+                )
+            ) textColor else color
+        mFab.drawable.setTint(fabDrawableColor)
 
-            setVectorFrameColors(tintBackground = false, showErrorDialog = true)
-        }
+        setVectorFrameColors(tintBackground = false, showErrorDialog = true)
     }
 
     //set system accent as background color
@@ -445,11 +434,9 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
             val category = Utils.getCategory(this@VectorifyActivity, index)
 
-            runOnUiThread {
-                mVectorsRecyclerView.scrollToPosition(0)
-                mVectorsAdapter.swapCategory(category.second)
-                mCategoriesChip.text = category.first
-            }
+            mVectorsRecyclerView.scrollToPosition(0)
+            mVectorsAdapter.swapCategory(category.second)
+            mCategoriesChip.text = category.first
 
             mSelectedCategory = index
             tempPreferences.tempCategory = mSelectedCategory
