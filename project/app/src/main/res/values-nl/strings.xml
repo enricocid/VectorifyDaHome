@@ -12,6 +12,7 @@
     <string name="title_background_dialog">Achtergrondkleur</string>
     <string name="title_vector">Vector</string>
     <string name="title_vector_dialog">Vectorkleur</string>
+    <string name="title_presets">Presets</string>
     <string name="selected_preset">Achtergrond: %1s, Vector: %1s</string>
     <string name="title_accent_me">KLEUR ME!</string>
 
@@ -32,6 +33,7 @@
     <string name="install_browser_message">Installeer een webbrowser!</string>
 
     <!-- Preview things -->
+    <string name="title_preview">Preview</string>
     <string name="title_size">Grootte en positie</string>
     <string name="title_save_to">Opslaan op interne opslag</string>
     <string name="title_crop">Bijsnijden en instellen als achtergrond</string>
@@ -49,6 +51,7 @@
     <string name="title_food">Eten en drinken</string>
     <string name="title_nature">Natuur</string>
     <string name="title_weather">Weer</string>
+    <string name="title_sport">Sport</string>
     <string name="title_math">Wiskunde</string>
     <string name="title_science">Wetenschap</string>
     <string name="title_chernoff">Chernoff-gezichten</string>
