@@ -11,6 +11,7 @@
     <string name="title_background_dialog">Colore sfondo</string>
     <string name="title_vector">Grafica</string>
     <string name="title_vector_dialog">Colore grafica</string>
+    <string name="title_presets">Presets</string>
     <string name="title_accent_me">ACCENTAMI!</string>
     <string name="selected_preset">Sfondo: %1s, Grafica: %1s</string>
 
@@ -31,6 +32,7 @@
     <string name="install_browser_message">Installa un browser prima!</string>
 
     <!-- Preview -->
+    <string name="title_preview">Preview</string>
     <string name="title_size">Dimensione e posizione</string>
     <string name="title_save_to">Salva nella memoria interna</string>
     <string name="title_crop">Crop e setta come sfondo</string>
@@ -48,6 +50,7 @@
     <string name="title_food">Cibo</string>
     <string name="title_nature">Natura</string>
     <string name="title_weather">Meteo</string>
+    <string name="title_sport">Sport</string>
     <string name="title_math">Matematica</string>
     <string name="title_science">Scienza</string>
     <string name="title_chernoff">Facce di Chernoff</string>
