@@ -1,0 +1,61 @@
+<resources>
+    <string name="info_error">Oups&#160;! De nouveaux vecteurs ont été ajoutés&#160;! Vous devez réappliquer le fond d\'écran et reconstruire la liste des configurations récentes (s\'il y en a). Désolé.</string>
+    <string name="info_error_ok">Ne plus afficher</string>
+    <string name="error_get_resource">Oups&#160;! Non trouvé&#160;!</string>
+    <!-- Card titles -->
+    <string name="title_background">Arrière-plan</string>
+    <string name="title_background_dialog">Couleur d\'arrière-plan</string>
+    <string name="title_vector">Image vectorielle</string>
+    <string name="title_vector_dialog">Couleur de l\'image vectorielle</string>
+    <string name="title_presets" translatable="false">Presets</string>
+    <string name="selected_preset">Arrière-plan&#160;: %1s, Image vectorielle&#160;: %1s</string>
+    <string name="title_accent_me">Colorie-moi&#160;!</string>
+    <!-- Recent setups things -->
+    <string name="title_recent_setups">Configurations récentes</string>
+    <string name="message_no_recent_setups">Aucune configuration récente&#160;!</string>
+    <string name="message_clear_recent_setups">Toutes les configurations récentes seront supprimées. Êtes-vous sûr&#160;? Si vous voulez supprimer des configurations spécifiques, appuyez dessus longuement :).</string>
+    <!-- BottomBar menu items -->
+    <string name="title_github">Page GitHub</string>
+    <string name="title_theme">Thème</string>
+    <string name="title_restore">Restaurer le fond d\'écran par défaut&#160;!</string>
+    <string name="title_reset_recents">Effacer les récents</string>
+    <string name="title_reset">Options supplémentaires</string>
+    <string name="install_browser_message">Veuillez d\'abord installer un navigateur&#160;!</string>
+    <!-- Preview things -->
+    <string name="title_size">Taille et position</string>
+    <string name="title_save_to">Enregistrer dans la mémoire interne</string>
+    <string name="title_crop">Rogner et définir comme fond d\'écran</string>
+    <string name="title_go_live">Définir comme fond d\'écran live</string>
+    <string name="title_already_live">Application des modifications&#8230;</string>
+    <string name="message_saved_to">%1s enregsitré vers %1s</string>
+    <!-- Categories -->
+    <string name="title_categories">Catégories</string>
+    <string name="title_tech">Tech</string>
+    <string name="title_symbols">Symboles</string>
+    <string name="title_animals">Animaux</string>
+    <string name="title_emoticons">Emoticônes</string>
+    <string name="title_fun">Fun</string>
+    <string name="title_food">Alimentation</string>
+    <string name="title_nature">Nature</string>
+    <string name="title_weather">Météo</string>
+    <string name="title_sport" translatable="false">Sport</string>
+    <string name="title_math">Maths</string>
+    <string name="title_science">Science</string>
+    <string name="title_chernoff">Visages de Chernoff</string>
+    <string name="title_music">Musique</string>
+    <string name="title_nerdy">Geek</string>
+    <string name="title_buildings">Bâtiments</string>
+    <string name="title_alert">Alertes</string>
+    <string name="title_alpha">Lettres</string>
+    <string name="title_roman">Chiffres romains</string>
+    <string name="title_zodiac">Zodiaque</string>
+    <string name="title_others">Autres</string>
+    <!-- Dialog rationale things -->
+    <string name="title_rationale">Permission d\'accès au stockage</string>
+    <string name="rationale">Laissez-moi accéder à votre stockage afin d\'enregistrer des fonds d\'écran dans votre mémoire interne. Je ne pourrai pas accéder à vos données personnelles :)</string>
+    <string name="rationale_denied">Vous avez récemment choisi l\'option «&#160;Ne plus me demander&#160;» lorsque la permission d\'accès au stockage a été demandée. Allez dans les infos de l\'application et accordez-moi la permission si vous voulez sauvegarder des fonds d\'écran.</string>
+    <string name="go_to_info">Aller vers les infos</string>
+    <string name="boo">Bouh&#160;! Pas d\'accès, pas de fête&#160;! Utilisez le fond d\'écran en direct&#160;!</string>
+    <string name="boo_info">Bouh&#160;! Juste pour que tu le saches&#160;!</string>
+    <string name="boo_almost_there">Naviguez maintenant vers les autorisations et activez l\'accès au stockage&#160;!</string>
+</resources>
