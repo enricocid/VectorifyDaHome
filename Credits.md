@@ -7,6 +7,8 @@
 
 - [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
+- [Sergej Shafarenka](https://github.com/beworker) for the awesome [Edge-to-Edge](https://github.com/beworker/edge-to-edge/) library!
+
 - [Canva](https://www.canva.com/learn/100-color-combinations) for some color presets!
 
 - [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on [Music Player GO](https://github.com/enricocid/Music-Player-GO) which I used here!
@@ -16,6 +18,8 @@
 - [Jnss98b](https://github.com/Jnss98b) for helping me with edge-to-edge implementation!
 
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team and [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support, inspirations and suggestions! The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome) that was built thanks to the team/community feedbacks!
+
+- [Nathan Bonnemains](https://github.com/NathanBnm) for French translations!
 
 - [Stefan Möller](https://github.com/stupo) for his [suggestions](https://github.com/enricocid/VectorifyDaHome/issues/2)!
 

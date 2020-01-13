@@ -1,0 +1,3 @@
+- Miglioramenti edge-to-edge (per versioni di android sopra oreo mr1)
+- Aggiunte traduzioni Francese (grazie a Nathan Bonnemains - https://github.com/NathanBnm)
+- Piccola revisione del codice

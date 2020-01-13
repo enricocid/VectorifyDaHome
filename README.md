@@ -1,13 +1,15 @@
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
 
-###### Current version: [(35) 1.7.1](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.7.1)
+
+[![Privacy policy](https://img.shields.io/static/v1?label=Privacy-policy&message=read&color=ef9a9a)](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md)
+[![Credits](https://img.shields.io/static/v1?label=Contributors&message=many&color=81d4fa)](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
+
+[![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
+[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.7.2&color=ffe082)](https://github.com/enricocid/Music-Player-GO/releases/tag/v1.7.2)
 
 
-[![API](https://img.shields.io/badge/API-21%2B-blue.svg?style=flat-square)](https://android-arsenal.com/api?level=21)
 
-[PRIVACY POLICY](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md) - [CREDITS](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
-
-<img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh34.gif" height="500px"/>
+<img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh36.gif" height="500px"/>
 
 # Downloads
 
@@ -37,7 +39,7 @@ The app itself implements a dark/light theme switcher!
 
 # License
 
-Copyright (C) 2019 **Enrico D'Ortenzio**
+Copyright (C) 2020 **Enrico D'Ortenzio**
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
