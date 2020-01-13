@@ -18,6 +18,7 @@
         <item name="vectors_color">@android:color/black</item>
         <item name="presets_text_color">@android:color/black</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
     </style>
 
     <!-- Base theme dark. -->
@@ -31,6 +32,11 @@
         <item name="vectors_color">@android:color/white</item>
         <item name="presets_text_color">@android:color/white</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+    </style>
+
+    <style name="PopupMenu" parent="android:Widget.Material.PopupMenu">
+        <item name="android:popupElevation">2dp</item>
     </style>
 
     <!-- Chip text appearance -->
