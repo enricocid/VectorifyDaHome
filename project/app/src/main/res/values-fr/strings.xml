@@ -14,6 +14,7 @@
     <string name="title_recent_setups">Configurations récentes</string>
     <string name="message_no_recent_setups">Aucune configuration récente&#160;!</string>
     <string name="message_clear_recent_setups">Toutes les configurations récentes seront supprimées. Êtes-vous sûr&#160;? Si vous voulez supprimer des configurations spécifiques, appuyez dessus longuement :).</string>
+    <string name="message_clear_single_recent_setup">La configuration &#35;%1s sera supprimée. Êtes-vous sûr&#160;?</string>
     <!-- BottomBar menu items -->
     <string name="title_github">Page GitHub</string>
     <string name="title_theme">Thème</string>
