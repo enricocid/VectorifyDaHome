@@ -34,6 +34,30 @@ import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 object Utils {
 
+    @JvmStatic
+    @TargetApi(Build.VERSION_CODES.O_MR1)
+    fun handleLightSystemBars(context: Context, window: Window?, view: View, isDialog: Boolean) {
+
+        val isThemeDark = vectorifyPreferences.theme == R.style.AppTheme_Dark
+
+        val color = if (!isDialog) ContextCompat.getColor(
+            context,
+            if (isThemeDark) R.color.bottom_bar_color_dark else R.color.bottom_bar_color
+        ) else Color.TRANSPARENT
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+
+            window?.apply {
+                statusBarColor = color
+                navigationBarColor = color
+            }
+
+        }
+
+        view.systemUiVisibility =
+            if (isThemeDark) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+    }
+
     //method to open live wallpaper intent
     @JvmStatic
     fun openLiveWallpaperIntent(context: Context) {
@@ -81,38 +105,6 @@ object Utils {
     @JvmStatic
     fun lightenColor(color: Int, factor: Float): Int {
         return ColorUtils.blendARGB(color, Color.WHITE, factor)
-    }
-
-    @JvmStatic
-    fun handleEdgeToEdge(context: Context, window: Window?, view: View, isMainView: Boolean) {
-
-        val isThemeDark = vectorifyPreferences.theme == R.style.AppTheme_Dark
-
-        val color = if (isMainView) ContextCompat.getColor(
-            context,
-            if (isThemeDark) R.color.bottom_bar_color_dark else R.color.bottom_bar_color
-        ) else Color.TRANSPARENT
-        window?.statusBarColor = color
-        window?.navigationBarColor = color
-
-        var flags =
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-        when {
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1 -> {
-
-                val systemBarsFlag =
-                    if (isThemeDark) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-                flags =
-                    flags or systemBarsFlag
-            }
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q -> {
-
-
-                flags =
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            }
-        }
-        view.systemUiVisibility = flags
     }
 
     @JvmStatic

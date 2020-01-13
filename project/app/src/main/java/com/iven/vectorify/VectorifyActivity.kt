@@ -30,6 +30,7 @@ import com.afollestad.materialdialogs.color.colorChooser
 import com.afollestad.materialdialogs.list.customListAdapter
 import com.afollestad.materialdialogs.list.getRecyclerView
 import com.afollestad.materialdialogs.list.listItems
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.iven.vectorify.adapters.PresetsAdapter
@@ -37,6 +38,8 @@ import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.utils.Utils
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
+import de.halfbit.edgetoedge.Edge
+import de.halfbit.edgetoedge.edgeToEdge
 import kotlinx.android.synthetic.main.background_color_pref_card.*
 import kotlinx.android.synthetic.main.cards_container.*
 import kotlinx.android.synthetic.main.presets_card.*
@@ -51,6 +54,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
     private lateinit var mFab: FloatingActionButton
     private lateinit var mVectorFrame: ImageView
+    private lateinit var mBottomBar: BottomAppBar
     private lateinit var mCategoriesChip: Chip
     private lateinit var mVectorsRecyclerView: RecyclerView
     private lateinit var mVectorsRecyclerViewLayoutManager: LinearLayoutManager
@@ -144,36 +148,42 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         setVectorColorForUI(mSelectedVectorColor)
 
         //set the bottom bar menu
-        val bottomBar = bar
-        bottomBar.replaceMenu(R.menu.bottom_menu)
-        bottomBar.menu.findItem(R.id.app_bar_restore).title = getString(R.string.title_reset)
-        bottomBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.app_bar_info -> openGitHubPage()
-                R.id.app_bar_theme -> setNewTheme()
-                R.id.app_bar_restore -> showOptionsPopups(
-                    this,
-                    bottomBar.findViewById(R.id.app_bar_restore)
-                )
+        mBottomBar = bar
+
+        mBottomBar.apply {
+            replaceMenu(R.menu.bottom_menu)
+            menu.findItem(R.id.app_bar_restore).title = getString(R.string.title_reset)
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.app_bar_info -> openGitHubPage()
+                    R.id.app_bar_theme -> setNewTheme()
+                    R.id.app_bar_restore -> showOptionsPopups(
+                        this@VectorifyActivity,
+                        findViewById(R.id.app_bar_restore)
+                    )
+                }
+                return@setOnMenuItemClickListener true
             }
-            return@setOnMenuItemClickListener true
-        }
 
-        bottomBar.setNavigationOnClickListener {
-            if (vectorifyPreferences.recentSetups.isNotEmpty())
-                startRecentsDialog()
-            else
-                DynamicToast.makeWarning(this, getString(R.string.message_no_recent_setups))
-                    .show()
-        }
+            setNavigationOnClickListener {
+                if (vectorifyPreferences.recentSetups.isNotEmpty())
+                    startRecentsDialog()
+                else
+                    DynamicToast.makeWarning(
+                        this@VectorifyActivity,
+                        getString(R.string.message_no_recent_setups)
+                    )
+                        .show()
+            }
 
-        bottomBar.afterMeasured {
-            val version = version
-            val lp = version.layoutParams as CoordinatorLayout.LayoutParams
-            lp.setMargins(0, 0, 0, height)
-            version.layoutParams = lp
+            afterMeasured {
+                val version = version
+                val lp = version.layoutParams as CoordinatorLayout.LayoutParams
+                lp.setMargins(0, 0, 0, height)
+                version.layoutParams = lp
 
-            cards_container.setPadding(0, 0, 0, height + version.height)
+                cards_container.setPadding(0, 0, 0, height + version.height)
+            }
         }
 
         //setup presets
@@ -234,6 +244,18 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
                 vectorifyPreferences.vector
             )
         )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            window?.apply {
+                Utils.handleLightSystemBars(this@VectorifyActivity, window, decorView, false)
+                edgeToEdge {
+                    decorView.fit { Edge.Top }
+                    mBottomBar.fit { Edge.Bottom + Edge.Right }
+                    mFab.fit { Edge.Right }
+                    mFab.fitPadding { Edge.Bottom }
+                }
+            }
+        }
     }
 
     private fun showOptionsPopups(
@@ -254,16 +276,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         if (vectorifyPreferences.recentSetups.isNullOrEmpty()) popup.menu.removeItem(R.id.clear_recents)
         popup.gravity = Gravity.END
         popup.show()
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) Utils.handleEdgeToEdge(
-            this,
-            window,
-            vectorifyView,
-            true
-        )
     }
 
     //update vector frame
@@ -462,12 +474,17 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             getRecyclerView().layoutManager =
                 GridLayoutManager(this@VectorifyActivity, 3, RecyclerView.VERTICAL, false)
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) Utils.handleEdgeToEdge(
-                this@VectorifyActivity,
-                this.window,
-                view,
-                false
-            )
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+                window?.apply {
+                    Utils.handleLightSystemBars(this@VectorifyActivity, window, decorView, true)
+                    edgeToEdge {
+                        getRecyclerView().fit { Edge.Bottom }
+                        decorView.fit { Edge.Top }
+                    }
+                }
+
+            }
         }
     }
 
