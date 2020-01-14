@@ -2,15 +2,13 @@ Vectorify da home! is a minimal and open source app to apply wallpapers from a v
 
 - Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
 
-- Category chooser.
+- Category chooser
 
-- Preview screen where you can customize the size and position of the vector graphic.
+- Preview screen where you can customize the size and position of the vector graphic
 
-- Recent setups with deletion possibility (long click to delete a single setup).
+- Recent setups management
+  - Consiglio: long click to delete a single setup
 
-- 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper).
+- 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper)
 
-
-- Other features?
-
-The app itself implements a dark/light theme switcher!
+- Dark/light themes

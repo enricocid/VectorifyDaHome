@@ -5,7 +5,7 @@
 [![Credits](https://img.shields.io/static/v1?label=Contributors&message=many&color=81d4fa)](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
 
 [![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
-[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.7.2&color=ffe082)](https://github.com/enricocid/Music-Player-GO/releases/tag/v1.7.2)
+[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.7.3&color=ffe082)](https://github.com/enricocid/Music-Player-GO/releases/tag/v1.7.3)
 
 
 
@@ -23,18 +23,16 @@
 
 - Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
 
-- Category chooser.
+- Category chooser
 
-- Recent setups with deletion possibility (long click to delete a single setup).
+- Recent setups management 
+  >tip: long click to delete a single setup)
 
-- Preview screen where you can customize the size and position of the vector graphic.
+- Preview screen where you can customize the size and position of the vector graphic
 
-- 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper).
+- 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper)
 
-
-- Other features?
-
-The app itself implements a dark/light theme switcher!
+- Dark/light themes
 
 
 # License
