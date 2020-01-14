@@ -5,7 +5,7 @@
     <!-- Card titles -->
     <string name="title_background">Arrière-plan</string>
     <string name="title_background_dialog">Couleur d\'arrière-plan</string>
-    <string name="title_vector">Image vectorielle</string>
+    <string name="title_vector">Image</string>
     <string name="title_vector_dialog">Couleur de l\'image vectorielle</string>
     <string name="title_presets">Paramètres prédéfinis</string>
     <string name="selected_preset">Arrière-plan&#160;: %1s, Image vectorielle&#160;: %1s</string>
