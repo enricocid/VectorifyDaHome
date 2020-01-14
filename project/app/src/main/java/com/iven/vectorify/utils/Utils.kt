@@ -34,6 +34,7 @@ import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 object Utils {
 
+    //method to apply dark system bars
     @JvmStatic
     @TargetApi(Build.VERSION_CODES.O_MR1)
     fun handleLightSystemBars(context: Context, window: Window?, view: View, isDialog: Boolean) {
@@ -93,6 +94,7 @@ object Utils {
     }
 
     //method to determine colors luminance
+    @JvmStatic
     fun isColorDark(color: Int): Boolean {
         return ColorUtils.calculateLuminance(color) < 0.35
     }
