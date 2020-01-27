@@ -10,7 +10,7 @@
     android:layout_marginBottom="8dp"
     android:layout_weight="1"
     android:padding="2dp"
-    app:cardBackgroundColor="?attr/presets_card_color"
+    app:cardBackgroundColor="@color/presets_card_color"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
     tools:context=".VectorifyActivity">
@@ -44,8 +44,8 @@
                 android:alpha="0.5"
                 android:onClick="startCategoryChooser"
                 android:textAppearance="@style/chipTextAppearance"
-                android:textColor="@color/bottom_bar_color"
-                app:chipBackgroundColor="@color/activity_background_color_dark" />
+                android:textColor="@color/chips_text_color"
+                app:chipBackgroundColor="@color/chips_color" />
         </FrameLayout>
 
         <!-- VECTORS OPTIONS -->

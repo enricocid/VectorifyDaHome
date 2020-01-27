@@ -21,6 +21,7 @@ import android.os.Build
 import android.view.View
 import android.view.Window
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -34,16 +35,39 @@ import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 object Utils {
 
+    @JvmStatic
+    fun getDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
+        context.getString(R.string.theme_pref_light) -> AppCompatDelegate.MODE_NIGHT_NO
+        context.getString(R.string.theme_pref_dark) -> AppCompatDelegate.MODE_NIGHT_YES
+        else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM else AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+    }
+
+    @JvmStatic
+    fun getProgressiveDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
+        context.getString(R.string.theme_pref_light) -> context.getString(R.string.theme_pref_dark)
+        context.getString(R.string.theme_pref_dark) -> context.getString(R.string.theme_pref_auto)
+        else -> context.getString(R.string.theme_pref_light)
+    }
+
+    @JvmStatic
+    fun getDefaultNightModeIcon(context: Context) = when (vectorifyPreferences.theme) {
+        context.getString(R.string.theme_pref_light) -> R.drawable.ic_theme_light
+        context.getString(R.string.theme_pref_dark) -> R.drawable.ic_theme_night
+        else -> R.drawable.ic_theme_auto
+    }
+
+    @JvmStatic
+    private fun isThemeNight() =
+        AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
+
     //method to apply dark system bars
     @JvmStatic
     @TargetApi(Build.VERSION_CODES.O_MR1)
     fun handleLightSystemBars(context: Context, window: Window?, view: View, isDialog: Boolean) {
 
-        val isThemeDark = vectorifyPreferences.theme == R.style.AppTheme_Dark
-
+        val isThemeNight = isThemeNight()
         val color = if (!isDialog) ContextCompat.getColor(
-            context,
-            if (isThemeDark) R.color.bottom_bar_color_dark else R.color.bottom_bar_color
+            context, R.color.bottom_bar_color
         ) else Color.TRANSPARENT
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
@@ -56,7 +80,7 @@ object Utils {
         }
 
         view.systemUiVisibility =
-            if (isThemeDark) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            if (isThemeNight) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
     }
 
     //method to open live wallpaper intent

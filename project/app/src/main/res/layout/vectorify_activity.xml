@@ -13,20 +13,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
+        android:alpha="0.25"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:paddingTop="16dp"
+        android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         android:text="@string/versionName"
         android:textAppearance="@android:style/TextAppearance.Material.Caption"
-        android:textColor="?android:attr/textColorSecondary" />
+        android:textColor="@color/vectors_color" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:backgroundTint="?attr/bottom_bar_color"
+        android:backgroundTint="@color/bottom_bar_color"
         app:fabAlignmentMode="end"
         app:navigationContentDescription="@string/title_recent_setups"
         app:navigationIcon="@drawable/ic_baseline_menu" />
@@ -35,8 +36,8 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:useCompatPadding="true"
         android:src="@drawable/ic_check"
-        app:layout_anchor="@id/bar" />
+        app:layout_anchor="@id/bar"
+        app:useCompatPadding="true" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

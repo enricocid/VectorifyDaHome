@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-            android:id="@+id/app_bar_info"
-            android:icon="@drawable/ic_info"
-            android:title="@string/title_github"
-            app:showAsAction="ifRoom"/>
+        android:id="@+id/app_bar_info"
+        android:icon="@drawable/ic_info"
+        android:title="@string/title_github"
+        app:showAsAction="ifRoom" />
 
     <item
-            android:id="@+id/app_bar_theme"
-            android:icon="@drawable/ic_theme"
-            android:title="@string/title_theme"
-            app:showAsAction="ifRoom"/>
+        android:id="@+id/app_bar_theme"
+        android:icon="@drawable/ic_theme_night"
+        android:title="@string/title_theme"
+        app:showAsAction="ifRoom" />
 
     <item
-            android:id="@+id/app_bar_restore"
-            android:icon="@drawable/ic_restore"
-            android:title="@string/title_restore"
-            app:showAsAction="ifRoom"/>
+        android:id="@+id/app_bar_restore"
+        android:icon="@drawable/ic_restore"
+        android:title="@string/title_restore"
+        app:showAsAction="ifRoom" />
 </menu>

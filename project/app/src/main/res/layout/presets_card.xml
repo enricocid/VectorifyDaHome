@@ -9,7 +9,7 @@
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="8dp"
     android:padding="2dp"
-    app:cardBackgroundColor="?attr/presets_card_color"
+    app:cardBackgroundColor="@color/presets_card_color"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
     tools:context=".VectorifyActivity">
@@ -27,7 +27,7 @@
             android:paddingEnd="16dp"
             android:text="@string/title_presets"
             android:textAppearance="@android:style/TextAppearance.Material.Title"
-            android:textColor="?attr/presets_text_color"
+            android:textColor="@color/vectors_color"
             android:textStyle="bold" />
 
         <!-- PRESETS OPTIONS -->

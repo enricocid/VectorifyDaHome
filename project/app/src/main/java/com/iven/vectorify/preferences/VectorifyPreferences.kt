@@ -17,6 +17,7 @@ class VectorifyPreferences(context: Context) {
     private val prefVector = context.getString(R.string.vector_key)
     private val prefCategory = context.getString(R.string.category_key)
     private val prefTheme = context.getString(R.string.theme_key)
+    private val prefsThemeDefault = context.getString(R.string.theme_pref_light)
     private val prefScale = context.getString(R.string.scale_key)
     private val prefRecentSetups = context.getString(R.string.recent_setups_key)
     private val prefHorizontalOffset = context.getString(R.string.horizontal_offset_key)
@@ -26,43 +27,43 @@ class VectorifyPreferences(context: Context) {
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    var backgroundColor: Int
+    var backgroundColor
         get() = mPrefs.getInt(prefBackgroundColor, mDefaultBackgroundColor)
         set(value) = mPrefs.edit().putInt(prefBackgroundColor, value).apply()
 
-    var vectorColor: Int
+    var vectorColor
         get() = mPrefs.getInt(prefVectorColor, mDefaultVectorColor)
         set(value) = mPrefs.edit().putInt(prefVectorColor, value).apply()
 
-    var vector: Int
+    var vector
         get() = mPrefs.getInt(prefVector, Utils.getDefaultVectorForApi())
         set(value) = mPrefs.edit().putInt(prefVector, value).apply()
 
-    var category: Int
+    var category
         get() = mPrefs.getInt(prefCategory, 0)
         set(value) = mPrefs.edit().putInt(prefCategory, value).apply()
 
-    var theme: Int
-        get() = mPrefs.getInt(prefTheme, R.style.AppTheme)
-        set(value) = mPrefs.edit().putInt(prefTheme, value).apply()
+    var theme
+        get() = mPrefs.getString(prefTheme, prefsThemeDefault)
+        set(value) = mPrefs.edit().putString(prefTheme, value).apply()
 
-    var scale: Float
+    var scale
         get() = mPrefs.getFloat(prefScale, 0.35F)
         set(value) = mPrefs.edit().putFloat(prefScale, value).apply()
 
-    var horizontalOffset: Float
+    var horizontalOffset
         get() = mPrefs.getFloat(prefHorizontalOffset, 0F)
         set(value) = mPrefs.edit().putFloat(prefHorizontalOffset, value).apply()
 
-    var verticalOffset: Float
+    var verticalOffset
         get() = mPrefs.getFloat(prefVerticalOffset, 0F)
         set(value) = mPrefs.edit().putFloat(prefVerticalOffset, value).apply()
 
-    var recentSetups: MutableSet<String>
+    var recentSetups
         get() = mPrefs.getStringSet(prefRecentSetups, mutableSetOf())!!
         set(value) = mPrefs.edit().putStringSet(prefRecentSetups, value).apply()
 
-    var hasToShowError: Boolean
+    var hasToShowError
         get() = mPrefs.getBoolean(prefShowError, true)
         set(value) = mPrefs.edit().putBoolean(prefShowError, value).apply()
 }

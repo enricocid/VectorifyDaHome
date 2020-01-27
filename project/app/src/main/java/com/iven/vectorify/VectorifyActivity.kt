@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
@@ -49,8 +50,6 @@ import kotlinx.android.synthetic.main.vectors_card.*
 
 @Suppress("UNUSED_PARAMETER")
 class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
-
-    private var mTheme = R.style.AppTheme
 
     private lateinit var mFab: FloatingActionButton
     private lateinit var mVectorFrame: ImageView
@@ -106,11 +105,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //set theme
-        mTheme = vectorifyPreferences.theme
-
-        setTheme(mTheme)
-
         setContentView(R.layout.vectorify_activity)
 
         //get wallpaper shit
@@ -153,10 +147,30 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         mBottomBar.apply {
             replaceMenu(R.menu.bottom_menu)
             menu.findItem(R.id.app_bar_restore).title = getString(R.string.title_reset)
+            val menuThemeItem = menu.findItem(R.id.app_bar_theme)
+            menuThemeItem.icon = ContextCompat.getDrawable(
+                this@VectorifyActivity,
+                Utils.getDefaultNightModeIcon(this@VectorifyActivity)
+            )
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.app_bar_info -> openGitHubPage()
-                    R.id.app_bar_theme -> setNewTheme()
+                    R.id.app_bar_theme -> {
+
+                        val newTheme = Utils.getProgressiveDefaultNightMode(this@VectorifyActivity)
+                        vectorifyPreferences.theme = newTheme
+
+                        AppCompatDelegate.setDefaultNightMode(
+                            Utils.getDefaultNightMode(
+                                applicationContext
+                            )
+                        )
+                        if (newTheme == context.getString(R.string.theme_pref_light)) menuThemeItem.icon =
+                            ContextCompat.getDrawable(
+                                this@VectorifyActivity,
+                                R.drawable.ic_theme_light
+                            )
+                    }
                     R.id.app_bar_restore -> showOptionsPopups(
                         this@VectorifyActivity,
                         findViewById(R.id.app_bar_restore)
@@ -486,17 +500,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
             }
         }
-    }
-
-    //update theme
-    private fun setNewTheme() {
-        val newTheme = if (mTheme == R.style.AppTheme) R.style.AppTheme_Dark else R.style.AppTheme
-        vectorifyPreferences.theme = newTheme
-
-        //smoothly set app theme
-        val intent = Intent(this, VectorifyActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 
     //returns formatted hex string

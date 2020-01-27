@@ -2,13 +2,13 @@
 <resources>
     <color name="default_accent_color">#3427FF</color>
 
-    <color name="bottom_bar_color">#FAFAFA</color>
+    <color name="bottom_bar_color">@color/chips_text_color</color>
     <color name="system_bars_color">#BFBFBF</color>
-
-    <color name="presets_card_color_dark">#595959</color>
-    <color name="bottom_bar_color_dark">#303030</color>
-    <color name="system_bars_color_dark">#313131</color>
-    <color name="activity_background_color_dark">#424242</color>
+    <color name="presets_card_color">@color/bottom_bar_color</color>
+    <color name="activity_background_color">@android:color/white</color>
+    <color name="chips_text_color">#FAFAFA</color>
+    <color name="chips_color">#424242</color>
+    <color name="vectors_color">@android:color/black</color>
 
     <!--  PRESETS -->
 

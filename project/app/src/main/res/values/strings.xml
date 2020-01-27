@@ -1,33 +1,12 @@
 <resources>
 
-    <string name="live_wallpaper_name" translatable="false">Vectorify da home!</string>
-
-    <string name="title_info_error" translatable="false">No pain no gain</string>
-
     <string name="info_error">Oops!! New vectors have been added! You have to reapply the wallpaper and rebuild recent
         setups (if any) list. Sorry.
     </string>
 
     <string name="info_error_ok">Don\'t show again</string>
 
-    <string name="space_delimiter" translatable="false">&#160;</string>
-    <string name="underscore_delimiter" translatable="false">&#95;</string>
     <string name="error_get_resource">Oops!! Not found!</string>
-
-    <!-- Hex string -->
-    <string name="hex" translatable="false">&#35;%1s</string>
-
-    <!-- Preferences keys -->
-    <string name="background_color_key" translatable="false">background_key</string>
-    <string name="vectors_color_key" translatable="false">icon_key</string>
-    <string name="theme_key" translatable="false">theme_key</string>
-    <string name="vector_key" translatable="false">icon_resource_key</string>
-    <string name="category_key" translatable="false">category_key</string>
-    <string name="scale_key" translatable="false">scale_key</string>
-    <string name="horizontal_offset_key" translatable="false">horizontal_offset_key</string>
-    <string name="vertical_offset_key" translatable="false">vertical_offset_key</string>
-    <string name="recent_setups_key" translatable="false">recent_setups_key</string>
-    <string name="error_show_message_key" translatable="false">error_show_message_key</string>
 
     <!-- Card titles -->
     <string name="title_background">Background</string>
@@ -40,8 +19,6 @@
 
     <!-- Recent setups things -->
     <string name="title_recent_setups">Recent setups</string>
-    <string name="delimiter" translatable="false">&#59;</string>
-    <string name="recent_setups_save_pattern" translatable="false">%1s&#59;%1s&#59;%1s&#59;%1s</string>
     <string name="message_no_recent_setups">No recent setups found!</string>
     <string name="message_clear_recent_setups">All recent setups will be deleted. Are You sure? If You want to delete
         specific setups just long click on them :).
@@ -55,15 +32,9 @@
     <string name="title_reset_recents">Clear recents</string>
     <string name="title_reset">Additional options</string>
 
-
-    <string name="app_github_link" translatable="false">
-        https://github.com/enricocid/VectorifyDaHome
-    </string>
     <string name="install_browser_message">Install a browser first!</string>
 
     <!-- Preview things -->
-    <string name="save_pattern" translatable="false">vectorify_da_home_</string>
-    <string name="time_pattern" translatable="false">dd_MM_yy_hh-ss</string>
     <string name="title_preview">Preview</string>
     <string name="title_size">Size and position</string>
     <string name="title_save_to">Save to internal memory</string>
@@ -71,7 +42,6 @@
     <string name="title_go_live">Set as live wallpaper</string>
     <string name="title_already_live">Applying changes&#8230;</string>
     <string name="message_saved_to">%1s saved to %1s</string>
-    <string name="loading" translatable="false">Vectorifying da home&#8230;</string>
 
     <!-- Categories -->
     <string name="title_categories">Categories</string>

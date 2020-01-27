@@ -54,8 +54,8 @@
             android:onClick="setSystemAccentForVector"
             android:text="@string/title_accent_me"
             android:textAppearance="@style/chipTextAppearance"
-            android:textColor="@color/bottom_bar_color"
-            app:chipBackgroundColor="@color/activity_background_color_dark" />
+            android:textColor="@color/chips_text_color"
+            app:chipBackgroundColor="@color/chips_color" />
     </LinearLayout>
 
 

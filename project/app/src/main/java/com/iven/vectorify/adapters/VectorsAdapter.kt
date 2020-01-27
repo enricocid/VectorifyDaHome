@@ -12,9 +12,9 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
 import com.iven.vectorify.tempPreferences
-import com.iven.vectorify.vectorifyPreferences
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
+import com.iven.vectorify.vectorifyPreferences
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 class VectorsAdapter(private val context: Context) :

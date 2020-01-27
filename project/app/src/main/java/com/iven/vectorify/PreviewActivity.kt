@@ -68,8 +68,7 @@ class PreviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //set ui theme and immersive mode
-        setTheme(vectorifyPreferences.theme)
+        //set immersive mode
         hideSystemUI()
 
         setContentView(R.layout.preview_activity)

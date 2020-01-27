@@ -8,8 +8,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
-import com.iven.vectorify.vectorifyPreferences
 import com.iven.vectorify.utils.Utils
+import com.iven.vectorify.vectorifyPreferences
 
 class RecentsAdapter(
     private val context: Context

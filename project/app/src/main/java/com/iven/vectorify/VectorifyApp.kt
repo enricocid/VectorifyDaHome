@@ -4,8 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
 import com.iven.vectorify.preferences.TempPreferences
 import com.iven.vectorify.preferences.VectorifyPreferences
+import com.iven.vectorify.utils.Utils
 
 val vectorifyPreferences: VectorifyPreferences by lazy {
     VectorifyApp.prefs
@@ -37,6 +39,7 @@ class VectorifyApp : Application() {
         window.defaultDisplay.getRealMetrics(d)
         metrics = Pair(d.widthPixels, d.heightPixels)
 
+        AppCompatDelegate.setDefaultNightMode(Utils.getDefaultNightMode(applicationContext))
         super.onCreate()
     }
 }
