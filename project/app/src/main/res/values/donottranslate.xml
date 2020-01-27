@@ -16,10 +16,8 @@
     <string name="scale_key">scale_key</string>
     <string name="horizontal_offset_key">horizontal_offset_key</string>
     <string name="vertical_offset_key">vertical_offset_key</string>
-    <string name="recent_setups_key">recent_setups_key</string>
+    <string name="recent_setups_key">recents_key</string>
     <string name="error_show_message_key">error_show_message_key</string>
-    <string name="delimiter">&#59;</string>
-    <string name="recent_setups_save_pattern">%1s&#59;%1s&#59;%1s&#59;%1s</string>
     <string name="app_github_link">
         https://github.com/enricocid/VectorifyDaHome
     </string>

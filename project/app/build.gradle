@@ -47,9 +47,9 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.preference:preference-ktx:1.1.0'
     implementation 'androidx.activity:activity-ktx:1.1.0'
-
     implementation 'com.google.android.material:material:1.1.0-rc02'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     implementation 'com.afollestad.material-dialogs:core:3.1.1'
     implementation 'com.afollestad.material-dialogs:color:3.1.1'

@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.preference.PreferenceManager
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import com.iven.vectorify.R
 import com.iven.vectorify.utils.Utils
+import java.lang.reflect.Type
 
 class VectorifyPreferences(context: Context) {
 
@@ -26,6 +29,10 @@ class VectorifyPreferences(context: Context) {
     private val prefShowError = context.getString(R.string.error_show_message_key)
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+    private val typeRecents = object : TypeToken<MutableList<Recent>>() {}.type
+
+    private val mGson = GsonBuilder().create()
 
     var backgroundColor
         get() = mPrefs.getInt(prefBackgroundColor, mDefaultBackgroundColor)
@@ -59,11 +66,37 @@ class VectorifyPreferences(context: Context) {
         get() = mPrefs.getFloat(prefVerticalOffset, 0F)
         set(value) = mPrefs.edit().putFloat(prefVerticalOffset, value).apply()
 
-    var recentSetups
-        get() = mPrefs.getStringSet(prefRecentSetups, mutableSetOf())!!
-        set(value) = mPrefs.edit().putStringSet(prefRecentSetups, value).apply()
+    var recentSetups: MutableList<Recent>?
+        get() = getObject(
+            prefRecentSetups,
+            typeRecents
+        )
+        set(value) = putObject(prefRecentSetups, value)
 
     var hasToShowError
         get() = mPrefs.getBoolean(prefShowError, true)
         set(value) = mPrefs.edit().putBoolean(prefShowError, value).apply()
+
+    /**
+     * Saves object into the Preferences.
+     * Only the fields are stored. Methods, Inner classes, Nested classes and inner interfaces are not stored.
+     **/
+    private fun <T> putObject(key: String, y: T) {
+        //Convert object to JSON String.
+        val inString = mGson.toJson(y)
+        //Save that String in SharedPreferences
+        mPrefs.edit().putString(key, inString).apply()
+    }
+
+    /**
+     * Get object from the Preferences.
+     **/
+    private fun <T> getObject(key: String, t: Type): T? {
+        //We read JSON String which was saved.
+        val value = mPrefs.getString(key, null)
+
+        //JSON String was found which means object can be read.
+        //We convert this JSON String to model object. Parameter "c" (of type Class<T>" is used to cast.
+        return mGson.fromJson(value, t)
+    }
 }

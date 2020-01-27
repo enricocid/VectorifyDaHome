@@ -29,6 +29,7 @@ import androidx.core.graphics.ColorUtils
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
+import com.iven.vectorify.preferences.Recent
 import com.iven.vectorify.tempPreferences
 import com.iven.vectorify.vectorifyPreferences
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -421,17 +422,21 @@ object Utils {
     //update recent setups
     @JvmStatic
     fun updateRecentSetups(context: Context) {
-        val recentSetups = vectorifyPreferences.recentSetups.toMutableList()
-        val stringToSave = context.getString(
-            R.string.recent_setups_save_pattern,
-            tempPreferences.tempBackgroundColor.toString(),
-            tempPreferences.tempVector.toString(),
-            tempPreferences.tempVectorColor.toString(),
-            tempPreferences.tempCategory.toString()
-        )
-
-        recentSetups.add(stringToSave)
-        vectorifyPreferences.recentSetups = recentSetups.toMutableSet()
+        val recentSetups =
+            if (vectorifyPreferences.recentSetups != null) vectorifyPreferences.recentSetups else mutableListOf()
+        tempPreferences.apply {
+            val recentToSave = Recent(
+                tempBackgroundColor,
+                tempVectorColor,
+                tempVector,
+                tempCategory,
+                tempScale,
+                tempHorizontalOffset,
+                tempVerticalOffset
+            )
+            if (!recentSetups?.contains(recentToSave)!!) recentSetups.add(recentToSave)
+            vectorifyPreferences.recentSetups = recentSetups
+        }
     }
 
     //clear recent setups
@@ -445,7 +450,7 @@ object Utils {
             message(R.string.message_clear_recent_setups)
             positiveButton {
                 //add an empty list to preferences
-                vectorifyPreferences.recentSetups = mutableSetOf()
+                vectorifyPreferences.recentSetups = null
             }
             negativeButton { dismiss() }
         }

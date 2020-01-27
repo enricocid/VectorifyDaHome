@@ -71,9 +71,12 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     //interface to let recent  setups UI to let VectorifyActivity to update its shit
     private fun onRecentSelected(
         selectedBackgroundColor: Int,
-        selectedVector: Int,
         selectedVectorColor: Int,
-        selectedCategory: Int
+        selectedVector: Int,
+        selectedCategory: Int,
+        selectedScale: Float,
+        selectedHorizontalOffset: Float,
+        selectedVerticalOffset: Float
     ) {
 
         setBackgroundColorForUI(selectedBackgroundColor)
@@ -84,6 +87,14 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         updateSelectedCategory(selectedCategory)
 
         scrollToVector(selectedVector)
+
+        tempPreferences.tempScale = selectedScale
+        tempPreferences.isScaleChanged = true
+
+        tempPreferences.isHorizontalOffsetChanged = true
+        tempPreferences.tempHorizontalOffset = selectedHorizontalOffset
+        tempPreferences.isVerticalOffsetChanged = true
+        tempPreferences.tempVerticalOffset = selectedVerticalOffset
     }
 
     override fun onStart() {
@@ -99,7 +110,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == getString(R.string.recent_setups_key) && vectorifyPreferences.recentSetups.isEmpty()) {
+        if (key == getString(R.string.recent_setups_key) && !vectorifyPreferences.recentSetups?.isNullOrEmpty()!!) {
             if (::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing) mRecentSetupsDialog.dismiss()
         }
     }
@@ -182,7 +193,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             }
 
             setNavigationOnClickListener {
-                if (vectorifyPreferences.recentSetups.isNotEmpty())
+                if (!vectorifyPreferences.recentSetups.isNullOrEmpty())
                     startRecentsDialog()
                 else
                     DynamicToast.makeWarning(
@@ -496,7 +507,15 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             val recentsAdapter = RecentsAdapter(this@VectorifyActivity)
 
             recentsAdapter.onRecentClick = { recent ->
-                onRecentSelected(recent[0], recent[1], recent[2], recent[3])
+                onRecentSelected(
+                    recent.backgroundColor,
+                    recent.vectorColor,
+                    recent.resource,
+                    recent.category,
+                    recent.scale,
+                    recent.horizontalOffset,
+                    recent.verticalOffset
+                )
                 dismiss()
             }
 
