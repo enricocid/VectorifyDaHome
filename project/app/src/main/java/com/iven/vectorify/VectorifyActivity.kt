@@ -1,5 +1,6 @@
 package com.iven.vectorify
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
@@ -366,6 +368,20 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         tempPreferences.isVectorColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setVectorColorForUI(systemAccent)
+    }
+
+    fun swapCardsColor(view: View) {
+        ObjectAnimator.ofFloat(view, View.ROTATION, 0f, 180f).apply {
+            duration = 500
+            start()
+            doOnEnd {
+                val tempBackgroundColorBackup = tempPreferences.tempBackgroundColor
+                setBackgroundColorForUI(tempPreferences.tempVectorColor)
+                setVectorColorForUI(tempBackgroundColorBackup)
+                tempPreferences.isVectorColorChanged = true
+                tempPreferences.isBackgroundColorChanged = true
+            }
+        }
     }
 
     private fun scrollToVector(vector: Int) {
