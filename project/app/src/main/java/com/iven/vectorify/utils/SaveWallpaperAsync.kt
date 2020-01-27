@@ -83,7 +83,6 @@ class SaveWallpaperAsync(
         super.onPreExecute()
 
         mMaterialDialog = MaterialDialog(contextReference?.get()!!)
-        mMaterialDialog.cornerRadius(res = R.dimen.md_corner_radius)
         mMaterialDialog.title(R.string.live_wallpaper_name)
         mMaterialDialog.message(R.string.loading)
 

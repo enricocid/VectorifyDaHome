@@ -212,7 +212,6 @@ object Utils {
 
         MaterialDialog(activity).show {
 
-            cornerRadius(res = R.dimen.md_corner_radius)
             title(R.string.title_rationale)
             message(message)
             positiveButton(if (shouldRequestRationale) android.R.string.ok else R.string.go_to_info) {
@@ -410,7 +409,6 @@ object Utils {
     private fun makeErrorDialog(context: Context) {
 
         MaterialDialog(context).show {
-            cornerRadius(res = R.dimen.md_corner_radius)
             title(R.string.title_info_error)
             message(R.string.info_error)
             positiveButton(R.string.info_error_ok) {
@@ -445,7 +443,6 @@ object Utils {
 
         MaterialDialog(context).show {
 
-            cornerRadius(res = R.dimen.md_corner_radius)
             title(res = R.string.title_recent_setups)
             message(R.string.message_clear_recent_setups)
             positiveButton {

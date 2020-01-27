@@ -415,7 +415,7 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         MaterialDialog(this).show {
 
             title(title)
-            cornerRadius(res = R.dimen.md_corner_radius)
+
             colorChooser(
                 colors = ColorPalette.Primary,
                 subColors = ColorPalette.PrimarySub,
@@ -455,7 +455,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
     //method to start categories chooser
     fun startCategoryChooser(view: View) {
         MaterialDialog(this).show {
-            cornerRadius(res = R.dimen.md_corner_radius)
             title(R.string.title_categories)
             listItems(R.array.categories) { _, index, _ ->
                 updateSelectedCategory(index)
@@ -479,8 +478,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
     private fun startRecentsDialog() {
         mRecentSetupsDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-
-            cornerRadius(res = R.dimen.md_corner_radius)
 
             title(res = R.string.title_recent_setups)
 

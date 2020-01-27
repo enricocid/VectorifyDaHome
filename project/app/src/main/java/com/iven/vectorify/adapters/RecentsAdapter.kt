@@ -66,7 +66,6 @@ class RecentsAdapter(
 
                 MaterialDialog(context).show {
 
-                    cornerRadius(res = R.dimen.md_corner_radius)
                     title(R.string.title_recent_setups)
                     message(
                         text = context.getString(
