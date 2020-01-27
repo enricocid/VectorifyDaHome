@@ -27,13 +27,13 @@
             android:id="@+id/background_color_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_black"
             android:paddingStart="16dp"
-            android:paddingTop="4dp"
+            android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="4dp"
             android:text="@string/title_background"
-            android:textAppearance="@android:style/TextAppearance.Material.Title"
-            android:textStyle="bold" />
+            android:textAppearance="@android:style/TextAppearance.Material.Title" />
 
         <TextView
             android:id="@+id/background_color_subhead"

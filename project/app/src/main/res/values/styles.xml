@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <attr name="toolbar_icons_color" format="color"/>
+    <attr name="toolbar_icons_color" format="color" />
 
     <!-- Base theme light. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -12,16 +12,22 @@
         <item name="popupMenuStyle">@style/PopupMenu</item>
         <item name="md_color_button_text">@color/vectors_color</item>
         <item name="md_corner_radius">@dimen/md_corner_radius</item>
+        <item name="md_font_title">@font/lato_black</item>
+        <item name="android:fontFamily">@font/lato</item>
     </style>
 
     <style name="PopupMenu" parent="android:Widget.Material.PopupMenu">
         <item name="android:popupElevation">2dp</item>
     </style>
 
+    <style name="ToolbarStyle.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">@font/lato_black</item>
+    </style>
+
     <!-- Chip text appearance -->
     <style name="chipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/lato_bold</item>
     </style>
 
     <!-- This will set the fade in animation on all the activities by default -->
