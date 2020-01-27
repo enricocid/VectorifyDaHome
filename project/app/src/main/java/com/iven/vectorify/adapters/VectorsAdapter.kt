@@ -26,8 +26,10 @@ class VectorsAdapter(private val context: Context) :
     private var mSelectedCategory = VectorsCategories.TECH
 
     init {
-        mSelectedCategory = Utils.getCategory(context, vectorifyPreferences.category).second
-        mSelectedDrawable = vectorifyPreferences.vector
+        vectorifyPreferences.latestSetup?.let { recent ->
+            mSelectedCategory = Utils.getCategory(context, recent.category).second
+            mSelectedDrawable = recent.resource
+        }
     }
 
     fun swapCategory(selectedCategory: List<Int>) {

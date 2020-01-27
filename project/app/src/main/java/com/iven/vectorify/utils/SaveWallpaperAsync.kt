@@ -111,7 +111,7 @@ class SaveWallpaperAsync(
             .show()
 
         //update recent setups
-        Utils.updateRecentSetups(context)
+        Utils.updateRecentSetups()
     }
 
     //set view as wallpaper

@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.graphics.ColorUtils
+import com.iven.vectorify.preferences.Recent
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorView
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -107,7 +108,6 @@ class PreviewActivity : AppCompatActivity() {
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 sUserIsSeeking = false
-                tempPreferences.isScaleChanged = true
                 tempPreferences.tempScale = userProgress.toFloat() / 100
             }
         })
@@ -182,40 +182,16 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun updatePrefsAndSetLiveWallpaper() {
 
-        //do all the save shit here when live wallpaper is applied
-        if (tempPreferences.isBackgroundColorChanged) {
-            vectorifyPreferences.backgroundColor = tempPreferences.tempBackgroundColor
-            tempPreferences.isBackgroundColorChanged = false
-        }
-
-        if (tempPreferences.isVectorColorChanged) {
-            vectorifyPreferences.vectorColor = tempPreferences.tempVectorColor
-            tempPreferences.isVectorColorChanged = false
-        }
-
-        if (tempPreferences.isVectorChanged) {
-            vectorifyPreferences.vector = tempPreferences.tempVector
-            tempPreferences.isVectorChanged = false
-        }
-
-        if (tempPreferences.isCategoryChanged) {
-            vectorifyPreferences.category = tempPreferences.tempCategory
-            tempPreferences.isCategoryChanged = false
-        }
-
-        if (tempPreferences.isScaleChanged) {
-            vectorifyPreferences.scale = tempPreferences.tempScale
-            tempPreferences.isScaleChanged = false
-        }
-
-        if (tempPreferences.isHorizontalOffsetChanged) {
-            vectorifyPreferences.horizontalOffset = tempPreferences.tempHorizontalOffset
-            tempPreferences.isHorizontalOffsetChanged = false
-        }
-
-        if (tempPreferences.isVerticalOffsetChanged) {
-            vectorifyPreferences.verticalOffset = tempPreferences.tempVerticalOffset
-            tempPreferences.isVerticalOffsetChanged = false
+        tempPreferences.apply {
+            vectorifyPreferences.latestSetup = Recent(
+                tempBackgroundColor,
+                tempVectorColor,
+                tempVector,
+                tempCategory,
+                tempScale,
+                tempHorizontalOffset,
+                tempVerticalOffset
+            )
         }
 
         //check if the live wallpaper is already running
@@ -226,7 +202,7 @@ class PreviewActivity : AppCompatActivity() {
                 .show()
 
         //update recent setups
-        Utils.updateRecentSetups(this)
+        Utils.updateRecentSetups()
     }
 
     fun moveVectorUp(view: View) {
@@ -254,10 +230,9 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     fun resetVectorPosition(view: View) {
-        val savedScale = vectorifyPreferences.scale
+        val savedScale = vectorifyPreferences.latestSetup?.scale!!
         mVectorView.setScaleFactor(savedScale)
         tempPreferences.tempScale = savedScale
-        tempPreferences.isScaleChanged = true
         mSeekBar.progress = (savedScale * 100).toInt()
         scale_text.text = Utils.getDecimalFormattedString(mSeekBar.progress.toFloat() / 100)
         mVectorView.resetPosition()

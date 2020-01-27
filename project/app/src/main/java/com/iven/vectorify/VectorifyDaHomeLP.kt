@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
+import com.iven.vectorify.preferences.Recent
 import com.iven.vectorify.utils.Utils
 
 class VectorifyDaHomeLP : WallpaperService() {
@@ -15,6 +16,8 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private var mDeviceWidth = 0
     private var mDeviceHeight = 0
+
+    private var mLatestSetup: Recent? = null
 
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
@@ -28,10 +31,15 @@ class VectorifyDaHomeLP : WallpaperService() {
     }
 
     private fun updatePaintProps() {
+
+        mLatestSetup = vectorifyPreferences.latestSetup
+
         //set paints props
-        mSelectedBackgroundColor = vectorifyPreferences.backgroundColor
-        mSelectedVectorColor = vectorifyPreferences.vectorColor
-        mSelectedScaleFactor = vectorifyPreferences.scale
+        mLatestSetup?.let { recent ->
+            mSelectedBackgroundColor = recent.backgroundColor
+            mSelectedVectorColor = recent.vectorColor
+            mSelectedScaleFactor = recent.scale
+        }
     }
 
     private inner class VectorifyEngine : WallpaperService.Engine() {
@@ -76,7 +84,7 @@ class VectorifyDaHomeLP : WallpaperService() {
 
                     val drawable = Utils.tintDrawable(
                         baseContext,
-                        vectorifyPreferences.vector,
+                        mLatestSetup?.resource!!,
                         mSelectedBackgroundColor,
                         mSelectedVectorColor,
                         false
@@ -88,8 +96,8 @@ class VectorifyDaHomeLP : WallpaperService() {
                         mDeviceWidth,
                         mDeviceHeight,
                         mSelectedScaleFactor,
-                        vectorifyPreferences.horizontalOffset,
-                        vectorifyPreferences.verticalOffset
+                        mLatestSetup?.horizontalOffset!!,
+                        mLatestSetup?.verticalOffset!!
                     )
                 }
             } finally {

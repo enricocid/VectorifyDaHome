@@ -86,28 +86,24 @@ class VectorView @JvmOverloads constructor(
 
     fun moveUp() {
         mVerticalOffset -= mStep
-        tempPreferences.isVerticalOffsetChanged = true
         tempPreferences.tempVerticalOffset = mVerticalOffset
         invalidate()
     }
 
     fun moveDown() {
         mVerticalOffset += mStep
-        tempPreferences.isVerticalOffsetChanged = true
         tempPreferences.tempVerticalOffset = mVerticalOffset
         invalidate()
     }
 
     fun moveLeft() {
         mHorizontalOffset -= mStep
-        tempPreferences.isHorizontalOffsetChanged = true
         tempPreferences.tempHorizontalOffset = mHorizontalOffset
         invalidate()
     }
 
     fun moveRight() {
         mHorizontalOffset += mStep
-        tempPreferences.isHorizontalOffsetChanged = true
         tempPreferences.tempHorizontalOffset = mHorizontalOffset
         invalidate()
     }
@@ -115,24 +111,23 @@ class VectorView @JvmOverloads constructor(
     fun centerHorizontal() {
         mHorizontalOffset = 0F
         tempPreferences.tempHorizontalOffset = mHorizontalOffset
-        tempPreferences.isHorizontalOffsetChanged = true
         invalidate()
     }
 
     fun centerVertical() {
         mVerticalOffset = 0F
         tempPreferences.tempVerticalOffset = mVerticalOffset
-        tempPreferences.isVerticalOffsetChanged = true
         invalidate()
     }
 
     fun resetPosition() {
-        mHorizontalOffset = vectorifyPreferences.horizontalOffset
+        val latestSetup = vectorifyPreferences.latestSetup
+        mHorizontalOffset = latestSetup?.horizontalOffset!!
         tempPreferences.tempHorizontalOffset = mHorizontalOffset
-        tempPreferences.isHorizontalOffsetChanged = true
-        mVerticalOffset = vectorifyPreferences.verticalOffset
+
+        mVerticalOffset = latestSetup.verticalOffset
         tempPreferences.tempVerticalOffset = mVerticalOffset
-        tempPreferences.isVerticalOffsetChanged = true
+
         invalidate()
     }
 }

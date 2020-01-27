@@ -82,18 +82,12 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         setBackgroundColorForUI(selectedBackgroundColor)
         setVectorColorForUI(selectedVectorColor)
 
-        setBackgroundAndVectorColorsChanged()
-
         updateSelectedCategory(selectedCategory)
 
         scrollToVector(selectedVector)
 
         tempPreferences.tempScale = selectedScale
-        tempPreferences.isScaleChanged = true
-
-        tempPreferences.isHorizontalOffsetChanged = true
         tempPreferences.tempHorizontalOffset = selectedHorizontalOffset
-        tempPreferences.isVerticalOffsetChanged = true
         tempPreferences.tempVerticalOffset = selectedVerticalOffset
     }
 
@@ -121,19 +115,25 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         setContentView(R.layout.vectorify_activity)
 
         //get wallpaper shit
-        mSelectedBackgroundColor = vectorifyPreferences.backgroundColor
-        mSelectedVectorColor = vectorifyPreferences.vectorColor
-        mSelectedVector = vectorifyPreferences.vector
-        mSelectedCategory = vectorifyPreferences.category
+
+        val latestSetup =
+            if (vectorifyPreferences.latestSetup != null) vectorifyPreferences.latestSetup else vectorifyPreferences.latestSetupBackup
+
+        latestSetup?.let { setup ->
+            mSelectedBackgroundColor = setup.backgroundColor
+            mSelectedVectorColor = setup.vectorColor
+            mSelectedVector = setup.resource
+            mSelectedCategory = setup.category
+            tempPreferences.tempScale = setup.scale
+            tempPreferences.tempHorizontalOffset = setup.horizontalOffset
+            tempPreferences.tempVerticalOffset = setup.verticalOffset
+        }
 
         //init temp preferences
         tempPreferences.tempBackgroundColor = mSelectedBackgroundColor
         tempPreferences.tempVectorColor = mSelectedVectorColor
         tempPreferences.tempVector = mSelectedVector
         tempPreferences.tempCategory = mSelectedCategory
-        tempPreferences.tempScale = vectorifyPreferences.scale
-        tempPreferences.tempHorizontalOffset = vectorifyPreferences.horizontalOffset
-        tempPreferences.tempVerticalOffset = vectorifyPreferences.verticalOffset
 
         mVectorFrame = vector_frame
         mCategoriesChip = categories_chip
@@ -221,8 +221,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
         presetsAdapter.onPresetClick = { combo ->
 
-            setBackgroundAndVectorColorsChanged()
-
             //update background card color and fab tint
             val comboBackgroundColor = ContextCompat.getColor(this, combo.first)
             setBackgroundColorForUI(comboBackgroundColor)
@@ -261,14 +259,13 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
                 setVectorFrameColors(tintBackground = false, showErrorDialog = false)
 
                 tempPreferences.tempVector = mSelectedVector
-                tempPreferences.isVectorChanged = true
             }
         }
 
         mCategoriesChip.text = Utils.getCategory(this, mSelectedCategory).first
         mVectorsRecyclerView.scrollToPosition(
             mVectorsAdapter.getVectorPosition(
-                vectorifyPreferences.vector
+                mSelectedVector
             )
         )
 
@@ -369,14 +366,12 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
     //set system accent as background color
     fun setSystemAccentForBackground(view: View) {
-        tempPreferences.isBackgroundColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setBackgroundColorForUI(systemAccent)
     }
 
     //set system accent as vector color
     fun setSystemAccentForVector(view: View) {
-        tempPreferences.isVectorColorChanged = true
         val systemAccent = Utils.getSystemAccentColor(this)
         setVectorColorForUI(systemAccent)
     }
@@ -389,8 +384,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
                 val tempBackgroundColorBackup = tempPreferences.tempBackgroundColor
                 setBackgroundColorForUI(tempPreferences.tempVectorColor)
                 setVectorColorForUI(tempBackgroundColorBackup)
-                tempPreferences.isVectorColorChanged = true
-                tempPreferences.isBackgroundColorChanged = true
             }
         }
     }
@@ -407,19 +400,14 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
         setBackgroundColorForUI(Color.BLACK)
         setVectorColorForUI(Color.WHITE)
 
-        setBackgroundAndVectorColorsChanged()
-
         updateSelectedCategory(0)
 
         scrollToVector(Utils.getDefaultVectorForApi())
 
         tempPreferences.tempScale = 0.35F
-        tempPreferences.isScaleChanged = true
 
         tempPreferences.tempHorizontalOffset = 0F
-        tempPreferences.isHorizontalOffsetChanged = true
         tempPreferences.tempVerticalOffset = 0F
-        tempPreferences.isVerticalOffsetChanged = true
     }
 
     //start material dialog
@@ -439,14 +427,12 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
                         if (tempPreferences.tempBackgroundColor != color) {
-                            tempPreferences.isBackgroundColorChanged = true
                             setBackgroundColorForUI(color)
                         }
                     }
                     else -> {
                         //update the color only if it really changed
                         if (tempPreferences.tempVectorColor != color) {
-                            tempPreferences.isVectorColorChanged = true
                             setVectorColorForUI(color)
                         }
                     }
@@ -454,11 +440,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
             }
             positiveButton()
         }
-    }
-
-    private fun setBackgroundAndVectorColorsChanged() {
-        tempPreferences.isBackgroundColorChanged = true
-        tempPreferences.isVectorColorChanged = true
     }
 
     //method to start background color picker for background
@@ -493,7 +474,6 @@ class VectorifyActivity : AppCompatActivity(), SharedPreferences.OnSharedPrefere
 
             mSelectedCategory = index
             tempPreferences.tempCategory = mSelectedCategory
-            tempPreferences.isCategoryChanged = true
         }
     }
 

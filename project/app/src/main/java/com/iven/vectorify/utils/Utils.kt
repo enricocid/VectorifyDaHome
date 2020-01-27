@@ -421,7 +421,7 @@ object Utils {
 
     //update recent setups
     @JvmStatic
-    fun updateRecentSetups(context: Context) {
+    fun updateRecentSetups() {
         val recentSetups =
             if (vectorifyPreferences.recentSetups != null) vectorifyPreferences.recentSetups else mutableListOf()
         tempPreferences.apply {
