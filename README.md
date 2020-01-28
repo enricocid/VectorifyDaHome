@@ -11,11 +11,6 @@
 
 <img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh36.gif" height="500px"/>
 
-# Downloads
-
-[<img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">](https://play.google.com/store/apps/details?id=com.iven.iconify)
-[<img alt="Get it on Github" height="80" src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.png">](https://github.com/enricocid/VectorifyDaHome/releases)
-
 
 # Description:
 
@@ -33,6 +28,13 @@
 - 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper)
 
 - Dark/light themes
+
+
+# Downloads
+
+[<img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">](https://play.google.com/store/apps/details?id=com.iven.iconify)
+[<img alt="Get it on F-Droid" height="80" src="https://gitlab.com/fdroid/artwork/raw/master/badge/get-it-on.png">](https://f-droid.org/repository/browse/?fdid=com.iven.iconify)
+[<img alt="Get it on Github" height="80" src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.png">](https://github.com/enricocid/VectorifyDaHome/releases)
 
 
 # License

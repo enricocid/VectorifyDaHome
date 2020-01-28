@@ -1,4 +1,4 @@
-Vectorify da home! è una applicazione minimale ed open source per applicare wallpapers da una vasta (400+) collezione di grafiche vettoriali:
+Vectorify da home! applicazione minimale ed open source per applicare wallpapers da una vasta (400+) collezione di grafiche vettoriali:
 
 - Lo sfondo e il colore della grafica sono personalizzabili grazie ad un fantastico color picker, dei presets o il colore di accento del dispositivo!
 
