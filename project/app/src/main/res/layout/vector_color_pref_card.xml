@@ -27,7 +27,7 @@
             android:id="@+id/vector_color_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/lato_black"
+            android:fontFamily="@font/raleway_black"
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
