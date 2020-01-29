@@ -1,6 +1,6 @@
-package com.iven.vectorify.preferences
+package com.iven.vectorify
 
-data class Recent(
+data class VectorifyWallpaper(
     val backgroundColor: Int,
     val vectorColor: Int,
     val resource: Int,

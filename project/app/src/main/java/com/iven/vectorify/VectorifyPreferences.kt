@@ -1,4 +1,4 @@
-package com.iven.vectorify.preferences
+package com.iven.vectorify
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -6,22 +6,23 @@ import android.graphics.Color
 import androidx.preference.PreferenceManager
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
-import com.iven.vectorify.R
 import java.lang.reflect.Type
 
 class VectorifyPreferences(context: Context) {
 
     private val prefTheme = context.getString(R.string.theme_key)
     private val prefsThemeDefault = context.getString(R.string.theme_pref_light)
-    private val prefLatestSetup = context.getString(R.string.latest_setup_key)
-    private val prefRecentSetups = context.getString(R.string.recent_setups_key)
+    private val prefSavedVectorifyWallpaper =
+        context.getString(R.string.saved_vectorify_wallpaper_key)
+    private val prefRecentVectorifySetups =
+        context.getString(R.string.recent_vectorify_wallpapers_key)
 
     private val prefShowError = context.getString(R.string.error_show_message_key)
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    private val typeLatestSetup = object : TypeToken<Recent>() {}.type
-    private val typeRecents = object : TypeToken<MutableList<Recent>>() {}.type
+    private val typeSavedVectorifyWallpaper = object : TypeToken<VectorifyWallpaper>() {}.type
+    private val typeRecents = object : TypeToken<MutableList<VectorifyWallpaper>>() {}.type
 
     private val mGson = GsonBuilder().create()
 
@@ -29,7 +30,7 @@ class VectorifyPreferences(context: Context) {
         get() = mPrefs.getString(prefTheme, prefsThemeDefault)
         set(value) = mPrefs.edit().putString(prefTheme, value).apply()
 
-    val latestSetupBackup = Recent(
+    val vectorifyWallpaperBackup = VectorifyWallpaper(
         Color.BLACK,
         Color.WHITE,
         R.drawable.android_logo_2019,
@@ -39,19 +40,19 @@ class VectorifyPreferences(context: Context) {
         0F
     )
 
-    var latestSetup: Recent?
+    var savedVectorifyWallpaper: VectorifyWallpaper?
         get() = getObject(
-            prefLatestSetup,
-            typeLatestSetup
+            prefSavedVectorifyWallpaper,
+            typeSavedVectorifyWallpaper
         )
-        set(value) = putObject(prefLatestSetup, value)
+        set(value) = putObject(prefSavedVectorifyWallpaper, value)
 
-    var recentSetups: MutableList<Recent>?
+    var vectorifyWallpaperSetups: MutableList<VectorifyWallpaper>?
         get() = getObject(
-            prefRecentSetups,
+            prefRecentVectorifySetups,
             typeRecents
         )
-        set(value) = putObject(prefRecentSetups, value)
+        set(value) = putObject(prefRecentVectorifySetups, value)
 
     var hasToShowError
         get() = mPrefs.getBoolean(prefShowError, true)

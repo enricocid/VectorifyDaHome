@@ -29,7 +29,7 @@
                     android:resource="@xml/provider_paths"/>
         </provider>
 
-        <activity android:name=".VectorifyActivity"
+        <activity android:name=".ui.MainActivity"
                   android:theme="@style/AppTheme"
                   android:screenOrientation="portrait">
             <intent-filter>
@@ -43,7 +43,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PreviewActivity"
+        <activity android:name=".ui.PreviewActivity"
                   android:theme="@style/AppTheme"
                   android:screenOrientation="portrait"/>
 

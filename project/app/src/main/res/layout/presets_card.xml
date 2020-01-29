@@ -12,7 +12,7 @@
     app:cardBackgroundColor="@color/presets_card_color"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
-    tools:context=".VectorifyActivity">
+    tools:context=".ui.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingBottom="4dp"
-            tools:context=".MainActivity" />
+            tools:context=".ui.MainActivity" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

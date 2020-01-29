@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/vector_size"
-    android:layout_height="@dimen/vector_size">
+    android:layout_height="@dimen/vector_size"
+    android:layout_margin="1dp"
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/checkbox"
@@ -17,6 +19,6 @@
         android:id="@+id/vector_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/selectableItemBackground"
+        android:background="?android:attr/actionBarItemBackground"
         android:contentDescription="@string/live_wallpaper_name" />
 </FrameLayout>

@@ -20,11 +20,11 @@
         <include layout="@layout/background_color_pref_card" />
 
         <ImageButton
+            android:id="@+id/swap_card_colors"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:onClick="swapCardsColor"
             android:src="@drawable/ic_swap_horizontal"
             tools:ignore="ContentDescription" />
 

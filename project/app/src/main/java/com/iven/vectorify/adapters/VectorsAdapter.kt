@@ -1,32 +1,28 @@
 package com.iven.vectorify.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
-import com.iven.vectorify.tempPreferences
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
 import com.iven.vectorify.vectorifyPreferences
-import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 class VectorsAdapter(private val context: Context) :
     RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
-    var onVectorClick: ((Int?) -> Unit)? = null
+    var onVectorClick: ((Int) -> Unit)? = null
+    var onVectorLongClick: ((Int) -> Unit)? = null
 
-    private var mSelectedDrawable = R.drawable.android
+    private var mSelectedDrawable = vectorifyPreferences.vectorifyWallpaperBackup.resource
     private var mSelectedCategory = VectorsCategories.TECH
 
     init {
-        vectorifyPreferences.latestSetup?.let { recent ->
+        vectorifyPreferences.savedVectorifyWallpaper?.let { recent ->
             mSelectedCategory = Utils.getCategory(context, recent.category).second
             mSelectedDrawable = recent.resource
         }
@@ -72,7 +68,6 @@ class VectorsAdapter(private val context: Context) :
 
     inner class VectorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        @SuppressLint("DefaultLocale")
         fun bindItems(drawable: Int) {
 
             val vectorButton = itemView.findViewById<ImageButton>(R.id.vector_button)
@@ -93,32 +88,7 @@ class VectorsAdapter(private val context: Context) :
                 }
             }
             vectorButton.setOnLongClickListener {
-                try {
-                    val iconName = context.resources.getResourceEntryName(drawable)
-                        .replace(
-                            context.getString(R.string.underscore_delimiter),
-                            context.getString(R.string.space_delimiter)
-                        )
-                        .capitalize()
-
-                    DynamicToast.make(
-                        context,
-                        iconName,
-                        AppCompatResources.getDrawable(context, drawable),
-                        tempPreferences.tempVectorColor,
-                        tempPreferences.tempBackgroundColor
-                    )
-                        .show()
-
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    DynamicToast.makeError(
-                        context,
-                        context.getString(R.string.error_get_resource),
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                }
+                onVectorLongClick?.invoke(drawable)
                 return@setOnLongClickListener false
             }
         }

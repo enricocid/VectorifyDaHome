@@ -11,8 +11,8 @@
     <string name="theme_pref_light">theme_pref_light</string>
     <string name="theme_pref_dark">theme_pref_dark</string>
     <string name="theme_pref_auto">theme_pref_auto</string>
-    <string name="latest_setup_key">latest_setup_key</string>
-    <string name="recent_setups_key">recents_key</string>
+    <string name="saved_vectorify_wallpaper_key">saved_vectorify_wallpaper_key</string>
+    <string name="recent_vectorify_wallpapers_key">recent_vectorify_wallpapers_key</string>
     <string name="error_show_message_key">error_show_message_key</string>
     <string name="app_github_link">
         https://github.com/enricocid/VectorifyDaHome

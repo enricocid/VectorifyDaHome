@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
-import com.iven.vectorify.preferences.Recent
 import com.iven.vectorify.utils.Utils
 
 class VectorifyDaHomeLP : WallpaperService() {
@@ -17,7 +16,7 @@ class VectorifyDaHomeLP : WallpaperService() {
     private var mDeviceWidth = 0
     private var mDeviceHeight = 0
 
-    private var mLatestSetup: Recent? = null
+    private var mLatestSetup: VectorifyWallpaper? = null
 
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
@@ -32,7 +31,7 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private fun updatePaintProps() {
 
-        mLatestSetup = vectorifyPreferences.latestSetup
+        mLatestSetup = vectorifyPreferences.savedVectorifyWallpaper
 
         //set paints props
         mLatestSetup?.let { recent ->

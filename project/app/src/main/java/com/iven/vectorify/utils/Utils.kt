@@ -25,13 +25,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.ColorUtils
 import com.afollestad.materialdialogs.MaterialDialog
-import com.iven.vectorify.R
-import com.iven.vectorify.VectorifyDaHomeLP
-import com.iven.vectorify.preferences.Recent
-import com.iven.vectorify.tempPreferences
-import com.iven.vectorify.vectorifyPreferences
+import com.iven.vectorify.*
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 object Utils {
@@ -112,28 +107,6 @@ object Utils {
         }
     }
 
-    //method to calculate colors for cards titles
-    @JvmStatic
-    fun getSecondaryColor(color: Int): Int {
-        return if (isColorDark(color)) Color.WHITE else Color.BLACK
-    }
-
-    //method to determine colors luminance
-    @JvmStatic
-    fun isColorDark(color: Int): Boolean {
-        return ColorUtils.calculateLuminance(color) < 0.35
-    }
-
-    @JvmStatic
-    fun darkenColor(color: Int, factor: Float): Int {
-        return ColorUtils.blendARGB(color, Color.BLACK, factor)
-    }
-
-    @JvmStatic
-    fun lightenColor(color: Int, factor: Float): Int {
-        return ColorUtils.blendARGB(color, Color.WHITE, factor)
-    }
-
     @JvmStatic
     fun drawBitmap(
         drawable: Drawable?,
@@ -183,17 +156,6 @@ object Utils {
             arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
             code
         )
-    }
-
-    //method to get rounded float string
-    @JvmStatic
-    fun getDecimalFormattedString(number: Float): String {
-        return try {
-            String.format("%.2f", number)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            ""
-        }
     }
 
     //determine if the live wallpaper is already applied
@@ -385,12 +347,11 @@ object Utils {
 
                 //darken or lighten color to increase vector visibility when the colors are the same
                 val finalVectorColor = if (checkIfColorsEqual(backgroundColor, vectorColor)) {
-                    if (isColorDark(vectorColor))
-                        lightenColor(
-                            vectorColor,
+                    if (vectorColor.isDark())
+                        vectorColor.lighten(
                             0.20F
                         )
-                    else darkenColor(vectorColor, 0.20F)
+                    else vectorColor.darken(0.20F)
                 } else {
                     vectorColor
                 }
@@ -417,26 +378,6 @@ object Utils {
         }
     }
 
-    //update recent setups
-    @JvmStatic
-    fun updateRecentSetups() {
-        val recentSetups =
-            if (vectorifyPreferences.recentSetups != null) vectorifyPreferences.recentSetups else mutableListOf()
-        tempPreferences.apply {
-            val recentToSave = Recent(
-                tempBackgroundColor,
-                tempVectorColor,
-                tempVector,
-                tempCategory,
-                tempScale,
-                tempHorizontalOffset,
-                tempVerticalOffset
-            )
-            if (!recentSetups?.contains(recentToSave)!!) recentSetups.add(recentToSave)
-            vectorifyPreferences.recentSetups = recentSetups
-        }
-    }
-
     //clear recent setups
     @JvmStatic
     fun clearRecentSetups(context: Context) {
@@ -447,9 +388,27 @@ object Utils {
             message(R.string.message_clear_recent_setups)
             positiveButton {
                 //add an empty list to preferences
-                vectorifyPreferences.recentSetups = null
+                vectorifyPreferences.vectorifyWallpaperSetups = null
             }
             negativeButton { dismiss() }
         }
+    }
+
+    @JvmStatic
+    fun openGitHubPage(context: Context) {
+        //intent to open git link
+        val openGitHubPageIntent = Intent(Intent.ACTION_VIEW)
+        openGitHubPageIntent.data = Uri.parse(context.getString(R.string.app_github_link))
+
+        //check if a browser is present
+        if (openGitHubPageIntent.resolveActivity(context.packageManager) != null) context.startActivity(
+            openGitHubPageIntent
+        ) else
+            DynamicToast.makeError(
+                context,
+                context.getString(R.string.install_browser_message),
+                Toast.LENGTH_LONG
+            )
+                .show()
     }
 }

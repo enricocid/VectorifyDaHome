@@ -11,7 +11,7 @@
     android:layout_marginBottom="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
-    tools:context=".VectorifyActivity">
+    tools:context=".ui.MainActivity">
 
     <ImageButton
         android:id="@+id/recent_setups_vector"

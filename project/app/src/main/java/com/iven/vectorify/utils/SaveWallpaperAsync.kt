@@ -108,9 +108,6 @@ class SaveWallpaperAsync(
             Toast.LENGTH_LONG
         )
             .show()
-
-        //update recent setups
-        Utils.updateRecentSetups()
     }
 
     //set view as wallpaper

@@ -1,4 +1,4 @@
-package com.iven.vectorify.utils
+package com.iven.vectorify.ui
 
 import android.content.Context
 import android.graphics.Canvas
