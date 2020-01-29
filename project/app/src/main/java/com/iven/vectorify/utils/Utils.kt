@@ -23,8 +23,10 @@ import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.*
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -395,20 +397,31 @@ object Utils {
     }
 
     @JvmStatic
-    fun openGitHubPage(context: Context) {
-        //intent to open git link
-        val openGitHubPageIntent = Intent(Intent.ACTION_VIEW)
-        openGitHubPageIntent.data = Uri.parse(context.getString(R.string.app_github_link))
+    fun openCustomTab(
+        context: Context
+    ) {
 
-        //check if a browser is present
-        if (openGitHubPageIntent.resolveActivity(context.packageManager) != null) context.startActivity(
-            openGitHubPageIntent
-        ) else
+        try {
+
+            CustomTabsIntent.Builder().apply {
+                addDefaultShareMenuItem()
+                setShowTitle(true)
+
+                // https://stackoverflow.com/a/55260049
+                AppCompatResources.getDrawable(context, R.drawable.ic_navigate_before)?.let {
+                    it.mutate().setTint(ContextCompat.getColor(context, R.color.red))
+                    setCloseButtonIcon(it.toBitmap())
+                }
+                build().launchUrl(context, Uri.parse(context.getString(R.string.app_github_link)))
+            }
+        } catch (e: Exception) {
             DynamicToast.makeError(
                 context,
                 context.getString(R.string.install_browser_message),
                 Toast.LENGTH_LONG
             )
                 .show()
+            e.printStackTrace()
+        }
     }
 }
