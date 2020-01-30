@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -233,38 +234,40 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         //determine if background color is dark or light and select
         //the appropriate color for UI widgets
-        val widgetColors = mTempBackgroundColor.toSurfaceColor()
+        val widgetColor = mTempBackgroundColor.toSurfaceColor()
 
         val cardColor = ColorUtils.setAlphaComponent(mTempBackgroundColor, 100)
 
         mToolbar.apply {
             setBackgroundColor(cardColor)
-            setTitleTextColor(widgetColors)
+            setTitleTextColor(widgetColor)
             setNavigationIcon(R.drawable.ic_navigate_before)
         }
 
         //set SeekBar colors
         seekbar_card.apply {
             setCardBackgroundColor(cardColor)
-            strokeColor = ColorUtils.setAlphaComponent(widgetColors, 25)
+            strokeColor = ColorUtils.setAlphaComponent(widgetColor, 25)
         }
 
         mSeekBar.apply {
-            progressTintList = ColorStateList.valueOf(widgetColors)
-            thumbTintList = ColorStateList.valueOf(widgetColors)
-            progressBackgroundTintList = ColorStateList.valueOf(widgetColors)
+            progressTintList = ColorStateList.valueOf(widgetColor)
+            thumbTintList = ColorStateList.valueOf(widgetColor)
+            progressBackgroundTintList = ColorStateList.valueOf(widgetColor)
         }
 
-        seekbar_title.setTextColor(widgetColors)
-        mSeekBarScale.setTextColor(widgetColors)
+        seekbar_title.setTextColor(widgetColor)
+        mSeekBarScale.setTextColor(widgetColor)
 
-        up.drawable.mutate().setTint(widgetColors)
-        down.drawable.mutate().setTint(widgetColors)
-        left.drawable.mutate().setTint(widgetColors)
-        right.drawable.mutate().setTint(widgetColors)
-        center_horizontal.drawable.mutate().setTint(widgetColors)
-        center_vertical.drawable.mutate().setTint(widgetColors)
-        reset_position.drawable.mutate().setTint(widgetColors)
+        listOf<ImageButton>(
+            up,
+            down,
+            left,
+            right,
+            center_horizontal,
+            center_vertical,
+            reset_position
+        ).applyTint(this, widgetColor)
     }
 
     private fun updateLatestSetup() {

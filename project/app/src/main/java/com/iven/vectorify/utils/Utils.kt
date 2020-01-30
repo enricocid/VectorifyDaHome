@@ -7,10 +7,12 @@ import android.app.WallpaperManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.RippleDrawable
 import android.net.Uri
 import android.os.Build
 import android.view.View
@@ -303,5 +305,12 @@ object Utils {
             context.getString(R.string.install_browser_message).toErrorToast(context)
             e.printStackTrace()
         }
+    }
+
+    @JvmStatic
+    fun createColouredRipple(context: Context, rippleColor: Int): Drawable? {
+        val ripple = ContextCompat.getDrawable(context, R.drawable.ripple) as RippleDrawable
+        ripple.setColor(ColorStateList.valueOf(rippleColor))
+        return ripple
     }
 }

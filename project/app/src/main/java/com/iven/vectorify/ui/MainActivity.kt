@@ -109,10 +109,10 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         getViewsAndResources()
 
         //update background card color and text from preferences
-        setBackgroundColorForUI(mTempBackgroundColor)
+        setBackgroundColorForUI(mTempBackgroundColor, false)
 
         //update vector card color and text from preferences
-        setVectorColorForUI(mTempVectorColor)
+        setVectorColorForUI(mTempVectorColor, false)
 
         setupFabButton()
 
@@ -127,8 +127,8 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 start()
                 doOnEnd {
                     val tempBackgroundColorBackup = mTempBackgroundColor
-                    setBackgroundColorForUI(mTempVectorColor)
-                    setVectorColorForUI(tempBackgroundColorBackup)
+                    setBackgroundColorForUI(mTempVectorColor, true)
+                    setVectorColorForUI(tempBackgroundColorBackup, true)
                 }
             }
         }
@@ -280,8 +280,14 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 onPresetClick = { combo ->
 
                     //update background and vector colors
-                    setBackgroundColorForUI(ContextCompat.getColor(this@MainActivity, combo.first))
-                    setVectorColorForUI(ContextCompat.getColor(this@MainActivity, combo.second))
+                    setBackgroundColorForUI(
+                        ContextCompat.getColor(this@MainActivity, combo.first),
+                        true
+                    )
+                    setVectorColorForUI(
+                        ContextCompat.getColor(this@MainActivity, combo.second),
+                        true
+                    )
 
                     //update vector frame colors
                     setVectorFrameColors(tintBackground = true, showErrorDialog = false)
@@ -367,8 +373,8 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         selectedVerticalOffset: Float
     ) {
 
-        setBackgroundColorForUI(selectedBackgroundColor)
-        setVectorColorForUI(selectedVectorColor)
+        setBackgroundColorForUI(selectedBackgroundColor, true)
+        setVectorColorForUI(selectedVectorColor, true)
 
         updateSelectedCategory(selectedCategory)
 
@@ -394,11 +400,11 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     }
 
     //update background card colors
-    private fun setBackgroundColorForUI(color: Int) {
+    private fun setBackgroundColorForUI(color: Int, updateColor: Boolean) {
 
-        mTempBackgroundColor = color
+        if (updateColor) mTempBackgroundColor = color
 
-        if (mTempBackgroundColor == mTempVectorColor) setVectorColorForUI(mTempVectorColor)
+        if (mTempBackgroundColor == mTempVectorColor) setVectorColorForUI(mTempVectorColor, false)
         val textColor = mTempBackgroundColor.toSurfaceColor()
 
         //update shit colors
@@ -421,14 +427,14 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     }
 
     //update vector card colors
-    private fun setVectorColorForUI(color: Int) {
+    private fun setVectorColorForUI(color: Int, updateColor: Boolean) {
 
-        mTempVectorColor = color
+        if (updateColor) mTempVectorColor = color
 
         val textColor = mTempVectorColor.toSurfaceColor()
 
         //update shit colors
-        vector_color.setCardBackgroundColor(mTempVectorColor.toContrastColor(mTempVectorColor))
+        vector_color.setCardBackgroundColor(mTempVectorColor.toContrastColor(mTempBackgroundColor))
 
         vector_color_head.setTextColor(textColor)
         vector_color_subhead.apply {
@@ -456,8 +462,8 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
         vectorifyPreferences.vectorifyWallpaperBackup.apply {
 
-            setBackgroundColorForUI(backgroundColor)
-            setVectorColorForUI(vectorColor)
+            setBackgroundColorForUI(backgroundColor, true)
+            setVectorColorForUI(vectorColor, true)
 
             updateSelectedCategory(category)
             scrollToVector(vectorColor)
@@ -484,11 +490,11 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 when (key) {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
-                        if (mTempBackgroundColor != color) setBackgroundColorForUI(color)
+                        if (mTempBackgroundColor != color) setBackgroundColorForUI(color, true)
                     }
                     else -> {
                         //update the color only if it really changed
-                        if (mTempVectorColor != color) setVectorColorForUI(color)
+                        if (mTempVectorColor != color) setVectorColorForUI(color, true)
                     }
                 }
             }
@@ -523,11 +529,11 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     }
 
     fun applyAccentToVector(view: View) {
-        setVectorColorForUI(Utils.getSystemAccentColor(this@MainActivity))
+        setVectorColorForUI(Utils.getSystemAccentColor(this@MainActivity), true)
     }
 
     fun applyAccentToBackground(view: View) {
-        setBackgroundColorForUI(Utils.getSystemAccentColor(this@MainActivity))
+        setBackgroundColorForUI(Utils.getSystemAccentColor(this@MainActivity), true)
     }
 
     private fun updateSelectedCategory(index: Int) {

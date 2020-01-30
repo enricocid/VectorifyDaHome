@@ -7,11 +7,13 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import com.google.android.material.card.MaterialCardView
+import com.iven.vectorify.utils.Utils
 
 
 //viewTreeObserver extension to measure layout params
@@ -85,4 +87,11 @@ fun String.toErrorToast(context: Context) {
     val info = ContextCompat.getDrawable(context, R.drawable.ic_info)
     val errorColor = ContextCompat.getColor(context, R.color.red)
     toColouredToast(context, info, errorColor, errorColor.toSurfaceColor())
+}
+
+fun List<ImageButton>.applyTint(context: Context, widgetColor: Int) {
+    forEach { imageButton ->
+        imageButton.drawable.mutate().setTint(widgetColor)
+        imageButton.background = Utils.createColouredRipple(context, widgetColor)
+    }
 }
