@@ -40,7 +40,7 @@
     <string name="title_save_to">Save to internal memory</string>
     <string name="title_crop">Crop and set as wallpaper</string>
     <string name="title_go_live">Set as live wallpaper</string>
-    <string name="title_already_live">Applying changes&#8230;</string>
+    <string name="title_already_live">Applying changes&#160;&#8230;</string>
     <string name="message_saved_to">Saved to %1s</string>
 
     <!-- Categories -->

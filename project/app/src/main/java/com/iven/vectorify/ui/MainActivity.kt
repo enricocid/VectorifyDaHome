@@ -10,10 +10,8 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
@@ -38,7 +36,6 @@ import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.utils.Utils
-import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import de.halfbit.edgetoedge.Edge
 import de.halfbit.edgetoedge.edgeToEdge
 import kotlinx.android.synthetic.main.background_color_pref_card.*
@@ -237,11 +234,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 if (!vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty())
                     openRecentSetups()
                 else
-                    DynamicToast.makeWarning(
-                        this@MainActivity,
-                        getString(R.string.message_no_recent_setups)
-                    )
-                        .show()
+                    getString(R.string.message_no_recent_setups).toErrorToast(this@MainActivity)
             }
 
             afterMeasured {
@@ -315,23 +308,18 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                             )
                             .capitalize()
 
-                        DynamicToast.make(
+                        iconName.toColouredToast(
                             this@MainActivity,
-                            iconName,
-                            AppCompatResources.getDrawable(this@MainActivity, vector),
-                            mTempVectorColor,
-                            mTempBackgroundColor
+                            ContextCompat.getDrawable(this@MainActivity, vector)!!,
+                            mTempBackgroundColor,
+                            mTempVectorColor
                         )
-                            .show()
 
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        DynamicToast.makeError(
-                            this@MainActivity,
-                            getString(R.string.error_get_resource),
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+
+                        getString(R.string.error_get_resource).toErrorToast(this@MainActivity)
+
                     }
                 }
             }

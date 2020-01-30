@@ -16,7 +16,6 @@ import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.Window
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.browser.customtabs.CustomTabsIntent
@@ -24,7 +23,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.*
-import com.pranavpandey.android.dynamic.toasts.DynamicToast
 
 object Utils {
 
@@ -339,12 +337,7 @@ object Utils {
                 build().launchUrl(context, Uri.parse(context.getString(R.string.app_github_link)))
             }
         } catch (e: Exception) {
-            DynamicToast.makeError(
-                context,
-                context.getString(R.string.install_browser_message),
-                Toast.LENGTH_LONG
-            )
-                .show()
+            context.getString(R.string.install_browser_message).toErrorToast(context)
             e.printStackTrace()
         }
     }

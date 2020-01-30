@@ -28,7 +28,7 @@
     <string name="title_save_to">Enregistrer dans la mémoire interne</string>
     <string name="title_crop">Rogner et définir comme fond d\'écran</string>
     <string name="title_go_live">Définir comme fond d\'écran live</string>
-    <string name="title_already_live">Application des modifications&#8230;</string>
+    <string name="title_already_live">Application des modifications&#160;&#8230;</string>
     <string name="message_saved_to">Enregsitré vers %1s</string>
     <!-- Categories -->
     <string name="title_categories">Catégories</string>

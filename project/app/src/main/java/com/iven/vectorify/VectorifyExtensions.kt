@@ -2,11 +2,17 @@ package com.iven.vectorify
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
+import com.google.android.material.card.MaterialCardView
+
 
 //viewTreeObserver extension to measure layout params
 //https://antonioleiva.com/kotlin-ongloballayoutlistener/
@@ -44,7 +50,34 @@ fun Float.toDecimalFormat() = try {
     ""
 }
 
-fun String.toToast(context: Context) {
-    Toast.makeText(context, this, Toast.LENGTH_LONG)
-        .show()
+fun String.toColouredToast(
+    context: Context,
+    icon: Drawable?,
+    backgroundColor: Int,
+    vectorColor: Int
+) {
+    Toast.makeText(context, this, Toast.LENGTH_LONG).apply {
+
+        val toastView = View.inflate(context, R.layout.custom_toast, null) as MaterialCardView
+
+        toastView.setCardBackgroundColor(ColorStateList.valueOf(backgroundColor))
+        toastView.findViewById<TextView>(R.id.toast_text).apply {
+            setTextColor(vectorColor)
+            text = this@toColouredToast
+
+            icon?.let { dw ->
+                dw.mutate().setTint(vectorColor)
+                setCompoundDrawablesRelativeWithIntrinsicBounds(dw, null, null, null)
+            }
+        }
+
+        view = toastView
+
+    }.show()
+}
+
+fun String.toErrorToast(context: Context) {
+    val info = ContextCompat.getDrawable(context, R.drawable.ic_info)
+    val errorColor = ContextCompat.getColor(context, R.color.red)
+    toColouredToast(context, info, errorColor, errorColor.toSurfaceColor())
 }

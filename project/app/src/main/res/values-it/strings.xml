@@ -37,7 +37,7 @@
     <string name="title_save_to">Salva nella memoria interna</string>
     <string name="title_crop">Crop e imposta come sfondo</string>
     <string name="title_go_live">Imposta come live wallpaper</string>
-    <string name="title_already_live">Applico i cambiamenti&#8230;</string>
+    <string name="title_already_live">Applico i cambiamenti&#160;&#8230;</string>
     <string name="message_saved_to">Salvato in %1s</string>
 
     <!-- Categorie -->

@@ -38,7 +38,7 @@
     <string name="title_save_to">Opslaan op interne opslag</string>
     <string name="title_crop">Bijsnijden en instellen als achtergrond</string>
     <string name="title_go_live">Instellen als live-achtergrond</string>
-    <string name="title_already_live">Bezig met toepassen&#8230;</string>
+    <string name="title_already_live">Bezig met toepassen&#160;&#8230;</string>
     <string name="message_saved_to">Is opgeslagen in %1s</string>
 
     <!-- Categories -->

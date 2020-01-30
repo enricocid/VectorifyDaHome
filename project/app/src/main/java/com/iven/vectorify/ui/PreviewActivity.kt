@@ -13,6 +13,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
@@ -21,7 +22,6 @@ import com.afollestad.materialdialogs.customview.customView
 import com.iven.vectorify.*
 import com.iven.vectorify.utils.SaveWallpaperLoader
 import com.iven.vectorify.utils.Utils
-import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import kotlinx.android.synthetic.main.position_controls.*
 import kotlinx.android.synthetic.main.preview_activity.*
 import kotlinx.android.synthetic.main.size_position_card.*
@@ -89,7 +89,12 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         if (mSaveWallpaperDialog.isShowing) mSaveWallpaperDialog.dismiss()
 
-        getString(R.string.message_saved_to, getExternalFilesDir(null)).toToast(this)
+        getString(R.string.message_saved_to, getExternalFilesDir(null)).toColouredToast(
+            this,
+            ContextCompat.getDrawable(this, R.drawable.ic_check),
+            mTempVectorColor,
+            mTempBackgroundColor
+        )
     }
 
     override fun onLoaderReset(loader: Loader<Uri?>) {
@@ -277,9 +282,12 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences
         if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
-        else
-            DynamicToast.makeSuccess(this, getString(R.string.title_already_live))
-                .show()
+        else getString(R.string.title_already_live).toColouredToast(
+            this,
+            ContextCompat.getDrawable(this, R.drawable.ic_check),
+            mTempVectorColor,
+            mTempBackgroundColor
+        )
 
         //update recent setups
         updateRecentSetups()

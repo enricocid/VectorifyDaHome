@@ -1,7 +1,6 @@
 package com.iven.vectorify
 
 import android.graphics.Canvas
-import android.graphics.Color
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
@@ -9,9 +8,11 @@ import com.iven.vectorify.utils.Utils
 
 class VectorifyDaHomeLP : WallpaperService() {
 
-    private var mSelectedBackgroundColor = Color.BLACK
-    private var mSelectedVectorColor = Color.WHITE
-    private var mSelectedScaleFactor = 0.35F
+    private val mBackupRecent = vectorifyPreferences.vectorifyWallpaperBackup
+
+    private var mSelectedBackgroundColor = mBackupRecent.backgroundColor
+    private var mSelectedVectorColor = mBackupRecent.vectorColor
+    private var mSelectedScaleFactor = mBackupRecent.scale
 
     private var mDeviceWidth = 0
     private var mDeviceHeight = 0
