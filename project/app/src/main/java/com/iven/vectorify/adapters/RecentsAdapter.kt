@@ -51,7 +51,6 @@ class RecentsAdapter(
                 Utils.tintDrawable(
                     context,
                     vectorifyWallpaper.resource,
-                    vectorifyWallpaper.backgroundColor,
                     vectorifyWallpaper.vectorColor,
                     false
                 )

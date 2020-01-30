@@ -361,10 +361,10 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     //update vector frame
     private fun setVectorFrameColors(tintBackground: Boolean, showErrorDialog: Boolean) {
         if (tintBackground) mVectorFrame.setBackgroundColor(mTempBackgroundColor)
+        mTempVectorColor = mTempVectorColor.toContrastColor(mTempBackgroundColor)
         val vector = Utils.tintDrawable(
             this,
             mTempVector,
-            mTempBackgroundColor,
             mTempVectorColor,
             showErrorDialog
         )
@@ -390,13 +390,8 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
         mFab.backgroundTintList = ColorStateList.valueOf(mTempBackgroundColor)
 
-        //check if colors are the same so we enable stroke to make vector visible
-        val fabDrawableColor = if (Utils.checkIfColorsEqual(
-                mTempBackgroundColor,
-                mTempVectorColor
-            )
-        ) textColor else mTempVectorColor
-        mFab.drawable.setTint(fabDrawableColor)
+        //check if colors are the same so we make vector color more visible
+        updateFabColor()
 
         //update vector frame colors
         setVectorFrameColors(tintBackground = true, showErrorDialog = false)
@@ -418,16 +413,14 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             text = mTempVectorColor.toHex(this@MainActivity)
         }
 
-        //check if colors are the same so we enable stroke to make vector visible
-        val fabDrawableColor =
-            if (Utils.checkIfColorsEqual(
-                    mTempBackgroundColor,
-                    mTempVectorColor
-                )
-            ) textColor else mTempVectorColor
-        mFab.drawable.setTint(fabDrawableColor)
-
+        updateFabColor()
         setVectorFrameColors(tintBackground = false, showErrorDialog = true)
+    }
+
+    private fun updateFabColor() {
+        //check if colors are the same so we enable stroke to make vector visible
+        val fabDrawableColor = mTempVectorColor.toContrastColor(mTempBackgroundColor)
+        mFab.drawable.setTint(fabDrawableColor)
     }
 
     private fun scrollToVector(vector: Int) {

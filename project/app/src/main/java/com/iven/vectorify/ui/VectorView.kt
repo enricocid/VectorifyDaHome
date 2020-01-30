@@ -53,7 +53,6 @@ class VectorView @JvmOverloads constructor(
                     Utils.tintDrawable(
                         ctx,
                         mVector,
-                        mBackgroundColor,
                         mVectorColor,
                         false
                     )

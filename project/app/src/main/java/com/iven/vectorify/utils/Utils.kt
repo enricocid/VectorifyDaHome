@@ -22,7 +22,10 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.afollestad.materialdialogs.MaterialDialog
-import com.iven.vectorify.*
+import com.iven.vectorify.R
+import com.iven.vectorify.VectorifyDaHomeLP
+import com.iven.vectorify.toErrorToast
+import com.iven.vectorify.vectorifyPreferences
 
 object Utils {
 
@@ -142,12 +145,6 @@ object Utils {
         return info != null && info.packageName == context.packageName
     }
 
-    //check if two colors are the same
-    @JvmStatic
-    fun checkIfColorsEqual(color1: Int, color2: Int): Boolean {
-        return color1 == color2
-    }
-
     //get categories start position
     @JvmStatic
     fun getCategory(context: Context, index: Int): Pair<String, List<Int>> {
@@ -243,7 +240,6 @@ object Utils {
     fun tintDrawable(
         context: Context,
         vector: Int,
-        backgroundColor: Int,
         vectorColor: Int,
         showErrorDialog: Boolean
     ): Drawable? {
@@ -268,19 +264,7 @@ object Utils {
 
                 //set tint mode multiply for special vectors
                 if (vectorProps.second) bit.setTintMode(PorterDuff.Mode.MULTIPLY)
-
-                //darken or lighten color to increase vector visibility when the colors are the same
-                val finalVectorColor = if (checkIfColorsEqual(backgroundColor, vectorColor)) {
-                    if (vectorColor.isDark())
-                        vectorColor.lighten(
-                            0.20F
-                        )
-                    else vectorColor.darken(0.20F)
-                } else {
-                    vectorColor
-                }
-
-                bit.setTint(finalVectorColor)
+                bit.setTint(vectorColor)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -289,10 +273,9 @@ object Utils {
         return bit
     }
 
-    //make rationale permission dialog
+    //make error dialog
     @JvmStatic
     private fun makeErrorDialog(context: Context) {
-
         MaterialDialog(context).show {
             title(R.string.title_info_error)
             message(R.string.info_error)

@@ -38,9 +38,8 @@ fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
 //method to calculate colors for cards titles
 fun Int.toSurfaceColor() = if (isDark()) Color.WHITE else Color.BLACK
 
-fun Int.lighten(factor: Float) = ColorUtils.blendARGB(this, Color.WHITE, factor)
-
-fun Int.darken(factor: Float) = ColorUtils.blendARGB(this, Color.BLACK, factor)
+fun Int.darkenOrLighten(factor: Float) =
+    ColorUtils.blendARGB(this, if (isDark()) Color.WHITE else Color.BLACK, factor)
 
 //method to get rounded float string
 fun Float.toDecimalFormat() = try {
@@ -49,6 +48,9 @@ fun Float.toDecimalFormat() = try {
     e.printStackTrace()
     ""
 }
+
+fun Int.toContrastColor(compareColor: Int) = if (this == compareColor)
+    darkenOrLighten(0.20F) else this
 
 fun String.toColouredToast(
     context: Context,
@@ -62,11 +64,14 @@ fun String.toColouredToast(
 
         toastView.setCardBackgroundColor(ColorStateList.valueOf(backgroundColor))
         toastView.findViewById<TextView>(R.id.toast_text).apply {
-            setTextColor(vectorColor)
+
+            val contentColor = vectorColor.toContrastColor(backgroundColor)
+
+            setTextColor(contentColor)
             text = this@toColouredToast
 
             icon?.let { dw ->
-                dw.mutate().setTint(vectorColor)
+                dw.mutate().setTint(contentColor)
                 setCompoundDrawablesRelativeWithIntrinsicBounds(dw, null, null, null)
             }
         }
