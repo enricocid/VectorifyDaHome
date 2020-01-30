@@ -97,4 +97,4 @@ fun List<ImageButton>.applyTint(context: Context, widgetColor: Int) {
 }
 
 fun MutableList<VectorifyWallpaper>?.getLatestSetup() =
-    this?.get(size - 1) ?: vectorifyPreferences.vectorifyWallpaperBackup
+    if (!this.isNullOrEmpty()) get(size - 1) else vectorifyPreferences.vectorifyWallpaperBackup

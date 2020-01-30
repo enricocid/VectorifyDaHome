@@ -279,7 +279,7 @@ object Utils {
             message(R.string.message_clear_recent_setups)
             positiveButton {
                 //add an empty list to preferences
-                vectorifyPreferences.vectorifyWallpaperSetups = null
+                vectorifyPreferences.vectorifyWallpaperSetups = mutableListOf()
             }
             negativeButton { dismiss() }
         }
