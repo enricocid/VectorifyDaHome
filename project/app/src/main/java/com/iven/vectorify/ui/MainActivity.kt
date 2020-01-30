@@ -79,6 +79,8 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     private var sSaveLatestSetup = true
 
+    private val sSwapColor get() = mTempVectorColor != mTempBackgroundColor
+
     override fun onStart() {
         super.onStart()
         PreferenceManager.getDefaultSharedPreferences(this)
@@ -115,7 +117,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         setupFabButton()
 
         swap_card_colors.setOnClickListener { swapBtn ->
-            if (mTempBackgroundColor != mTempVectorColor) ObjectAnimator.ofFloat(
+            if (sSwapColor) ObjectAnimator.ofFloat(
                 swapBtn,
                 View.ROTATION,
                 0f,
@@ -191,7 +193,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                         putInt(TEMP_BACKGROUND_COLOR, mTempBackgroundColor)
                         putInt(
                             TEMP_VECTOR_COLOR,
-                            mTempVectorColor.toContrastColor(mTempBackgroundColor)
+                            mTempVectorColor
                         )
                         putInt(TEMP_VECTOR, mTempVector)
                         putInt(TEMP_CATEGORY, mTempCategory)
@@ -203,7 +205,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 startActivity(intent)
             }
         }
-
     }
 
     private fun setupBottomBar() {
@@ -380,7 +381,9 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     //update vector frame
     private fun setVectorFrameColors(tintBackground: Boolean, showErrorDialog: Boolean) {
+
         if (tintBackground) mVectorFrame.setBackgroundColor(mTempBackgroundColor)
+
         val vector = Utils.tintDrawable(
             this,
             mTempVector,
@@ -395,6 +398,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
         mTempBackgroundColor = color
 
+        if (mTempBackgroundColor == mTempVectorColor) setVectorColorForUI(mTempVectorColor)
         val textColor = mTempBackgroundColor.toSurfaceColor()
 
         //update shit colors
@@ -424,16 +428,15 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         val textColor = mTempVectorColor.toSurfaceColor()
 
         //update shit colors
-        vector_color.setCardBackgroundColor(mTempVectorColor)
+        vector_color.setCardBackgroundColor(mTempVectorColor.toContrastColor(mTempVectorColor))
 
         vector_color_head.setTextColor(textColor)
         vector_color_subhead.apply {
             setTextColor(textColor)
             text = mTempVectorColor.toHex(this@MainActivity)
         }
-
-        updateFabColor()
         setVectorFrameColors(tintBackground = false, showErrorDialog = true)
+        updateFabColor()
     }
 
     private fun updateFabColor() {
@@ -545,7 +548,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             super.onSaveInstanceState(outState)
             vectorifyPreferences.savedVectorifyWallpaper = VectorifyWallpaper(
                 mTempBackgroundColor,
-                mTempVectorColor.toContrastColor(mTempBackgroundColor),
+                mTempVectorColor,
                 mTempVector,
                 mTempCategory,
                 mTempScale,

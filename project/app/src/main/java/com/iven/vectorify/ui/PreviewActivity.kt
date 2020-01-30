@@ -158,7 +158,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         mVectorView.updateVectorView(
             VectorifyWallpaper(
                 mTempBackgroundColor,
-                mTempVectorColor,
+                mTempVectorColor.toContrastColor(mTempBackgroundColor),
                 mTempVector,
                 mTempCategory,
                 mTempScale,

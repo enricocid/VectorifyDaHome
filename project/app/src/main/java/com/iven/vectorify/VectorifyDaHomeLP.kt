@@ -37,7 +37,7 @@ class VectorifyDaHomeLP : WallpaperService() {
         //set paints props
         mLatestSetup?.let { recent ->
             mSelectedBackgroundColor = recent.backgroundColor
-            mSelectedVectorColor = recent.vectorColor
+            mSelectedVectorColor = recent.vectorColor.toContrastColor(mSelectedBackgroundColor)
             mSelectedScaleFactor = recent.scale
         }
     }
