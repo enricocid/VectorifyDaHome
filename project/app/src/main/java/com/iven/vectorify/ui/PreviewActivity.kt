@@ -225,7 +225,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     }
 
     private fun setWallpaper(set: Boolean) {
-        updateRecentSetups()
+        mVectorView.saveToRecentSetups()
         mVectorView.vectorifyDaHome(set)
     }
 
@@ -271,17 +271,6 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
     private fun updatePrefsAndSetLiveWallpaper() {
 
-        //save wallpaper to prefs
-        vectorifyPreferences.savedVectorifyWallpaper = VectorifyWallpaper(
-            mTempBackgroundColor,
-            mTempVectorColor,
-            mTempVector,
-            mTempCategory,
-            mTempScale,
-            mTempHorizontalOffset,
-            mTempVerticalOffset
-        )
-
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences
         if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
@@ -292,27 +281,9 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             mTempBackgroundColor
         )
 
-        //update recent setups
-        updateRecentSetups()
-    }
-
-    private fun updateRecentSetups() {
-        //update recent setups
-        val recentSetups =
-            if (vectorifyPreferences.vectorifyWallpaperSetups != null) vectorifyPreferences.vectorifyWallpaperSetups else mutableListOf()
-
-        val recentToSave = VectorifyWallpaper(
-            mTempBackgroundColor,
-            mTempVectorColor,
-            mTempVector,
-            mTempCategory,
-            mTempScale,
-            mTempHorizontalOffset,
-            mTempVerticalOffset
-        )
-
-        if (!recentSetups?.contains(recentToSave)!!) recentSetups.add(recentToSave)
-        vectorifyPreferences.vectorifyWallpaperSetups = recentSetups
+        //update prefs
+        mVectorView.saveToPrefs()
+        mVectorView.saveToRecentSetups()
     }
 
     fun moveVectorUp(view: View) {

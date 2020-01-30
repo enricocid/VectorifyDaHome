@@ -22,6 +22,7 @@ class VectorView @JvmOverloads constructor(
     private var mBackgroundColor = mBackupRecent.backgroundColor
     private var mVectorColor = mBackupRecent.vectorColor
     private var mVector = mBackupRecent.resource
+    private var mCategory = mBackupRecent.category
     private var mScaleFactor = mBackupRecent.scale
     private var mHorizontalOffset = mBackupRecent.horizontalOffset
     private var mVerticalOffset = mBackupRecent.verticalOffset
@@ -32,6 +33,7 @@ class VectorView @JvmOverloads constructor(
         mBackgroundColor = vectorifyWallpaper.backgroundColor
         mVectorColor = vectorifyWallpaper.vectorColor
         mVector = vectorifyWallpaper.resource
+        mCategory = vectorifyWallpaper.category
         mScaleFactor = vectorifyWallpaper.scale
         mHorizontalOffset = vectorifyWallpaper.horizontalOffset
         mVerticalOffset = vectorifyWallpaper.verticalOffset
@@ -114,4 +116,36 @@ class VectorView @JvmOverloads constructor(
         invalidate()
     }
 
+    fun saveToPrefs() {
+        //save wallpaper to prefs
+        vectorifyPreferences.savedVectorifyWallpaper = VectorifyWallpaper(
+            mBackgroundColor,
+            mVectorColor,
+            mVector,
+            mCategory,
+            mScaleFactor,
+            mHorizontalOffset,
+            mVerticalOffset
+        )
+    }
+
+    fun saveToRecentSetups() {
+
+        //update recent setups
+        val recentSetups =
+            if (vectorifyPreferences.vectorifyWallpaperSetups != null) vectorifyPreferences.vectorifyWallpaperSetups else mutableListOf()
+
+        val recentToSave = VectorifyWallpaper(
+            mBackgroundColor,
+            mVectorColor,
+            mVector,
+            mCategory,
+            mScaleFactor,
+            mHorizontalOffset,
+            mVerticalOffset
+        )
+
+        if (!recentSetups?.contains(recentToSave)!!) recentSetups.add(recentToSave)
+        vectorifyPreferences.vectorifyWallpaperSetups = recentSetups
+    }
 }
