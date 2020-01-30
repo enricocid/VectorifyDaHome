@@ -35,6 +35,13 @@ import com.iven.vectorify.*
 import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
+import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_BACKGROUND_COLOR
+import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_CATEGORY
+import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_H_OFFSET
+import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_SCALE
+import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_VECTOR
+import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_VECTOR_COLOR
+import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_V_OFFSET
 import com.iven.vectorify.utils.Utils
 import de.halfbit.edgetoedge.Edge
 import de.halfbit.edgetoedge.edgeToEdge
@@ -107,7 +114,12 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         setupFabButton()
 
         swap_card_colors.setOnClickListener { swapBtn ->
-            if (mTempBackgroundColor != mTempVectorColor) ObjectAnimator.ofFloat(swapBtn, View.ROTATION, 0f, 180f).apply {
+            if (mTempBackgroundColor != mTempVectorColor) ObjectAnimator.ofFloat(
+                swapBtn,
+                View.ROTATION,
+                0f,
+                180f
+            ).apply {
                 duration = 500
                 start()
                 doOnEnd {
@@ -172,7 +184,10 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
                     putExtras(Bundle().apply {
                         putInt(TEMP_BACKGROUND_COLOR, mTempBackgroundColor)
-                        putInt(TEMP_VECTOR_COLOR, mTempVectorColor.toContrastColor(mTempBackgroundColor))
+                        putInt(
+                            TEMP_VECTOR_COLOR,
+                            mTempVectorColor.toContrastColor(mTempBackgroundColor)
+                        )
                         putInt(TEMP_VECTOR, mTempVector)
                         putInt(TEMP_CATEGORY, mTempCategory)
                         putFloat(TEMP_SCALE, mTempScale)

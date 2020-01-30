@@ -26,16 +26,6 @@ import kotlinx.android.synthetic.main.position_controls.*
 import kotlinx.android.synthetic.main.preview_activity.*
 import kotlinx.android.synthetic.main.size_position_card.*
 
-private const val SAVE_WALLPAPER_LOADER_ID = 25
-
-const val TEMP_BACKGROUND_COLOR = "TEMP_BACKGROUND_COLOR"
-const val TEMP_VECTOR_COLOR = "TEMP_VECTOR_COLOR"
-const val TEMP_VECTOR = "TEMP_VECTOR"
-const val TEMP_CATEGORY = "TEMP_CATEGORY"
-const val TEMP_SCALE = "TEMP_SCALE"
-const val TEMP_H_OFFSET = "TEMP_H_OFFSET"
-const val TEMP_V_OFFSET = "TEMP_V_OFFSET"
-
 @Suppress("UNUSED_PARAMETER")
 class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?> {
 
@@ -365,5 +355,18 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
                 // Hide the nav bar and status bar
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_FULLSCREEN)
+    }
+
+    companion object {
+
+        private const val SAVE_WALLPAPER_LOADER_ID = 25
+
+        internal const val TEMP_BACKGROUND_COLOR = "TEMP_BACKGROUND_COLOR"
+        internal const val TEMP_VECTOR_COLOR = "TEMP_VECTOR_COLOR"
+        internal const val TEMP_VECTOR = "TEMP_VECTOR"
+        internal const val TEMP_CATEGORY = "TEMP_CATEGORY"
+        internal const val TEMP_SCALE = "TEMP_SCALE"
+        internal const val TEMP_H_OFFSET = "TEMP_H_OFFSET"
+        internal const val TEMP_V_OFFSET = "TEMP_V_OFFSET"
     }
 }
