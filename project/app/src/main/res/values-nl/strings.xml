@@ -14,7 +14,7 @@
     <string name="title_vector_dialog">Vectorkleur</string>
     <string name="title_presets">Presets</string>
     <string name="selected_preset">Achtergrond: %1s, Vector: %1s</string>
-    <string name="title_accent_me">KLEUR ME!</string>
+    <string name="title_accent_me">Kleur me!</string>
 
     <!-- Recent setups things -->
     <string name="title_recent_setups">Recente voorinstellingen</string>

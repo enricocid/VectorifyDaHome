@@ -29,11 +29,11 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/raleway_black"
             android:paddingStart="16dp"
-            android:paddingTop="8dp"
+            android:paddingTop="16dp"
             android:paddingEnd="16dp"
             android:paddingBottom="4dp"
             android:text="@string/title_vector"
-            android:textAppearance="@android:style/TextAppearance.Material.Title" />
+            android:textAppearance="@android:style/TextAppearance.Material" />
 
         <TextView
             android:id="@+id/vector_color_subhead"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textAppearance="@android:style/TextAppearance.Material.Small" />
+            android:textAppearance="@android:style/TextAppearance.Material.Caption" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/accent_vector"

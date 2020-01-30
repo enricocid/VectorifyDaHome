@@ -24,10 +24,11 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/raleway_black"
             android:paddingStart="16dp"
-            android:paddingTop="8dp"
+            android:paddingTop="16dp"
             android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
             android:text="@string/title_presets"
-            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:textAppearance="@android:style/TextAppearance.Material"
             android:textColor="@color/vectors_color" />
 
         <!-- PRESETS OPTIONS -->

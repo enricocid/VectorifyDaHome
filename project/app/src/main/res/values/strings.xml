@@ -15,7 +15,7 @@
     <string name="title_vector_dialog">Vector color</string>
     <string name="title_presets">Presets</string>
     <string name="selected_preset">Background: %1s, Vector: %1s</string>
-    <string name="title_accent_me">ACCENT ME!</string>
+    <string name="title_accent_me">Accent me!</string>
 
     <!-- Recent setups things -->
     <string name="title_recent_setups">Recent setups</string>
