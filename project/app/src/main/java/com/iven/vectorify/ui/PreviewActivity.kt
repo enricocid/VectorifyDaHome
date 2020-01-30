@@ -234,8 +234,8 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         val cardColor = ColorUtils.setAlphaComponent(mTempBackgroundColor, 100)
 
         mToolbar.apply {
-            //  this.context.setTheme(if (mTempBackgroundColor.isDark()) R.style.ToolbarStyle_Dark else R.style.ToolbarStyle)
             setBackgroundColor(cardColor)
+            setTitleTextColor(widgetColors)
             setNavigationIcon(R.drawable.ic_navigate_before)
         }
 
