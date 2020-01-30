@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onShow
 import com.afollestad.materialdialogs.customview.customView
 import com.iven.vectorify.*
 import com.iven.vectorify.utils.SaveWallpaperLoader
@@ -56,7 +58,21 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             customView(R.layout.progress_dialog)
             cancelOnTouchOutside(false)
             cancelable(false)
+            this.window?.apply {
+                setFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                )
+                decorView.systemUiVisibility =
+                    this@PreviewActivity.window.decorView.systemUiVisibility
+            }
+
             show()
+            onShow {
+                this.window?.clearFlags(
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                )
+            }
         }
 
         return mSaveImageLoader
