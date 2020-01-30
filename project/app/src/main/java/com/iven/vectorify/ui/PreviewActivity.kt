@@ -168,9 +168,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         )
 
         mVectorView.onSetWallpaper = { setWallpaper, bitmap ->
-
             mSaveImageLoader = SaveWallpaperLoader(this, bitmap, setWallpaper)
-
             LoaderManager.getInstance(this).initLoader(SAVE_WALLPAPER_LOADER_ID, null, this)
         }
 

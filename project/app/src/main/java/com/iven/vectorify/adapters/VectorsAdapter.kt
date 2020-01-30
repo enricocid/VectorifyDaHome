@@ -70,26 +70,24 @@ class VectorsAdapter(private val context: Context) :
 
         fun bindItems(drawable: Int) {
 
-            val vectorButton = itemView.findViewById<ImageButton>(R.id.vector_button)
-            val checkbox = itemView.findViewById<ImageView>(R.id.checkbox)
-
-            vectorButton.setImageResource(drawable)
-
-            if (mSelectedDrawable == drawable) checkbox.visibility = View.VISIBLE
-            else
-                checkbox.visibility = View.GONE
-
-            vectorButton.setOnClickListener {
-                if (mSelectedDrawable != drawable) {
-                    notifyItemChanged(getVectorPosition(mSelectedDrawable))
-                    mSelectedDrawable = drawable
-                    checkbox.visibility = View.VISIBLE
-                    onVectorClick?.invoke(drawable)
-                }
+            val checkbox = itemView.findViewById<ImageView>(R.id.checkbox).apply {
+                visibility = if (mSelectedDrawable == drawable) View.VISIBLE else View.GONE
             }
-            vectorButton.setOnLongClickListener {
-                onVectorLongClick?.invoke(drawable)
-                return@setOnLongClickListener false
+
+            itemView.findViewById<ImageButton>(R.id.vector_button).apply {
+                setImageResource(drawable)
+                setOnClickListener {
+                    if (mSelectedDrawable != drawable) {
+                        notifyItemChanged(getVectorPosition(mSelectedDrawable))
+                        mSelectedDrawable = drawable
+                        checkbox.visibility = View.VISIBLE
+                        onVectorClick?.invoke(drawable)
+                    }
+                }
+                setOnLongClickListener {
+                    onVectorLongClick?.invoke(drawable)
+                    return@setOnLongClickListener false
+                }
             }
         }
     }

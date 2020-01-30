@@ -9,13 +9,11 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.view.View
-import android.view.Window
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.browser.customtabs.CustomTabsIntent
@@ -54,27 +52,11 @@ object Utils {
     private fun isThemeNight() =
         AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
 
-    //method to apply dark system bars
     @JvmStatic
     @TargetApi(Build.VERSION_CODES.O_MR1)
-    fun handleLightSystemBars(context: Context, window: Window?, view: View, isDialog: Boolean) {
-
-        val isThemeNight = isThemeNight()
-        val color = if (!isDialog) ContextCompat.getColor(
-            context, R.color.bottom_bar_color
-        ) else Color.TRANSPARENT
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-
-            window?.apply {
-                statusBarColor = color
-                navigationBarColor = color
-            }
-
-        }
-
+    fun handleLightSystemBars(view: View) {
         view.systemUiVisibility =
-            if (isThemeNight) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            if (isThemeNight()) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
     }
 
     //method to open live wallpaper intent
@@ -305,9 +287,7 @@ object Utils {
     fun openCustomTab(
         context: Context
     ) {
-
         try {
-
             CustomTabsIntent.Builder().apply {
                 addDefaultShareMenuItem()
                 setShowTitle(true)

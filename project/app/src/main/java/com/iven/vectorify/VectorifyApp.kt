@@ -16,6 +16,7 @@ val deviceMetrics: Pair<Int, Int> by lazy {
 }
 
 class VectorifyApp : Application() {
+
     companion object {
         lateinit var prefs: VectorifyPreferences
         lateinit var metrics: Pair<Int, Int>

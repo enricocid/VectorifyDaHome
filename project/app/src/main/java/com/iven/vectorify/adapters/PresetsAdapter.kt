@@ -86,40 +86,48 @@ class PresetsAdapter(@NonNull private val context: Context) :
             val selectedBackgroundColor = ContextCompat.getColor(context, combo.first)
             colorItem.strokeColor = selectedBackgroundColor
 
-            itemView.setOnClickListener {
-                onPresetClick?.invoke(combo)
-            }
-
-            itemView.setOnLongClickListener {
-
-                try {
-                    val backgroundColorName = context.resources.getResourceEntryName(combo.first)
-                        .replace(
-                            context.getString(R.string.underscore_delimiter),
-                            context.getString(R.string.space_delimiter)
-                        )
-                        .capitalize()
-
-                    val vectorColorName = context.resources.getResourceEntryName(combo.second)
-                        .replace(
-                            context.getString(R.string.underscore_delimiter),
-                            context.getString(R.string.space_delimiter)
-                        )
-                        .capitalize()
-
-                    context.getString(
-                        R.string.selected_preset,
-                        backgroundColorName,
-                        vectorColorName
-                    ).toColouredToast(context, null, selectedBackgroundColor, selectedVectorColor)
-
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    context.getString(
-                        R.string.error_get_resource
-                    ).toErrorToast(context)
+            itemView.apply {
+                setOnClickListener {
+                    onPresetClick?.invoke(combo)
                 }
-                return@setOnLongClickListener false
+
+                setOnLongClickListener {
+
+                    try {
+                        val backgroundColorName =
+                            context.resources.getResourceEntryName(combo.first)
+                                .replace(
+                                    context.getString(R.string.underscore_delimiter),
+                                    context.getString(R.string.space_delimiter)
+                                )
+                                .capitalize()
+
+                        val vectorColorName = context.resources.getResourceEntryName(combo.second)
+                            .replace(
+                                context.getString(R.string.underscore_delimiter),
+                                context.getString(R.string.space_delimiter)
+                            )
+                            .capitalize()
+
+                        context.getString(
+                            R.string.selected_preset,
+                            backgroundColorName,
+                            vectorColorName
+                        ).toColouredToast(
+                            context,
+                            null,
+                            selectedBackgroundColor,
+                            selectedVectorColor
+                        )
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        context.getString(
+                            R.string.error_get_resource
+                        ).toErrorToast(context)
+                    }
+                    return@setOnLongClickListener false
+                }
             }
         }
     }

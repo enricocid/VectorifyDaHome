@@ -43,10 +43,6 @@ class RecentsAdapter(
 
         fun bindItems(vectorifyWallpaper: VectorifyWallpaper) {
 
-            val recentButton = itemView.findViewById<ImageView>(R.id.recent_setups_vector)
-
-            recentButton.setBackgroundColor(vectorifyWallpaper.backgroundColor)
-
             val drawable =
                 Utils.tintDrawable(
                     context,
@@ -55,39 +51,40 @@ class RecentsAdapter(
                     false
                 )
 
-            recentButton.setImageDrawable(drawable)
-
-            recentButton.setOnClickListener {
-                onRecentClick?.invoke(vectorifyWallpaper)
-            }
-
-            recentButton.setOnLongClickListener {
-
-                MaterialDialog(context).show {
-
-                    title(R.string.title_recent_setups)
-                    message(
-                        text = context.getString(
-                            R.string.message_clear_single_recent_setup,
-                            adapterPosition.toString()
-                        )
-                    )
-                    positiveButton {
-                        //add an empty list to preferences
-                        try {
-                            if (mRecentSetups?.contains(vectorifyWallpaper)!!) mRecentSetups?.remove(
-                                vectorifyWallpaper
-                            )
-                            notifyDataSetChanged()
-                            vectorifyPreferences.vectorifyWallpaperSetups = mRecentSetups
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-                    negativeButton { dismiss() }
+            itemView.findViewById<ImageView>(R.id.recent_setups_vector).apply {
+                setBackgroundColor(vectorifyWallpaper.backgroundColor)
+                setImageDrawable(drawable)
+                setOnClickListener {
+                    onRecentClick?.invoke(vectorifyWallpaper)
                 }
+                setOnLongClickListener {
 
-                return@setOnLongClickListener true
+                    MaterialDialog(context).show {
+
+                        title(R.string.title_recent_setups)
+                        message(
+                            text = context.getString(
+                                R.string.message_clear_single_recent_setup,
+                                adapterPosition.toString()
+                            )
+                        )
+                        positiveButton {
+                            //add an empty list to preferences
+                            try {
+                                if (mRecentSetups?.contains(vectorifyWallpaper)!!) mRecentSetups?.remove(
+                                    vectorifyWallpaper
+                                )
+                                notifyDataSetChanged()
+                                vectorifyPreferences.vectorifyWallpaperSetups = mRecentSetups
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                        negativeButton { dismiss() }
+                    }
+
+                    return@setOnLongClickListener true
+                }
             }
         }
     }

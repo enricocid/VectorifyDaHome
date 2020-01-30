@@ -34,14 +34,15 @@ class SaveWallpaperLoader(
         return try {
             // Get the external storage directory path
             context.getExternalFilesDir(null)?.let { path ->
-                val s =
-                    SimpleDateFormat(context.getString(R.string.time_pattern), Locale.getDefault())
-                val format = s.format(Date())
 
-                val saveFormat = "${context.getString(R.string.save_pattern) + format}.png"
+                val format = SimpleDateFormat(
+                    context.getString(R.string.time_pattern),
+                    Locale.getDefault()
+                ).format(Date())
 
                 // Create a file to save the image
-                val wallpaperToSave = File(path, saveFormat)
+                val wallpaperToSave =
+                    File(path, "${context.getString(R.string.save_pattern) + format}.png")
 
                 // Get the file output stream
                 val stream = FileOutputStream(wallpaperToSave)
@@ -49,11 +50,12 @@ class SaveWallpaperLoader(
                 // Compress the bitmap
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
 
-                // Flush the output stream
-                stream.flush()
+                // Flush and close the output stream
+                stream.apply {
+                    flush()
+                    close()
+                }
 
-                // Close the output stream
-                stream.close()
                 if (isSetWallpaper) FileProvider.getUriForFile(
                     context,
                     context.getString(R.string.live_wallpaper_name),

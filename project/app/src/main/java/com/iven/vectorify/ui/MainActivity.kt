@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -136,7 +137,11 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             window?.apply {
-                Utils.handleLightSystemBars(this@MainActivity, this, decorView, false)
+                if (Build.VERSION.SDK_INT != Build.VERSION_CODES.Q) {
+                    statusBarColor = Color.TRANSPARENT
+                    navigationBarColor = Color.TRANSPARENT
+                }
+                Utils.handleLightSystemBars(decorView)
                 edgeToEdge {
                     decorView.fit { Edge.Top }
                     mBottomBar.fit { Edge.Bottom + Edge.Right }
@@ -577,7 +582,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) window?.apply {
-                Utils.handleLightSystemBars(context, this, decorView, true)
+                Utils.handleLightSystemBars(decorView)
                 edgeToEdge {
                     getRecyclerView().fit { Edge.Bottom }
                     decorView.fit { Edge.Top }
