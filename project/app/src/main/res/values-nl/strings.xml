@@ -39,7 +39,7 @@
     <string name="title_crop">Bijsnijden en instellen als achtergrond</string>
     <string name="title_go_live">Instellen als live-achtergrond</string>
     <string name="title_already_live">Bezig met toepassen&#8230;</string>
-    <string name="message_saved_to">%1s is opgeslagen in %1s</string>
+    <string name="message_saved_to">Is opgeslagen in %1s</string>
 
     <!-- Categories -->
     <string name="title_categories">Categorieën</string>
@@ -63,17 +63,4 @@
     <string name="title_roman">Romeins</string>
     <string name="title_zodiac">Dierenriem</string>
     <string name="title_others">Overig</string>
-
-    <!-- Dialog rationale things -->
-    <string name="title_rationale">Toegang tot opslag</string>
-    <string name="rationale">Geef de app toegang tot je opslag om achtergronden op te slaan op de interne opslag. De app
-        leest geen persoonlijke gegevens uit :)
-    </string>
-    <string name="rationale_denied">Je hebt onlangs gekozen voor \'Niet opnieuw vragen\' bij de opslagmachtiging.
-        Ga naar de app-informatie en machtig de app als je achtergronden wilt opslaan.
-    </string>
-    <string name="go_to_info">Ga naar informatie</string>
-    <string name="boo">Verdorie! Geen toegang, geen feest! Gebruik de live-achtergrond!</string>
-    <string name="boo_info">Verdorie! Gewoon om even mijn ei kwijt te kunnen!</string>
-    <string name="boo_almost_there">Ga naar \'machtigingen\' en geef toegang tot de opslag!</string>
 </resources>

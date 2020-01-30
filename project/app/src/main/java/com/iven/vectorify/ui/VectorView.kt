@@ -1,23 +1,21 @@
 package com.iven.vectorify.ui
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.drawToBitmap
 import com.iven.vectorify.VectorifyWallpaper
 import com.iven.vectorify.deviceMetrics
-import com.iven.vectorify.utils.SaveWallpaperAsync
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
-import java.lang.ref.WeakReference
 
 class VectorView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
-    private var mDeviceWidth = deviceMetrics.first
-    private var mDeviceHeight = deviceMetrics.second
+    var onSetWallpaper: ((Boolean, Bitmap) -> Unit)? = null
 
     private val mBackupRecent = vectorifyPreferences.vectorifyWallpaperBackup
 
@@ -40,13 +38,7 @@ class VectorView @JvmOverloads constructor(
     }
 
     fun vectorifyDaHome(isSetAsWallpaper: Boolean) {
-        SaveWallpaperAsync(
-            WeakReference(context),
-            drawToBitmap(),
-            mDeviceWidth,
-            mDeviceHeight,
-            isSetAsWallpaper
-        ).execute()
+        onSetWallpaper?.invoke(isSetAsWallpaper, drawToBitmap())
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -69,8 +61,8 @@ class VectorView @JvmOverloads constructor(
                 Utils.drawBitmap(
                     drawable,
                     this,
-                    mDeviceWidth,
-                    mDeviceHeight,
+                    deviceMetrics.first,
+                    deviceMetrics.second,
                     mScaleFactor,
                     mHorizontalOffset,
                     mVerticalOffset

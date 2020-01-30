@@ -29,7 +29,7 @@
     <string name="title_crop">Rogner et définir comme fond d\'écran</string>
     <string name="title_go_live">Définir comme fond d\'écran live</string>
     <string name="title_already_live">Application des modifications&#8230;</string>
-    <string name="message_saved_to">%1s enregsitré vers %1s</string>
+    <string name="message_saved_to">Enregsitré vers %1s</string>
     <!-- Categories -->
     <string name="title_categories">Catégories</string>
     <string name="title_tech">Tech</string>
@@ -52,12 +52,4 @@
     <string name="title_roman">Chiffres romains</string>
     <string name="title_zodiac">Zodiaque</string>
     <string name="title_others">Autres</string>
-    <!-- Dialog rationale things -->
-    <string name="title_rationale">Permission d\'accès au stockage</string>
-    <string name="rationale">Laissez-moi accéder à votre stockage afin d\'enregistrer des fonds d\'écran dans votre mémoire interne. Je ne pourrai pas accéder à vos données personnelles :)</string>
-    <string name="rationale_denied">Vous avez récemment choisi l\'option «&#160;Ne plus me demander&#160;» lorsque la permission d\'accès au stockage a été demandée. Allez dans les infos de l\'application et accordez-moi la permission si vous voulez sauvegarder des fonds d\'écran.</string>
-    <string name="go_to_info">Aller vers les infos</string>
-    <string name="boo">Bouh&#160;! Pas d\'accès, pas de fête&#160;! Utilisez le fond d\'écran en direct&#160;!</string>
-    <string name="boo_info">Bouh&#160;! Juste pour que tu le saches&#160;!</string>
-    <string name="boo_almost_there">Naviguez maintenant vers les autorisations et activez l\'accès au stockage&#160;!</string>
 </resources>

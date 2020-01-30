@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.Toast
 import androidx.core.graphics.ColorUtils
 
 //viewTreeObserver extension to measure layout params
@@ -41,4 +42,9 @@ fun Float.toDecimalFormat() = try {
 } catch (e: Exception) {
     e.printStackTrace()
     ""
+}
+
+fun String.toToast(context: Context) {
+    Toast.makeText(context, this, Toast.LENGTH_LONG)
+        .show()
 }

@@ -1,11 +1,9 @@
 package com.iven.vectorify.ui
 
-import android.Manifest
-import android.annotation.TargetApi
+import android.app.WallpaperManager
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.res.ColorStateList
-import android.os.Build
+import android.net.Uri
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.Menu
@@ -13,20 +11,22 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.SeekBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat
 import androidx.core.graphics.ColorUtils
+import androidx.loader.app.LoaderManager
+import androidx.loader.content.Loader
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.iven.vectorify.*
+import com.iven.vectorify.utils.SaveWallpaperLoader
 import com.iven.vectorify.utils.Utils
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import kotlinx.android.synthetic.main.position_controls.*
 import kotlinx.android.synthetic.main.preview_activity.*
 import kotlinx.android.synthetic.main.size_position_card.*
 
-const val SAVE_WALLPAPER = 0
-const val SET_WALLPAPER = 1
+private const val SAVE_WALLPAPER_LOADER_ID = 25
 
 const val TEMP_BACKGROUND_COLOR = "TEMP_BACKGROUND_COLOR"
 const val TEMP_VECTOR_COLOR = "TEMP_VECTOR_COLOR"
@@ -37,7 +37,7 @@ const val TEMP_H_OFFSET = "TEMP_H_OFFSET"
 const val TEMP_V_OFFSET = "TEMP_V_OFFSET"
 
 @Suppress("UNUSED_PARAMETER")
-class PreviewActivity : AppCompatActivity() {
+class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?> {
 
     private var sUserIsSeeking = false
 
@@ -56,6 +56,45 @@ class PreviewActivity : AppCompatActivity() {
     private var mTempHorizontalOffset = mBackupRecent.horizontalOffset
     private var mTempVerticalOffset = mBackupRecent.verticalOffset
 
+    private lateinit var mSaveWallpaperDialog: MaterialDialog
+    private lateinit var mSaveImageLoader: Loader<Uri?>
+
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Uri?> {
+
+        mSaveWallpaperDialog = MaterialDialog(this).apply {
+            title(R.string.live_wallpaper_name)
+            customView(R.layout.progress_dialog)
+            cancelOnTouchOutside(false)
+            cancelable(false)
+            show()
+        }
+
+        return mSaveImageLoader
+    }
+
+    override fun onLoadFinished(loader: Loader<Uri?>, wallpaperUri: Uri?) {
+
+        wallpaperUri?.let {
+            val wallpaperManager = WallpaperManager.getInstance(this)
+            try {
+                //start crop and set wallpaper intent
+                startActivity(wallpaperManager.getCropAndSetWallpaperIntent(wallpaperUri))
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
+
+        }
+
+        LoaderManager.getInstance(this).destroyLoader(SAVE_WALLPAPER_LOADER_ID)
+
+        if (mSaveWallpaperDialog.isShowing) mSaveWallpaperDialog.dismiss()
+
+        getString(R.string.message_saved_to, getExternalFilesDir(null)).toToast(this)
+    }
+
+    override fun onLoaderReset(loader: Loader<Uri?>) {
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         finishAndRemoveTask()
@@ -68,18 +107,8 @@ class PreviewActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.save ->
-                if (Utils.hasToRequestWriteStoragePermission(this)) Utils.makeRationaleDialog(
-                    this,
-                    SAVE_WALLPAPER,
-                    true
-                ) else mVectorView.vectorifyDaHome(false)
-
-            R.id.set -> if (Utils.hasToRequestWriteStoragePermission(this)) Utils.makeRationaleDialog(
-                this,
-                SET_WALLPAPER,
-                true
-            ) else mVectorView.vectorifyDaHome(true)
+            R.id.save -> setWallpaper(false)
+            R.id.set -> setWallpaper(true)
             R.id.go_live -> updatePrefsAndSetLiveWallpaper()
             android.R.id.home -> finishAndRemoveTask()
         }
@@ -127,6 +156,13 @@ class PreviewActivity : AppCompatActivity() {
             )
         )
 
+        mVectorView.onSetWallpaper = { setWallpaper, bitmap ->
+
+            mSaveImageLoader = SaveWallpaperLoader(this, bitmap, setWallpaper)
+
+            LoaderManager.getInstance(this).initLoader(SAVE_WALLPAPER_LOADER_ID, null, this)
+        }
+
         setSupportActionBar(mToolbar)
 
         supportActionBar?.let { ab ->
@@ -139,32 +175,6 @@ class PreviewActivity : AppCompatActivity() {
         setToolbarAndSeekBarColors()
 
         initializeSeekBar()
-    }
-
-    //manage request permission result, continue loading ui if permissions was granted
-    @TargetApi(Build.VERSION_CODES.M)
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-            val shouldShowRationale =
-                ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-            if (!shouldShowRationale)
-                Utils.makeRationaleDialog(this, requestCode, shouldShowRationale) else
-                DynamicToast.makeError(this, getString(R.string.boo), Toast.LENGTH_LONG)
-                    .show()
-        } else {
-            when (requestCode) {
-                SAVE_WALLPAPER -> setWallpaper(false)
-                SET_WALLPAPER -> setWallpaper(true)
-            }
-        }
     }
 
     private fun getViews() {

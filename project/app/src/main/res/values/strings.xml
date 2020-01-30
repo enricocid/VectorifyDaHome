@@ -41,7 +41,7 @@
     <string name="title_crop">Crop and set as wallpaper</string>
     <string name="title_go_live">Set as live wallpaper</string>
     <string name="title_already_live">Applying changes&#8230;</string>
-    <string name="message_saved_to">%1s saved to %1s</string>
+    <string name="message_saved_to">Saved to %1s</string>
 
     <!-- Categories -->
     <string name="title_categories">Categories</string>
@@ -65,17 +65,4 @@
     <string name="title_roman">Roman</string>
     <string name="title_zodiac">Zodiac</string>
     <string name="title_others">Others</string>
-
-    <!-- Dialog rationale things -->
-    <string name="title_rationale">Storage access permission</string>
-    <string name="rationale">Let me access to Your storage in order to save wallpapers to Your internal memory. No
-        personal data will be accessed by me :)
-    </string>
-    <string name="rationale_denied">You have recently chose \"Don\'t ask me again\" option when storage access
-        permission was asked. Go to the app\'s info and grant me the permission if You want to save wallpapers.
-    </string>
-    <string name="go_to_info">Go to info</string>
-    <string name="boo">Boo! No access no party! Use the live wallpaper!</string>
-    <string name="boo_info">Boo! Just so You know!</string>
-    <string name="boo_almost_there">Now navigate to permissions and enable storage access!</string>
 </resources>

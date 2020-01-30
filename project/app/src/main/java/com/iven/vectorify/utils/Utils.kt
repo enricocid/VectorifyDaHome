@@ -2,15 +2,11 @@
 
 package com.iven.vectorify.utils
 
-import android.Manifest
 import android.annotation.TargetApi
-import android.app.Activity
 import android.app.WallpaperManager
-import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -24,7 +20,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.afollestad.materialdialogs.MaterialDialog
@@ -128,7 +123,6 @@ object Utils {
 
         val drawableCanvas = Canvas(bitmap)
         drawable?.setBounds(0, 0, drawableCanvas.width, drawableCanvas.height)
-
         drawable?.draw(drawableCanvas)
 
         val left = canvas.width / 2F - drawableCanvas.width / 2F + horizontalOffset
@@ -142,82 +136,12 @@ object Utils {
         )
     }
 
-    @JvmStatic
-    fun hasToRequestWriteStoragePermission(activity: Activity): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(
-            activity,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ) != PackageManager.PERMISSION_GRANTED
-    }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    @JvmStatic
-    fun requestPermissions(activity: Activity, code: Int) {
-        ActivityCompat.requestPermissions(
-            activity,
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            code
-        )
-    }
-
     //determine if the live wallpaper is already applied
     @JvmStatic
     fun isLiveWallpaperRunning(context: Context): Boolean {
         val wpm = WallpaperManager.getInstance(context)
         val info = wpm.wallpaperInfo
         return info != null && info.packageName == context.packageName
-    }
-
-    //make rationale permission dialog
-    @JvmStatic
-    fun makeRationaleDialog(activity: Activity, which: Int, shouldRequestRationale: Boolean) {
-
-        val message = if (shouldRequestRationale) R.string.rationale else R.string.rationale_denied
-
-        MaterialDialog(activity).show {
-
-            title(R.string.title_rationale)
-            message(message)
-            positiveButton(if (shouldRequestRationale) android.R.string.ok else R.string.go_to_info) {
-                if (shouldRequestRationale) requestPermissions(activity, which) else
-                    openVectorifyDaHomeDetails(activity)
-            }
-            negativeButton {
-                if (shouldRequestRationale)
-                    DynamicToast.makeError(
-                        context,
-                        activity.getString(R.string.boo),
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                else
-                    DynamicToast.makeWarning(
-                        context,
-                        activity.getString(R.string.boo_info),
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-            }
-        }
-    }
-
-    //make rationale permission dialog
-    @JvmStatic
-    private fun openVectorifyDaHomeDetails(context: Context) {
-        try {
-            //Open the specific App Info page:
-            val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-            intent.data = Uri.parse("package:" + context.packageName)
-            context.startActivity(intent)
-            DynamicToast.make(
-                context,
-                context.getString(R.string.boo_almost_there),
-                Toast.LENGTH_LONG
-            )
-                .show()
-        } catch (e: ActivityNotFoundException) {
-            e.printStackTrace()
-        }
     }
 
     //check if two colors are the same
