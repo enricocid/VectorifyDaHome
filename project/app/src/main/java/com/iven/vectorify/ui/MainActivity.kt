@@ -77,8 +77,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     private var mTempHorizontalOffset = mBackupRecent.horizontalOffset
     private var mTempVerticalOffset = mBackupRecent.verticalOffset
 
-    private var sSaveLatestSetup = true
-
     private val sSwapColor get() = mTempVectorColor != mTempBackgroundColor
 
     override fun onStart() {
@@ -96,11 +94,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         if (key == getString(R.string.recent_vectorify_wallpapers_key) && vectorifyPreferences.vectorifyWallpaperSetups?.isNullOrEmpty()!! && ::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing)
             mRecentSetupsDialog.dismiss()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        sSaveLatestSetup = true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -159,18 +152,14 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     private fun getViewsAndResources() {
 
         //get wallpaper shiz
-        val latestSetup =
-            if (vectorifyPreferences.savedVectorifyWallpaper != null) vectorifyPreferences.savedVectorifyWallpaper else vectorifyPreferences.vectorifyWallpaperBackup
-
-        //init temp preferences
-        latestSetup?.let { setup ->
-            mTempBackgroundColor = setup.backgroundColor
-            mTempVectorColor = setup.vectorColor
-            mTempVector = setup.resource
-            mTempCategory = setup.category
-            mTempScale = setup.scale
-            mTempHorizontalOffset = setup.horizontalOffset
-            mTempVerticalOffset = setup.verticalOffset
+        vectorifyPreferences.vectorifyWallpaperSetups.getLatestSetup().apply {
+            mTempBackgroundColor = backgroundColor
+            mTempVectorColor = vectorColor
+            mTempVector = resource
+            mTempCategory = category
+            mTempScale = scale
+            mTempHorizontalOffset = horizontalOffset
+            mTempVerticalOffset = verticalOffset
         }
 
         mVectorFrame = vector_frame
@@ -184,8 +173,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         //get the fab (don't move from this position)
         mFab.apply {
             setOnClickListener {
-
-                sSaveLatestSetup = false
 
                 //start preview activity
                 val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
@@ -546,21 +533,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             mVectorsRecyclerView.scrollToPosition(0)
             mVectorsAdapter.swapCategory(category.second)
             mCategoriesChip.text = category.first
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        if (sSaveLatestSetup) {
-            super.onSaveInstanceState(outState)
-            vectorifyPreferences.savedVectorifyWallpaper = VectorifyWallpaper(
-                mTempBackgroundColor,
-                mTempVectorColor,
-                mTempVector,
-                mTempCategory,
-                mTempScale,
-                mTempHorizontalOffset,
-                mTempVerticalOffset
-            )
         }
     }
 

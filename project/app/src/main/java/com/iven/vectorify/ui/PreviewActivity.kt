@@ -225,7 +225,6 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     }
 
     private fun setWallpaper(set: Boolean) {
-        updateLatestSetup()
         updateRecentSetups()
         mVectorView.vectorifyDaHome(set)
     }
@@ -270,7 +269,9 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         ).applyTint(this, widgetColor)
     }
 
-    private fun updateLatestSetup() {
+    private fun updatePrefsAndSetLiveWallpaper() {
+
+        //save wallpaper to prefs
         vectorifyPreferences.savedVectorifyWallpaper = VectorifyWallpaper(
             mTempBackgroundColor,
             mTempVectorColor,
@@ -280,11 +281,6 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             mTempHorizontalOffset,
             mTempVerticalOffset
         )
-    }
-
-    private fun updatePrefsAndSetLiveWallpaper() {
-
-        updateLatestSetup()
 
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences

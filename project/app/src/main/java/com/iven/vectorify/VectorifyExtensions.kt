@@ -95,3 +95,6 @@ fun List<ImageButton>.applyTint(context: Context, widgetColor: Int) {
         imageButton.background = Utils.createColouredRipple(context, widgetColor)
     }
 }
+
+fun MutableList<VectorifyWallpaper>?.getLatestSetup() =
+    this?.get(size - 1) ?: vectorifyPreferences.vectorifyWallpaperBackup
