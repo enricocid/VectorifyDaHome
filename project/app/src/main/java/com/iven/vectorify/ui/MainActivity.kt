@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         setupFabButton()
 
         swap_card_colors.setOnClickListener { swapBtn ->
-            ObjectAnimator.ofFloat(swapBtn, View.ROTATION, 0f, 180f).apply {
+            if (mTempBackgroundColor != mTempVectorColor) ObjectAnimator.ofFloat(swapBtn, View.ROTATION, 0f, 180f).apply {
                 duration = 500
                 start()
                 doOnEnd {
@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
                     putExtras(Bundle().apply {
                         putInt(TEMP_BACKGROUND_COLOR, mTempBackgroundColor)
-                        putInt(TEMP_VECTOR_COLOR, mTempVectorColor)
+                        putInt(TEMP_VECTOR_COLOR, mTempVectorColor.toContrastColor(mTempBackgroundColor))
                         putInt(TEMP_VECTOR, mTempVector)
                         putInt(TEMP_CATEGORY, mTempCategory)
                         putFloat(TEMP_SCALE, mTempScale)
@@ -361,11 +361,10 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     //update vector frame
     private fun setVectorFrameColors(tintBackground: Boolean, showErrorDialog: Boolean) {
         if (tintBackground) mVectorFrame.setBackgroundColor(mTempBackgroundColor)
-        mTempVectorColor = mTempVectorColor.toContrastColor(mTempBackgroundColor)
         val vector = Utils.tintDrawable(
             this,
             mTempVector,
-            mTempVectorColor,
+            mTempVectorColor.toContrastColor(mTempBackgroundColor),
             showErrorDialog
         )
         mVectorFrame.setImageDrawable(vector)
@@ -526,7 +525,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             super.onSaveInstanceState(outState)
             vectorifyPreferences.savedVectorifyWallpaper = VectorifyWallpaper(
                 mTempBackgroundColor,
-                mTempVectorColor,
+                mTempVectorColor.toContrastColor(mTempBackgroundColor),
                 mTempVector,
                 mTempCategory,
                 mTempScale,
