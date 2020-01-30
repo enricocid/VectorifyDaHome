@@ -41,10 +41,10 @@ class SaveWallpaperLoader(
                 val saveFormat = "${context.getString(R.string.save_pattern) + format}.png"
 
                 // Create a file to save the image
-                val file = File(path, saveFormat)
+                val wallpaperToSave = File(path, saveFormat)
 
                 // Get the file output stream
-                val stream = FileOutputStream(file)
+                val stream = FileOutputStream(wallpaperToSave)
 
                 // Compress the bitmap
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
@@ -57,7 +57,7 @@ class SaveWallpaperLoader(
                 if (isSetWallpaper) FileProvider.getUriForFile(
                     context,
                     context.getString(R.string.live_wallpaper_name),
-                    path
+                    wallpaperToSave
                 ) else null
             }
         } catch (e: Exception) {

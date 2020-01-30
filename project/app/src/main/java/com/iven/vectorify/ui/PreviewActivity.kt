@@ -80,11 +80,11 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
     override fun onLoadFinished(loader: Loader<Uri?>, wallpaperUri: Uri?) {
 
-        wallpaperUri?.let {
+        wallpaperUri?.let { uri ->
             val wallpaperManager = WallpaperManager.getInstance(this)
             try {
                 //start crop and set wallpaper intent
-                startActivity(wallpaperManager.getCropAndSetWallpaperIntent(wallpaperUri))
+                startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
             } catch (e: Throwable) {
                 e.printStackTrace()
             }
