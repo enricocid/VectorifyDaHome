@@ -38,8 +38,8 @@ fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
 //method to calculate colors for cards titles
 fun Int.toSurfaceColor() = if (isDark()) Color.WHITE else Color.BLACK
 
-fun Int.darkenOrLighten(factor: Float) =
-    ColorUtils.blendARGB(this, if (isDark()) Color.WHITE else Color.BLACK, factor)
+fun Int.darkenOrLighten() =
+    ColorUtils.blendARGB(this, if (isDark()) Color.WHITE else Color.BLACK, 0.20F)
 
 //method to get rounded float string
 fun Float.toDecimalFormat() = try {
@@ -50,7 +50,7 @@ fun Float.toDecimalFormat() = try {
 }
 
 fun Int.toContrastColor(compareColor: Int) = if (this == compareColor)
-    darkenOrLighten(0.20F) else this
+    darkenOrLighten() else this
 
 fun String.toColouredToast(
     context: Context,
