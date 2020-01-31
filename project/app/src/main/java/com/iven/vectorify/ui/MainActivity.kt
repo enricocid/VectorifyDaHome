@@ -54,10 +54,6 @@ import kotlinx.android.synthetic.main.vector_color_pref_card.*
 import kotlinx.android.synthetic.main.vectorify_activity.*
 import kotlinx.android.synthetic.main.vectors_card.*
 
-private const val TAG_BG_COLOR_RESTORE = "TAG_BG_COLOR_RESTORE"
-private const val TAG_VECTOR_COLOR_RESTORE = "TAG_VECTOR_COLOR_RESTORE"
-private const val TAG_CATEGORY_RESTORE = "TAG_CATEGORY_RESTORE"
-
 @Suppress("UNUSED_PARAMETER")
 class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     SharedPreferences.OnSharedPreferenceChangeListener {
@@ -84,8 +80,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     private val sSwapColor get() = mTempVectorColor != mTempBackgroundColor
 
-    private var sThemeChanged = false
-
     override fun onStart() {
         super.onStart()
         PreferenceManager.getDefaultSharedPreferences(this)
@@ -101,25 +95,13 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             getString(R.string.recent_vectorify_wallpapers_key) -> if (vectorifyPreferences.vectorifyWallpaperSetups?.isNullOrEmpty()!! && ::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing) mRecentSetupsDialog.dismiss()
-            getString(R.string.theme_key) -> sThemeChanged = true
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        if (sThemeChanged) {
-            super.onSaveInstanceState(outState)
-            outState.apply {
-                putInt(TAG_BG_COLOR_RESTORE, mTempBackgroundColor)
-                putInt(TAG_VECTOR_COLOR_RESTORE, mTempVectorColor)
-                putInt(TAG_CATEGORY_RESTORE, mTempCategory)
-            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getViewsAndResources(savedInstanceState)
+        getViewsAndResources()
 
         //update background card color and text from preferences
         setBackgroundColorForUI(mTempBackgroundColor, false)
@@ -176,14 +158,9 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         }
     }
 
-    private fun getViewsAndResources(savedInstanceState: Bundle?) {
+    private fun getViewsAndResources() {
 
-        //try to restore the wallpaper applied before applying a theme
-        if (savedInstanceState != null) savedInstanceState.apply {
-            mTempBackgroundColor = getInt(TAG_BG_COLOR_RESTORE)
-            mTempVectorColor = getInt(TAG_VECTOR_COLOR_RESTORE)
-            mTempCategory = getInt(TAG_CATEGORY_RESTORE)
-        } else vectorifyPreferences.vectorifyWallpaperSetups.getLatestSetup().apply {
+        vectorifyPreferences.vectorifyWallpaperSetups.getLatestSetup().apply {
             //get wallpaper shiz from prefs
             mTempBackgroundColor = backgroundColor
             mTempVectorColor = vectorColor
