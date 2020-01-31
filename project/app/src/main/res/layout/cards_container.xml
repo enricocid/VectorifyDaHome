@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cards_container"
     android:layout_width="match_parent"
@@ -25,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_swap_horizontal"
+            app:srcCompat="@drawable/ic_swap_horizontal"
             tools:ignore="ContentDescription" />
 
         <include layout="@layout/vector_color_pref_card" />

@@ -18,6 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="@android:dimen/app_icon_size"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/live_wallpaper_name" />
+        tools:ignore="ContentDescription" />
 
 </com.google.android.material.card.MaterialCardView>
