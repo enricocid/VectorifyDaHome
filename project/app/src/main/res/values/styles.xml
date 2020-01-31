@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base theme light. -->
+    <!-- Base DayNight theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/system_bars_color</item>
         <item name="colorPrimaryDark">@color/system_bars_color</item>
