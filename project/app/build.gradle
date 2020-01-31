@@ -11,8 +11,8 @@ android {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 38
-        versionName "1.8.0"
+        versionCode 37
+        versionName "1.7.3"
     }
 
     // Configure only for each module that uses Java 8
@@ -27,6 +27,10 @@ android {
     // For Kotlin projects
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
     }
 
     applicationVariants.all { variant ->
