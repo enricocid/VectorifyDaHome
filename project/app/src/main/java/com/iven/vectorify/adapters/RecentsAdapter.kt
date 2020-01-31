@@ -36,7 +36,6 @@ class RecentsAdapter(
     }
 
     override fun onBindViewHolder(holder: RecentSetupsHolder, position: Int) {
-
         holder.bindItems(mRecentSetups?.get(position)!!)
     }
 

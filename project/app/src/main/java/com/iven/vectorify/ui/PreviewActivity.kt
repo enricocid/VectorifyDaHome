@@ -14,8 +14,8 @@ import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
@@ -98,7 +98,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         getString(R.string.message_saved_to, getExternalFilesDir(null)).toColouredToast(
             this,
-            ContextCompat.getDrawable(this, R.drawable.ic_check),
+            AppCompatResources.getDrawable(this, R.drawable.ic_check),
             mTempVectorColor,
             mTempBackgroundColor
         )
@@ -276,7 +276,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
         else getString(R.string.title_already_live).toColouredToast(
             this,
-            ContextCompat.getDrawable(this, R.drawable.ic_check),
+            AppCompatResources.getDrawable(this, R.drawable.ic_check),
             mTempVectorColor,
             mTempBackgroundColor
         )

@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import com.google.android.material.card.MaterialCardView
@@ -84,7 +85,7 @@ fun String.toColouredToast(
 }
 
 fun String.toErrorToast(context: Context) {
-    val info = ContextCompat.getDrawable(context, R.drawable.ic_info)
+    val info = AppCompatResources.getDrawable(context, R.drawable.ic_info)
     val errorColor = ContextCompat.getColor(context, R.color.red)
     toColouredToast(context, info, errorColor, errorColor.toSurfaceColor())
 }

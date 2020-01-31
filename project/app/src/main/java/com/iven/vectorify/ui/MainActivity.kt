@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
@@ -210,7 +211,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 R.string.title_reset
             )
             val menuThemeItem = menu.findItem(R.id.app_bar_theme).apply {
-                icon = ContextCompat.getDrawable(
+                icon = AppCompatResources.getDrawable(
                     this@MainActivity,
                     Utils.getDefaultNightModeIcon(this@MainActivity)
                 )
@@ -230,7 +231,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                             )
                         )
 
-                        menuThemeItem.icon = ContextCompat.getDrawable(
+                        menuThemeItem.icon = AppCompatResources.getDrawable(
                             this@MainActivity,
                             Utils.getDefaultNightModeIcon(this@MainActivity)
                         )
@@ -331,7 +332,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
                         iconName.toColouredToast(
                             this@MainActivity,
-                            ContextCompat.getDrawable(this@MainActivity, vector)!!,
+                            AppCompatResources.getDrawable(this@MainActivity, vector)!!,
                             mTempBackgroundColor,
                             mTempVectorColor
                         )

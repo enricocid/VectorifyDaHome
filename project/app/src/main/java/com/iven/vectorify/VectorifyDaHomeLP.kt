@@ -12,18 +12,16 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private var mSelectedBackgroundColor = mBackupRecent.backgroundColor
     private var mSelectedVectorColor = mBackupRecent.vectorColor
+    private var mSelectedVector = mBackupRecent.resource
     private var mSelectedScaleFactor = mBackupRecent.scale
+    private var mHorizontalOffSet = mBackupRecent.horizontalOffset
+    private var mVerticalOffSet = mBackupRecent.verticalOffset
 
-    private var mDeviceWidth = 0
-    private var mDeviceHeight = 0
-
-    private var mLatestSetup: VectorifyWallpaper? = null
+    private var mDeviceWidth = deviceMetrics.first
+    private var mDeviceHeight = deviceMetrics.second
 
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
-
-        mDeviceWidth = deviceMetrics.first
-        mDeviceHeight = deviceMetrics.second
 
         updatePaintProps()
 
@@ -32,13 +30,16 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private fun updatePaintProps() {
 
-        mLatestSetup = vectorifyPreferences.savedVectorifyWallpaper
+        val selectedWallpaper = vectorifyPreferences.savedVectorifyWallpaper
 
         //set paints props
-        mLatestSetup?.let { recent ->
+        selectedWallpaper?.let { recent ->
             mSelectedBackgroundColor = recent.backgroundColor
             mSelectedVectorColor = recent.vectorColor.toContrastColor(mSelectedBackgroundColor)
+            mSelectedVector = recent.resource
             mSelectedScaleFactor = recent.scale
+            mHorizontalOffSet = recent.horizontalOffset
+            mVerticalOffSet = recent.verticalOffset
         }
     }
 
@@ -84,7 +85,7 @@ class VectorifyDaHomeLP : WallpaperService() {
 
                     val drawable = Utils.tintDrawable(
                         baseContext,
-                        mLatestSetup?.resource!!,
+                        mSelectedVector,
                         mSelectedVectorColor,
                         false
                     )
@@ -95,8 +96,8 @@ class VectorifyDaHomeLP : WallpaperService() {
                         mDeviceWidth,
                         mDeviceHeight,
                         mSelectedScaleFactor,
-                        mLatestSetup?.horizontalOffset!!,
-                        mLatestSetup?.verticalOffset!!
+                        mHorizontalOffSet,
+                        mVerticalOffSet
                     )
                 }
             } finally {
