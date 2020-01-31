@@ -38,6 +38,11 @@
 [<img alt="Get it on Github" height="80" src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.png">](https://github.com/enricocid/VectorifyDaHome/releases)
 
 
+# Want to contribute to translations?
+
+Please have a look [here](https://github.com/enricocid/VectorifyDaHome/issues/13) :)
+
+
 # License
 
 Copyright (C) 2020 **Enrico D'Ortenzio**
