@@ -1,0 +1,13 @@
+- Aggiunto tema automatico DayNight: 
+segue il sistema su Android Q e la batteria sui dispositivi più vecchi
+
+- Aggiunto pulsante per scambiare i colori
+
+- Gli sfondi sono salvati in memoria interna > Android > data > com.iven.iconify > files
+Permesso WRITE_EXTERNAL_STORAGE rimosso!
+
+- Rivisto il salvataggio dei setup recenti (aggiunto ripristino scala e posizione)
+Nota: i setup recenti saranno cancellati. Sorry...
+
+- Viene usata una Chrome custom tab per aprire il GitHub
+- Migliorato il design dell'app e il codice

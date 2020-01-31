@@ -1,6 +1,7 @@
 Vectorify da home! applicazione minimale ed open source per applicare wallpapers da una vasta (400+) collezione di grafiche vettoriali:
 
-- Lo sfondo e il colore della grafica sono personalizzabili grazie ad un fantastico color picker, dei presets o il colore di accento del dispositivo!
+- Lo sfondo e il colore della grafica sono personalizzabili grazie ad un fantastico color picker, dei presets o il colore di accento del dispositivo.
+Puoi anche scambiarli se vuoi!
 
 - Selettore categoria
 
@@ -10,5 +11,8 @@ Vectorify da home! applicazione minimale ed open source per applicare wallpapers
   - Consiglio: clicca a lungo sui singoli setup per cancellarli
 
 - 3 modi per impostare il wallpaper (salva, applica direttamente - comporta il salvataggio, live wallpaper)
+  - Nota: gli sfondi saranno salvati nella cartella riservata all'app (memoria interna > Android > data > com.iven.iconify > files). 
+Il sistema cancellerà il suo contenuto se disinstalli l'app perciò fai un backup prima di farlo.
 
-- Temi dark/light
+
+- Temi chiaro, scuro ed automatico (segue le impostazioni di sistema in Android Q ed il livello di batteria sui telefono più vecchi)

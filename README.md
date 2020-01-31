@@ -5,18 +5,18 @@
 [![Credits](https://img.shields.io/static/v1?label=Contributors&message=many&color=81d4fa)](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
 
 [![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
-[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.7.3&color=ffe082)](https://github.com/enricocid/Music-Player-GO/releases/tag/v1.7.3)
+[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.8.0&color=ffe082)](https://github.com/enricocid/Music-Player-GO/releases/tag/v1.8.0)
 
 
 
-<img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh36.gif" height="500px"/>
+<img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh_38.gif" height="500px"/>
 
 
 # Description:
 
 **Vectorify da home!** is a minimal and open source app to apply wallpapers from a vast (400+) collection of vector graphics:
 
-- Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color!
+- Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color. You can also swap them if You want!
 
 - Category chooser
 
@@ -26,8 +26,9 @@
 - Preview screen where you can customize the size and position of the vector graphic
 
 - 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper)
+  >note: wallpapers are now being saved to the private's app folder (internal storage > Android > data > com.iven.iconify > files). The system will clear the folder if You uninstall the app so make sure to backup them.
 
-- Dark/light themes
+- Light, dark and automatic (following the system settings on Android Q and battery level on older devices) themes
 
 
 # Downloads
