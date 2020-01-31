@@ -34,7 +34,7 @@ class VectorifyPreferences(context: Context) {
         Color.BLACK,
         Color.WHITE,
         R.drawable.android_logo_2019,
-        R.string.title_tech,
+        0,
         0.35F,
         0F,
         0F

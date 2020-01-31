@@ -130,6 +130,13 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
         setupRecyclerViews()
 
+        mCategoriesChip.text = Utils.getCategory(this@MainActivity, mTempCategory).first
+        mVectorsRecyclerView.scrollToPosition(
+            mVectorsAdapter.getVectorPosition(
+                mTempVector
+            )
+        )
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             window?.apply {
                 if (Build.VERSION.SDK_INT != Build.VERSION_CODES.Q) {
@@ -331,22 +338,12 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
                     } catch (e: Exception) {
                         e.printStackTrace()
-
                         getString(R.string.error_get_resource).toErrorToast(this@MainActivity)
-
                     }
                 }
             }
             adapter = mVectorsAdapter
-
-            scrollToPosition(
-                mVectorsAdapter.getVectorPosition(
-                    mTempVector
-                )
-            )
         }
-
-        mCategoriesChip.text = Utils.getCategory(this@MainActivity, mTempVector).first
     }
 
     //update UI on recent selected
