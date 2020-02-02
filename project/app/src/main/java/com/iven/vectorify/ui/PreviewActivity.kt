@@ -311,10 +311,15 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     }
 
     fun resetVectorPosition(view: View) {
-        val savedScale = vectorifyPreferences.savedVectorifyWallpaper?.scale!!
-        mVectorView.setScaleFactor(savedScale)
-        mTempScale = savedScale
-        mSeekBar.progress = (savedScale * 100).toInt()
+
+        mTempScale = vectorifyPreferences.vectorifyWallpaperBackup.scale
+
+        vectorifyPreferences.savedVectorifyWallpaper?.let {
+            mTempScale = it.scale
+        }
+
+        mVectorView.setScaleFactor(mTempScale)
+        mSeekBar.progress = (mTempScale * 100).toInt()
         mSeekBarScale.text = (mSeekBar.progress.toFloat() / 100).toDecimalFormat()
         mVectorView.resetPosition()
     }

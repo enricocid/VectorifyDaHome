@@ -109,10 +109,17 @@ class VectorView @JvmOverloads constructor(
     }
 
     fun resetPosition() {
+
+        vectorifyPreferences.vectorifyWallpaperBackup.apply {
+            mHorizontalOffset = horizontalOffset
+            mVerticalOffset = verticalOffset
+        }
+
         vectorifyPreferences.savedVectorifyWallpaper?.let { recent ->
             mHorizontalOffset = recent.horizontalOffset
             mVerticalOffset = recent.verticalOffset
         }
+
         invalidate()
     }
 
