@@ -23,7 +23,9 @@
 
 - [Heimen Stoffels](https://github.com/Vistaus) for Dutch translations!
 
-- [Jnss98b](https://github.com/Jnss98b) for his [support](https://github.com/enricocid/VectorifyDaHome/issues/3)!
+- [j9o1](https://github.com/j9o1) for Spanish translations!
+
+- [Jnss98b](https://github.com/Jnss98b) for his support on different issues: [3](https://github.com/enricocid/VectorifyDaHome/issues/3), [4](https://github.com/enricocid/VectorifyDaHome/issues/4), [7](https://github.com/enricocid/VectorifyDaHome/issues/7),[8](https://github.com/enricocid/VectorifyDaHome/issues/8), [14](https://github.com/enricocid/VectorifyDaHome/issues/14)!
 
 - Abdul Kahlawi for reporting and letting me to fix an issue on Lollipop!
 
