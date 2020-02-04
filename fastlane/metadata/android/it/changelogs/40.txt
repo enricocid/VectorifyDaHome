@@ -1,0 +1,3 @@
+- Corretto "applicazione di un nuovo tema che causava il non corretto ripristino dei colori dello sfondo e dell'immagine e dell'immagine stessa"
+- Aggiunto Spagnolo (grazie a j901 - https://github.com/j9o1)
+- Aggiornamenti material components
