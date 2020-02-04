@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
@@ -293,11 +292,6 @@ object Utils {
             CustomTabsIntent.Builder().apply {
                 addDefaultShareMenuItem()
                 setShowTitle(true)
-                // https://stackoverflow.com/a/55260049
-                AppCompatResources.getDrawable(context, R.drawable.ic_navigate_before)?.toBitmap()
-                    ?.let { bmp ->
-                        setCloseButtonIcon(bmp)
-                    }
                 build().launchUrl(context, Uri.parse(context.getString(R.string.app_github_link)))
             }
         } catch (e: Exception) {
