@@ -1,0 +1,66 @@
+<resources>
+
+    <string name="info_error">¡Error! Se han agregado nuevos vectores. Vuelve a aplicar el fondo de pantalla y/o reconstruye los fondos recientes si existen.
+    </string>
+
+    <string name="info_error_ok">No mostrar de nuevo</string>
+
+    <string name="error_get_resource">¡Error! ¡No se ha encontrado!</string>
+
+    <!-- Card titles -->
+    <string name="title_background">Fondo</string>
+    <string name="title_background_dialog">Color de fondo</string>
+    <string name="title_vector">Vector</string>
+    <string name="title_vector_dialog">Color del vector</string>
+    <string name="title_presets">Predefinidos</string>
+    <string name="selected_preset">Fondo: %1s, Vector: %1s</string>
+    <string name="title_accent_me">¡Dame color!</string>
+
+    <!-- Recent setups things -->
+    <string name="title_recent_setups">Fondos recientes</string>
+    <string name="message_no_recent_setups">¡No se han encontrado fondos recientes!</string>
+    <string name="message_clear_recent_setups">Todos los fondos recientes serán borrados. ¿Estás seguro? Si quieres borrar fondos específicos sólo mantén presionado sobre ellos :)
+    </string>
+    <string name="message_clear_single_recent_setup">El fondo &#35;%1s será borrado. ¿Seguro?</string>
+
+    <!-- BottomBar menu items -->
+    <string name="title_github">Página en GitHub</string>
+    <string name="title_theme">Tema</string>
+    <string name="title_restore">Restaurar fondo de pantalla por defecto</string>
+    <string name="title_reset_recents">Limpiar recientes</string>
+    <string name="title_reset">Opciones adicionales</string>
+
+    <string name="install_browser_message">¡Primero instala un navegador!</string>
+
+    <!-- Preview things -->
+    <string name="title_preview">Muestra</string>
+    <string name="title_size">Tamaño y posición</string>
+    <string name="title_save_to">Guardar en la memoria interna</string>
+    <string name="title_crop">Recortar y elegir como fondo de pantalla</string>
+    <string name="title_go_live">Guardar como fondo con movimiento</string>
+    <string name="title_already_live">Aplicando cambios&#160;&#8230;</string>
+    <string name="message_saved_to">Guardado en %1s</string>
+
+    <!-- Categories -->
+    <string name="title_categories">Categorías</string>
+    <string name="title_tech">Tecnología</string>
+    <string name="title_symbols">Símbolos</string>
+    <string name="title_animals">Animales</string>
+    <string name="title_emoticons">Emojis</string>
+    <string name="title_fun">Divertidos</string>
+    <string name="title_food">Comida</string>
+    <string name="title_nature">Naturaleza</string>
+    <string name="title_weather">Clima</string>
+    <string name="title_sport">Deportes</string>
+    <string name="title_math">Matemáticas</string>
+    <string name="title_science">Ciencia</string>
+    <string name="title_chernoff">Caras de Chernoff</string>
+    <string name="title_music">Música</string>
+    <string name="title_nerdy">Para nerds</string>
+    <string name="title_buildings">Edificios</string>
+    <string name="title_alert">Alerta</string>
+    <string name="title_alpha">Letras</string>
+    <string name="title_roman">Romanos</string>
+    <string name="title_zodiac">Zodíaco</string>
+    <string name="title_others">Otros</string>
+</resources>
