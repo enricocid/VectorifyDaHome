@@ -54,6 +54,11 @@ import kotlinx.android.synthetic.main.vector_color_pref_card.*
 import kotlinx.android.synthetic.main.vectorify_activity.*
 import kotlinx.android.synthetic.main.vectors_card.*
 
+private const val TAG_BG_COLOR_RESTORE = "TAG_BG_COLOR_RESTORE"
+private const val TAG_VECTOR_COLOR_RESTORE = "TAG_VECTOR_COLOR_RESTORE"
+private const val TAG_VECTOR_RESTORE = "TAG_VECTOR_RESTORE"
+private const val TAG_CATEGORY_RESTORE = "TAG_CATEGORY_RESTORE"
+
 @Suppress("UNUSED_PARAMETER")
 class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     SharedPreferences.OnSharedPreferenceChangeListener {
@@ -80,6 +85,21 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     private val sSwapColor get() = mTempVectorColor != mTempBackgroundColor
 
+    private var sThemeChanged = false
+    private var sRestoreVectorFromBundle = false
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        if (sThemeChanged) {
+            super.onSaveInstanceState(outState)
+            outState.apply {
+                putInt(TAG_BG_COLOR_RESTORE, mTempBackgroundColor)
+                putInt(TAG_VECTOR_COLOR_RESTORE, mTempVectorColor)
+                putInt(TAG_VECTOR_RESTORE, mTempVector)
+                putInt(TAG_CATEGORY_RESTORE, mTempCategory)
+            }
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         PreferenceManager.getDefaultSharedPreferences(this)
@@ -95,6 +115,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             getString(R.string.recent_vectorify_wallpapers_key) -> if (vectorifyPreferences.vectorifyWallpaperSetups?.isNullOrEmpty()!! && ::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing) mRecentSetupsDialog.dismiss()
+            getString(R.string.theme_key) -> sThemeChanged = true
         }
     }
 
@@ -102,6 +123,14 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         super.onCreate(savedInstanceState)
 
         getViewsAndResources()
+
+        savedInstanceState?.let { bundle ->
+            sRestoreVectorFromBundle = true
+            mTempBackgroundColor = bundle.getInt(TAG_BG_COLOR_RESTORE)
+            mTempVectorColor = bundle.getInt(TAG_VECTOR_COLOR_RESTORE)
+            mTempVector = bundle.getInt(TAG_VECTOR_RESTORE)
+            mTempCategory = bundle.getInt(TAG_CATEGORY_RESTORE)
+        }
 
         //update background card color and text from preferences
         setBackgroundColorForUI(mTempBackgroundColor, false)
@@ -132,12 +161,8 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
         setupRecyclerViews()
 
-        mCategoriesChip.text = Utils.getCategory(this@MainActivity, mTempCategory).first
-        mVectorsRecyclerView.scrollToPosition(
-            mVectorsAdapter.getVectorPosition(
-                mTempVector
-            )
-        )
+        // mCategoriesChip.text = Utils.getCategory(this@MainActivity, mTempCategory).first
+        updateSelectedCategory(mTempCategory, true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             window?.apply {
@@ -304,19 +329,22 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
             mVectorsAdapter = VectorsAdapter(this@MainActivity).apply {
                 onVectorClick = { vector ->
+                    if (!sRestoreVectorFromBundle) {
+                        if (mTempVector != vector) {
+                            try {
+                                mVectorFrame.setImageResource(Utils.getVectorProps(vector).first)
+                                mTempVector = vector
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                mTempVector = Utils.getDefaultVectorForApi()
+                                mVectorFrame.setImageResource(Utils.getVectorProps(mTempVector).first)
+                            }
 
-                    if (mTempVector != vector) {
-                        try {
-                            mVectorFrame.setImageResource(Utils.getVectorProps(vector).first)
-                            mTempVector = vector
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                            mTempVector = Utils.getDefaultVectorForApi()
-                            mVectorFrame.setImageResource(Utils.getVectorProps(mTempVector).first)
+                            //update drawable tint
+                            setVectorFrameColors(tintBackground = false, showErrorDialog = false)
                         }
-
-                        //update drawable tint
-                        setVectorFrameColors(tintBackground = false, showErrorDialog = false)
+                    } else {
+                        sRestoreVectorFromBundle = false
                     }
                 }
 
@@ -362,7 +390,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         setBackgroundColorForUI(selectedBackgroundColor, true)
         setVectorColorForUI(selectedVectorColor, true)
 
-        updateSelectedCategory(selectedCategory)
+        updateSelectedCategory(selectedCategory, false)
 
         scrollToVector(selectedVector)
 
@@ -451,8 +479,8 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             setBackgroundColorForUI(backgroundColor, true)
             setVectorColorForUI(vectorColor, true)
 
-            updateSelectedCategory(category)
-            scrollToVector(vectorColor)
+            updateSelectedCategory(category, false)
+            scrollToVector(resource)
 
             mTempScale = scale
             mTempHorizontalOffset = horizontalOffset
@@ -509,7 +537,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         MaterialDialog(this).show {
             title(R.string.title_categories)
             listItems(R.array.categories) { _, index, _ ->
-                updateSelectedCategory(index)
+                updateSelectedCategory(index, false)
             }
         }
     }
@@ -522,17 +550,16 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         setBackgroundColorForUI(Utils.getSystemAccentColor(this@MainActivity), true)
     }
 
-    private fun updateSelectedCategory(index: Int) {
-        if (mTempCategory != index) {
-
+    private fun updateSelectedCategory(index: Int, force: Boolean) {
+        if (mTempCategory != index && !force) {
             mTempCategory = index
-
-            val category = Utils.getCategory(this, mTempCategory)
-
             mVectorsRecyclerView.scrollToPosition(0)
-            mVectorsAdapter.swapCategory(category.second)
-            mCategoriesChip.text = category.first
         }
+        val category = Utils.getCategory(this, mTempCategory)
+        mVectorsAdapter.swapCategory(category.second)
+        mCategoriesChip.text = category.first
+
+        if (force) scrollToVector(mTempVector)
     }
 
     private fun openRecentSetups() {
