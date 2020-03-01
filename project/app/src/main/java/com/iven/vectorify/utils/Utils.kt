@@ -50,14 +50,10 @@ object Utils {
     }
 
     @JvmStatic
-    private fun isThemeNight() =
-        AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
-
-    @JvmStatic
     @TargetApi(Build.VERSION_CODES.O_MR1)
-    fun handleLightSystemBars(view: View) {
+    fun handleLightSystemBars(isThemeNight: Boolean, view: View) {
         view.systemUiVisibility =
-            if (isThemeNight()) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            if (isThemeNight) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
     }
 
     //method to open live wallpaper intent
