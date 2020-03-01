@@ -3,6 +3,8 @@
 
 ### Libraries/dependencies/dev/support
 
+- [Jnss98b](https://github.com/Jnss98b) for his support on different issues: [3](https://github.com/enricocid/VectorifyDaHome/issues/3), [4](https://github.com/enricocid/VectorifyDaHome/issues/4), [7](https://github.com/enricocid/VectorifyDaHome/issues/7),[8](https://github.com/enricocid/VectorifyDaHome/issues/8), [14](https://github.com/enricocid/VectorifyDaHome/issues/14), [16](https://github.com/enricocid/VectorifyDaHome/issues/16), [17](https://github.com/enricocid/VectorifyDaHome/issues/17)!
+
 - [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
 - [Sergej Shafarenka](https://github.com/beworker) for the awesome [Edge-to-Edge](https://github.com/beworker/edge-to-edge/) library!
@@ -13,8 +15,6 @@
 
 - [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
 
-- [Jnss98b](https://github.com/Jnss98b) for helping me with edge-to-edge implementation!
-
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team and [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support, inspirations and suggestions! The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome) that was built thanks to the team/community feedbacks!
 
 - [Nathan Bonnemains](https://github.com/NathanBnm) for French translations and a great [tip](https://github.com/enricocid/VectorifyDaHome/issues/11)!
@@ -24,8 +24,6 @@
 - [Heimen Stoffels](https://github.com/Vistaus) for Dutch translations!
 
 - [j9o1](https://github.com/j9o1) for Spanish translations!
-
-- [Jnss98b](https://github.com/Jnss98b) for his support on different issues: [3](https://github.com/enricocid/VectorifyDaHome/issues/3), [4](https://github.com/enricocid/VectorifyDaHome/issues/4), [7](https://github.com/enricocid/VectorifyDaHome/issues/7),[8](https://github.com/enricocid/VectorifyDaHome/issues/8), [14](https://github.com/enricocid/VectorifyDaHome/issues/14)!
 
 - Abdul Kahlawi for reporting and letting me to fix an issue on Lollipop!
 

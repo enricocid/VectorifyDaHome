@@ -1,0 +1,5 @@
+- Corretto il tema automatico e la gestione delle barre di sistema light
+- L'ultima sessione viene ora ripristinata
+- Chrome tabs: viene mantenuta l'icona per chiudere originale
+- Aggiornamenti dipendenze
+- Pulizia codice
