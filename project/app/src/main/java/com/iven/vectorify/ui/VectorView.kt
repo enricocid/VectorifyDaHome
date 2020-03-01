@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.drawToBitmap
 import com.iven.vectorify.VectorifyWallpaper
+import com.iven.vectorify.addToRecentSetups
 import com.iven.vectorify.deviceMetrics
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
@@ -139,10 +140,7 @@ class VectorView @JvmOverloads constructor(
     fun saveToRecentSetups() {
 
         //update recent setups
-        val recentSetups =
-            if (vectorifyPreferences.vectorifyWallpaperSetups != null) vectorifyPreferences.vectorifyWallpaperSetups else mutableListOf()
-
-        val recentToSave = VectorifyWallpaper(
+        VectorifyWallpaper(
             mBackgroundColor,
             mVectorColor,
             mVector,
@@ -150,9 +148,6 @@ class VectorView @JvmOverloads constructor(
             mScaleFactor,
             mHorizontalOffset,
             mVerticalOffset
-        )
-
-        if (!recentSetups?.contains(recentToSave)!!) recentSetups.add(recentToSave)
-        vectorifyPreferences.vectorifyWallpaperSetups = recentSetups
+        ).addToRecentSetups()
     }
 }

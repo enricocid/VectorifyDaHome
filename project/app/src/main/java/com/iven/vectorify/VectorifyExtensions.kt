@@ -31,6 +31,18 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
     })
 }
 
+fun List<VectorifyWallpaper>?.getLatestSetup() =
+    if (!this.isNullOrEmpty()) get(size - 1) else vectorifyPreferences.vectorifyWallpaperBackup
+
+fun VectorifyWallpaper.addToRecentSetups() {
+    //update recent setups
+    val recentSetups =
+        if (vectorifyPreferences.vectorifyWallpaperSetups != null) vectorifyPreferences.vectorifyWallpaperSetups else mutableListOf()
+
+    if (!recentSetups?.contains(this)!!) recentSetups.add(this)
+    vectorifyPreferences.vectorifyWallpaperSetups = recentSetups
+}
+
 @SuppressLint("DefaultLocale")
 fun Int.toHex(context: Context) =
     context.getString(R.string.hex, Integer.toHexString(this)).toUpperCase()
@@ -96,6 +108,3 @@ fun List<ImageButton>.applyTint(context: Context, widgetColor: Int) {
         imageButton.background = Utils.createColouredRipple(context, widgetColor)
     }
 }
-
-fun MutableList<VectorifyWallpaper>?.getLatestSetup() =
-    if (!this.isNullOrEmpty()) get(size - 1) else vectorifyPreferences.vectorifyWallpaperBackup

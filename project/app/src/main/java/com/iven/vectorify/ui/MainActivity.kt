@@ -100,6 +100,19 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        VectorifyWallpaper(
+            mTempBackgroundColor,
+            mTempVectorColor,
+            mTempVector,
+            mTempCategory,
+            mTempScale,
+            mTempHorizontalOffset,
+            mTempVerticalOffset
+        ).addToRecentSetups()
+    }
+
     override fun onStart() {
         super.onStart()
         PreferenceManager.getDefaultSharedPreferences(this)
