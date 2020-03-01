@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     private val sThemeNight get() = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     private var sThemeChanged = false
-    private var sRestoreVectorFromBundle = false
+    private var sRestoreVector = false
 
     override fun onSaveInstanceState(outState: Bundle) {
         if (sThemeChanged) {
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     override fun onPause() {
         super.onPause()
-        VectorifyWallpaper(
+        vectorifyPreferences.restoreVectorifyWallpaper = VectorifyWallpaper(
             mTempBackgroundColor,
             mTempVectorColor,
             mTempVector,
@@ -112,7 +112,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             mTempScale,
             mTempHorizontalOffset,
             mTempVerticalOffset
-        ).addToRecentSetups()
+        )
     }
 
     override fun onStart() {
@@ -140,11 +140,22 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         getViewsAndResources()
 
         savedInstanceState?.let { bundle ->
-            sRestoreVectorFromBundle = true
+            sRestoreVector = true
             mTempBackgroundColor = bundle.getInt(TAG_BG_COLOR_RESTORE)
             mTempVectorColor = bundle.getInt(TAG_VECTOR_COLOR_RESTORE)
             mTempVector = bundle.getInt(TAG_VECTOR_RESTORE)
             mTempCategory = bundle.getInt(TAG_CATEGORY_RESTORE)
+        }
+
+        vectorifyPreferences.restoreVectorifyWallpaper?.let { vw ->
+            //get wallpaper shiz from prefs
+            mTempBackgroundColor = vw.backgroundColor
+            mTempVectorColor = vw.vectorColor
+            mTempVector = vw.resource
+            mTempCategory = vw.category
+            mTempScale = vw.scale
+            mTempHorizontalOffset = vw.horizontalOffset
+            mTempVerticalOffset = vw.verticalOffset
         }
 
         //update background card color and text from preferences
@@ -176,7 +187,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
         setupRecyclerViews()
 
-        // mCategoriesChip.text = Utils.getCategory(this@MainActivity, mTempCategory).first
         updateSelectedCategory(mTempCategory, true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
@@ -199,18 +209,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     }
 
     private fun getViewsAndResources() {
-
-        vectorifyPreferences.vectorifyWallpaperSetups.getLatestSetup().apply {
-            //get wallpaper shiz from prefs
-            mTempBackgroundColor = backgroundColor
-            mTempVectorColor = vectorColor
-            mTempVector = resource
-            mTempCategory = category
-            mTempScale = scale
-            mTempHorizontalOffset = horizontalOffset
-            mTempVerticalOffset = verticalOffset
-        }
-
         mVectorFrame = vector_frame
         mCategoriesChip = categories_chip
         mVectorsRecyclerView = vectors_rv
@@ -344,7 +342,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
             mVectorsAdapter = VectorsAdapter(this@MainActivity).apply {
                 onVectorClick = { vector ->
-                    if (!sRestoreVectorFromBundle) {
+                    if (!sRestoreVector) {
                         if (mTempVector != vector) {
                             try {
                                 mVectorFrame.setImageResource(Utils.getVectorProps(vector).first)
@@ -359,7 +357,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                             setVectorFrameColors(tintBackground = false, showErrorDialog = false)
                         }
                     } else {
-                        sRestoreVectorFromBundle = false
+                        sRestoreVector = false
                     }
                 }
 

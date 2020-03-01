@@ -30,7 +30,7 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private fun updatePaintProps() {
 
-        val selectedWallpaper = vectorifyPreferences.savedVectorifyWallpaper
+        val selectedWallpaper = vectorifyPreferences.liveVectorifyWallpaper
 
         //set paints props
         selectedWallpaper?.let { recent ->

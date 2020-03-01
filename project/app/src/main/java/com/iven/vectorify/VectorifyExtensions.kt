@@ -31,9 +31,6 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
     })
 }
 
-fun List<VectorifyWallpaper>?.getLatestSetup() =
-    if (!this.isNullOrEmpty()) get(size - 1) else vectorifyPreferences.vectorifyWallpaperBackup
-
 fun VectorifyWallpaper.addToRecentSetups() {
     //update recent setups
     val recentSetups =

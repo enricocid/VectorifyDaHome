@@ -115,7 +115,7 @@ class VectorView @JvmOverloads constructor(
             mVerticalOffset = verticalOffset
         }
 
-        vectorifyPreferences.savedVectorifyWallpaper?.let { recent ->
+        vectorifyPreferences.liveVectorifyWallpaper?.let { recent ->
             mHorizontalOffset = recent.horizontalOffset
             mVerticalOffset = recent.verticalOffset
         }
@@ -125,7 +125,7 @@ class VectorView @JvmOverloads constructor(
 
     fun saveToPrefs() {
         //save wallpaper to prefs
-        vectorifyPreferences.savedVectorifyWallpaper = VectorifyWallpaper(
+        vectorifyPreferences.liveVectorifyWallpaper = VectorifyWallpaper(
             mBackgroundColor,
             mVectorColor,
             mVector,

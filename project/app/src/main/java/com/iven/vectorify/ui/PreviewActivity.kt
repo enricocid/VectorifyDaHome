@@ -314,7 +314,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         mTempScale = vectorifyPreferences.vectorifyWallpaperBackup.scale
 
-        vectorifyPreferences.savedVectorifyWallpaper?.let {
+        vectorifyPreferences.liveVectorifyWallpaper?.let {
             mTempScale = it.scale
         }
 

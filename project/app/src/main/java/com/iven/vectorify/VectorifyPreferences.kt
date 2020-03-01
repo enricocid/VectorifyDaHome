@@ -14,12 +14,14 @@ class VectorifyPreferences(context: Context) {
     private val prefsThemeDefault = context.getString(R.string.theme_pref_light)
     private val prefSavedVectorifyWallpaper =
         context.getString(R.string.saved_vectorify_wallpaper_key)
+    private val prefRestoreVectorifyWallpaper =
+        context.getString(R.string.restore_vectorify_wallpaper_key)
     private val prefRecentVectorifySetups =
         context.getString(R.string.recent_vectorify_wallpapers_key)
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    private val typeSavedVectorifyWallpaper = object : TypeToken<VectorifyWallpaper>() {}.type
+    private val typeVectorifyWallpaper = object : TypeToken<VectorifyWallpaper>() {}.type
     private val typeRecents = object : TypeToken<MutableList<VectorifyWallpaper>>() {}.type
 
     private val mGson = GsonBuilder().create()
@@ -38,10 +40,17 @@ class VectorifyPreferences(context: Context) {
         0F
     )
 
-    var savedVectorifyWallpaper: VectorifyWallpaper?
+    var restoreVectorifyWallpaper: VectorifyWallpaper?
+        get() = getObject(
+            prefRestoreVectorifyWallpaper,
+            typeVectorifyWallpaper
+        )
+        set(value) = putObject(prefRestoreVectorifyWallpaper, value)
+
+    var liveVectorifyWallpaper: VectorifyWallpaper?
         get() = getObject(
             prefSavedVectorifyWallpaper,
-            typeSavedVectorifyWallpaper
+            typeVectorifyWallpaper
         )
         set(value) = putObject(prefSavedVectorifyWallpaper, value)
 
