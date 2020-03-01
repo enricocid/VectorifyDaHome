@@ -26,6 +26,7 @@ import com.iven.vectorify.VectorifyDaHomeLP
 import com.iven.vectorify.toErrorToast
 import com.iven.vectorify.vectorifyPreferences
 
+
 object Utils {
 
     @JvmStatic
@@ -51,9 +52,10 @@ object Utils {
 
     @JvmStatic
     @TargetApi(Build.VERSION_CODES.O_MR1)
-    fun handleLightSystemBars(isThemeNight: Boolean, view: View) {
-        view.systemUiVisibility =
-            if (isThemeNight) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+    fun handleLightSystemBars(isThemeNight: Boolean, decorView: View) {
+        val flags = decorView.systemUiVisibility
+        decorView.systemUiVisibility =
+            if (isThemeNight) flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv() and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv() else flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
     }
 
     //method to open live wallpaper intent
