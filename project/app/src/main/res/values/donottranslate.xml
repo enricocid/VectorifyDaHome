@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="live_wallpaper_name">Vectorify da home!</string>
-    <string name="title_info_error">No pain no gain</string>
     <string name="space_delimiter">&#160;</string>
     <string name="underscore_delimiter">&#95;</string>
     <string name="hex">&#35;%1s</string>
@@ -13,7 +12,6 @@
     <string name="theme_pref_auto">theme_pref_auto</string>
     <string name="saved_vectorify_wallpaper_key">saved_vectorify_wallpaper_key</string>
     <string name="recent_vectorify_wallpapers_key">recent_vectorify_wallpapers_key</string>
-    <string name="error_show_message_key">error_show_message_key</string>
     <string name="app_github_link">
         https://github.com/enricocid/VectorifyDaHome
     </string>

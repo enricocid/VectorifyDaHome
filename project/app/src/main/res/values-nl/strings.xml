@@ -1,10 +1,5 @@
 <resources>
 
-    <string name="info_error">Er zijn nieuwe vectors toegevoegd! Je moet de achtergrond opnieuw instellen recente voorinstellingen
-        (indien aanwezig) opnieuw toepassen. Sorry.
-    </string>
-
-    <string name="info_error_ok">Niet meer tonen</string>
     <string name="error_get_resource">Oeps, niet gevonden!</string>
 
     <!-- Card titles -->

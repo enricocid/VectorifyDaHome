@@ -1,9 +1,5 @@
 <resources>
 
-    <string name="info_error">Oops!! Sono state aggiunte delle nuove grafiche! Dovrai riapplicare lo sfondo e ricostruire la
-        lista dei setup recenti (se ne avevi). Sorry.
-    </string>
-    <string name="info_error_ok">Non mostrare più</string>
     <string name="error_get_resource">Oops!! Non trovato!</string>
 
     <!-- Titoli cards -->

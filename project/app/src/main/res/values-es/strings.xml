@@ -1,10 +1,5 @@
 <resources>
 
-    <string name="info_error">¡Error! Se han agregado nuevos vectores. Vuelve a aplicar el fondo de pantalla y/o reconstruye los fondos recientes si existen.
-    </string>
-
-    <string name="info_error_ok">No mostrar de nuevo</string>
-
     <string name="error_get_resource">¡Error! ¡No se ha encontrado!</string>
 
     <!-- Card titles -->

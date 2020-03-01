@@ -17,8 +17,6 @@ class VectorifyPreferences(context: Context) {
     private val prefRecentVectorifySetups =
         context.getString(R.string.recent_vectorify_wallpapers_key)
 
-    private val prefShowError = context.getString(R.string.error_show_message_key)
-
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     private val typeSavedVectorifyWallpaper = object : TypeToken<VectorifyWallpaper>() {}.type
@@ -53,10 +51,6 @@ class VectorifyPreferences(context: Context) {
             typeRecents
         )
         set(value) = putObject(prefRecentVectorifySetups, value)
-
-    var hasToShowError
-        get() = mPrefs.getBoolean(prefShowError, true)
-        set(value) = mPrefs.edit().putBoolean(prefShowError, value).apply()
 
     /**
      * Saves object into the Preferences.

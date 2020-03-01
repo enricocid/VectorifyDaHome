@@ -47,8 +47,7 @@ class RecentsAdapter(
                 Utils.tintDrawable(
                     context,
                     vectorifyWallpaper.resource,
-                    vectorifyWallpaper.vectorColor.toContrastColor(vectorifyWallpaper.backgroundColor),
-                    false
+                    vectorifyWallpaper.vectorColor.toContrastColor(vectorifyWallpaper.backgroundColor)
                 )
 
             itemView.findViewById<ImageView>(R.id.recent_setups_vector).apply {

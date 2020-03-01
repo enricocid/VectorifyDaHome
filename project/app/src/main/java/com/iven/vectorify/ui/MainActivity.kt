@@ -422,8 +422,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         val vector = Utils.tintDrawable(
             this,
             mTempVector,
-            mTempVectorColor.toContrastColor(mTempBackgroundColor),
-            showErrorDialog
+            mTempVectorColor.toContrastColor(mTempBackgroundColor)
         )
         mVectorFrame.setImageDrawable(vector)
     }

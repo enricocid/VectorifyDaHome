@@ -1,6 +1,4 @@
 <resources>
-    <string name="info_error">Oups&#160;! De nouveaux vecteurs ont été ajoutés&#160;! Vous devez réappliquer le fond d\'écran et reconstruire la liste des configurations récentes (s\'il y en a). Désolé.</string>
-    <string name="info_error_ok">Ne plus afficher</string>
     <string name="error_get_resource">Oups&#160;! Non trouvé&#160;!</string>
     <!-- Card titles -->
     <string name="title_background">Arrière-plan</string>

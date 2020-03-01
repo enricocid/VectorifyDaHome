@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -13,7 +12,7 @@ import com.iven.vectorify.R
 import com.iven.vectorify.toColouredToast
 import com.iven.vectorify.toErrorToast
 
-class PresetsAdapter(@NonNull private val context: Context) :
+class PresetsAdapter(private val context: Context) :
     RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
 
     var onPresetClick: ((Pair<Int, Int>) -> Unit)? = null

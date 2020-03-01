@@ -219,8 +219,7 @@ object Utils {
     fun tintDrawable(
         context: Context,
         vector: Int,
-        vectorColor: Int,
-        showErrorDialog: Boolean
+        vectorColor: Int
     ): Drawable? {
 
         //determine if we are facing android m, n, o vectors
@@ -231,7 +230,6 @@ object Utils {
             AppCompatResources.getDrawable(context, vectorProps.first)
         } catch (e: Exception) {
             e.printStackTrace()
-            if (showErrorDialog && vectorifyPreferences.hasToShowError) makeErrorDialog(context)
             vectorProps = getVectorProps(getDefaultVectorForApi())
             AppCompatResources.getDrawable(context, vectorProps.first)
         }
@@ -250,18 +248,6 @@ object Utils {
         }
 
         return bit
-    }
-
-    //make error dialog
-    @JvmStatic
-    private fun makeErrorDialog(context: Context) {
-        MaterialDialog(context).show {
-            title(R.string.title_info_error)
-            message(R.string.info_error)
-            positiveButton(R.string.info_error_ok) {
-                vectorifyPreferences.hasToShowError = false
-            }
-        }
     }
 
     //clear recent setups

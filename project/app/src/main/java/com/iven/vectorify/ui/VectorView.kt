@@ -56,8 +56,7 @@ class VectorView @JvmOverloads constructor(
                     Utils.tintDrawable(
                         ctx,
                         mVector,
-                        mVectorColor,
-                        false
+                        mVectorColor
                     )
 
                 Utils.drawBitmap(

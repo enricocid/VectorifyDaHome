@@ -86,8 +86,7 @@ class VectorifyDaHomeLP : WallpaperService() {
                     val drawable = Utils.tintDrawable(
                         baseContext,
                         mSelectedVector,
-                        mSelectedVectorColor,
-                        false
+                        mSelectedVectorColor
                     )
 
                     Utils.drawBitmap(

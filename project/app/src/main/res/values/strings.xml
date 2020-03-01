@@ -1,11 +1,5 @@
 <resources>
 
-    <string name="info_error">Oops!! New vectors have been added! You have to reapply the wallpaper and rebuild recent
-        setups (if any) list. Sorry.
-    </string>
-
-    <string name="info_error_ok">Don\'t show again</string>
-
     <string name="error_get_resource">Oops!! Not found!</string>
 
     <!-- Card titles -->
