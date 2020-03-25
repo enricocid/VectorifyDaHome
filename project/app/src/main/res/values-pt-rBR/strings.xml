@@ -1,0 +1,61 @@
+<resources>
+
+<string name="error_get_resource">Oops!! Não encontrado!</string>
+
+<!-- Títulos dos cartões -->
+    <string name="title_background">Fundo</string>
+    <string name="title_background_dialog">Cor de fundo</string>
+    <string name="title_vector">Vetor</string>
+    <string name="title_vector_dialog">Cor do vetor</string>
+    <string name="title_presets">Predefinições</string>
+    <string name="selected_preset">Fundo: %1s, Vetor: %1s</string>
+    <string name="title_accent_me">Acentue-me!</string>
+
+<!-- Configurações recentes coisas -->
+    <string name="title_recent_setups">Configurações recentes</string>
+    <string name="message_no_recent_setups">Nenhuma configuração recente encontrada!</string>
+    <string name="message_clear_recent_setups">Todas as configurações recentes serão excluídas. Tem certeza? Se você quiser excluir
+        configurações específicas apenas clique longo sobre eles :).
+    </string>
+    <string name="message_clear_single_recent_setup">A configuração &#35;%1s será excluída. Você tem certeza?</string>
+
+<!-- Itens do menu BottomBar -->
+    <string name="title_github">Página do GitHub</string>
+    <string name="title_theme">Tema</string>
+    <string name="title_restore">Restaurar papel de parede padrão!</string>
+    <string name="title_reset_recents">Resetar recentes</string>
+    <string name="title_reset">Opções adicionais</string>
+    <string name="install_browser_message">Instale um navegador primeiro!</string>
+
+    <!-- Preview things -->
+    <string name="title_preview">Visualização</string>
+    <string name="title_size">Tamanho e posição</string>
+    <string name="title_save_to">Salvar a memória interna</string>
+    <string name="title_crop">Cortar e definir como papel de parede</string>
+    <string name="title_go_live">Definir como papel de parede ao vivo</string>
+    <string name="title_already_live">Aplicando alterações&#160;&#8230;</string>
+    <string name="message_saved_to">Salvo em %1s</string>
+
+<!-- Categorias -->
+    <string name="title_categories">Categorias</string>
+    <string name="title_tech">Tech</string>
+    <string name="title_symbols">Símbolos</string>
+    <string name="title_animals">Animais</string>
+    <string name="title_emoticons">Emoticons</string>
+    <string name="title_fun">Diversão</string>
+    <string name="title_food">Alimentos</string>
+    <string name="title_nature">Natureza</string>
+    <string name="title_weather">Tempo</string>
+    <string name="title_sport">Sport</string>
+    <string name="title_math">Matemática</string>
+    <string name="title_science">Science</string>
+    <string name="title_chernoff">Rostos de Chernoff</string>
+    <string name="title_music">Música</string>
+    <string name="title_nerdy">Nerd</string>
+    <string name="title_buildings">Edifícios</string>
+    <string name="title_alert">Alerta</string>
+    <string name="title_alpha">Letras</string>
+    <string name="title_roman">Roman</string>
+    <string name="title_zodiac">Zodíaco</string>
+    <string name="title_others">Outros</string>
+</resources>
