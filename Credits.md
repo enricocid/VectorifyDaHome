@@ -25,6 +25,8 @@
 
 - [j9o1](https://github.com/j9o1) for Spanish translations!
 
+- [ZJRDroid](https://github.com/ZJRDroid) for Brazilian Portuguese translations!
+
 - Abdul Kahlawi for reporting and letting me to fix an issue on Lollipop!
 
 
