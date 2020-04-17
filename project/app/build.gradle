@@ -4,13 +4,15 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 41
         versionName "1.8.3"
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     // Configure only for each module that uses Java 8
@@ -27,8 +29,8 @@ android {
         jvmTarget = "1.8"
     }
 
-    defaultConfig {
-        vectorDrawables.useSupportLibrary = true
+    packagingOptions {
+        exclude 'META-INF/*'
     }
 
     applicationVariants.all { variant ->
@@ -45,19 +47,29 @@ android {
 }
 
 dependencies {
+// Kotlin
+    //https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+// Support
+    //https://developer.android.com/jetpack/androidx/versions
     implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.preference:preference-ktx:1.1.0'
+    implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.activity:activity-ktx:1.1.0'
     implementation 'androidx.loader:loader:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'androidx.browser:browser:1.2.0'
+    //https://github.com/material-components/material-components-android/releases
+    implementation 'com.google.android.material:material:1.1.0'
 
+// Third-party
+    //https://github.com/google/gson/blob/master/CHANGELOG.md
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    //https://github.com/afollestad/material-dialogs/releases
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
     implementation 'com.afollestad.material-dialogs:color:3.3.0'
     implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
 
+    //https://github.com/beworker/edge-to-edge/blob/master/CHANGELOG.md
     implementation 'de.halfbit:edge-to-edge:0.8'
 }
