@@ -5,11 +5,11 @@
 [![Credits](https://img.shields.io/static/v1?label=Contributors&message=many&color=81d4fa)](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
 
 [![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
-[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.8.3&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.8.3)
+[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.8.4&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.8.4)
 
 
 
-<img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh_38.gif" height="500px"/>
+<img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh_38_opt.gif" height="500px"/>
 
 
 # Description:
