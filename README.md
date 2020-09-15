@@ -7,7 +7,9 @@
 [![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
 [![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.8.4&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases/tag/v1.8.4)
 
-
+<a href="https://hosted.weblate.org/engage/vectorify-da-home/">
+<img src="https://hosted.weblate.org/widgets/vectorify-da-home/-/287x66-white.png" />
+</a>
 
 <img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh_38_opt.gif" height="500px"/>
 
@@ -40,7 +42,7 @@
 
 # Want to contribute to translations?
 
-Please have a look [here](https://github.com/enricocid/VectorifyDaHome/issues/13) :)
+The project is now hosted on [weblate](https://hosted.weblate.org/engage/vectorify-da-home/). If You want to support weblate guys please consider a [donation](https://weblate.org/it/donate/new/) :)
 
 
 # License
