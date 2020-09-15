@@ -44,6 +44,9 @@
 
 The project is now hosted on [weblate](https://hosted.weblate.org/engage/vectorify-da-home/). If You want to support weblate guys please consider a [donation](https://weblate.org/it/donate/new/) :)
 
+<a href="https://hosted.weblate.org/engage/vectorify-da-home/">
+<img src="https://hosted.weblate.org/widgets/vectorify-da-home/-/88x31-white.png" alt="Stato traduzione" />
+</a>
 
 # License
 
