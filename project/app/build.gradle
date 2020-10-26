@@ -1,75 +1,26 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
-    defaultConfig {
-        applicationId "com.iven.iconify"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 42
-        versionName "1.8.4"
-
-        vectorDrawables.useSupportLibrary = true
+buildscript {
+    ext.kotlin_version = '1.4.10'
+    repositories {
+        google()
+        jcenter()
     }
-
-    // Configure only for each module that uses Java 8
-    // language features (either in its source code or
-    // through dependencies).
-    compileOptions {
-        encoding = 'UTF-8'
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    // For Kotlin projects
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    packagingOptions {
-        exclude 'META-INF/*'
-    }
-
-    applicationVariants.all { variant ->
-        variant.resValue "string", "versionName", "v" + variant.versionName
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 }
 
-dependencies {
-// Kotlin
-    //https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-// Support
-    //https://developer.android.com/jetpack/androidx/versions
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.preference:preference-ktx:1.1.1'
-    implementation 'androidx.activity:activity-ktx:1.1.0'
-    implementation 'androidx.loader:loader:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.browser:browser:1.2.0'
-    //https://github.com/material-components/material-components-android/releases
-    implementation 'com.google.android.material:material:1.1.0'
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
 
-// Third-party
-    //https://github.com/google/gson/blob/master/CHANGELOG.md
-    implementation 'com.google.code.gson:gson:2.8.6'
-
-    //https://github.com/afollestad/material-dialogs/releases
-    implementation 'com.afollestad.material-dialogs:core:3.3.0'
-    implementation 'com.afollestad.material-dialogs:color:3.3.0'
-    implementation 'com.afollestad.material-dialogs:bottomsheets:3.3.0'
-
-    //https://github.com/beworker/edge-to-edge/blob/master/CHANGELOG.md
-    implementation 'de.halfbit:edge-to-edge:0.8'
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
