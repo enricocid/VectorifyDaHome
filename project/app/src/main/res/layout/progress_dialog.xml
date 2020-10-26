@@ -9,7 +9,8 @@
     <ProgressBar
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
-        android:indeterminateTint="@color/vectors_color" />
+        android:indeterminateTint="@color/vectors_color"
+        android:indeterminateTintMode="src_in" />
 
     <TextView
         android:layout_width="0dp"
