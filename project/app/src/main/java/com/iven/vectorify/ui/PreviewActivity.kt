@@ -4,17 +4,15 @@ import android.app.WallpaperManager
 import android.content.Context
 import android.content.res.ColorStateList
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.AttributeSet
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.WindowManager
+import android.view.*
 import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.ColorUtils
 import androidx.loader.app.LoaderManager
@@ -28,6 +26,7 @@ import com.iven.vectorify.utils.Utils
 import kotlinx.android.synthetic.main.position_controls.*
 import kotlinx.android.synthetic.main.preview_activity.*
 import kotlinx.android.synthetic.main.size_position_card.*
+
 
 @Suppress("UNUSED_PARAMETER")
 class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?> {
@@ -61,17 +60,15 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             cancelable(false)
             this.window?.apply {
                 setFlags(
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 )
-                decorView.systemUiVisibility =
-                    this@PreviewActivity.window.decorView.systemUiVisibility
             }
 
             show()
             onShow {
                 this.window?.clearFlags(
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 )
             }
         }
@@ -96,12 +93,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         if (mSaveWallpaperDialog.isShowing) mSaveWallpaperDialog.dismiss()
 
-        getString(R.string.message_saved_to, getExternalFilesDir(null)).toColouredToast(
-            this,
-            AppCompatResources.getDrawable(this, R.drawable.ic_check),
-            mTempVectorColor,
-            mTempBackgroundColor
-        )
+        Toast.makeText(this, getString(R.string.message_saved_to, getExternalFilesDir(null)), Toast.LENGTH_LONG).show()
     }
 
     override fun onLoaderReset(loader: Loader<Uri?>) {
@@ -128,10 +120,10 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     }
 
     override fun onCreateView(
-        parent: View?,
-        name: String,
-        context: Context,
-        attrs: AttributeSet
+            parent: View?,
+            name: String,
+            context: Context,
+            attrs: AttributeSet
     ): View? {
         //set immersive mode
         hideSystemUI()
@@ -157,15 +149,15 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         //set vector view
         mVectorView.updateVectorView(
-            VectorifyWallpaper(
-                mTempBackgroundColor,
-                mTempVectorColor.toContrastColor(mTempBackgroundColor),
-                mTempVector,
-                mTempCategory,
-                mTempScale,
-                mTempHorizontalOffset,
-                mTempVerticalOffset
-            )
+                VectorifyWallpaper(
+                        mTempBackgroundColor,
+                        mTempVectorColor.toContrastColor(mTempBackgroundColor),
+                        mTempVector,
+                        mTempCategory,
+                        mTempScale,
+                        mTempHorizontalOffset,
+                        mTempVerticalOffset
+                )
         )
 
         mVectorView.onSetWallpaper = { setWallpaper, bitmap ->
@@ -259,13 +251,13 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         mSeekBarScale.setTextColor(widgetColor)
 
         listOf<ImageButton>(
-            up,
-            down,
-            left,
-            right,
-            center_horizontal,
-            center_vertical,
-            reset_position
+                up,
+                down,
+                left,
+                right,
+                center_horizontal,
+                center_vertical,
+                reset_position
         ).applyTint(this, widgetColor)
     }
 
@@ -274,12 +266,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences
         if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
-        else getString(R.string.title_already_live).toColouredToast(
-            this,
-            AppCompatResources.getDrawable(this, R.drawable.ic_check),
-            mTempVectorColor,
-            mTempBackgroundColor
-        )
+        else Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_LONG).show()
 
         //update prefs
         mVectorView.saveToPrefs()
@@ -331,19 +318,32 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
     //immersive mode
     //https://developer.android.com/training/system-ui/immersive
+    @Suppress("DEPRECATION")
     private fun hideSystemUI() {
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
         // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                // Set the content to appear under the system bars so that the
-                // content doesn't resize when the system bars hide and show.
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                // Hide the nav bar and status bar
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            //https://stackoverflow.com/a/62643518
+            window.setDecorFitsSystemWindows(false)
+            val controller = window.insetsController
+            if (controller != null) {
+                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
+                controller.systemBarsBehavior =
+                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        } else {
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    // Set the content to appear under the system bars so that the
+                    // content doesn't resize when the system bars hide and show.
+                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    // Hide the nav bar and status bar
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        }
     }
 
     companion object {

@@ -13,16 +13,19 @@ class VectorifyPreferences(context: Context) {
     private val prefTheme = context.getString(R.string.theme_key)
     private val prefsThemeDefault = context.getString(R.string.theme_pref_light)
     private val prefSavedVectorifyWallpaper =
-        context.getString(R.string.saved_vectorify_wallpaper_key)
+            context.getString(R.string.saved_vectorify_wallpaper_key)
     private val prefRestoreVectorifyWallpaper =
-        context.getString(R.string.restore_vectorify_wallpaper_key)
+            context.getString(R.string.restore_vectorify_wallpaper_key)
     private val prefRecentVectorifySetups =
-        context.getString(R.string.recent_vectorify_wallpapers_key)
+            context.getString(R.string.recent_vectorify_wallpapers_key)
+    private val prefSavedVectorifyMetrics =
+            context.getString(R.string.saved_vectorify_metrics_key)
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     private val typeVectorifyWallpaper = object : TypeToken<VectorifyWallpaper>() {}.type
     private val typeRecents = object : TypeToken<MutableList<VectorifyWallpaper>>() {}.type
+    private val typeMetrics = object : TypeToken<Pair<Int, Int>>() {}.type
 
     private val mGson = GsonBuilder().create()
 
@@ -31,33 +34,40 @@ class VectorifyPreferences(context: Context) {
         set(value) = mPrefs.edit().putString(prefTheme, value).apply()
 
     val vectorifyWallpaperBackup = VectorifyWallpaper(
-        Color.BLACK,
-        Color.WHITE,
-        R.drawable.android_logo_2019,
-        0,
-        0.35F,
-        0F,
-        0F
+            Color.BLACK,
+            Color.WHITE,
+            R.drawable.android_logo_2019,
+            0,
+            0.35F,
+            0F,
+            0F
     )
 
     var restoreVectorifyWallpaper: VectorifyWallpaper?
         get() = getObject(
-            prefRestoreVectorifyWallpaper,
-            typeVectorifyWallpaper
+                prefRestoreVectorifyWallpaper,
+                typeVectorifyWallpaper
         )
         set(value) = putObject(prefRestoreVectorifyWallpaper, value)
 
+    var vectorifyMetrics: Pair<Int, Int>?
+        get() = getObject(
+                prefSavedVectorifyMetrics,
+                typeMetrics
+        )
+        set(value) = putObject(prefSavedVectorifyMetrics, value)
+
     var liveVectorifyWallpaper: VectorifyWallpaper?
         get() = getObject(
-            prefSavedVectorifyWallpaper,
-            typeVectorifyWallpaper
+                prefSavedVectorifyWallpaper,
+                typeVectorifyWallpaper
         )
         set(value) = putObject(prefSavedVectorifyWallpaper, value)
 
     var vectorifyWallpaperSetups: MutableList<VectorifyWallpaper>?
         get() = getObject(
-            prefRecentVectorifySetups,
-            typeRecents
+                prefRecentVectorifySetups,
+                typeRecents
         )
         set(value) = putObject(prefRecentVectorifySetups, value)
 

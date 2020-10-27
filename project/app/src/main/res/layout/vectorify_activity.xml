@@ -2,6 +2,7 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/vectorifyView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_check"
         app:layout_anchor="@id/bar"
-        app:useCompatPadding="true" />
+        app:useCompatPadding="true"
+        tools:ignore="ContentDescription" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

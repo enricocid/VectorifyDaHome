@@ -2,6 +2,7 @@ package com.iven.vectorify.ui
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
@@ -9,9 +10,12 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
@@ -62,7 +66,7 @@ private const val TAG_CATEGORY_RESTORE = "TAG_CATEGORY_RESTORE"
 
 @Suppress("UNUSED_PARAMETER")
 class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
-    SharedPreferences.OnSharedPreferenceChangeListener {
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var mFab: FloatingActionButton
     private lateinit var mVectorFrame: ImageView
@@ -105,26 +109,26 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     override fun onPause() {
         super.onPause()
         vectorifyPreferences.restoreVectorifyWallpaper = VectorifyWallpaper(
-            mTempBackgroundColor,
-            mTempVectorColor,
-            mTempVector,
-            mTempCategory,
-            mTempScale,
-            mTempHorizontalOffset,
-            mTempVerticalOffset
+                mTempBackgroundColor,
+                mTempVectorColor,
+                mTempVector,
+                mTempCategory,
+                mTempScale,
+                mTempHorizontalOffset,
+                mTempVerticalOffset
         )
     }
 
     override fun onStart() {
         super.onStart()
         PreferenceManager.getDefaultSharedPreferences(this)
-            .registerOnSharedPreferenceChangeListener(this)
+                .registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onStop() {
         super.onStop()
         PreferenceManager.getDefaultSharedPreferences(this)
-            .unregisterOnSharedPreferenceChangeListener(this)
+                .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
@@ -137,6 +141,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getDisplayMetrics()
         getViewsAndResources()
 
         savedInstanceState?.let { bundle ->
@@ -168,10 +173,10 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
         swap_card_colors.setOnClickListener { swapBtn ->
             if (sSwapColor) ObjectAnimator.ofFloat(
-                swapBtn,
-                View.ROTATION,
-                0f,
-                180f
+                    swapBtn,
+                    View.ROTATION,
+                    0f,
+                    180f
             ).apply {
                 duration = 500
                 start()
@@ -195,7 +200,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                     statusBarColor = Color.TRANSPARENT
                     navigationBarColor = Color.TRANSPARENT
                 }
-                Utils.handleLightSystemBars(sThemeNight, decorView)
+                Utils.handleLightSystemBars(sThemeNight, this)
                 edgeToEdge {
                     decorView.fit { Edge.Top }
                     mBottomBar.fit { Edge.Bottom + Edge.Right }
@@ -205,6 +210,22 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                     }
                 }
             }
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getDisplayMetrics() {
+        //retrieve display specifications
+        val window = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val d = DisplayMetrics()
+        val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            display
+        } else {
+            window.defaultDisplay
+        }
+        if (display != null) {
+            display.getRealMetrics(d)
+            vectorifyPreferences.vectorifyMetrics = Pair(d.widthPixels, d.heightPixels)
         }
     }
 
@@ -226,8 +247,8 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                     putExtras(Bundle().apply {
                         putInt(TEMP_BACKGROUND_COLOR, mTempBackgroundColor)
                         putInt(
-                            TEMP_VECTOR_COLOR,
-                            mTempVectorColor
+                                TEMP_VECTOR_COLOR,
+                                mTempVectorColor
                         )
                         putInt(TEMP_VECTOR, mTempVector)
                         putInt(TEMP_CATEGORY, mTempCategory)
@@ -247,12 +268,12 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
             replaceMenu(R.menu.bottom_menu)
             menu.findItem(R.id.app_bar_restore).title = getString(
-                R.string.title_reset
+                    R.string.title_reset
             )
             val menuThemeItem = menu.findItem(R.id.app_bar_theme).apply {
                 icon = AppCompatResources.getDrawable(
-                    this@MainActivity,
-                    Utils.getDefaultNightModeIcon(this@MainActivity)
+                        this@MainActivity,
+                        Utils.getDefaultNightModeIcon(this@MainActivity)
                 )
             }
 
@@ -262,24 +283,24 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                     R.id.app_bar_theme -> {
 
                         vectorifyPreferences.theme =
-                            Utils.getProgressiveDefaultNightMode(this@MainActivity)
+                                Utils.getProgressiveDefaultNightMode(this@MainActivity)
 
                         AppCompatDelegate.setDefaultNightMode(
-                            Utils.getDefaultNightMode(
-                                this@MainActivity
-                            )
+                                Utils.getDefaultNightMode(
+                                        this@MainActivity
+                                )
                         )
 
                         menuThemeItem.icon = AppCompatResources.getDrawable(
-                            this@MainActivity,
-                            Utils.getDefaultNightModeIcon(this@MainActivity)
+                                this@MainActivity,
+                                Utils.getDefaultNightModeIcon(this@MainActivity)
                         )
                     }
 
                     R.id.app_bar_restore -> showOptionsPopup(
-                        findViewById(
-                            R.id.app_bar_restore
-                        )
+                            findViewById(
+                                    R.id.app_bar_restore
+                            )
                     )
                 }
                 return@setOnMenuItemClickListener true
@@ -289,7 +310,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 if (!vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty())
                     openRecentSetups()
                 else
-                    getString(R.string.message_no_recent_setups).toErrorToast(this@MainActivity)
+                    Toast.makeText(this@MainActivity, getString(R.string.message_no_recent_setups), Toast.LENGTH_LONG).show()
             }
 
             afterMeasured {
@@ -315,12 +336,12 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
                     //update background and vector colors
                     setBackgroundColorForUI(
-                        ContextCompat.getColor(this@MainActivity, combo.first),
-                        true
+                            ContextCompat.getColor(this@MainActivity, combo.first),
+                            true
                     )
                     setVectorColorForUI(
-                        ContextCompat.getColor(this@MainActivity, combo.second),
-                        true
+                            ContextCompat.getColor(this@MainActivity, combo.second),
+                            true
                     )
 
                     //update vector frame colors
@@ -336,7 +357,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         mVectorsRecyclerView.apply {
 
             mVectorsRecyclerViewLayoutManager =
-                GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
+                    GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
             layoutManager = mVectorsRecyclerViewLayoutManager
             setHasFixedSize(true)
 
@@ -366,22 +387,17 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
                     try {
                         val iconName = resources.getResourceEntryName(vector)
-                            .replace(
-                                getString(R.string.underscore_delimiter),
-                                getString(R.string.space_delimiter)
-                            )
-                            .capitalize()
+                                .replace(
+                                        getString(R.string.underscore_delimiter),
+                                        getString(R.string.space_delimiter)
+                                )
+                                .capitalize()
 
-                        iconName.toColouredToast(
-                            this@MainActivity,
-                            AppCompatResources.getDrawable(this@MainActivity, vector)!!,
-                            mTempBackgroundColor,
-                            mTempVectorColor
-                        )
+                        Toast.makeText(this@MainActivity, iconName, Toast.LENGTH_LONG).show()
 
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        getString(R.string.error_get_resource).toErrorToast(this@MainActivity)
+                        Toast.makeText(this@MainActivity, getString(R.string.error_get_resource), Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -391,13 +407,13 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     //update UI on recent selected
     private fun onRecentSelected(
-        selectedBackgroundColor: Int,
-        selectedVectorColor: Int,
-        selectedVector: Int,
-        selectedCategory: Int,
-        selectedScale: Float,
-        selectedHorizontalOffset: Float,
-        selectedVerticalOffset: Float
+            selectedBackgroundColor: Int,
+            selectedVectorColor: Int,
+            selectedVector: Int,
+            selectedCategory: Int,
+            selectedScale: Float,
+            selectedHorizontalOffset: Float,
+            selectedVerticalOffset: Float
     ) {
 
         setBackgroundColorForUI(selectedBackgroundColor, true)
@@ -418,9 +434,9 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         if (tintBackground) mVectorFrame.setBackgroundColor(mTempBackgroundColor)
 
         val vector = Utils.tintDrawable(
-            this,
-            mTempVector,
-            mTempVectorColor.toContrastColor(mTempBackgroundColor)
+                this,
+                mTempVector,
+                mTempVectorColor.toContrastColor(mTempBackgroundColor)
         )
         mVectorFrame.setImageDrawable(vector)
     }
@@ -507,10 +523,10 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             title(title)
 
             colorChooser(
-                colors = ColorPalette.Primary,
-                subColors = ColorPalette.PrimarySub,
-                allowCustomArgb = true,
-                showAlphaSelector = false
+                    colors = ColorPalette.Primary,
+                    subColors = ColorPalette.PrimarySub,
+                    allowCustomArgb = true,
+                    showAlphaSelector = false
 
             ) { _, color ->
                 when (key) {
@@ -531,16 +547,16 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     //method to start color picker for background
     fun startBackgroundColorPicker(view: View) {
         startColorPicker(
-            getString(R.string.background_color_key),
-            R.string.title_background_dialog
+                getString(R.string.background_color_key),
+                R.string.title_background_dialog
         )
     }
 
     //method to start color picker for vector
     fun startVectorColorPicker(view: View) {
         startColorPicker(
-            getString(R.string.vectors_color_key),
-            R.string.title_vector_dialog
+                getString(R.string.vectors_color_key),
+                R.string.title_vector_dialog
         )
     }
 
@@ -583,13 +599,13 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 onRecentClick = { recent ->
                     recent.apply {
                         onRecentSelected(
-                            backgroundColor,
-                            vectorColor,
-                            resource,
-                            category,
-                            scale,
-                            horizontalOffset,
-                            verticalOffset
+                                backgroundColor,
+                                vectorColor,
+                                resource,
+                                category,
+                                scale,
+                                horizontalOffset,
+                                verticalOffset
                         )
                     }
                     dismiss()
@@ -598,10 +614,10 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             }
 
             getRecyclerView().layoutManager =
-                GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
+                    GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) window?.apply {
-                Utils.handleLightSystemBars(sThemeNight, decorView)
+                Utils.handleLightSystemBars(sThemeNight, this)
                 edgeToEdge {
                     getRecyclerView().fit { Edge.Bottom }
                     decorView.fit { Edge.Top }
@@ -622,7 +638,7 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             }
             inflate(R.menu.menu_do_something)
             if (vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty()) menu.removeItem(
-                R.id.clear_recents
+                    R.id.clear_recents
             )
             gravity = Gravity.END
             show()

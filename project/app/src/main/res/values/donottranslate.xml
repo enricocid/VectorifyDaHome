@@ -13,6 +13,7 @@
     <string name="saved_vectorify_wallpaper_key">saved_vectorify_wallpaper_key</string>
     <string name="recent_vectorify_wallpapers_key">recent_vectorify_wallpapers_key</string>
     <string name="restore_vectorify_wallpaper_key">restore_vectorify_wallpaper_key</string>
+    <string name="saved_vectorify_metrics_key">saved_vectorify_metrics_key</string>
     <string name="app_github_link">
         https://github.com/enricocid/VectorifyDaHome
     </string>

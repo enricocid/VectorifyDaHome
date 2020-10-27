@@ -2,6 +2,7 @@ package com.iven.vectorify
 
 import android.graphics.Canvas
 import android.os.Handler
+import android.os.Looper
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
 import com.iven.vectorify.utils.Utils
@@ -17,8 +18,9 @@ class VectorifyDaHomeLP : WallpaperService() {
     private var mHorizontalOffSet = mBackupRecent.horizontalOffset
     private var mVerticalOffSet = mBackupRecent.verticalOffset
 
-    private var mDeviceWidth = deviceMetrics.first
-    private var mDeviceHeight = deviceMetrics.second
+    private val mVectorifyMetrics get() = vectorifyPreferences.vectorifyMetrics
+    private var mDeviceWidth = mVectorifyMetrics!!.first
+    private var mDeviceHeight = mVectorifyMetrics!!.second
 
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
@@ -45,7 +47,7 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private inner class VectorifyEngine : WallpaperService.Engine() {
 
-        private val handler = Handler()
+        private val handler = Handler(Looper.getMainLooper())
         private var sVisible = true
         private val drawRunner = Runnable { draw() }
 
@@ -84,19 +86,19 @@ class VectorifyDaHomeLP : WallpaperService() {
                     canvas.drawColor(mSelectedBackgroundColor)
 
                     val drawable = Utils.tintDrawable(
-                        baseContext,
-                        mSelectedVector,
-                        mSelectedVectorColor
+                            baseContext,
+                            mSelectedVector,
+                            mSelectedVectorColor
                     )
 
                     Utils.drawBitmap(
-                        drawable,
-                        canvas,
-                        mDeviceWidth,
-                        mDeviceHeight,
-                        mSelectedScaleFactor,
-                        mHorizontalOffSet,
-                        mVerticalOffSet
+                            drawable,
+                            canvas,
+                            mDeviceWidth,
+                            mDeviceHeight,
+                            mSelectedScaleFactor,
+                            mHorizontalOffSet,
+                            mVerticalOffSet
                     )
                 }
             } finally {
