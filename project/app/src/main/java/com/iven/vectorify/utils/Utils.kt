@@ -35,7 +35,11 @@ object Utils {
     fun getDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
         context.getString(R.string.theme_pref_light) -> AppCompatDelegate.MODE_NIGHT_NO
         context.getString(R.string.theme_pref_dark) -> AppCompatDelegate.MODE_NIGHT_YES
-        else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM else AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+        else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        } else {
+            AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+        }
     }
 
     @JvmStatic
@@ -120,7 +124,11 @@ object Utils {
             verticalOffset: Float
     ) {
 
-        val dimension = if (deviceWidth > deviceHeight) deviceHeight else deviceWidth
+        val dimension = if (deviceWidth > deviceHeight) {
+            deviceHeight
+        } else {
+            deviceWidth
+        }
         val bitmap = Bitmap.createBitmap(
                 (dimension * scale).toInt(),
                 (dimension * scale).toInt(), Bitmap.Config.ARGB_8888
@@ -265,7 +273,9 @@ object Utils {
                 bit.mutate()
 
                 //set tint mode multiply for special vectors
-                if (vectorProps.second) bit.setTintMode(PorterDuff.Mode.MULTIPLY)
+                if (vectorProps.second) {
+                    bit.setTintMode(PorterDuff.Mode.MULTIPLY)
+                }
                 bit.setTint(vectorColor)
             } catch (e: Exception) {
                 e.printStackTrace()

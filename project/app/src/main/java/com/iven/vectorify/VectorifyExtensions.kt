@@ -27,9 +27,15 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
 fun VectorifyWallpaper.addToRecentSetups() {
     //update recent setups
     val recentSetups =
-            if (vectorifyPreferences.vectorifyWallpaperSetups != null) vectorifyPreferences.vectorifyWallpaperSetups else mutableListOf()
+            if (vectorifyPreferences.vectorifyWallpaperSetups != null) {
+                vectorifyPreferences.vectorifyWallpaperSetups
+            } else {
+                mutableListOf()
+            }
 
-    if (!recentSetups?.contains(this)!!) recentSetups.add(this)
+    if (!recentSetups?.contains(this)!!) {
+        recentSetups.add(this)
+    }
     vectorifyPreferences.vectorifyWallpaperSetups = recentSetups
 }
 
@@ -41,10 +47,20 @@ fun Int.toHex(context: Context) =
 fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
 
 //method to calculate colors for cards titles
-fun Int.toSurfaceColor() = if (isDark()) Color.WHITE else Color.BLACK
+fun Int.toSurfaceColor() = if (isDark()) {
+    Color.WHITE
+} else {
+    Color.BLACK
+}
 
-fun Int.darkenOrLighten() =
-        ColorUtils.blendARGB(this, if (isDark()) Color.WHITE else Color.BLACK, 0.20F)
+fun Int.darkenOrLighten(): Int {
+    val mask = if (isDark()) {
+        Color.WHITE
+    } else {
+        Color.BLACK
+    }
+    return ColorUtils.blendARGB(this, mask, 0.20F)
+}
 
 //method to get rounded float string
 fun Float.toDecimalFormat() = try {
@@ -54,8 +70,11 @@ fun Float.toDecimalFormat() = try {
     ""
 }
 
-fun Int.toContrastColor(compareColor: Int) = if (this == compareColor)
-    darkenOrLighten() else this
+fun Int.toContrastColor(compareColor: Int) = if (this == compareColor) {
+    darkenOrLighten()
+} else {
+    this
+}
 
 fun List<ImageButton>.applyTint(context: Context, widgetColor: Int) {
     forEach { imageButton ->

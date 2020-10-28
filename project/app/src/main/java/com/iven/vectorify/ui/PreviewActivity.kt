@@ -91,7 +91,9 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         LoaderManager.getInstance(this).destroyLoader(SAVE_WALLPAPER_LOADER_ID)
 
-        if (mSaveWallpaperDialog.isShowing) mSaveWallpaperDialog.dismiss()
+        if (mSaveWallpaperDialog.isShowing) {
+            mSaveWallpaperDialog.dismiss()
+        }
 
         Toast.makeText(this, getString(R.string.message_saved_to, getExternalFilesDir(null)), Toast.LENGTH_LONG).show()
     }
@@ -143,7 +145,11 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             mTempVerticalOffset = ext.getFloat(TEMP_V_OFFSET)
         }
 
-        setContentView(if (mTempBackgroundColor.isDark()) R.layout.preview_activity_dark else R.layout.preview_activity)
+        setContentView(if (mTempBackgroundColor.isDark()) {
+            R.layout.preview_activity_dark
+        } else {
+            R.layout.preview_activity
+        })
 
         getViews()
 
@@ -265,8 +271,11 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences
-        if (!Utils.isLiveWallpaperRunning(this)) Utils.openLiveWallpaperIntent(this)
-        else Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_LONG).show()
+        if (!Utils.isLiveWallpaperRunning(this)) {
+            Utils.openLiveWallpaperIntent(this)
+        } else {
+            Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_LONG).show()
+        }
 
         //update prefs
         mVectorView.saveToPrefs()
@@ -313,7 +322,9 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) hideSystemUI()
+        if (hasFocus) {
+            hideSystemUI()
+        }
     }
 
     //immersive mode

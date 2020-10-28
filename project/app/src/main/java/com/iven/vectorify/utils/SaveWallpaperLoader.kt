@@ -56,11 +56,15 @@ class SaveWallpaperLoader(
                     close()
                 }
 
-                if (isSetWallpaper) FileProvider.getUriForFile(
-                        context,
-                        context.getString(R.string.live_wallpaper_name),
-                        wallpaperToSave
-                ) else null
+                if (isSetWallpaper) {
+                    FileProvider.getUriForFile(
+                            context,
+                            context.getString(R.string.live_wallpaper_name),
+                            wallpaperToSave
+                    )
+                } else {
+                    null
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()

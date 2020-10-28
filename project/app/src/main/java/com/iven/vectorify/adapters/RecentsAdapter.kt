@@ -70,9 +70,11 @@ class RecentsAdapter(
                         positiveButton {
                             //add an empty list to preferences
                             try {
-                                if (mRecentSetups?.contains(vectorifyWallpaper)!!) mRecentSetups?.remove(
-                                        vectorifyWallpaper
-                                )
+                                if (mRecentSetups?.contains(vectorifyWallpaper)!!) {
+                                    mRecentSetups?.remove(
+                                            vectorifyWallpaper
+                                    )
+                                }
                                 notifyDataSetChanged()
                                 vectorifyPreferences.vectorifyWallpaperSetups = mRecentSetups
                             } catch (e: Exception) {

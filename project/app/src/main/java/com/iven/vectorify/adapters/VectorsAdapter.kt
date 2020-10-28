@@ -71,7 +71,11 @@ class VectorsAdapter(private val context: Context) :
         fun bindItems(drawable: Int) {
 
             val checkbox = itemView.findViewById<ImageView>(R.id.checkbox).apply {
-                visibility = if (mSelectedDrawable == drawable) View.VISIBLE else View.GONE
+                visibility = if (mSelectedDrawable == drawable) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
             }
 
             itemView.findViewById<ImageButton>(R.id.vector_button).apply {

@@ -133,7 +133,9 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            getString(R.string.recent_vectorify_wallpapers_key) -> if (vectorifyPreferences.vectorifyWallpaperSetups?.isNullOrEmpty()!! && ::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing) mRecentSetupsDialog.dismiss()
+            getString(R.string.recent_vectorify_wallpapers_key) -> if (vectorifyPreferences.vectorifyWallpaperSetups?.isNullOrEmpty()!! && ::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing) {
+                mRecentSetupsDialog.dismiss()
+            }
             getString(R.string.theme_key) -> sThemeChanged = true
         }
     }
@@ -172,18 +174,20 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         setupFabButton()
 
         swap_card_colors.setOnClickListener { swapBtn ->
-            if (sSwapColor) ObjectAnimator.ofFloat(
-                    swapBtn,
-                    View.ROTATION,
-                    0f,
-                    180f
-            ).apply {
-                duration = 500
-                start()
-                doOnEnd {
-                    val tempBackgroundColorBackup = mTempBackgroundColor
-                    setBackgroundColorForUI(mTempVectorColor, true)
-                    setVectorColorForUI(tempBackgroundColorBackup, true)
+            if (sSwapColor) {
+                ObjectAnimator.ofFloat(
+                        swapBtn,
+                        View.ROTATION,
+                        0f,
+                        180f
+                ).apply {
+                    duration = 500
+                    start()
+                    doOnEnd {
+                        val tempBackgroundColorBackup = mTempBackgroundColor
+                        setBackgroundColorForUI(mTempVectorColor, true)
+                        setVectorColorForUI(tempBackgroundColorBackup, true)
+                    }
                 }
             }
         }
@@ -307,10 +311,11 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             }
 
             setNavigationOnClickListener {
-                if (!vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty())
+                if (!vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty()) {
                     openRecentSetups()
-                else
+                } else {
                     Toast.makeText(this@MainActivity, getString(R.string.message_no_recent_setups), Toast.LENGTH_LONG).show()
+                }
             }
 
             afterMeasured {
@@ -431,7 +436,9 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     //update vector frame
     private fun setVectorFrameColors(tintBackground: Boolean, showErrorDialog: Boolean) {
 
-        if (tintBackground) mVectorFrame.setBackgroundColor(mTempBackgroundColor)
+        if (tintBackground) {
+            mVectorFrame.setBackgroundColor(mTempBackgroundColor)
+        }
 
         val vector = Utils.tintDrawable(
                 this,
@@ -444,9 +451,13 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     //update background card colors
     private fun setBackgroundColorForUI(color: Int, updateColor: Boolean) {
 
-        if (updateColor) mTempBackgroundColor = color
+        if (updateColor) {
+            mTempBackgroundColor = color
+        }
 
-        if (mTempBackgroundColor == mTempVectorColor) setVectorColorForUI(mTempVectorColor, false)
+        if (mTempBackgroundColor == mTempVectorColor) {
+            setVectorColorForUI(mTempVectorColor, false)
+        }
         val textColor = mTempBackgroundColor.toSurfaceColor()
 
         //update shit colors
@@ -471,7 +482,9 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
     //update vector card colors
     private fun setVectorColorForUI(color: Int, updateColor: Boolean) {
 
-        if (updateColor) mTempVectorColor = color
+        if (updateColor) {
+            mTempVectorColor = color
+        }
 
         val textColor = mTempVectorColor.toSurfaceColor()
 
@@ -532,11 +545,15 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 when (key) {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
-                        if (mTempBackgroundColor != color) setBackgroundColorForUI(color, true)
+                        if (mTempBackgroundColor != color) {
+                            setBackgroundColorForUI(color, true)
+                        }
                     }
                     else -> {
                         //update the color only if it really changed
-                        if (mTempVectorColor != color) setVectorColorForUI(color, true)
+                        if (mTempVectorColor != color) {
+                            setVectorColorForUI(color, true)
+                        }
                     }
                 }
             }
@@ -587,7 +604,9 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         mVectorsAdapter.swapCategory(category.second)
         mCategoriesChip.text = category.first
 
-        if (force) scrollToVector(mTempVector)
+        if (force) {
+            scrollToVector(mTempVector)
+        }
     }
 
     private fun openRecentSetups() {
@@ -616,11 +635,13 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             getRecyclerView().layoutManager =
                     GridLayoutManager(context, 3, RecyclerView.VERTICAL, false)
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) window?.apply {
-                Utils.handleLightSystemBars(sThemeNight, this)
-                edgeToEdge {
-                    getRecyclerView().fit { Edge.Bottom }
-                    decorView.fit { Edge.Top }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+                window?.apply {
+                    Utils.handleLightSystemBars(sThemeNight, this)
+                    edgeToEdge {
+                        getRecyclerView().fit { Edge.Bottom }
+                        decorView.fit { Edge.Top }
+                    }
                 }
             }
         }
@@ -637,9 +658,11 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
                 return@setOnMenuItemClickListener true
             }
             inflate(R.menu.menu_do_something)
-            if (vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty()) menu.removeItem(
-                    R.id.clear_recents
-            )
+            if (vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty()) {
+                menu.removeItem(
+                        R.id.clear_recents
+                )
+            }
             gravity = Gravity.END
             show()
         }

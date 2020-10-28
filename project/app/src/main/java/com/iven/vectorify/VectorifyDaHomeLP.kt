@@ -102,8 +102,9 @@ class VectorifyDaHomeLP : WallpaperService() {
                     )
                 }
             } finally {
-                if (canvas != null)
+                if (canvas != null) {
                     holder.unlockCanvasAndPost(canvas)
+                }
             }
             handler.removeCallbacks(drawRunner)
         }
