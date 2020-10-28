@@ -7,5 +7,4 @@
     <color name="system_bars_color">#313131</color>
     <color name="activity_background_color">@color/chips_color</color>
     <color name="vectors_color">@android:color/white</color>
-    <color name="red">#ef9a9a</color>
 </resources>

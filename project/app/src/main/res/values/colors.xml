@@ -10,8 +10,6 @@
     <color name="chips_color">#424242</color>
     <color name="vectors_color">@android:color/black</color>
 
-    <color name="red">#f44336</color>
-
     <!--  PRESETS -->
 
     <color name="midnight_blue">#1E1F26</color>
