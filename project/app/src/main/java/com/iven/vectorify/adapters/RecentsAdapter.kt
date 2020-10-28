@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
@@ -22,12 +22,13 @@ class RecentsAdapter(
     private var mRecentSetups = vectorifyPreferences.vectorifyWallpaperSetups
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
+        val recentSetupLayout = LayoutInflater.from(parent.context).inflate(
+                R.layout.recent_option,
+                parent,
+                false
+        )
         return RecentSetupsHolder(
-                LayoutInflater.from(parent.context).inflate(
-                        R.layout.recent_option,
-                        parent,
-                        false
-                )
+                recentSetupLayout
         )
     }
 
@@ -50,7 +51,7 @@ class RecentsAdapter(
                             vectorifyWallpaper.vectorColor.toContrastColor(vectorifyWallpaper.backgroundColor)
                     )
 
-            itemView.findViewById<ImageView>(R.id.recent_setups_vector).apply {
+            itemView.findViewById<ImageButton>(R.id.recent_setups_vector).apply {
                 setBackgroundColor(vectorifyWallpaper.backgroundColor)
                 setImageDrawable(drawable)
                 setOnClickListener {
