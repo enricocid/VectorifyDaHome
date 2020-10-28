@@ -1,0 +1,7 @@
+- Android 11 compatibility
+- Dependencies updates
+- Changes to recent setups dialog
+- Fix apply wallpaper progress bar
+
+Don't forget to visit weblate for translations!
+https://hosted.weblate.org/engage/vectorify-da-home/

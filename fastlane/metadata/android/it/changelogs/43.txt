@@ -1,0 +1,7 @@
+- Compatibilità Android 11
+- Aggiornamento dipendenze
+- Cambiamenti al dialog recenti
+- Corretto problema con barra di progresso durante l'applicazione degli sfondi
+
+Non dimenticare di visitare weblate se vuoi aiutare con le traduzioni!
+https://hosted.weblate.org/engage/vectorify-da-home/
