@@ -1,0 +1,16 @@
+Vectorify da home! je minimalistički program otvorenog koda za postavljanje slika pozadina iz ogromne zbirke (više od 400) vektorskih grafika:
+
+- Boje pozadine i grafike mogu se prilagoditi jednostavnim biranjem boja, upotrebom predložaka ili boje isticanja uređaja.
+Po želji se mogu i zamijeniti!
+
+- Biranje kategorija
+
+- Pretprikaz za prilagođavanje veličine i položaja vektorske grafike
+
+- Upravljanje nedavnim konfiguracijama
+   - Savjet: za brisanje pojedinih konfiguracija, pritisni ih dugo
+
+- 3 načina postavljanja slike pozadine (spremanje, izravna primjena – uključuje spremanje, slika pozadine uživo)
+   - Slike pozadine sada se spremaju u privatnu mapu programa (interno spremište > Android > podaci > com.iven.iconify > datoteke). Pri deinstaliranju programa sustav briše mapu, stoga izradi sigurnosnu kopiju.
+
+- Svijetla, tamna i automatska tema (slijedi postavke Android Q sustava i razinu baterije na uređajima sa starijim sustavima)

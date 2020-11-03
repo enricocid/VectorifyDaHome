@@ -1,0 +1,3 @@
+- Lollipop: fixed a crash
+Thanks Abdul Kahlawi for reporting
+- Update dependencies
