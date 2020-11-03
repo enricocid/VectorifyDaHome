@@ -1,0 +1,7 @@
+- Kompatibel mit Android 11
+- Aktualisierte Abhängigkeiten
+- Änderungen am Dialogfeld „Neueste Zusammenstellungen“
+- Korrektur des Fortschrittsbalkens beim Anwenden von Hintergrundbildern
+
+Besuche Weblate zwecks Übersetzungen!
+https://hosted.weblate.org/engage/vectorify-da-home/
