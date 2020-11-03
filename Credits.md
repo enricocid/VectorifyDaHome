@@ -19,6 +19,8 @@
 
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team and [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support, inspirations and suggestions! The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome) that was built thanks to the team/community feedbacks!
 
+- [milotype](https://github.com/milotype) for [Croatian](https://github.com/enricocid/VectorifyDaHome/pull/26) and [German](https://github.com/enricocid/VectorifyDaHome/pull/27) translations!
+
 - [Nathan Bonnemains](https://github.com/NathanBnm) for French translations and a great [tip](https://github.com/enricocid/VectorifyDaHome/issues/11)!
 
 - [Stefan Möller](https://github.com/stupo) for his [suggestions](https://github.com/enricocid/VectorifyDaHome/issues/2)!
