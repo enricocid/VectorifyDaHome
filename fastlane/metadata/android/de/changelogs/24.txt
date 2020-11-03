@@ -1,0 +1,3 @@
+- Fixed live wallpaper being update on saving/direct apply
+- Implemented colorful toasts
+- Reviewed some translations

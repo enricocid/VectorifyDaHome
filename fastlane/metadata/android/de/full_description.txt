@@ -1,0 +1,16 @@
+Vectorify da home! ist eine minimalistische und Open-Source-App zum Anwenden von Hintergrundbildern aus einer riesigen Sammlung (mehr als 400) von Vektorgrafiken:
+
+- Farben des Hintergrunds und der Vektorgrafiken können dank eines fantastischen Farbwählers, gespeicherten Voreinstellungen oder der Auszeichnungsfarbe des Geräts angepasst werden.
+Nach Wunsch können sie auch getauscht werden!
+
+- Kategorieauswahl
+
+- Vorschau, um Größe und Lage der Vektorgrafik anzupassen
+
+- Verwaltung der neusten Zusammenstellungen
+   - Tipp: Um einzelne Zusammenstellungen zu löschen, einfach lange draufhalten
+
+- 3 Möglichkeiten zum Festlegen des Hintergrundbilds (Speichern, direktes Anwenden – inklusive Speichern, Live-Hintergrundbild)
+   - Hintergrundbilder werden jetzt im Privaten App-Ordner gespeichert (interner Speicher > Android > Daten > com.iven.iconify > Dateien). Das System löscht den Ordner, wenn die App deinstalliert wird. Vergiss also nicht eine Sicherungskopie zu erstellen.
+
+- Heller, dunkler und automatischer Darstellungsmodus (gemäß den Systemeinstellungen auf Android Q Geräten und dem Akkuladestand auf älteren Geräten)

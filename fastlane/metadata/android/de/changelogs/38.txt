@@ -1,0 +1,13 @@
+- Added automatic DayNight theme: 
+following system on Android Q and battery on older devices
+
+- Added a button to swap colors
+
+- Wallpapers are saved to internal storage > Android > data > com.iven.iconify > files
+WRITE_EXTERNAL_STORAGE permission removed!
+
+- Reviewed recent setups storing (added scale and positioning restoring)
+Note: recent setups will be cleared. Sorry...
+
+- Chrome custom tab is now being used to open the GitHub page
+- Design of the app and code have been improved too!

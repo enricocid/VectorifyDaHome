@@ -1,0 +1,7 @@
+- New UI: optimize the available screen space making vector frame bigger and
+vectors list showing on 2 rows. Categories are now separated and accessible through
+category chooser.
+- New vectors (Chernoff faces)
+- Fix preview reset button
+- Fix wrong presets toast notification color
+- Review presets order

@@ -1,0 +1,5 @@
+- Fix to automatic theme and light system bars handling
+- Restore latest session setup
+- Keep original chrome tab close icon
+- Update dependencies
+- Code cleaning
