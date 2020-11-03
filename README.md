@@ -14,6 +14,15 @@
 <img align="right" src="https://raw.githubusercontent.com/enricocid/VectorifyDaHome/master/vdh_38_opt.gif" height="500px"/>
 
 
+# About donations
+
+If You appreciated my project I ask You to donate to a friend of mine who is living a very difficult moment (lost the job and its home):
+
+[gofundme page](https://www.gofundme.com/f/aiutarmi-per-favore)
+
+Thanks
+
+
 # Description:
 
 **Vectorify da home!** is a minimal and open source app to apply wallpapers from a vast (400+) collection of vector graphics:
