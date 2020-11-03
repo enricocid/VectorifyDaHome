@@ -1,0 +1,3 @@
+- Improve edge-to-edge (applies to android versions above oreo mr1)
+- Add French translations (credits goes to Nathan Bonnemains - https://github.com/NathanBnm)
+- Minor code review

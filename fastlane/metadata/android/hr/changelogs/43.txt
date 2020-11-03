@@ -1,0 +1,7 @@
+- Kompatibilnost s Android 11
+- Akatualizirane ovisnosti
+- Promjene u dijaloškom okviru za „Nedavne konfiguracije”
+- Ispravljena traka napretka primjene slike pozadine
+
+Posjeti Weblate stranicu za prevođenje!
+https://hosted.weblate.org/engage/vectorify-da-home/

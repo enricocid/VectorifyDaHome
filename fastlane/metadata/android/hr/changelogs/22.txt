@@ -1,0 +1,3 @@
+- To know the name of the vector just long click on it! :)
+- Added many new vectors
+- Fixes to graphics categorization
