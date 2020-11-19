@@ -1,0 +1,5 @@
+- Corretto un errore
+- Aggiornamento dipendenze
+
+Non dimenticare di visitare weblate se vuoi aiutare con le traduzioni!
+https://hosted.weblate.org/engage/vectorify-da-home/

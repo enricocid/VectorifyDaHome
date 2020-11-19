@@ -1,0 +1,5 @@
+- Fix an issue
+- Dependencies updates
+
+Don't forget to visit weblate for translations!
+https://hosted.weblate.org/engage/vectorify-da-home/
