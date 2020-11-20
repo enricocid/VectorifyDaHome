@@ -37,7 +37,6 @@
 
 [<img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">](https://play.google.com/store/apps/details?id=com.iven.iconify)
 [<img alt="Get it on F-Droid" height="80" src="https://gitlab.com/fdroid/artwork/raw/master/badge/get-it-on.png">](https://f-droid.org/repository/browse/?fdid=com.iven.iconify)
-[<img alt="Get it on Github" height="80" src="https://raw.githubusercontent.com/flocke/andOTP/master/assets/badges/get-it-on-github.png">](https://github.com/enricocid/VectorifyDaHome/releases)
 
 
 # Want to contribute to translations?
