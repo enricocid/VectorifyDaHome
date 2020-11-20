@@ -3,7 +3,7 @@
 
 ### F-droid
 
-@IzzySoft, @Poussinou, @TSP for setting up the F-Droid repository
+[**Izzy**](https://github.com/IzzySoft), [**Poussinou**](https://github.com/Poussinou) and [**TSP**](https://github.com/TPS) for setting up the F-Droid repository
 
 
 ### Libraries/dependencies/dev/support
