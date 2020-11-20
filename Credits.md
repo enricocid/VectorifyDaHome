@@ -1,6 +1,11 @@
 # Credits:
 
 
+### F-droid
+
+@IzzySoft, @Poussinou, @TSP for setting up the F-Droid repository
+
+
 ### Libraries/dependencies/dev/support
 
 - [Jnss98b](https://github.com/Jnss98b) for his support on different issues: [3](https://github.com/enricocid/VectorifyDaHome/issues/3), [4](https://github.com/enricocid/VectorifyDaHome/issues/4), [7](https://github.com/enricocid/VectorifyDaHome/issues/7),[8](https://github.com/enricocid/VectorifyDaHome/issues/8), [14](https://github.com/enricocid/VectorifyDaHome/issues/14), [16](https://github.com/enricocid/VectorifyDaHome/issues/16), [17](https://github.com/enricocid/VectorifyDaHome/issues/17)!
