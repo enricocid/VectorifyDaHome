@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
-import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -90,7 +88,6 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
 
     private val sSwapColor get() = mTempVectorColor != mTempBackgroundColor
 
-    private val sThemeNight get() = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     private var sThemeChanged = false
     private var sRestoreVector = false
 
@@ -199,14 +196,9 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
         updateSelectedCategory(mTempCategory, true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            window?.apply {
-                if (Build.VERSION.SDK_INT != Build.VERSION_CODES.Q) {
-                    statusBarColor = Color.TRANSPARENT
-                    navigationBarColor = Color.TRANSPARENT
-                }
-                Utils.handleLightSystemBars(sThemeNight, this)
+            window?.let { win ->
                 edgeToEdge {
-                    decorView.fit { Edge.Top }
+                    win.decorView.fit { Edge.Top }
                     mBottomBar.fit { Edge.Bottom + Edge.Right }
                     mFab.apply {
                         fit { Edge.Right }
@@ -647,11 +639,10 @@ class MainActivity : AppCompatActivity(R.layout.vectorify_activity),
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                window?.apply {
-                    Utils.handleLightSystemBars(sThemeNight, this)
+                window?.let { win ->
                     edgeToEdge {
                         getRecyclerView().fit { Edge.Bottom }
-                        decorView.fit { Edge.Top }
+                        win.decorView.fit { Edge.Top }
                     }
                 }
             }
