@@ -274,7 +274,7 @@ object Utils {
     ) {
         try {
             CustomTabsIntent.Builder().apply {
-                addDefaultShareMenuItem()
+                setShareState(CustomTabsIntent.SHARE_STATE_ON)
                 setShowTitle(true)
                 build().launchUrl(context, Uri.parse(context.getString(R.string.app_github_link)))
             }
