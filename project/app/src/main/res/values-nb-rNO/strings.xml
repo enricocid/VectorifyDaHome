@@ -39,7 +39,7 @@
     <string name="message_no_recent_setups">Fant ingen nylige oppsett.</string>
     <string name="title_recent_setups">Nylige oppsett</string>
     <string name="title_accent_me">Gi aksentfarge.</string>
-    <string name="selected_preset">Bakgrunn: %s1s, vektorielt bilde: %1$s</string>
+    <string name="selected_preset">Bakgrunn: %1s, vektorielt bilde: %1s</string>
     <string name="title_presets">Forhåndsinnstillinger</string>
     <string name="title_vector_dialog">Vektoriell farge</string>
     <string name="title_vector">Vektoriell</string>
