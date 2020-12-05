@@ -6,7 +6,8 @@
     android:layout_height="@dimen/vector_size"
     android:layout_margin="1dp"
     android:padding="2dp"
-    tools:ignore="ContentDescription">
+    tools:ignore="ContentDescription"
+    tools:viewBindingIgnore="true">
 
     <ImageView
         android:id="@+id/checkbox"

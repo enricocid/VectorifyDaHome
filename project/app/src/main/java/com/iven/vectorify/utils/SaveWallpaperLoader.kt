@@ -13,9 +13,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SaveWallpaperLoader(
-        context: Context,
-        private val bitmapToProcess: Bitmap,
-        private val isSetWallpaper: Boolean
+    context: Context,
+    private val bitmapToProcess: Bitmap,
+    private val isSetWallpaper: Boolean
 ) : AsyncTaskLoader<Uri?>(context) {
 
     override fun onStartLoading() {
@@ -25,7 +25,7 @@ class SaveWallpaperLoader(
 
     // This is where background code is executed
     override fun loadInBackground() =
-            saveImageToExternalStorage(cropBitmapFromCenterAndScreenSize())
+        saveImageToExternalStorage(cropBitmapFromCenterAndScreenSize())
 
 
     // Method to save an image to external storage
@@ -36,13 +36,13 @@ class SaveWallpaperLoader(
             context.getExternalFilesDir(null)?.let { path ->
 
                 val format = SimpleDateFormat(
-                        context.getString(R.string.time_pattern),
-                        Locale.getDefault()
+                    context.getString(R.string.time_pattern),
+                    Locale.getDefault()
                 ).format(Date())
 
                 // Create a file to save the image
                 val wallpaperToSave =
-                        File(path, "${context.getString(R.string.save_pattern) + format}.png")
+                    File(path, "${context.getString(R.string.save_pattern) + format}.png")
 
                 // Get the file output stream
                 val stream = FileOutputStream(wallpaperToSave)
@@ -51,16 +51,16 @@ class SaveWallpaperLoader(
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
 
                 // Flush and close the output stream
-                stream.apply {
+                stream.run {
                     flush()
                     close()
                 }
 
                 if (isSetWallpaper) {
                     FileProvider.getUriForFile(
-                            context,
-                            context.getString(R.string.live_wallpaper_name),
-                            wallpaperToSave
+                        context,
+                        context.getString(R.string.live_wallpaper_name),
+                        wallpaperToSave
                     )
                 } else {
                     null
@@ -96,8 +96,8 @@ class SaveWallpaperLoader(
         }
 
         val newBitmap = Bitmap.createScaledBitmap(
-                bitmapToProcess, bitmapNewWidth,
-                bitmapNewHeight, true
+            bitmapToProcess, bitmapNewWidth,
+            bitmapNewHeight, true
         )
 
         val bitmapGapX = ((bitmapNewWidth - deviceWidth) / 2.0f).toInt()
@@ -105,8 +105,8 @@ class SaveWallpaperLoader(
 
         //final bitmap
         return Bitmap.createBitmap(
-                newBitmap, bitmapGapX, bitmapGapY,
-                deviceWidth, deviceHeight
+            newBitmap, bitmapGapX, bitmapGapY,
+            deviceWidth, deviceHeight
         )
     }
 }

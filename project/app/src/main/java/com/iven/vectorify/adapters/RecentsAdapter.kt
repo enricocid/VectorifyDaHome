@@ -14,21 +14,21 @@ import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
 
 class RecentsAdapter(
-        private val context: Context
+    private val context: Context
 ) :
-        RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
+    RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
     private var mRecentSetups = vectorifyPreferences.vectorifyWallpaperSetups
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
         val recentSetupLayout = LayoutInflater.from(parent.context).inflate(
-                R.layout.recent_option,
-                parent,
-                false
+            R.layout.recent_option,
+            parent,
+            false
         )
         return RecentSetupsHolder(
-                recentSetupLayout
+            recentSetupLayout
         )
     }
 
@@ -45,11 +45,11 @@ class RecentsAdapter(
         fun bindItems(vectorifyWallpaper: VectorifyWallpaper) {
 
             val drawable =
-                    Utils.tintDrawable(
-                            context,
-                            vectorifyWallpaper.resource,
-                            vectorifyWallpaper.vectorColor.toContrastColor(vectorifyWallpaper.backgroundColor)
-                    )
+                Utils.tintDrawable(
+                    context,
+                    vectorifyWallpaper.resource,
+                    vectorifyWallpaper.vectorColor.toContrastColor(vectorifyWallpaper.backgroundColor)
+                )
 
             itemView.findViewById<ImageButton>(R.id.recent_setups_vector).apply {
                 setBackgroundColor(vectorifyWallpaper.backgroundColor)
@@ -63,17 +63,17 @@ class RecentsAdapter(
 
                         title(R.string.title_recent_setups)
                         message(
-                                text = context.getString(
-                                        R.string.message_clear_single_recent_setup,
-                                        adapterPosition.toString()
-                                )
+                            text = context.getString(
+                                R.string.message_clear_single_recent_setup,
+                                adapterPosition.toString()
+                            )
                         )
                         positiveButton {
                             //add an empty list to preferences
                             try {
                                 if (mRecentSetups?.contains(vectorifyWallpaper)!!) {
                                     mRecentSetups?.remove(
-                                            vectorifyWallpaper
+                                        vectorifyWallpaper
                                     )
                                 }
                                 notifyDataSetChanged()

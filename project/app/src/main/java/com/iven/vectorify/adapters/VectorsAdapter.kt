@@ -13,7 +13,7 @@ import com.iven.vectorify.utils.VectorsCategories
 import com.iven.vectorify.vectorifyPreferences
 
 class VectorsAdapter(private val context: Context) :
-        RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
+    RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
     var onVectorClick: ((Int) -> Unit)? = null
     var onVectorLongClick: ((Int) -> Unit)? = null
@@ -50,11 +50,11 @@ class VectorsAdapter(private val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VectorsHolder {
         return VectorsHolder(
-                LayoutInflater.from(parent.context).inflate(
-                        R.layout.vector_option,
-                        parent,
-                        false
-                )
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.vector_option,
+                parent,
+                false
+            )
         )
     }
 

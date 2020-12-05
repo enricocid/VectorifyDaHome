@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
@@ -35,6 +34,10 @@ android {
 
     applicationVariants.all { variant ->
         variant.resValue "string", "versionName", "v" + variant.versionName
+    }
+
+    buildFeatures{
+        viewBinding = true
     }
 
     buildTypes {

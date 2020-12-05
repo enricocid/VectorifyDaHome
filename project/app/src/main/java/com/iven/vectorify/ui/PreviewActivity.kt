@@ -3,40 +3,36 @@ package com.iven.vectorify.ui
 import android.app.WallpaperManager
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.*
-import android.widget.ImageButton
 import android.widget.SeekBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.ColorUtils
+import androidx.core.view.children
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onShow
 import com.afollestad.materialdialogs.customview.customView
 import com.iven.vectorify.*
+import com.iven.vectorify.databinding.PreviewActivityBinding
 import com.iven.vectorify.utils.SaveWallpaperLoader
 import com.iven.vectorify.utils.Utils
-import kotlinx.android.synthetic.main.position_controls.*
-import kotlinx.android.synthetic.main.preview_activity.*
-import kotlinx.android.synthetic.main.size_position_card.*
 
 
 @Suppress("UNUSED_PARAMETER")
 class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?> {
 
-    private var sUserIsSeeking = false
+    // View binding class
+    private lateinit var mPreviewActivityBinding: PreviewActivityBinding
 
-    private lateinit var mToolbar: Toolbar
-    private lateinit var mVectorView: VectorView
-    private lateinit var mSeekBar: SeekBar
-    private lateinit var mSeekBarScale: TextView
+    private var sUserIsSeeking = false
 
     private val mBackupRecent = vectorifyPreferences.vectorifyWallpaperBackup
 
@@ -58,17 +54,16 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             customView(R.layout.progress_dialog)
             cancelOnTouchOutside(false)
             cancelable(false)
-            this.window?.apply {
+            window?.run {
                 setFlags(
-                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 )
             }
-
             show()
             onShow {
                 this.window?.clearFlags(
-                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 )
             }
         }
@@ -95,7 +90,11 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             mSaveWallpaperDialog.dismiss()
         }
 
-        Toast.makeText(this, getString(R.string.message_saved_to, getExternalFilesDir(null)), Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            this,
+            getString(R.string.message_saved_to, getExternalFilesDir(null)),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun onLoaderReset(loader: Loader<Uri?>) {
@@ -106,26 +105,11 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         finishAndRemoveTask()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.save -> setWallpaper(false)
-            R.id.set -> setWallpaper(true)
-            R.id.go_live -> updatePrefsAndSetLiveWallpaper()
-            android.R.id.home -> finishAndRemoveTask()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onCreateView(
-            parent: View?,
-            name: String,
-            context: Context,
-            attrs: AttributeSet
+        parent: View?,
+        name: String,
+        context: Context,
+        attrs: AttributeSet
     ): View? {
         //set immersive mode
         hideSystemUI()
@@ -134,6 +118,9 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mPreviewActivityBinding = PreviewActivityBinding.inflate(layoutInflater)
+        setContentView(mPreviewActivityBinding.root)
 
         intent?.extras?.let { ext ->
             mTempBackgroundColor = ext.getInt(TEMP_BACKGROUND_COLOR)
@@ -145,86 +132,87 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             mTempVerticalOffset = ext.getFloat(TEMP_V_OFFSET)
         }
 
-        setContentView(if (mTempBackgroundColor.isDark()) {
-            R.layout.preview_activity_dark
-        } else {
-            R.layout.preview_activity
-        })
+        initViews()
+    }
 
-        getViews()
+    private fun initViews() {
+
+        // init click listeners
+        mPreviewActivityBinding.run {
+            up.setOnClickListener { vectorView.moveUp() }
+            down.setOnClickListener { vectorView.moveDown() }
+            left.setOnClickListener { vectorView.moveLeft() }
+            right.setOnClickListener { vectorView.moveRight() }
+            centerHorizontal.setOnClickListener { vectorView.centerHorizontal() }
+            centerVertical.setOnClickListener { vectorView.centerVertical() }
+            resetPosition.setOnClickListener { resetVectorPosition() }
+        }
 
         //set vector view
-        mVectorView.updateVectorView(
-                VectorifyWallpaper(
-                        mTempBackgroundColor,
-                        mTempVectorColor.toContrastColor(mTempBackgroundColor),
-                        mTempVector,
-                        mTempCategory,
-                        mTempScale,
-                        mTempHorizontalOffset,
-                        mTempVerticalOffset
-                )
+        mPreviewActivityBinding.vectorView.updateVectorView(
+            VectorifyWallpaper(
+                mTempBackgroundColor,
+                mTempVectorColor.toContrastColor(mTempBackgroundColor),
+                mTempVector,
+                mTempCategory,
+                mTempScale,
+                mTempHorizontalOffset,
+                mTempVerticalOffset
+            )
         )
 
-        mVectorView.onSetWallpaper = { setWallpaper, bitmap ->
+        mPreviewActivityBinding.vectorView.onSetWallpaper = { setWallpaper, bitmap ->
             mSaveImageLoader = SaveWallpaperLoader(this, bitmap, setWallpaper)
             LoaderManager.getInstance(this).initLoader(SAVE_WALLPAPER_LOADER_ID, null, this)
         }
 
-        setSupportActionBar(mToolbar)
-
-        supportActionBar?.let { ab ->
-            ab.setHomeButtonEnabled(true)
-            ab.setDisplayHomeAsUpEnabled(true)
-        }
-
-        //set toolbar shit
         //match theme with background luminance
         setToolbarAndSeekBarColors()
 
         initializeSeekBar()
     }
 
-    private fun getViews() {
-        mToolbar = findViewById(R.id.toolbar)
-        mVectorView = vector_view
-        mSeekBar = seek_size
-        mSeekBarScale = scale_text
-    }
-
     private fun initializeSeekBar() {
         //observe SeekBar changes
-        mSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        mPreviewActivityBinding.run {
+            seekSize.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
-            var userProgress = 0
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                sUserIsSeeking = true
-            }
-
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser && progress >= 10) {
-                    userProgress = progress
-                    mSeekBarScale.text = (progress.toFloat() / 100).toDecimalFormat()
-                    mVectorView.setScaleFactor(progress.toFloat() / 100)
+                var userProgress = 0
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                    sUserIsSeeking = true
                 }
-            }
 
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                sUserIsSeeking = false
-                mTempScale = userProgress.toFloat() / 100
-            }
-        })
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    if (fromUser && progress >= 10) {
+                        userProgress = progress
+                        seekbarTitle.text = (progress.toFloat() / 100).toDecimalFormat()
+                        vectorView.setScaleFactor(progress.toFloat() / 100)
+                    }
+                }
 
-        //restore saved scale value
-        mSeekBar.progress = (mTempScale * 100).toInt()
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    sUserIsSeeking = false
+                    mTempScale = userProgress.toFloat() / 100
+                }
+            })
 
-        //set scale text
-        mSeekBarScale.text = mTempScale.toDecimalFormat()
+            //restore saved scale value
+            seekSize.progress = (mTempScale * 100).toInt()
+
+            //set scale text
+            seekbarTitle.text = mTempScale.toDecimalFormat()
+        }
     }
 
     private fun setWallpaper(set: Boolean) {
-        mVectorView.saveToRecentSetups()
-        mVectorView.vectorifyDaHome(set)
+        mPreviewActivityBinding.vectorView.run {
+            saveToRecentSetups()
+            vectorifyDaHome(set)
+        }
     }
 
     private fun setToolbarAndSeekBarColors() {
@@ -235,36 +223,63 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         val cardColor = ColorUtils.setAlphaComponent(mTempBackgroundColor, 100)
 
-        mToolbar.apply {
+        mPreviewActivityBinding.toolbar.run {
             setBackgroundColor(cardColor)
             setTitleTextColor(widgetColor)
             setNavigationIcon(R.drawable.ic_navigate_before)
+            inflateMenu(R.menu.toolbar_menu)
+            setNavigationOnClickListener { finishAndRemoveTask() }
+            setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.save -> setWallpaper(false)
+                    R.id.set -> setWallpaper(true)
+                    else -> updatePrefsAndSetLiveWallpaper()
+                }
+                return@setOnMenuItemClickListener true
+            }
+
+            //set menu items color according the the background luminance
+            menu.run {
+                val drawablesList = children.map { it.icon }.toMutableList().apply {
+                    add(navigationIcon)
+                }
+
+                val iterator = drawablesList.iterator()
+                while (iterator.hasNext()) {
+                    iterator.next().run {
+                        mutate()
+                        colorFilter = PorterDuffColorFilter(widgetColor, PorterDuff.Mode.SRC_IN)
+                    }
+                }
+            }
         }
 
         //set SeekBar colors
-        seekbar_card.apply {
+        mPreviewActivityBinding.seekbarCard.run {
             setCardBackgroundColor(cardColor)
             strokeColor = ColorUtils.setAlphaComponent(widgetColor, 25)
         }
 
-        mSeekBar.apply {
+        mPreviewActivityBinding.seekSize.run {
             progressTintList = ColorStateList.valueOf(widgetColor)
             thumbTintList = ColorStateList.valueOf(widgetColor)
             progressBackgroundTintList = ColorStateList.valueOf(widgetColor)
         }
 
-        seekbar_title.setTextColor(widgetColor)
-        mSeekBarScale.setTextColor(widgetColor)
+        mPreviewActivityBinding.seekbarTitle.setTextColor(widgetColor)
+        mPreviewActivityBinding.seekbarTitle.setTextColor(widgetColor)
 
-        listOf<ImageButton>(
+        mPreviewActivityBinding.run {
+            listOf(
                 up,
                 down,
                 left,
                 right,
-                center_horizontal,
-                center_vertical,
-                reset_position
-        ).applyTint(this, widgetColor)
+                centerHorizontal,
+                centerVertical,
+                resetPosition
+            ).applyTint(this@PreviewActivity, widgetColor)
+        }
     }
 
     private fun updatePrefsAndSetLiveWallpaper() {
@@ -278,46 +293,25 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         }
 
         //update prefs
-        mVectorView.saveToPrefs()
-        mVectorView.saveToRecentSetups()
+        mPreviewActivityBinding.vectorView.run {
+            saveToPrefs()
+            saveToRecentSetups()
+        }
     }
 
-    fun moveVectorUp(view: View) {
-        mVectorView.moveUp()
-    }
-
-    fun moveVectorDown(view: View) {
-        mVectorView.moveDown()
-    }
-
-    fun moveVectorLeft(view: View) {
-        mVectorView.moveLeft()
-    }
-
-    fun moveVectorRight(view: View) {
-        mVectorView.moveRight()
-    }
-
-    fun centerHorizontalVectorPosition(view: View) {
-        mVectorView.centerHorizontal()
-    }
-
-    fun centerVerticalVectorPosition(view: View) {
-        mVectorView.centerVertical()
-    }
-
-    fun resetVectorPosition(view: View) {
-
+    private fun resetVectorPosition() {
         mTempScale = vectorifyPreferences.vectorifyWallpaperBackup.scale
 
         vectorifyPreferences.liveVectorifyWallpaper?.let {
             mTempScale = it.scale
         }
 
-        mVectorView.setScaleFactor(mTempScale)
-        mSeekBar.progress = (mTempScale * 100).toInt()
-        mSeekBarScale.text = (mSeekBar.progress.toFloat() / 100).toDecimalFormat()
-        mVectorView.resetPosition()
+        mPreviewActivityBinding.run {
+            vectorView.setScaleFactor(mTempScale)
+            seekSize.progress = (mTempScale * 100).toInt()
+            seekbarTitle.text = (seekSize.progress.toFloat() / 100).toDecimalFormat()
+            vectorView.resetPosition()
+        }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -338,11 +332,10 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             //https://stackoverflow.com/a/62643518
             window.setDecorFitsSystemWindows(false)
-            val controller = window.insetsController
-            if (controller != null) {
+            window.insetsController?.let { controller ->
                 controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
                 controller.systemBarsBehavior =
-                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
         } else {
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY

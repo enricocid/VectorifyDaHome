@@ -12,7 +12,7 @@ import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
 
 class VectorView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     var onSetWallpaper: ((Boolean, Bitmap) -> Unit)? = null
@@ -47,26 +47,26 @@ class VectorView @JvmOverloads constructor(
         super.onDraw(canvas)
 
         context?.let { ctx ->
-            canvas?.apply {
+            canvas?.let { cv ->
 
-                drawColor(mBackgroundColor)
+                cv.drawColor(mBackgroundColor)
                 //draw the vector!
                 val drawable =
-                        Utils.tintDrawable(
-                                ctx,
-                                mVector,
-                                mVectorColor
-                        )
+                    Utils.tintDrawable(
+                        ctx,
+                        mVector,
+                        mVectorColor
+                    )
 
                 val deviceMetrics = vectorifyPreferences.vectorifyMetrics
                 Utils.drawBitmap(
-                        drawable,
-                        this,
-                        deviceMetrics!!.first,
-                        deviceMetrics.second,
-                        mScaleFactor,
-                        mHorizontalOffset,
-                        mVerticalOffset
+                    drawable,
+                    cv,
+                    deviceMetrics!!.first,
+                    deviceMetrics.second,
+                    mScaleFactor,
+                    mHorizontalOffset,
+                    mVerticalOffset
                 )
             }
         }
@@ -110,7 +110,7 @@ class VectorView @JvmOverloads constructor(
 
     fun resetPosition() {
 
-        vectorifyPreferences.vectorifyWallpaperBackup.apply {
+        vectorifyPreferences.vectorifyWallpaperBackup.run {
             mHorizontalOffset = horizontalOffset
             mVerticalOffset = verticalOffset
         }
@@ -126,13 +126,13 @@ class VectorView @JvmOverloads constructor(
     fun saveToPrefs() {
         //save wallpaper to prefs
         vectorifyPreferences.liveVectorifyWallpaper = VectorifyWallpaper(
-                mBackgroundColor,
-                mVectorColor,
-                mVector,
-                mCategory,
-                mScaleFactor,
-                mHorizontalOffset,
-                mVerticalOffset
+            mBackgroundColor,
+            mVectorColor,
+            mVector,
+            mCategory,
+            mScaleFactor,
+            mHorizontalOffset,
+            mVerticalOffset
         )
     }
 
@@ -140,13 +140,13 @@ class VectorView @JvmOverloads constructor(
 
         //update recent setups
         VectorifyWallpaper(
-                mBackgroundColor,
-                mVectorColor,
-                mVector,
-                mCategory,
-                mScaleFactor,
-                mHorizontalOffset,
-                mVerticalOffset
+            mBackgroundColor,
+            mVectorColor,
+            mVector,
+            mCategory,
+            mScaleFactor,
+            mHorizontalOffset,
+            mVerticalOffset
         ).addToRecentSetups()
     }
 }

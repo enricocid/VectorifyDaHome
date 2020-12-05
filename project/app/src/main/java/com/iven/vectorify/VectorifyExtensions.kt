@@ -14,7 +14,7 @@ import com.iven.vectorify.utils.Utils
 //https://antonioleiva.com/kotlin-ongloballayoutlistener/
 inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
     viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
+        ViewTreeObserver.OnGlobalLayoutListener {
         override fun onGlobalLayout() {
             if (measuredWidth > 0 && measuredHeight > 0) {
                 viewTreeObserver.removeOnGlobalLayoutListener(this)
@@ -27,11 +27,11 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
 fun VectorifyWallpaper.addToRecentSetups() {
     //update recent setups
     val recentSetups =
-            if (vectorifyPreferences.vectorifyWallpaperSetups != null) {
-                vectorifyPreferences.vectorifyWallpaperSetups
-            } else {
-                mutableListOf()
-            }
+        if (vectorifyPreferences.vectorifyWallpaperSetups != null) {
+            vectorifyPreferences.vectorifyWallpaperSetups
+        } else {
+            mutableListOf()
+        }
 
     if (!recentSetups?.contains(this)!!) {
         recentSetups.add(this)
@@ -41,10 +41,10 @@ fun VectorifyWallpaper.addToRecentSetups() {
 
 @SuppressLint("DefaultLocale")
 fun Int.toHex(context: Context) =
-        context.getString(R.string.hex, Integer.toHexString(this)).toUpperCase()
+    context.getString(R.string.hex, Integer.toHexString(this)).toUpperCase()
 
 //method to determine colors luminance
-fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
+private fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
 
 //method to calculate colors for cards titles
 fun Int.toSurfaceColor() = if (isDark()) {
