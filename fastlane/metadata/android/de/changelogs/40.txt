@@ -1,3 +1,0 @@
-- Fix "changing theme causes the background and vector colors and the vector itself to reset"
-- Add Spanish translations (credits goes to j901 - https://github.com/j9o1)
-- Update material components

@@ -77,8 +77,11 @@ fun Int.toContrastColor(compareColor: Int) = if (this == compareColor) {
 }
 
 fun List<ImageButton>.applyTint(context: Context, widgetColor: Int) {
-    forEach { imageButton ->
-        imageButton.drawable.mutate().setTint(widgetColor)
-        imageButton.background = Utils.createColouredRipple(context, widgetColor)
+    val iterator = iterator()
+    while (iterator.hasNext()) {
+        iterator.next().run {
+            drawable.mutate().setTint(widgetColor)
+            background = Utils.createColouredRipple(context, widgetColor)
+        }
     }
 }

@@ -1,8 +1,0 @@
-- For devices with >= Android 8.1: implemented edge-to-edge to uniform system bars
-color to the app's theme. Thanks Jnss98b (https://github.com/Jnss98b) for support on this!
-- Extremely simplified the Recents dialog implementation.
-- The reset button now shows two options: reset default wallpaper and clear recents.
-- Added Dutch translations (thanks to Heimen Stoffels).
-
-Note: unfortunately recents and current wallpaper might be affected after this update.
-Thanks for Your patience!

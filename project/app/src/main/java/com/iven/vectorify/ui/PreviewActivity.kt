@@ -3,8 +3,6 @@ package com.iven.vectorify.ui
 import android.app.WallpaperManager
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -243,13 +241,9 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
                 val drawablesList = children.map { it.icon }.toMutableList().apply {
                     add(navigationIcon)
                 }
-
                 val iterator = drawablesList.iterator()
                 while (iterator.hasNext()) {
-                    iterator.next().run {
-                        mutate()
-                        colorFilter = PorterDuffColorFilter(widgetColor, PorterDuff.Mode.SRC_IN)
-                    }
+                    iterator.next().mutate().setTint(widgetColor)
                 }
             }
         }

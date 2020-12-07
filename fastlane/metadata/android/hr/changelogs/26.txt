@@ -1,2 +1,0 @@
-- Add new nerdy/symbols vectors
-- Review permissions dialog

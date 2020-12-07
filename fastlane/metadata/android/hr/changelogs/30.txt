@@ -1,4 +1,0 @@
-- Add 4 new Android logos
-- Update dependencies
-
-Thanks to Jnss98b (https://github.com/Jnss98b) for support :D

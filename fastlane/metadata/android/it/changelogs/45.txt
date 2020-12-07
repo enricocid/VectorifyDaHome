@@ -1,0 +1,4 @@
+- Android 11: correzioni edge to edge
+- Aggiornate/aggiunte traduzioni
+- Miglioramenti codice
+- Aggiornamento dipendenze

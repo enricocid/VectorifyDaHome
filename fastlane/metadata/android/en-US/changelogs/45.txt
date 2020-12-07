@@ -1,0 +1,4 @@
+- Android 11: fix edge to edge
+- Update/add translations
+- Code improvements
+- Upgrade dependencies

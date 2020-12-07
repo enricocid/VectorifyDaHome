@@ -1,3 +1,0 @@
-- Know the preset colors names on long click on them
-- Save recent setup on wallpaper saved/set
-- Add new vectors
