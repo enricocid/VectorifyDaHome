@@ -12,6 +12,8 @@
 
 - [john2020star](https://github.com/john2020star) for having contributed to fix this[issue](https://github.com/enricocid/VectorifyDaHome/issues/24)
 
+- [Square](https://github.com/square/) for [Moshi](https://github.com/square/moshi/) library!
+
 - [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
 
 - [Sergej Shafarenka](https://github.com/beworker) for the awesome [Edge-to-Edge](https://github.com/beworker/edge-to-edge/) library!

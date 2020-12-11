@@ -21,6 +21,7 @@ import com.afollestad.materialdialogs.callbacks.onShow
 import com.afollestad.materialdialogs.customview.customView
 import com.iven.vectorify.*
 import com.iven.vectorify.databinding.PreviewActivityBinding
+import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.SaveWallpaperLoader
 import com.iven.vectorify.utils.Utils
 

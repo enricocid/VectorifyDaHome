@@ -3,8 +3,10 @@ package com.iven.vectorify
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
+import com.iven.vectorify.models.Metrics
+import com.iven.vectorify.models.VectorifyWallpaper
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import java.lang.reflect.Type
 
 class VectorifyPreferences(context: Context) {
@@ -22,64 +24,74 @@ class VectorifyPreferences(context: Context) {
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    private val typeVectorifyWallpaper = object : TypeToken<VectorifyWallpaper>() {}.type
-    private val typeRecents = object : TypeToken<MutableList<VectorifyWallpaper>>() {}.type
-    private val typeMetrics = object : TypeToken<Pair<Int, Int>>() {}.type
+    private val mMoshi = Moshi.Builder().build()
 
-    private val mGson = GsonBuilder().create()
+    private val typeWallpapersList =
+        Types.newParameterizedType(MutableList::class.java, VectorifyWallpaper::class.java)
 
     var theme
         get() = mPrefs.getString(prefTheme, prefsThemeDefault)
         set(value) = mPrefs.edit().putString(prefTheme, value).apply()
 
     var restoreVectorifyWallpaper: VectorifyWallpaper?
-        get() = getObject(
+        get() = getObjectForClass(
             prefRestoreVectorifyWallpaper,
-            typeVectorifyWallpaper
+            VectorifyWallpaper::class.java
         )
-        set(value) = putObject(prefRestoreVectorifyWallpaper, value)
+        set(value) = putObjectForClass(
+            prefRestoreVectorifyWallpaper,
+            value,
+            VectorifyWallpaper::class.java
+        )
 
-    var vectorifyMetrics: Pair<Int, Int>?
-        get() = getObject(
+    var vectorifyMetrics: Metrics
+        get() = getObjectForClass(
             prefSavedVectorifyMetrics,
-            typeMetrics
-        )
-        set(value) = putObject(prefSavedVectorifyMetrics, value)
+            Metrics::class.java
+        ) ?: Metrics(0, 0)
+        set(value) = putObjectForClass(prefSavedVectorifyMetrics, value, Metrics::class.java)
 
     var liveVectorifyWallpaper: VectorifyWallpaper?
-        get() = getObject(
+        get() = getObjectForClass(
             prefSavedVectorifyWallpaper,
-            typeVectorifyWallpaper
+            VectorifyWallpaper::class.java
         )
-        set(value) = putObject(prefSavedVectorifyWallpaper, value)
+        set(value) = putObjectForClass(
+            prefSavedVectorifyWallpaper,
+            value,
+            VectorifyWallpaper::class.java
+        )
 
     var vectorifyWallpaperSetups: MutableList<VectorifyWallpaper>?
-        get() = getObject(
+        get() = getObjectForType(
             prefRecentVectorifySetups,
-            typeRecents
+            typeWallpapersList
         )
-        set(value) = putObject(prefRecentVectorifySetups, value)
+        set(value) = putObjectForType(prefRecentVectorifySetups, value, typeWallpapersList)
 
-    /**
-     * Saves object into the Preferences.
-     * Only the fields are stored. Methods, Inner classes, Nested classes and inner interfaces are not stored.
-     **/
-    private fun <T> putObject(key: String, y: T) {
-        //Convert object to JSON String.
-        val inString = mGson.toJson(y)
-        //Save that String in SharedPreferences
-        mPrefs.edit().putString(key, inString).apply()
+    // Saves object into the Preferences using Moshi
+    private fun <T : Any> getObjectForClass(key: String, clazz: Class<T>): T? {
+        mPrefs.getString(key, null)?.let { json ->
+            return mMoshi.adapter(clazz).fromJson(json)
+        }
+        return null
     }
 
-    /**
-     * Get object from the Preferences.
-     **/
-    private fun <T> getObject(key: String, t: Type): T? {
-        //We read JSON String which was saved.
-        val value = mPrefs.getString(key, null)
+    private fun <T : Any> putObjectForClass(key: String, value: T?, clazz: Class<T>) {
+        val json = mMoshi.adapter(clazz).toJson(value)
+        mPrefs.edit().putString(key, json).apply()
+    }
 
-        //JSON String was found which means object can be read.
-        //We convert this JSON String to model object. Parameter "c" (of type Class<T>" is used to cast.
-        return mGson.fromJson(value, t)
+    // Saves object into the Preferences using Moshi
+    private fun <T : Any> putObjectForType(key: String, value: T?, type: Type) {
+        val json = mMoshi.adapter<T>(type).toJson(value)
+        mPrefs.edit().putString(key, json).apply()
+    }
+
+    private fun <T : Any> getObjectForType(key: String, type: Type): T? {
+        mPrefs.getString(key, null)?.let { json ->
+            return mMoshi.adapter<T>(type).fromJson(json)
+        }
+        return null
     }
 }

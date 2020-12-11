@@ -8,8 +8,8 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.drawToBitmap
 import com.iven.vectorify.R
-import com.iven.vectorify.VectorifyWallpaper
 import com.iven.vectorify.addToRecentSetups
+import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
 
@@ -62,8 +62,8 @@ class VectorView @JvmOverloads constructor(
                 Utils.drawBitmap(
                     drawable,
                     cv,
-                    deviceMetrics!!.first,
-                    deviceMetrics.second,
+                    deviceMetrics.width,
+                    deviceMetrics.height,
                     mScaleFactor,
                     mHorizontalOffset,
                     mVerticalOffset

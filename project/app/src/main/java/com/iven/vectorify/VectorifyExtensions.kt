@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageButton
 import androidx.core.graphics.ColorUtils
+import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
 
 

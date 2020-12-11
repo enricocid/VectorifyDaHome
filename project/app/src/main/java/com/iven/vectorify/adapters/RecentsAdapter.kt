@@ -8,7 +8,7 @@ import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
-import com.iven.vectorify.VectorifyWallpaper
+import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.toContrastColor
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences

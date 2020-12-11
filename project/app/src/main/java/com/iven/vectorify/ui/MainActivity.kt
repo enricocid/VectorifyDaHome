@@ -38,6 +38,8 @@ import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.databinding.VectorifyActivityBinding
+import com.iven.vectorify.models.Metrics
+import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_BACKGROUND_COLOR
 import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_CATEGORY
 import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_H_OFFSET
@@ -243,7 +245,7 @@ class MainActivity : AppCompatActivity(),
         }
         if (display != null) {
             display.getRealMetrics(d)
-            vectorifyPreferences.vectorifyMetrics = Pair(d.widthPixels, d.heightPixels)
+            vectorifyPreferences.vectorifyMetrics = Metrics(d.widthPixels, d.heightPixels)
         }
     }
 

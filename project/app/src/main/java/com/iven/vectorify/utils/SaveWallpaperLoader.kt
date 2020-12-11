@@ -76,8 +76,8 @@ class SaveWallpaperLoader(
         //https://stackoverflow.com/a/25699365
 
         val displayMetrics = vectorifyPreferences.vectorifyMetrics
-        val deviceWidth = displayMetrics!!.first
-        val deviceHeight = displayMetrics.second
+        val deviceWidth = displayMetrics.width
+        val deviceHeight = displayMetrics.height
 
         val bitmapWidth = bitmapToProcess.width.toFloat()
         val bitmapHeight = bitmapToProcess.height.toFloat()
