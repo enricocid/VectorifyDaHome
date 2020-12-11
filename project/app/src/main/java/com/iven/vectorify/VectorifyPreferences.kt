@@ -2,7 +2,6 @@ package com.iven.vectorify
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
 import androidx.preference.PreferenceManager
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -32,16 +31,6 @@ class VectorifyPreferences(context: Context) {
     var theme
         get() = mPrefs.getString(prefTheme, prefsThemeDefault)
         set(value) = mPrefs.edit().putString(prefTheme, value).apply()
-
-    val vectorifyWallpaperBackup = VectorifyWallpaper(
-        Color.BLACK,
-        Color.WHITE,
-        R.drawable.android_logo_2019,
-        0,
-        0.35F,
-        0F,
-        0F
-    )
 
     var restoreVectorifyWallpaper: VectorifyWallpaper?
         get() = getObject(

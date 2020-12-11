@@ -3,6 +3,7 @@ package com.iven.vectorify.ui
 import android.app.WallpaperManager
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -32,15 +33,13 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
     private var sUserIsSeeking = false
 
-    private val mBackupRecent = vectorifyPreferences.vectorifyWallpaperBackup
-
-    private var mTempBackgroundColor = mBackupRecent.backgroundColor
-    private var mTempVectorColor = mBackupRecent.vectorColor
-    private var mTempVector = mBackupRecent.resource
-    private var mTempCategory = mBackupRecent.category
-    private var mTempScale = mBackupRecent.scale
-    private var mTempHorizontalOffset = mBackupRecent.horizontalOffset
-    private var mTempVerticalOffset = mBackupRecent.verticalOffset
+    private var mTempBackgroundColor = Color.BLACK
+    private var mTempVectorColor = Color.WHITE
+    private var mTempVector = R.drawable.android_logo_2019
+    private var mTempCategory = 0
+    private var mTempScale = 0.35F
+    private var mTempHorizontalOffset = 0F
+    private var mTempVerticalOffset = 0F
 
     private lateinit var mSaveWallpaperDialog: MaterialDialog
     private lateinit var mSaveImageLoader: Loader<Uri?>
@@ -294,7 +293,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     }
 
     private fun resetVectorPosition() {
-        mTempScale = vectorifyPreferences.vectorifyWallpaperBackup.scale
+        mTempScale = 0.35F
 
         vectorifyPreferences.liveVectorifyWallpaper?.let {
             mTempScale = it.scale

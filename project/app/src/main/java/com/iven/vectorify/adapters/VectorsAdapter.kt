@@ -18,7 +18,7 @@ class VectorsAdapter(private val context: Context) :
     var onVectorClick: ((Int) -> Unit)? = null
     var onVectorLongClick: ((Int) -> Unit)? = null
 
-    private var mSelectedDrawable = vectorifyPreferences.vectorifyWallpaperBackup.resource
+    private var mSelectedDrawable = R.drawable.android_logo_2019
     private var mSelectedCategory = VectorsCategories.TECH
 
     init {

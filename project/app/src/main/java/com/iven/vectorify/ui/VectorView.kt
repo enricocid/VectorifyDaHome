@@ -3,9 +3,11 @@ package com.iven.vectorify.ui
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.drawToBitmap
+import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyWallpaper
 import com.iven.vectorify.addToRecentSetups
 import com.iven.vectorify.utils.Utils
@@ -17,15 +19,13 @@ class VectorView @JvmOverloads constructor(
 
     var onSetWallpaper: ((Boolean, Bitmap) -> Unit)? = null
 
-    private val mBackupRecent = vectorifyPreferences.vectorifyWallpaperBackup
-
-    private var mBackgroundColor = mBackupRecent.backgroundColor
-    private var mVectorColor = mBackupRecent.vectorColor
-    private var mVector = mBackupRecent.resource
-    private var mCategory = mBackupRecent.category
-    private var mScaleFactor = mBackupRecent.scale
-    private var mHorizontalOffset = mBackupRecent.horizontalOffset
-    private var mVerticalOffset = mBackupRecent.verticalOffset
+    private var mBackgroundColor = Color.BLACK
+    private var mVectorColor = Color.WHITE
+    private var mVector = R.drawable.android_logo_2019
+    private var mCategory = 0
+    private var mScaleFactor = 0.35F
+    private var mHorizontalOffset = 0F
+    private var mVerticalOffset = 0F
 
     private var mStep = 15F
 
@@ -110,10 +110,8 @@ class VectorView @JvmOverloads constructor(
 
     fun resetPosition() {
 
-        vectorifyPreferences.vectorifyWallpaperBackup.run {
-            mHorizontalOffset = horizontalOffset
-            mVerticalOffset = verticalOffset
-        }
+        mHorizontalOffset = 0F
+        mVerticalOffset = 0F
 
         vectorifyPreferences.liveVectorifyWallpaper?.let { recent ->
             mHorizontalOffset = recent.horizontalOffset
