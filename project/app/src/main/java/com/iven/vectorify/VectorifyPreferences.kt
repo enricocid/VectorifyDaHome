@@ -12,7 +12,7 @@ import java.lang.reflect.Type
 class VectorifyPreferences(context: Context) {
 
     private val prefTheme = context.getString(R.string.theme_key)
-    private val prefsThemeDefault = context.getString(R.string.theme_pref_light)
+    private val prefsThemeDefault = context.getString(R.string.theme_pref_auto)
     private val prefSavedVectorifyWallpaper =
         context.getString(R.string.saved_vectorify_wallpaper_key)
     private val prefRestoreVectorifyWallpaper =
@@ -48,7 +48,7 @@ class VectorifyPreferences(context: Context) {
         get() = getObjectForClass(
             prefSavedVectorifyMetrics,
             Metrics::class.java
-        ) ?: Metrics(0, 0)
+        ) ?: Metrics(720, 1280)
         set(value) = putObjectForClass(prefSavedVectorifyMetrics, value, Metrics::class.java)
 
     var liveVectorifyWallpaper: VectorifyWallpaper?

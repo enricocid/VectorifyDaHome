@@ -1,0 +1,8 @@
+- Bug fixes
+- Replaced an old lib with a modern one to improve the internal saving mechanisms.
+
+Note 1: in light of these changes recent wallpapers will be lost; I'm sorry
+but it was needed :)
+
+Note 2: in light of these changes above size of applied live wallpaper could differ from preview; please
+apply a wallpaper from another source then the live wallpaper from vectorify again :)

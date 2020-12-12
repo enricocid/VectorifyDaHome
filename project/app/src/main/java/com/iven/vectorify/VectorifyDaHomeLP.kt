@@ -17,9 +17,10 @@ class VectorifyDaHomeLP : WallpaperService() {
     private var mHorizontalOffSet = 0F
     private var mVerticalOffSet = 0F
 
-    private val mVectorifyMetrics get() = vectorifyPreferences.vectorifyMetrics
-    private var mDeviceWidth = mVectorifyMetrics.width
-    private var mDeviceHeight = mVectorifyMetrics.height
+    private val metrics get() = vectorifyPreferences.vectorifyMetrics
+
+    private val mDeviceWidth = metrics.width
+    private val mDeviceHeight = metrics.height
 
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
@@ -85,19 +86,19 @@ class VectorifyDaHomeLP : WallpaperService() {
                     canvas.drawColor(mSelectedBackgroundColor)
 
                     val drawable = Utils.tintDrawable(
-                        baseContext,
-                        mSelectedVector,
-                        mSelectedVectorColor
+                            baseContext,
+                            mSelectedVector,
+                            mSelectedVectorColor
                     )
 
                     Utils.drawBitmap(
-                        drawable,
-                        canvas,
-                        mDeviceWidth,
-                        mDeviceHeight,
-                        mSelectedScaleFactor,
-                        mHorizontalOffSet,
-                        mVerticalOffSet
+                            drawable,
+                            canvas,
+                            mDeviceWidth,
+                            mDeviceHeight,
+                            mSelectedScaleFactor,
+                            mHorizontalOffSet,
+                            mVerticalOffSet
                     )
                 }
             } finally {

@@ -1,0 +1,9 @@
+- Bug fixes
+- Rimpiazzata una vecchia libreria con una più moderna per migliorare i
+meccanismi di salvataggio interni alla app.
+
+Nota 1: per via di questi cambiamenti i wallpaper recenti andranno perduti; mi dispiace ma era
+necessario :)
+
+Note 2: per via di questi cambiamenti la grandezza del live wallpaper potrebbe differire dalla preview.
+Per favore applica uno sfondo da un'altra fonte e riapplica il live wallpaper con Vectorify :)

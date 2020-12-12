@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -8,8 +9,8 @@ android {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 45
-        versionName "1.8.7"
+        versionCode 46
+        versionName "1.8.8"
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -65,8 +66,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
 
 // Third-party
-    //https://github.com/google/gson/blob/master/CHANGELOG.md
-    implementation 'com.google.code.gson:gson:2.8.6'
+    //https://github.com/square/moshi/release
+    implementation 'com.squareup.moshi:moshi:1.11.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.11.0'
 
     //https://github.com/afollestad/material-dialogs/releases
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
