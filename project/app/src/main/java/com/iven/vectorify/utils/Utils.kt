@@ -12,13 +12,13 @@ import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
-import android.net.Uri
 import android.os.Build
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.afollestad.materialdialogs.MaterialDialog
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
@@ -276,7 +276,8 @@ object Utils {
             CustomTabsIntent.Builder().apply {
                 setShareState(CustomTabsIntent.SHARE_STATE_ON)
                 setShowTitle(true)
-                build().launchUrl(context, Uri.parse(context.getString(R.string.app_github_link)))
+                val link = context.getString(R.string.app_github_link)
+                build().launchUrl(context, link.toUri())
             }
         } catch (e: Exception) {
             Toast.makeText(

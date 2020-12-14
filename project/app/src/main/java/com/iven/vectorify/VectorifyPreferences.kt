@@ -2,6 +2,7 @@ package com.iven.vectorify
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.iven.vectorify.models.Metrics
 import com.iven.vectorify.models.VectorifyWallpaper
@@ -31,7 +32,7 @@ class VectorifyPreferences(context: Context) {
 
     var theme
         get() = mPrefs.getString(prefTheme, prefsThemeDefault)
-        set(value) = mPrefs.edit().putString(prefTheme, value).apply()
+        set(value) = mPrefs.edit { putString(prefTheme, value) }
 
     var restoreVectorifyWallpaper: VectorifyWallpaper?
         get() = getObjectForClass(
@@ -79,13 +80,13 @@ class VectorifyPreferences(context: Context) {
 
     private fun <T : Any> putObjectForClass(key: String, value: T?, clazz: Class<T>) {
         val json = mMoshi.adapter(clazz).toJson(value)
-        mPrefs.edit().putString(key, json).apply()
+        mPrefs.edit { putString(key, json) }
     }
 
     // Saves object into the Preferences using Moshi
     private fun <T : Any> putObjectForType(key: String, value: T?, type: Type) {
         val json = mMoshi.adapter<T>(type).toJson(value)
-        mPrefs.edit().putString(key, json).apply()
+        mPrefs.edit { putString(key, json) }
     }
 
     private fun <T : Any> getObjectForType(key: String, type: Type): T? {

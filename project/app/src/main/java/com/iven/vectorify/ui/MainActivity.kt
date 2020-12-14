@@ -21,6 +21,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -256,18 +257,17 @@ class MainActivity : AppCompatActivity(),
 
                 //start preview activity
                 val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
-                    putExtras(Bundle().apply {
-                        putInt(TEMP_BACKGROUND_COLOR, mTempBackgroundColor)
-                        putInt(
-                            TEMP_VECTOR_COLOR,
-                            mTempVectorColor
+                    putExtras(
+                        bundleOf(
+                            TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
+                            TEMP_VECTOR_COLOR to mTempVectorColor,
+                            TEMP_VECTOR to mTempVector,
+                            TEMP_CATEGORY to mTempCategory,
+                            TEMP_SCALE to mTempScale,
+                            TEMP_H_OFFSET to mTempHorizontalOffset,
+                            TEMP_V_OFFSET to mTempVerticalOffset
                         )
-                        putInt(TEMP_VECTOR, mTempVector)
-                        putInt(TEMP_CATEGORY, mTempCategory)
-                        putFloat(TEMP_SCALE, mTempScale)
-                        putFloat(TEMP_H_OFFSET, mTempHorizontalOffset)
-                        putFloat(TEMP_V_OFFSET, mTempVerticalOffset)
-                    })
+                    )
                 }
                 startActivity(intent)
             }

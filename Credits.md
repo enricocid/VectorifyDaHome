@@ -20,7 +20,7 @@
 
 - [Canva](https://www.canva.com/learn/100-color-combinations) for some color presets!
 
-- [TacoTheDank](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and fixes on [Music Player GO](https://github.com/enricocid/Music-Player-GO) which I used here!
+- [**TacoTheDank**](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8, translations and [improvements](https://github.com/enricocid/Music-Player-GO/pull/248) which I used here!
 
 - [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
 
