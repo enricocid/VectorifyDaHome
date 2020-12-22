@@ -16,7 +16,6 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
@@ -283,10 +282,7 @@ class MainActivity : AppCompatActivity(),
                 R.string.title_reset
             )
             val menuThemeItem = menu.findItem(R.id.app_bar_theme).apply {
-                icon = AppCompatResources.getDrawable(
-                    this@MainActivity,
-                    Utils.getDefaultNightModeIcon(this@MainActivity)
-                )
+                icon = getDrawable(Utils.getDefaultNightModeIcon(this@MainActivity))
             }
 
             setOnMenuItemClickListener {
@@ -303,10 +299,7 @@ class MainActivity : AppCompatActivity(),
                             )
                         )
 
-                        menuThemeItem.icon = AppCompatResources.getDrawable(
-                            this@MainActivity,
-                            Utils.getDefaultNightModeIcon(this@MainActivity)
-                        )
+                        menuThemeItem.icon = getDrawable(Utils.getDefaultNightModeIcon(this@MainActivity))
                     }
 
                     R.id.app_bar_restore -> showOptionsPopup(

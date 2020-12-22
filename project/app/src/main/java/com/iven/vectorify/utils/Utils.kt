@@ -15,7 +15,6 @@ import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
@@ -227,11 +226,11 @@ object Utils {
         var vectorProps = getVectorProps(vector)
 
         val bit = try {
-            AppCompatResources.getDrawable(context, vectorProps.first)
+            context.getDrawable(vectorProps.first)
         } catch (e: Exception) {
             e.printStackTrace()
             vectorProps = getVectorProps(getDefaultVectorForApi())
-            AppCompatResources.getDrawable(context, vectorProps.first)
+            context.getDrawable(vectorProps.first)
         }
 
         if (bit != null) {
@@ -291,7 +290,7 @@ object Utils {
 
     @JvmStatic
     fun createColouredRipple(context: Context, rippleColor: Int): Drawable {
-        val ripple = AppCompatResources.getDrawable(context, R.drawable.ripple) as RippleDrawable
+        val ripple = context.getDrawable(R.drawable.ripple) as RippleDrawable
         ripple.setColor(ColorStateList.valueOf(rippleColor))
         return ripple
     }
