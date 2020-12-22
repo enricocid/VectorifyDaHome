@@ -26,7 +26,6 @@ import com.iven.vectorify.utils.SaveWallpaperLoader
 import com.iven.vectorify.utils.Utils
 
 
-@Suppress("UNUSED_PARAMETER")
 class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?> {
 
     // View binding class

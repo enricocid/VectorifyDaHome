@@ -57,7 +57,7 @@ private const val TAG_VECTOR_COLOR_RESTORE = "TAG_VECTOR_COLOR_RESTORE"
 private const val TAG_VECTOR_RESTORE = "TAG_VECTOR_RESTORE"
 private const val TAG_CATEGORY_RESTORE = "TAG_CATEGORY_RESTORE"
 
-@Suppress("UNUSED_PARAMETER")
+
 class MainActivity : AppCompatActivity(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -367,7 +367,7 @@ class MainActivity : AppCompatActivity(),
                     )
 
                     //update vector frame colors
-                    setVectorFrameColors(tintBackground = true, showErrorDialog = false)
+                    setVectorFrameColors(true)
                 }
             }
             adapter = presetsAdapter
@@ -403,7 +403,7 @@ class MainActivity : AppCompatActivity(),
                             }
 
                             //update drawable tint
-                            setVectorFrameColors(tintBackground = false, showErrorDialog = false)
+                            setVectorFrameColors(false)
                         }
                     } else {
                         sRestoreVector = false
@@ -461,7 +461,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     //update vector frame
-    private fun setVectorFrameColors(tintBackground: Boolean, showErrorDialog: Boolean) {
+    private fun setVectorFrameColors(tintBackground: Boolean) {
 
         if (tintBackground) {
             mVectorifyActivityBinding.vectorFrame.setBackgroundColor(mTempBackgroundColor)
@@ -504,7 +504,7 @@ class MainActivity : AppCompatActivity(),
         updateFabColor()
 
         //update vector frame colors
-        setVectorFrameColors(tintBackground = true, showErrorDialog = false)
+        setVectorFrameColors(true)
     }
 
     //update vector card colors
@@ -528,7 +528,7 @@ class MainActivity : AppCompatActivity(),
             setTextColor(textColor)
             text = mTempVectorColor.toHex(this@MainActivity)
         }
-        setVectorFrameColors(tintBackground = false, showErrorDialog = true)
+        setVectorFrameColors(false)
         updateFabColor()
     }
 
