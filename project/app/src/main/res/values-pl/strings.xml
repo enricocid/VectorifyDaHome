@@ -31,8 +31,6 @@
     <string name="title_size">Rozmiar i</string>
     <string name="title_preview">Podgląd</string>
     <string name="install_browser_message">Zainstaluj najpierw przeglądarkę!</string>
-    <string name="title_reset">Opcje dodatkowe</string>
-    <string name="title_reset_recents">Wyczyść ostatnie</string>
     <string name="title_restore">Przywróć domyślną tapetę!</string>
     <string name="title_github">Strona na GitHubie</string>
     <string name="message_clear_single_recent_setup">Ustawienie #%1s zostanie usunięte. Jesteś pewien\?</string>

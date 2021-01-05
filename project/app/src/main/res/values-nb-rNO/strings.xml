@@ -29,8 +29,6 @@
     <string name="title_size">Størrelse og posisjon</string>
     <string name="title_preview">Forhåndsvis</string>
     <string name="install_browser_message">Installere en nettleser første!</string>
-    <string name="title_reset">Ytterligere innstillinger</string>
-    <string name="title_reset_recents">Tøm nylige</string>
     <string name="title_restore">Gjenopprett forvalgt bakgrunnsbilde.</string>
     <string name="title_github">GitHub-side</string>
     <string name="title_theme">Drakt</string>

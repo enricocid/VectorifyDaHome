@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="default_accent_color">#3427FF</color>
+    <color name="red">#ef9a9a</color>
 
     <color name="presets_card_color">#595959</color>
     <color name="bottom_bar_color">#303030</color>

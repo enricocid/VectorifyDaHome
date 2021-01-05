@@ -18,8 +18,6 @@
     <string name="title_github">Page GitHub</string>
     <string name="title_theme">Thème</string>
     <string name="title_restore">Restaurer le fond d\'écran par défaut !</string>
-    <string name="title_reset_recents">Effacer les récents</string>
-    <string name="title_reset">Options supplémentaires</string>
     <string name="install_browser_message">Veuillez d\'abord installer un navigateur !</string>
     <!-- Preview things -->
     <string name="title_preview">Aperçu</string>

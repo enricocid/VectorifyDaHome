@@ -4,11 +4,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.drawToBitmap
 import com.iven.vectorify.R
 import com.iven.vectorify.addToRecentSetups
+import com.iven.vectorify.models.Metrics
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
@@ -29,6 +31,10 @@ class VectorView @JvmOverloads constructor(
 
     private var mStep = 15F
 
+    private lateinit var mDeviceMetrics: Metrics
+
+    private var mDrawable: Drawable? = null
+
     fun updateVectorView(vectorifyWallpaper: VectorifyWallpaper) {
         mBackgroundColor = vectorifyWallpaper.backgroundColor
         mVectorColor = vectorifyWallpaper.vectorColor
@@ -37,6 +43,13 @@ class VectorView @JvmOverloads constructor(
         mScaleFactor = vectorifyWallpaper.scale
         mHorizontalOffset = vectorifyWallpaper.horizontalOffset
         mVerticalOffset = vectorifyWallpaper.verticalOffset
+
+        mDeviceMetrics = vectorifyPreferences.vectorifyMetrics
+        mDrawable = Utils.tintDrawable(
+                context,
+                mVector,
+                mVectorColor
+        )
     }
 
     fun vectorifyDaHome(isSetAsWallpaper: Boolean) {
@@ -46,30 +59,21 @@ class VectorView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        context?.let { ctx ->
             canvas?.let { cv ->
 
                 cv.drawColor(mBackgroundColor)
-                //draw the vector!
-                val drawable =
-                    Utils.tintDrawable(
-                        ctx,
-                        mVector,
-                        mVectorColor
-                    )
 
-                val deviceMetrics = vectorifyPreferences.vectorifyMetrics
+                //draw the vector!
                 Utils.drawBitmap(
-                    drawable,
+                    mDrawable,
                     cv,
-                    deviceMetrics.width,
-                    deviceMetrics.height,
+                    mDeviceMetrics.width,
+                    mDeviceMetrics.height,
                     mScaleFactor,
                     mHorizontalOffset,
                     mVerticalOffset
                 )
             }
-        }
     }
 
     //update scale factor when the user stop seeking

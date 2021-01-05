@@ -4,9 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.card.MaterialCardView
 import com.iven.vectorify.R
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.toContrastColor
@@ -14,21 +15,19 @@ import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
 
 class RecentsAdapter(
-    private val context: Context
+        private val ctx: Context
 ) :
-    RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
+        RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
     private var mRecentSetups = vectorifyPreferences.vectorifyWallpaperSetups
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
-        val recentSetupLayout = LayoutInflater.from(parent.context).inflate(
-            R.layout.recent_option,
-            parent,
-            false
-        )
-        return RecentSetupsHolder(
-            recentSetupLayout
+
+        return RecentSetupsHolder(LayoutInflater.from(parent.context).inflate(
+                R.layout.recent_option,
+                parent,
+                false)
         )
     }
 
@@ -45,35 +44,33 @@ class RecentsAdapter(
         fun bindItems(vectorifyWallpaper: VectorifyWallpaper) {
 
             val drawable =
-                Utils.tintDrawable(
-                    context,
-                    vectorifyWallpaper.resource,
-                    vectorifyWallpaper.vectorColor.toContrastColor(vectorifyWallpaper.backgroundColor)
-                )
+                    Utils.tintDrawable(
+                            ctx,
+                            vectorifyWallpaper.resource,
+                            vectorifyWallpaper.vectorColor.toContrastColor(vectorifyWallpaper.backgroundColor)
+                    )
 
-            itemView.findViewById<ImageButton>(R.id.recent_setups_vector).apply {
-                setBackgroundColor(vectorifyWallpaper.backgroundColor)
-                setImageDrawable(drawable)
+            itemView.run {
                 setOnClickListener {
                     onRecentClick?.invoke(vectorifyWallpaper)
                 }
                 setOnLongClickListener {
 
-                    MaterialDialog(context).show {
+                    MaterialDialog(ctx).show {
 
                         title(R.string.title_recent_setups)
                         message(
-                            text = context.getString(
-                                R.string.message_clear_single_recent_setup,
-                                adapterPosition.toString()
-                            )
+                                text = ctx.getString(
+                                        R.string.message_clear_single_recent_setup,
+                                        adapterPosition.toString()
+                                )
                         )
                         positiveButton {
                             //add an empty list to preferences
                             try {
                                 if (mRecentSetups?.contains(vectorifyWallpaper)!!) {
                                     mRecentSetups?.remove(
-                                        vectorifyWallpaper
+                                            vectorifyWallpaper
                                     )
                                 }
                                 notifyDataSetChanged()
@@ -86,6 +83,20 @@ class RecentsAdapter(
                     }
 
                     return@setOnLongClickListener true
+                }
+
+                (this as MaterialCardView).setCardBackgroundColor(vectorifyWallpaper.backgroundColor)
+
+                findViewById<ImageView>(R.id.recent_setups_vector).apply {
+
+                    setImageDrawable(drawable)
+
+                    scaleY = vectorifyWallpaper.scale
+                    scaleX = vectorifyWallpaper.scale
+
+                    // properly calculate image view gravity to match set wallpaper
+                    x = (resources.getDimensionPixelOffset(R.dimen.recent_width) * vectorifyWallpaper.horizontalOffset) / vectorifyPreferences.vectorifyMetrics.width
+                    y = (resources.getDimensionPixelOffset(R.dimen.recent_height) * vectorifyWallpaper.verticalOffset) / vectorifyPreferences.vectorifyMetrics.height
                 }
             }
         }

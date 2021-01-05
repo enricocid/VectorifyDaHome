@@ -29,8 +29,6 @@
     <string name="title_size">Koko ja sijainti</string>
     <string name="title_preview">Esikatselu</string>
     <string name="install_browser_message">Asenna ensin selain!</string>
-    <string name="title_reset">Lisäasetukset</string>
-    <string name="title_reset_recents">Tyhjennä viimeisimmät</string>
     <string name="title_restore">Palauta oletustaustakuva!</string>
     <string name="title_theme">Teema</string>
     <string name="title_github">GitHub-sivu</string>

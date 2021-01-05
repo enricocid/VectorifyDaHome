@@ -10,29 +10,26 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.widget.PopupMenu
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.marginBottom
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
-import com.afollestad.materialdialogs.list.customListAdapter
-import com.afollestad.materialdialogs.list.getRecyclerView
 import com.afollestad.materialdialogs.list.listItems
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.iven.vectorify.*
 import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.RecentsAdapter
@@ -58,15 +55,16 @@ private const val TAG_CATEGORY_RESTORE = "TAG_CATEGORY_RESTORE"
 
 
 class MainActivity : AppCompatActivity(),
-    SharedPreferences.OnSharedPreferenceChangeListener {
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     // View binding class
     private lateinit var mVectorifyActivityBinding: VectorifyActivityBinding
 
+    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+    private var sHideOnDrag = true
+
     private lateinit var mVectorsRecyclerViewLayoutManager: LinearLayoutManager
     private lateinit var mVectorsAdapter: VectorsAdapter
-
-    private lateinit var mRecentSetupsDialog: MaterialDialog
 
     private var mTempBackgroundColor = Color.BLACK
     private var mTempVectorColor = Color.WHITE
@@ -96,32 +94,32 @@ class MainActivity : AppCompatActivity(),
     override fun onPause() {
         super.onPause()
         vectorifyPreferences.restoreVectorifyWallpaper = VectorifyWallpaper(
-            mTempBackgroundColor,
-            mTempVectorColor,
-            mTempVector,
-            mTempCategory,
-            mTempScale,
-            mTempHorizontalOffset,
-            mTempVerticalOffset
+                mTempBackgroundColor,
+                mTempVectorColor,
+                mTempVector,
+                mTempCategory,
+                mTempScale,
+                mTempHorizontalOffset,
+                mTempVerticalOffset
         )
     }
 
     override fun onStart() {
         super.onStart()
         PreferenceManager.getDefaultSharedPreferences(this)
-            .registerOnSharedPreferenceChangeListener(this)
+                .registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onStop() {
         super.onStop()
         PreferenceManager.getDefaultSharedPreferences(this)
-            .unregisterOnSharedPreferenceChangeListener(this)
+                .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            getString(R.string.recent_vectorify_wallpapers_key) -> if (vectorifyPreferences.vectorifyWallpaperSetups?.isNullOrEmpty()!! && ::mRecentSetupsDialog.isInitialized && mRecentSetupsDialog.isShowing) {
-                mRecentSetupsDialog.dismiss()
+            getString(R.string.recent_vectorify_wallpapers_key) -> if (vectorifyPreferences.vectorifyWallpaperSetups?.isNullOrEmpty()!! && mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
             getString(R.string.theme_key) -> sThemeChanged = true
         }
@@ -131,6 +129,7 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
 
         mVectorifyActivityBinding = VectorifyActivityBinding.inflate(layoutInflater)
+
         setContentView(mVectorifyActivityBinding.root)
 
         getDisplayMetrics()
@@ -177,26 +176,57 @@ class MainActivity : AppCompatActivity(),
             categoriesChip.setOnClickListener { startCategoryChooser() }
             backgroundColorPicker.setOnClickListener { //method to start color picker for background
                 startColorPicker(
-                    getString(R.string.background_color_key),
-                    R.string.title_background_dialog
+                        getString(R.string.background_color_key),
+                        R.string.title_background_dialog
                 )
             }
             accentBackground.setOnClickListener {
                 setBackgroundColorForUI(
-                    Utils.getSystemAccentColor(
-                        this@MainActivity
-                    ), true
+                        Utils.getSystemAccentColor(
+                                this@MainActivity
+                        ), true
                 )
             }
             vectorColorPicker.setOnClickListener {  //method to start color picker for vector
                 startColorPicker(
-                    getString(R.string.vectors_color_key),
-                    R.string.title_vector_dialog
+                        getString(R.string.vectors_color_key),
+                        R.string.title_vector_dialog
                 )
             }
             accentVector.setOnClickListener {
                 setVectorColorForUI(Utils.getSystemAccentColor(this@MainActivity), true)
             }
+
+            swapCardColors.setOnClickListener { swapBtn ->
+                if (sSwapColor) {
+                    ObjectAnimator.ofFloat(
+                            swapBtn,
+                            View.ROTATION,
+                            0f,
+                            180f
+                    ).apply {
+                        duration = 500
+                        start()
+                        doOnEnd {
+                            val tempBackgroundColorBackup = mTempBackgroundColor
+                            setBackgroundColorForUI(mTempVectorColor, true)
+                            setVectorColorForUI(tempBackgroundColorBackup, true)
+                        }
+                    }
+                }
+            }
+
+            bottom.run {
+                mBottomSheetBehavior = BottomSheetBehavior.from(this)
+                background = Utils.getRoundedBGforRecent(this@MainActivity)
+            }
+
+            shadowView.setOnClickListener {
+                mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+
+            mBottomSheetBehavior.peekHeight = 0
+            mBottomSheetBehavior.isDraggable = false
         }
 
         //update background card color and text from preferences
@@ -205,26 +235,7 @@ class MainActivity : AppCompatActivity(),
         //update vector card color and text from preferences
         setVectorColorForUI(mTempVectorColor, false)
 
-        setupFabButton()
-
-        mVectorifyActivityBinding.swapCardColors.setOnClickListener { swapBtn ->
-            if (sSwapColor) {
-                ObjectAnimator.ofFloat(
-                    swapBtn,
-                    View.ROTATION,
-                    0f,
-                    180f
-                ).apply {
-                    duration = 500
-                    start()
-                    doOnEnd {
-                        val tempBackgroundColorBackup = mTempBackgroundColor
-                        setBackgroundColorForUI(mTempVectorColor, true)
-                        setVectorColorForUI(tempBackgroundColorBackup, true)
-                    }
-                }
-            }
-        }
+        setupFabButtonClick()
 
         setupBottomBar()
 
@@ -249,23 +260,24 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    private fun setupFabButton() {
-        //get the fab (don't move from this position)
-        mVectorifyActivityBinding.fab.run {
-            setOnClickListener {
+    private fun setupFabButtonClick() {
+        mVectorifyActivityBinding.fab.setOnClickListener {
 
+            if (mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                Utils.clearRecentSetups(this@MainActivity)
+            } else {
                 //start preview activity
                 val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
                     putExtras(
-                        bundleOf(
-                            TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
-                            TEMP_VECTOR_COLOR to mTempVectorColor,
-                            TEMP_VECTOR to mTempVector,
-                            TEMP_CATEGORY to mTempCategory,
-                            TEMP_SCALE to mTempScale,
-                            TEMP_H_OFFSET to mTempHorizontalOffset,
-                            TEMP_V_OFFSET to mTempVerticalOffset
-                        )
+                            bundleOf(
+                                    TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
+                                    TEMP_VECTOR_COLOR to mTempVectorColor,
+                                    TEMP_VECTOR to mTempVector,
+                                    TEMP_CATEGORY to mTempCategory,
+                                    TEMP_SCALE to mTempScale,
+                                    TEMP_H_OFFSET to mTempHorizontalOffset,
+                                    TEMP_V_OFFSET to mTempVerticalOffset
+                            )
                     )
                 }
                 startActivity(intent)
@@ -278,9 +290,7 @@ class MainActivity : AppCompatActivity(),
         mVectorifyActivityBinding.bar.run {
 
             replaceMenu(R.menu.bottom_menu)
-            menu.findItem(R.id.app_bar_restore).title = getString(
-                R.string.title_reset
-            )
+
             val menuThemeItem = menu.findItem(R.id.app_bar_theme).apply {
                 icon = getDrawable(Utils.getDefaultNightModeIcon(this@MainActivity))
             }
@@ -291,22 +301,19 @@ class MainActivity : AppCompatActivity(),
                     R.id.app_bar_theme -> {
 
                         vectorifyPreferences.theme =
-                            Utils.getProgressiveDefaultNightMode(this@MainActivity)
+                                Utils.getProgressiveDefaultNightMode(this@MainActivity)
 
                         AppCompatDelegate.setDefaultNightMode(
-                            Utils.getDefaultNightMode(
-                                this@MainActivity
-                            )
+                                Utils.getDefaultNightMode(
+                                        this@MainActivity
+                                )
                         )
 
-                        menuThemeItem.icon = getDrawable(Utils.getDefaultNightModeIcon(this@MainActivity))
+                        menuThemeItem.icon =
+                                getDrawable(Utils.getDefaultNightModeIcon(this@MainActivity))
                     }
 
-                    R.id.app_bar_restore -> showOptionsPopup(
-                        findViewById(
-                            R.id.app_bar_restore
-                        )
-                    )
+                    R.id.app_bar_restore -> restoreDefaultWallpaper()
                 }
                 return@setOnMenuItemClickListener true
             }
@@ -316,24 +323,65 @@ class MainActivity : AppCompatActivity(),
                     openRecentSetups()
                 } else {
                     Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.message_no_recent_setups),
-                        Toast.LENGTH_LONG
+                            this@MainActivity,
+                            getString(R.string.message_no_recent_setups),
+                            Toast.LENGTH_LONG
                     ).show()
                 }
             }
 
+            // setup bottom sheet behavior
+            mBottomSheetBehavior.addBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
+
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                    if (slideOffset >= 0) {
+                        mVectorifyActivityBinding.run {
+                            bottom.alpha = slideOffset
+                            shadowView.alpha = slideOffset * 0.50F
+                            bar.elevation = (1 - slideOffset) * resources.getDimension(R.dimen.recent_setups_elevation)
+                        }
+                    }
+                }
+
+                @SuppressLint("SwitchIntDef")
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    when (newState) {
+                        BottomSheetBehavior.STATE_EXPANDED -> {
+                            mVectorifyActivityBinding.bar.elevation = 0F
+                            mBottomSheetBehavior.isDraggable = true
+                            mVectorifyActivityBinding.run {
+                                shadowView.visibility = View.VISIBLE
+                                fab.setImageDrawable(getDrawable(R.drawable.ic_delete))
+                                fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity, R.color.red))
+                            }
+                        }
+                        BottomSheetBehavior.STATE_DRAGGING -> if (!sHideOnDrag) {
+                            sHideOnDrag = true
+                        }
+                        BottomSheetBehavior.STATE_COLLAPSED -> {
+                            mBottomSheetBehavior.isDraggable = false
+                            mVectorifyActivityBinding.shadowView.visibility = View.GONE
+                            if (sHideOnDrag) {
+                                updateFabColor(true)
+                            }
+                        }
+                    }
+                }
+            })
+
             afterMeasured {
-                val lp =
-                    mVectorifyActivityBinding.version.layoutParams as CoordinatorLayout.LayoutParams
-                lp.setMargins(0, 0, 0, height)
-                mVectorifyActivityBinding.version.layoutParams = lp
-                mVectorifyActivityBinding.cardsContainer.setPadding(
-                    0,
-                    0,
-                    0,
-                    height + mVectorifyActivityBinding.version.height
-                )
+                mVectorifyActivityBinding.run {
+                    val lp = version.layoutParams as CoordinatorLayout.LayoutParams
+                    lp.setMargins(0, 0, 0, height)
+                    cardsContainer.setPadding(
+                            0,
+                            0,
+                            0,
+                            height + version.height
+                    )
+                    bottom.setPadding(0, 0, 0, fab.height + fab.marginBottom)
+                }
             }
         }
     }
@@ -351,12 +399,12 @@ class MainActivity : AppCompatActivity(),
 
                     //update background and vector colors
                     setBackgroundColorForUI(
-                        ContextCompat.getColor(this@MainActivity, combo.first),
-                        true
+                            ContextCompat.getColor(this@MainActivity, combo.first),
+                            true
                     )
                     setVectorColorForUI(
-                        ContextCompat.getColor(this@MainActivity, combo.second),
-                        true
+                            ContextCompat.getColor(this@MainActivity, combo.second),
+                            true
                     )
 
                     //update vector frame colors
@@ -370,7 +418,7 @@ class MainActivity : AppCompatActivity(),
         mVectorifyActivityBinding.vectorsRv.run {
 
             mVectorsRecyclerViewLayoutManager =
-                GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
+                    GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
             layoutManager = mVectorsRecyclerViewLayoutManager
             setHasFixedSize(true)
 
@@ -380,18 +428,18 @@ class MainActivity : AppCompatActivity(),
                         if (mTempVector != vector) {
                             try {
                                 mVectorifyActivityBinding.vectorFrame.setImageResource(
-                                    Utils.getVectorProps(
-                                        vector
-                                    ).first
+                                        Utils.getVectorProps(
+                                                vector
+                                        ).first
                                 )
                                 mTempVector = vector
                             } catch (e: Exception) {
                                 e.printStackTrace()
                                 mTempVector = Utils.getDefaultVectorForApi()
                                 mVectorifyActivityBinding.vectorFrame.setImageResource(
-                                    Utils.getVectorProps(
-                                        mTempVector
-                                    ).first
+                                        Utils.getVectorProps(
+                                                mTempVector
+                                        ).first
                                 )
                             }
 
@@ -408,20 +456,20 @@ class MainActivity : AppCompatActivity(),
 
                     try {
                         val iconName = resources.getResourceEntryName(vector)
-                            .replace(
-                                getString(R.string.underscore_delimiter),
-                                getString(R.string.space_delimiter)
-                            )
-                            .capitalize()
+                                .replace(
+                                        getString(R.string.underscore_delimiter),
+                                        getString(R.string.space_delimiter)
+                                )
+                                .capitalize()
 
                         Toast.makeText(this@MainActivity, iconName, Toast.LENGTH_LONG).show()
 
                     } catch (e: Exception) {
                         e.printStackTrace()
                         Toast.makeText(
-                            this@MainActivity,
-                            getString(R.string.error_get_resource),
-                            Toast.LENGTH_LONG
+                                this@MainActivity,
+                                getString(R.string.error_get_resource),
+                                Toast.LENGTH_LONG
                         ).show()
                     }
                 }
@@ -432,13 +480,13 @@ class MainActivity : AppCompatActivity(),
 
     //update UI on recent selected
     private fun onRecentSelected(
-        selectedBackgroundColor: Int,
-        selectedVectorColor: Int,
-        selectedVector: Int,
-        selectedCategory: Int,
-        selectedScale: Float,
-        selectedHorizontalOffset: Float,
-        selectedVerticalOffset: Float
+            selectedBackgroundColor: Int,
+            selectedVectorColor: Int,
+            selectedVector: Int,
+            selectedCategory: Int,
+            selectedScale: Float,
+            selectedHorizontalOffset: Float,
+            selectedVerticalOffset: Float
     ) {
 
         setBackgroundColorForUI(selectedBackgroundColor, true)
@@ -461,9 +509,9 @@ class MainActivity : AppCompatActivity(),
         }
 
         val vector = Utils.tintDrawable(
-            this,
-            mTempVector,
-            mTempVectorColor.toContrastColor(mTempBackgroundColor)
+                this,
+                mTempVector,
+                mTempVectorColor.toContrastColor(mTempBackgroundColor)
         )
         mVectorifyActivityBinding.vectorFrame.setImageDrawable(vector)
     }
@@ -491,10 +539,10 @@ class MainActivity : AppCompatActivity(),
         }
 
         mVectorifyActivityBinding.fab.backgroundTintList =
-            ColorStateList.valueOf(mTempBackgroundColor)
+                ColorStateList.valueOf(mTempBackgroundColor)
 
         //check if colors are the same so we make vector color more visible
-        updateFabColor()
+        updateFabColor(false)
 
         //update vector frame colors
         setVectorFrameColors(true)
@@ -511,9 +559,9 @@ class MainActivity : AppCompatActivity(),
 
         //update shit colors
         mVectorifyActivityBinding.vectorColor.setCardBackgroundColor(
-            mTempVectorColor.toContrastColor(
-                mTempBackgroundColor
-            )
+                mTempVectorColor.toContrastColor(
+                        mTempBackgroundColor
+                )
         )
 
         mVectorifyActivityBinding.vectorColorHead.setTextColor(textColor)
@@ -522,10 +570,14 @@ class MainActivity : AppCompatActivity(),
             text = mTempVectorColor.toHex(this@MainActivity)
         }
         setVectorFrameColors(false)
-        updateFabColor()
+        updateFabColor(false)
     }
 
-    private fun updateFabColor() {
+    private fun updateFabColor(updateDrawable: Boolean) {
+        if (updateDrawable) {
+            mVectorifyActivityBinding.fab.backgroundTintList = ColorStateList.valueOf(mTempBackgroundColor)
+            mVectorifyActivityBinding.fab.setImageDrawable(getDrawable(R.drawable.ic_check))
+        }
         //check if colors are the same so we enable stroke to make vector visible
         val fabDrawableColor = mTempVectorColor.toContrastColor(mTempBackgroundColor)
         mVectorifyActivityBinding.fab.drawable.setTint(fabDrawableColor)
@@ -535,9 +587,9 @@ class MainActivity : AppCompatActivity(),
         mVectorsAdapter.onVectorClick?.invoke(vector)
         mVectorsAdapter.swapSelectedDrawable(mTempVector)
         mVectorifyActivityBinding.vectorsRv.scrollToPosition(
-            mVectorsAdapter.getVectorPosition(
-                mTempVector
-            )
+                mVectorsAdapter.getVectorPosition(
+                        mTempVector
+                )
         )
     }
 
@@ -562,10 +614,10 @@ class MainActivity : AppCompatActivity(),
             title(title)
 
             colorChooser(
-                colors = ColorPalette.Primary,
-                subColors = ColorPalette.PrimarySub,
-                allowCustomArgb = true,
-                showAlphaSelector = false
+                    colors = ColorPalette.Primary,
+                    subColors = ColorPalette.PrimarySub,
+                    allowCustomArgb = true,
+                    showAlphaSelector = false
 
             ) { _, color ->
                 when (key) {
@@ -612,63 +664,35 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun openRecentSetups() {
-        mRecentSetupsDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
 
-            title(res = R.string.title_recent_setups)
-
-            RecentsAdapter(context).apply {
-                onRecentClick = { recent ->
-                    recent.run {
-                        onRecentSelected(
-                            backgroundColor,
-                            vectorColor,
-                            resource,
-                            category,
-                            scale,
-                            horizontalOffset,
-                            verticalOffset
-                        )
-                    }
-                    dismiss()
-                }
-                customListAdapter(this)
-            }
-
-            getRecyclerView().apply {
+        if (mBottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+            mVectorifyActivityBinding.recentsRv.run {
                 setHasFixedSize(true)
-                layoutManager =
-                    GridLayoutManager(context, 6, RecyclerView.VERTICAL, false)
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-                window?.let { win ->
-                    edgeToEdge {
-                        getRecyclerView().fit { Edge.Bottom }
-                        win.decorView.fit { Edge.Top }
+                val recentSetupsAdapter = RecentsAdapter(this@MainActivity).apply {
+                    onRecentClick = { recent ->
+                        sHideOnDrag = false
+                        recent.run {
+                            onRecentSelected(
+                                    backgroundColor,
+                                    vectorColor,
+                                    resource,
+                                    category,
+                                    scale,
+                                    horizontalOffset,
+                                    verticalOffset
+                            )
+                        }
+                        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                     }
                 }
+                adapter = recentSetupsAdapter
             }
-        }
-    }
 
-    private fun showOptionsPopup(view: View) {
-
-        PopupMenu(this, view).apply {
-            setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.clear_recents -> Utils.clearRecentSetups(this@MainActivity)
-                    else -> restoreDefaultWallpaper()
-                }
-                return@setOnMenuItemClickListener true
+            mVectorifyActivityBinding.recentsRv.afterMeasured {
+                mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
-            inflate(R.menu.menu_do_something)
-            if (vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty()) {
-                menu.removeItem(
-                    R.id.clear_recents
-                )
-            }
-            gravity = Gravity.END
-            show()
+        } else {
+            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
 }

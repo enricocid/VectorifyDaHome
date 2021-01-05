@@ -31,8 +31,6 @@
     <string name="title_size">Größe und Lage</string>
     <string name="title_preview">Vorschau</string>
     <string name="install_browser_message">Installiere zuerst einen Browser!</string>
-    <string name="title_reset">Weitere Einstellungen</string>
-    <string name="title_reset_recents">Neuste Zusammenstellungen löschen</string>
     <string name="title_restore">Standard-Hintergrundbild wiederherstellen!</string>
     <string name="title_theme">Modus</string>
     <string name="title_github">GitHub-Seite</string>

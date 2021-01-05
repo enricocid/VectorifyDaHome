@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="default_accent_color">#3427FF</color>
+    <color name="red">#f44336</color>
 
     <color name="bottom_bar_color">@color/chips_text_color</color>
     <color name="system_bars_color">#BFBFBF</color>

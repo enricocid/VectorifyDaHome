@@ -3,5 +3,8 @@
     <dimen name="activity_padding">16dp</dimen>
     <dimen name="preset_option_dim">28dp</dimen>
     <dimen name="vector_size">40dp</dimen>
+    <dimen name="recent_setups_elevation">8dp</dimen>
     <dimen name="md_corner_radius">16dp</dimen>
+    <dimen name="recent_height">156dp</dimen>
+    <dimen name="recent_width">124dp</dimen>
 </resources>

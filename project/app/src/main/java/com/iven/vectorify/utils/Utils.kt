@@ -19,12 +19,29 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.ShapeAppearanceModel
 import com.iven.vectorify.R
 import com.iven.vectorify.VectorifyDaHomeLP
 import com.iven.vectorify.vectorifyPreferences
 
 
 object Utils {
+
+    @JvmStatic
+    fun getRoundedBGforRecent(context: Context): MaterialShapeDrawable {
+        val color = ContextCompat.getColor(context, R.color.bottom_bar_color)
+        val cornerSize = context.resources.getDimension(R.dimen.md_corner_radius)
+        val shapeAppearanceModel = ShapeAppearanceModel()
+                .toBuilder()
+                .setTopLeftCornerSize(cornerSize)
+                .setTopRightCornerSize(cornerSize)
+                .build()
+        return MaterialShapeDrawable(shapeAppearanceModel).apply {
+            fillColor =
+                    ColorStateList.valueOf(color)
+        }
+    }
 
     @JvmStatic
     fun getDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
@@ -55,11 +72,11 @@ object Utils {
     @JvmStatic
     fun openLiveWallpaperIntent(context: Context) {
         val intent = Intent(
-            WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
+                WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
         )
         intent.putExtra(
-            WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-            ComponentName(context, VectorifyDaHomeLP::class.java)
+                WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+                ComponentName(context, VectorifyDaHomeLP::class.java)
         )
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or Intent.FLAG_ACTIVITY_NO_ANIMATION)
         context.startActivity(intent)
@@ -70,8 +87,8 @@ object Utils {
     fun getSystemAccentColor(context: Context): Int {
         return try {
             ContextCompat.getColor(
-                context,
-                context.resources.getIdentifier("accent_device_default_dark", "color", "android")
+                    context,
+                    context.resources.getIdentifier("accent_device_default_dark", "color", "android")
             )
         } catch (e: Exception) {
             e.printStackTrace()
@@ -81,13 +98,13 @@ object Utils {
 
     @JvmStatic
     fun drawBitmap(
-        drawable: Drawable?,
-        canvas: Canvas,
-        deviceWidth: Int,
-        deviceHeight: Int,
-        scale: Float,
-        horizontalOffset: Float,
-        verticalOffset: Float
+            drawable: Drawable?,
+            canvas: Canvas,
+            deviceWidth: Int,
+            deviceHeight: Int,
+            scale: Float,
+            horizontalOffset: Float,
+            verticalOffset: Float
     ) {
 
         val dimension = if (deviceWidth > deviceHeight) {
@@ -96,8 +113,8 @@ object Utils {
             deviceWidth
         }
         val bitmap = Bitmap.createBitmap(
-            (dimension * scale).toInt(),
-            (dimension * scale).toInt(), Bitmap.Config.ARGB_8888
+                (dimension * scale).toInt(),
+                (dimension * scale).toInt(), Bitmap.Config.ARGB_8888
         )
 
         val drawableCanvas = Canvas(bitmap)
@@ -108,10 +125,10 @@ object Utils {
         val top = canvas.height / 2F - drawableCanvas.width / 2F + verticalOffset
 
         canvas.drawBitmap(
-            bitmap,
-            left,
-            top,
-            null
+                bitmap,
+                left,
+                top,
+                null
         )
     }
 
@@ -129,44 +146,44 @@ object Utils {
         return when (index) {
             0 -> Pair(context.getString(R.string.title_tech), VectorsCategories.TECH) //tech
             1 -> Pair(
-                context.getString(R.string.title_symbols),
-                VectorsCategories.SYMBOLS
+                    context.getString(R.string.title_symbols),
+                    VectorsCategories.SYMBOLS
             ) //symbols
             2 -> Pair(
-                context.getString(R.string.title_animals),
-                VectorsCategories.ANIMALS
+                    context.getString(R.string.title_animals),
+                    VectorsCategories.ANIMALS
             ) //animals
             3 -> Pair(
-                context.getString(R.string.title_emoticons),
-                VectorsCategories.EMOTICONS
+                    context.getString(R.string.title_emoticons),
+                    VectorsCategories.EMOTICONS
             ) //emoticons
             4 -> Pair(context.getString(R.string.title_fun), VectorsCategories.FUN) //fun
             5 -> Pair(context.getString(R.string.title_food), VectorsCategories.FOOD) //food
             6 -> Pair(context.getString(R.string.title_nature), VectorsCategories.NATURE) //nature
             7 -> Pair(
-                context.getString(R.string.title_weather),
-                VectorsCategories.WEATHER
+                    context.getString(R.string.title_weather),
+                    VectorsCategories.WEATHER
             ) //weather
             8 -> Pair(context.getString(R.string.title_sport), VectorsCategories.SPORT) //sport
             9 -> Pair(context.getString(R.string.title_math), VectorsCategories.MATH) //math
             10 -> Pair(
-                context.getString(R.string.title_science),
-                VectorsCategories.SCIENCE
+                    context.getString(R.string.title_science),
+                    VectorsCategories.SCIENCE
             ) //science
             11 -> Pair(
-                context.getString(R.string.title_chernoff),
-                VectorsCategories.CHERNOFF
+                    context.getString(R.string.title_chernoff),
+                    VectorsCategories.CHERNOFF
             ) //Chernoff faceS
             12 -> Pair(context.getString(R.string.title_music), VectorsCategories.MUSIC) //music
             13 -> Pair(context.getString(R.string.title_nerdy), VectorsCategories.NERDY) //nerdy
             14 -> Pair(
-                context.getString(R.string.title_buildings),
-                VectorsCategories.BUILDINGS
+                    context.getString(R.string.title_buildings),
+                    VectorsCategories.BUILDINGS
             ) //buildings
             15 -> Pair(context.getString(R.string.title_alert), VectorsCategories.ALERT) //alert
             16 -> Pair(
-                context.getString(R.string.title_alpha),
-                VectorsCategories.ALPHABET
+                    context.getString(R.string.title_alpha),
+                    VectorsCategories.ALPHABET
             ) //letters
             17 -> Pair(context.getString(R.string.title_roman), VectorsCategories.ROMAN) //roman
             18 -> Pair(context.getString(R.string.title_zodiac), VectorsCategories.ZODIAC) //zodiac
@@ -216,9 +233,9 @@ object Utils {
 
     @JvmStatic
     fun tintDrawable(
-        context: Context,
-        vector: Int,
-        vectorColor: Int
+            context: Context,
+            vector: Int,
+            vectorColor: Int
     ): Drawable? {
 
         //determine if we are facing android m, n, o vectors
@@ -269,7 +286,7 @@ object Utils {
 
     @JvmStatic
     fun openCustomTab(
-        context: Context
+            context: Context
     ) {
         try {
             CustomTabsIntent.Builder().apply {
@@ -280,9 +297,9 @@ object Utils {
             }
         } catch (e: Exception) {
             Toast.makeText(
-                context,
-                context.getString(R.string.install_browser_message),
-                Toast.LENGTH_LONG
+                    context,
+                    context.getString(R.string.install_browser_message),
+                    Toast.LENGTH_LONG
             ).show()
             e.printStackTrace()
         }

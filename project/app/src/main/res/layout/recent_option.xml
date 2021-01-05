@@ -3,21 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="4dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginBottom="8dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="2dp"
+    android:layout_width="@dimen/recent_width"
+    android:layout_height="@dimen/recent_height"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="4dp"
     tools:viewBindingIgnore="true">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/recent_setups_vector"
         android:layout_width="match_parent"
-        android:layout_height="@android:dimen/app_icon_size"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_height="match_parent"
         tools:ignore="ContentDescription" />
-
 </com.google.android.material.card.MaterialCardView>

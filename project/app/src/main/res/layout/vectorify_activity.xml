@@ -95,47 +95,47 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
-            <LinearLayout
-                android:id="@+id/background_color_picker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/background_color_head"
+                <LinearLayout
+                    android:id="@+id/background_color_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_black"
-                    android:paddingStart="16dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="4dp"
-                    android:text="@string/title_background"
-                    android:textAppearance="@android:style/TextAppearance.Material" />
+                    android:background="?android:attr/selectableItemBackground"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/background_color_subhead"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textAppearance="@android:style/TextAppearance.Material.Caption" />
+                    <TextView
+                        android:id="@+id/background_color_head"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/raleway_black"
+                        android:paddingStart="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/title_background"
+                        android:textAppearance="@android:style/TextAppearance.Material" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/accent_background"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:alpha="0.5"
-                    android:text="@string/title_accent_me"
-                    android:textAppearance="@style/chipTextAppearance"
-                    android:textColor="@color/chips_text_color"
-                    app:chipBackgroundColor="@color/chips_color" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/background_color_subhead"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textAppearance="@android:style/TextAppearance.Material.Caption" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/accent_background"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:alpha="0.5"
+                        android:text="@string/title_accent_me"
+                        android:textAppearance="@style/chipTextAppearance"
+                        android:textColor="@color/chips_text_color"
+                        app:chipBackgroundColor="@color/chips_color" />
+                </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -164,9 +164,9 @@
                 app:cardElevation="2dp">
 
                 <LinearLayout
+                    android:id="@+id/vector_color_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/vector_color_picker"
                     android:background="?android:attr/selectableItemBackground"
                     android:orientation="vertical">
 
@@ -267,12 +267,50 @@
         android:textAppearance="@android:style/TextAppearance.Material.Caption"
         android:textColor="@color/vectors_color" />
 
+    <!-- RECENT SETUPS BOTTOM SHEET -->
+    <View
+        android:id="@+id/shadow_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@android:color/background_dark"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_bar_color"
+        android:orientation="vertical"
+        android:alpha="0"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_black"
+            android:padding="24dp"
+            android:text="@string/title_recent_setups"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recents_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </LinearLayout>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:backgroundTint="@color/bottom_bar_color"
+        app:elevation="@dimen/recent_setups_elevation"
         app:fabAlignmentMode="end"
         app:navigationContentDescription="@string/title_recent_setups"
         app:navigationIcon="@drawable/ic_baseline_menu" />
@@ -285,5 +323,4 @@
         app:layout_anchor="@id/bar"
         app:useCompatPadding="true"
         tools:ignore="ContentDescription" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

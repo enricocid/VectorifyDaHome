@@ -29,8 +29,6 @@
     <string name="title_size">الحجم والموضع</string>
     <string name="title_preview">معاينة</string>
     <string name="install_browser_message">قم بتثبيت متصفح أولاً!</string>
-    <string name="title_reset">خيارات إضافية</string>
-    <string name="title_reset_recents">مسح الحديثة</string>
     <string name="title_restore">استعادة الخلفية الافتراضية!</string>
     <string name="title_theme">السمة</string>
     <string name="title_github">صفحة GitHub</string>
