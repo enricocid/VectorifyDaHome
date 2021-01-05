@@ -43,13 +43,13 @@
                 android:id="@+id/seekbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_black"
                 android:paddingStart="16dp"
                 android:paddingTop="16dp"
                 android:paddingEnd="16dp"
                 android:text="@string/title_size"
                 android:textAlignment="textStart"
-                android:textAppearance="@android:style/TextAppearance.Material" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                     android:paddingEnd="16dp"
                     android:paddingBottom="16dp"
                     android:textAlignment="textEnd"
-                    android:textAppearance="@android:style/TextAppearance.Material.Small"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:textStyle="bold" />
             </LinearLayout>
 

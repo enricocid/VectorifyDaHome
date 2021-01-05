@@ -106,13 +106,13 @@
                         android:id="@+id/background_color_head"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/raleway_black"
                         android:paddingStart="16dp"
                         android:paddingTop="16dp"
                         android:paddingEnd="16dp"
                         android:paddingBottom="4dp"
                         android:text="@string/title_background"
-                        android:textAppearance="@android:style/TextAppearance.Material" />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/background_color_subhead"
@@ -120,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:textAppearance="@android:style/TextAppearance.Material.Caption" />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/accent_background"
@@ -174,13 +174,13 @@
                         android:id="@+id/vector_color_head"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/raleway_black"
                         android:paddingStart="16dp"
                         android:paddingTop="16dp"
                         android:paddingEnd="16dp"
                         android:paddingBottom="4dp"
                         android:text="@string/title_vector"
-                        android:textAppearance="@android:style/TextAppearance.Material" />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/vector_color_subhead"
@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:textAppearance="@android:style/TextAppearance.Material.Caption" />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/accent_vector"
@@ -230,14 +230,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_black"
                     android:paddingStart="16dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="8dp"
                     android:text="@string/title_presets"
-                    android:textAppearance="@android:style/TextAppearance.Material"
-                    android:textColor="@color/vectors_color" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textColor="@color/vectors_color"
+                    android:textStyle="bold" />
 
                 <!-- PRESETS OPTIONS -->
                 <androidx.recyclerview.widget.RecyclerView
@@ -264,7 +264,7 @@
         android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         android:text="@string/versionName"
-        android:textAppearance="@android:style/TextAppearance.Material.Caption"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
         android:textColor="@color/vectors_color" />
 
     <!-- RECENT SETUPS BOTTOM SHEET -->
@@ -280,18 +280,18 @@
         android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:alpha="0"
         android:background="@color/bottom_bar_color"
         android:orientation="vertical"
-        android:alpha="0"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_black"
             android:padding="24dp"
             android:text="@string/title_recent_setups"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            android:textAppearance="@android:style/TextAppearance.Material.Title"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recents_rv"

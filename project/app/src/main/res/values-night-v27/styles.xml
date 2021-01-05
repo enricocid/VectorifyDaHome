@@ -5,12 +5,8 @@
         <item name="colorPrimary">@color/system_bars_color</item>
         <item name="colorPrimaryDark">@color/system_bars_color</item>
         <item name="android:windowBackground">@color/activity_background_color</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
-        <item name="popupMenuStyle">@style/PopupMenu</item>
         <item name="md_color_button_text">@color/vectors_color</item>
         <item name="md_corner_radius">@dimen/md_corner_radius</item>
-        <item name="md_font_title">@font/raleway_black</item>
-        <item name="android:fontFamily">@font/raleway</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
         <item name="android:statusBarColor">@color/activity_background_color</item>
