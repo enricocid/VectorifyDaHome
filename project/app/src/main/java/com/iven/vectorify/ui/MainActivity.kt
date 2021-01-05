@@ -426,22 +426,19 @@ class MainActivity : AppCompatActivity(),
                 onVectorClick = { vector ->
                     if (!sRestoreVector) {
                         if (mTempVector != vector) {
-                            try {
-                                mVectorifyActivityBinding.vectorFrame.setImageResource(
-                                        Utils.getVectorProps(
-                                                vector
-                                        ).first
-                                )
-                                mTempVector = vector
+
+                            mTempVector = try {
+                                vector
                             } catch (e: Exception) {
                                 e.printStackTrace()
-                                mTempVector = Utils.getDefaultVectorForApi()
-                                mVectorifyActivityBinding.vectorFrame.setImageResource(
-                                        Utils.getVectorProps(
-                                                mTempVector
-                                        ).first
-                                )
+                                Utils.getDefaultVectorForApi()
                             }
+
+                            mVectorifyActivityBinding.vectorFrame.setImageResource(
+                                    Utils.getVectorProps(
+                                            vector
+                                    ).first
+                            )
 
                             //update drawable tint
                             setVectorFrameColors(false)
