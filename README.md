@@ -6,6 +6,9 @@
 
 [![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
 [![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.8.8&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases)
+<a href="https://github.com/enricocid/VectorifyDaHome/actions">
+<img alt="CI" src="https://github.com/enricocid/VectorifyDaHome/workflows/Android%20CI/badge.svg">
+</a>
 
 <a href="https://hosted.weblate.org/engage/vectorify-da-home/">
 <img src="https://hosted.weblate.org/widgets/vectorify-da-home/-/287x66-white.png" />
