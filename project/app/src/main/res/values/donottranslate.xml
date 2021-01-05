@@ -3,7 +3,7 @@
     <string name="live_wallpaper_name">Vectorify da home!</string>
     <string name="space_delimiter">&#160;</string>
     <string name="underscore_delimiter">&#95;</string>
-    <string name="hex">&#35;%1s</string>
+    <string name="hex">#%1s</string>
     <string name="background_color_key">background_key</string>
     <string name="vectors_color_key">icon_key</string>
     <string name="theme_key">theme_pref_key</string>
@@ -19,5 +19,5 @@
     </string>
     <string name="save_pattern">vdh_</string>
     <string name="time_pattern">dd_MM_yy_hh-ss</string>
-    <string name="loading">Vectorifying da home&#160;&#8230;</string>
+    <string name="loading">"Vectorifying da home …"</string>
 </resources>

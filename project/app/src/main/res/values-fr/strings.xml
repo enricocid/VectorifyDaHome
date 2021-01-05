@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_get_resource">Oups ! Non trouvé !</string>
+    <string name="error_get_resource">"Oups ! Non trouvé !"</string>
     <!-- Card titles -->
-    <string name="title_background">Arrière-plan</string>
-    <string name="title_background_dialog">Couleur d\'arrière-plan</string>
+    <string name="title_background">"Arrière-plan"</string>
+    <string name="title_background_dialog">"Couleur d'arrière-plan"</string>
     <string name="title_vector">Image</string>
-    <string name="title_vector_dialog">Couleur de l\'image vectorielle</string>
-    <string name="title_presets">Paramètres prédéfinis</string>
-    <string name="selected_preset">Arrière-plan : %1s, Image vectorielle : %1s</string>
+    <string name="title_vector_dialog">"Couleur de l'image vectorielle"</string>
+    <string name="title_presets">"Paramètres prédéfinis"</string>
+    <string name="selected_preset">"Arrière-plan : %1s, Image vectorielle : %1s"</string>
     <string name="title_accent_me">Colorie-moi !</string>
     <!-- Recent setups things -->
-    <string name="title_recent_setups">Configurations récentes</string>
-    <string name="message_no_recent_setups">Aucune configuration récente !</string>
-    <string name="message_clear_recent_setups">Toutes les configurations récentes seront supprimées. Êtes-vous sûr·e \? Si vous voulez supprimer des configurations spécifiques, appuyez dessus longuement :).</string>
-    <string name="message_clear_single_recent_setup">La configuration #%1s sera supprimée. Êtes-vous sûr·e \?</string>
+    <string name="title_recent_setups">"Configurations récentes"</string>
+    <string name="message_no_recent_setups">"Aucune configuration récente !"</string>
+    <string name="message_clear_recent_setups">"Toutes les configurations récentes seront supprimées. Êtes-vous sûr·e ? Si vous voulez supprimer des configurations spécifiques, appuyez dessus longuement :)."</string>
+    <string name="message_clear_single_recent_setup">"La configuration #%1s sera supprimée. Êtes-vous sûr·e ?"</string>
     <!-- BottomBar menu items -->
     <string name="title_github">Page GitHub</string>
-    <string name="title_theme">Thème</string>
-    <string name="title_restore">Restaurer le fond d\'écran par défaut !</string>
-    <string name="install_browser_message">Veuillez d\'abord installer un navigateur !</string>
+    <string name="title_theme">"Thème"</string>
+    <string name="title_restore">"Restaurer le fond d'écran par défaut !"</string>
+    <string name="install_browser_message">"Veuillez d'abord installer un navigateur !"</string>
     <!-- Preview things -->
-    <string name="title_preview">Aperçu</string>
+    <string name="title_preview">"Aperçu"</string>
     <string name="title_size">Taille et position</string>
     <string name="title_save_to">Enregistrer dans la mémoire interne</string>
-    <string name="title_crop">Rogner et définir comme fond d\'écran</string>
-    <string name="title_go_live">Définir comme fond d\'écran live</string>
+    <string name="title_crop">"Rogner et définir comme fond d'écran"</string>
+    <string name="title_go_live">"Définir comme fond d'écran live"</string>
     <string name="title_already_live">Application des modifications …</string>
-    <string name="message_saved_to">Enregsitré vers %1s</string>
+    <string name="message_saved_to">"Enregsitré vers %1s"</string>
     <!-- Categories -->
-    <string name="title_categories">Catégories</string>
+    <string name="title_categories">"Catégories"</string>
     <string name="title_tech">Technologie</string>
     <string name="title_symbols">Symboles</string>
     <string name="title_animals">Animaux</string>
-    <string name="title_emoticons">Émoticônes</string>
+    <string name="title_emoticons">"Émoticônes"</string>
     <string name="title_fun">Amusement</string>
     <string name="title_food">Alimentation</string>
     <string name="title_nature">Nature</string>
-    <string name="title_weather">Météo</string>
+    <string name="title_weather">"Météo"</string>
     <string name="title_sport">Sport</string>
     <string name="title_math">Maths</string>
     <string name="title_science">Science</string>

@@ -8,7 +8,7 @@
     <string name="title_roman">Römische</string>
     <string name="title_alpha">Buchstaben</string>
     <string name="title_alert">Warnung</string>
-    <string name="title_buildings">Gebäude</string>
+    <string name="title_buildings">"Gebäude"</string>
     <string name="title_nerdy">Nerd</string>
     <string name="title_music">Musik</string>
     <string name="title_chernoff">Chernoff-Gesichter</string>
@@ -34,8 +34,8 @@
     <string name="title_restore">Standard-Hintergrundbild wiederherstellen!</string>
     <string name="title_theme">Modus</string>
     <string name="title_github">GitHub-Seite</string>
-    <string name="message_clear_single_recent_setup">Zusammenstellung #%1s wird gelöscht. Willst du das wirklich\?</string>
-    <string name="message_clear_recent_setups">Alle neuesten Zusammenstellungen werden gelöscht. Willst du das wirklich\? Um bestimmte Zusammenstellungen zu löschen, einfach lange draufhalten :).</string>
+    <string name="message_clear_single_recent_setup">"Zusammenstellung #%1s wird gelöscht. Willst du das wirklich?"</string>
+    <string name="message_clear_recent_setups">"Alle neuesten Zusammenstellungen werden gelöscht. Willst du das wirklich? Um bestimmte Zusammenstellungen zu löschen, einfach lange draufhalten :)."</string>
     <string name="message_no_recent_setups">Keine neuesten Zusammenstellungen gefunden!</string>
     <string name="title_recent_setups">Neueste Zusammenstellungen</string>
     <string name="title_accent_me">Einfärben!</string>
