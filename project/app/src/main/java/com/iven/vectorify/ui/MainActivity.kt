@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(),
     private lateinit var mVectorifyActivityBinding: VectorifyActivityBinding
 
     private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
-    private var sHideOnDrag = true
+    private var sUpdateFab = true
 
     private lateinit var mVectorsRecyclerViewLayoutManager: LinearLayoutManager
     private lateinit var mVectorsAdapter: VectorsAdapter
@@ -356,14 +356,14 @@ class MainActivity : AppCompatActivity(),
                                 fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity, R.color.red))
                             }
                         }
-                        BottomSheetBehavior.STATE_DRAGGING -> if (!sHideOnDrag) {
-                            sHideOnDrag = true
+                        BottomSheetBehavior.STATE_DRAGGING -> if (!sUpdateFab) {
+                            sUpdateFab = true
                         }
                         BottomSheetBehavior.STATE_COLLAPSED -> {
                             mBottomSheetBehavior.isDraggable = false
                             mVectorifyActivityBinding.shadowView.visibility = View.GONE
-                            if (sHideOnDrag) {
-                                updateFabColor(true)
+                            if (sUpdateFab) {
+                                updateFabColor()
                             }
                         }
                     }
@@ -486,6 +486,7 @@ class MainActivity : AppCompatActivity(),
             selectedVerticalOffset: Float
     ) {
 
+        updateFabColor()
         setBackgroundColorForUI(selectedBackgroundColor, true)
         setVectorColorForUI(selectedVectorColor, true)
 
@@ -539,7 +540,7 @@ class MainActivity : AppCompatActivity(),
                 ColorStateList.valueOf(mTempBackgroundColor)
 
         //check if colors are the same so we make vector color more visible
-        updateFabColor(false)
+        updateFabColor()
 
         //update vector frame colors
         setVectorFrameColors(true)
@@ -567,14 +568,14 @@ class MainActivity : AppCompatActivity(),
             text = mTempVectorColor.toHex(this@MainActivity)
         }
         setVectorFrameColors(false)
-        updateFabColor(false)
+        updateFabColor()
     }
 
-    private fun updateFabColor(updateDrawable: Boolean) {
-        if (updateDrawable) {
-            mVectorifyActivityBinding.fab.backgroundTintList = ColorStateList.valueOf(mTempBackgroundColor)
-            mVectorifyActivityBinding.fab.setImageDrawable(getDrawable(R.drawable.ic_check))
-        }
+    private fun updateFabColor() {
+
+        mVectorifyActivityBinding.fab.backgroundTintList = ColorStateList.valueOf(mTempBackgroundColor)
+        mVectorifyActivityBinding.fab.setImageDrawable(getDrawable(R.drawable.ic_check))
+
         //check if colors are the same so we enable stroke to make vector visible
         val fabDrawableColor = mTempVectorColor.toContrastColor(mTempBackgroundColor)
         mVectorifyActivityBinding.fab.drawable.setTint(fabDrawableColor)
@@ -667,7 +668,7 @@ class MainActivity : AppCompatActivity(),
                 setHasFixedSize(true)
                 val recentSetupsAdapter = RecentsAdapter(this@MainActivity).apply {
                     onRecentClick = { recent ->
-                        sHideOnDrag = false
+                        sUpdateFab = false
                         recent.run {
                             onRecentSelected(
                                     backgroundColor,
