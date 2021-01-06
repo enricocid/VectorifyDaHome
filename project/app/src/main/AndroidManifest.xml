@@ -12,14 +12,14 @@
             android:name=".VectorifyApp"
             android:allowBackup="false"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/live_wallpaper_name"
+            android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
         <provider
                 android:name="androidx.core.content.FileProvider"
-                android:authorities="@string/live_wallpaper_name"
+                android:authorities="@string/app_name"
                 android:exported="false"
                 android:grantUriPermissions="true">
 
@@ -48,7 +48,7 @@
 
         <service
                 android:name=".VectorifyDaHomeLP"
-                android:label="@string/live_wallpaper_name"
+                android:label="@string/app_name"
                 android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
                 <action android:name="android.service.wallpaper.WallpaperService"/>

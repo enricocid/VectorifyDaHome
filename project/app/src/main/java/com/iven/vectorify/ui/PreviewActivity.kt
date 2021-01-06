@@ -47,7 +47,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     override fun onCreateLoader(id: Int, args: Bundle?): Loader<Uri?> {
 
         mSaveWallpaperDialog = MaterialDialog(this).apply {
-            title(R.string.live_wallpaper_name)
+            title(R.string.app_name)
             customView(R.layout.progress_dialog)
             cancelOnTouchOutside(false)
             cancelable(false)

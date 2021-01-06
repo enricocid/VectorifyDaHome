@@ -59,7 +59,7 @@ class SaveWallpaperLoader(
                 if (isSetWallpaper) {
                     FileProvider.getUriForFile(
                         context,
-                        context.getString(R.string.live_wallpaper_name),
+                        context.getString(R.string.app_name),
                         wallpaperToSave
                     )
                 } else {

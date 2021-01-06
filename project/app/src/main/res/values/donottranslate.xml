@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="live_wallpaper_name">Vectorify da home!</string>
+    <!-- suppress AndroidLintUnusedResources  -->
+    <string name="app_name_release">Vectorify da home!</string>
+    <!-- suppress AndroidLintUnusedResources  -->
+    <string name="app_name_debug">VDH debug</string>
+
     <string name="space_delimiter">&#160;</string>
     <string name="underscore_delimiter">&#95;</string>
     <string name="hex">#%1s</string>
