@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.iven.vectorify.R
 
-class PresetsAdapter(private val context: Context) :
+class PresetsAdapter(private val ctx: Context) :
     RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
 
     var onPresetClick: ((Pair<Int, Int>) -> Unit)? = null
@@ -78,10 +78,10 @@ class PresetsAdapter(private val context: Context) :
 
             val colorItem = itemView as MaterialCardView
 
-            val selectedVectorColor = ContextCompat.getColor(context, combo.second)
+            val selectedVectorColor = ContextCompat.getColor(ctx, combo.second)
             colorItem.setCardBackgroundColor(selectedVectorColor)
 
-            val selectedBackgroundColor = ContextCompat.getColor(context, combo.first)
+            val selectedBackgroundColor = ContextCompat.getColor(ctx, combo.first)
             colorItem.strokeColor = selectedBackgroundColor
 
             itemView.run {
@@ -93,14 +93,14 @@ class PresetsAdapter(private val context: Context) :
 
                     try {
                         val backgroundColorName =
-                            context.resources.getResourceEntryName(combo.first)
+                            ctx.resources.getResourceEntryName(combo.first)
                                 .replace(
-                                    context.getString(R.string.underscore_delimiter),
-                                    context.getString(R.string.space_delimiter)
+                                    ctx.getString(R.string.underscore_delimiter),
+                                    ctx.getString(R.string.space_delimiter)
                                 )
                                 .capitalize()
 
-                        val vectorColorName = context.resources.getResourceEntryName(combo.second)
+                        val vectorColorName = ctx.resources.getResourceEntryName(combo.second)
                             .replace(
                                 context.getString(R.string.underscore_delimiter),
                                 context.getString(R.string.space_delimiter)
@@ -108,7 +108,7 @@ class PresetsAdapter(private val context: Context) :
                             .capitalize()
 
                         Toast.makeText(
-                            context, context.getString(
+                            ctx, context.getString(
                                 R.string.selected_preset,
                                 backgroundColorName,
                                 vectorColorName
@@ -118,7 +118,7 @@ class PresetsAdapter(private val context: Context) :
                     } catch (e: Exception) {
                         e.printStackTrace()
                         Toast.makeText(
-                            context, context.getString(
+                            ctx, context.getString(
                                 R.string.error_get_resource
                             ), Toast.LENGTH_LONG
                         ).show()

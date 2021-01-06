@@ -55,7 +55,7 @@ object Utils {
     }
 
     @JvmStatic
-    fun getProgressiveDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
+    fun getNextDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
         context.getString(R.string.theme_pref_light) -> context.getString(R.string.theme_pref_dark)
         context.getString(R.string.theme_pref_dark) -> context.getString(R.string.theme_pref_auto)
         else -> context.getString(R.string.theme_pref_light)

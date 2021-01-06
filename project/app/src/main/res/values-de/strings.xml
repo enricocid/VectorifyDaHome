@@ -25,10 +25,10 @@
     <string name="title_tech">Technische</string>
     <string name="title_categories">Kategorien</string>
     <string name="message_saved_to">Gespeichert nach %1s</string>
-    <string name="title_already_live">Änderungen anwenden …</string>
+    <string name="title_already_live">"Änderungen anwenden …"</string>
     <string name="title_crop">Beschneiden und als Hintergrundbild setzen</string>
     <string name="title_save_to">Im internen Speicher speichern</string>
-    <string name="title_size">Größe und Lage</string>
+    <string name="title_size">"Größe und Lage"</string>
     <string name="title_preview">Vorschau</string>
     <string name="install_browser_message">Installiere zuerst einen Browser!</string>
     <string name="title_restore">Standard-Hintergrundbild wiederherstellen!</string>
@@ -38,7 +38,7 @@
     <string name="message_clear_recent_setups">"Alle neuesten Zusammenstellungen werden gelöscht. Willst du das wirklich? Um bestimmte Zusammenstellungen zu löschen, einfach lange draufhalten :)."</string>
     <string name="message_no_recent_setups">Keine neuesten Zusammenstellungen gefunden!</string>
     <string name="title_recent_setups">Neueste Zusammenstellungen</string>
-    <string name="title_accent_me">Einfärben!</string>
+    <string name="title_accent_me">"Einfärben!"</string>
     <string name="selected_preset">Hintergrund: %1s, Bild: %1s</string>
     <string name="title_presets">Vorlagen</string>
     <string name="title_background_dialog">Hintergrundfarbe</string>

@@ -22,7 +22,7 @@
     <!-- Preview things -->
     <string name="title_preview">"Aperçu"</string>
     <string name="title_size">Taille et position</string>
-    <string name="title_save_to">Enregistrer dans la mémoire interne</string>
+    <string name="title_save_to">"Enregistrer dans la mémoire interne"</string>
     <string name="title_crop">"Rogner et définir comme fond d'écran"</string>
     <string name="title_go_live">"Définir comme fond d'écran live"</string>
     <string name="title_already_live">Application des modifications …</string>
@@ -43,7 +43,7 @@
     <string name="title_chernoff">Visages de Chernoff</string>
     <string name="title_music">Musique</string>
     <string name="title_nerdy">Geek</string>
-    <string name="title_buildings">Bâtiments</string>
+    <string name="title_buildings">"Bâtiments"</string>
     <string name="title_alert">Alertes</string>
     <string name="title_alpha">Lettres</string>
     <string name="title_roman">Chiffres romains</string>

@@ -17,10 +17,10 @@ class VectorifyDaHomeLP : WallpaperService() {
     private var mHorizontalOffSet = 0F
     private var mVerticalOffSet = 0F
 
-    private val metrics get() = vectorifyPreferences.vectorifyMetrics
+    private val mMetrics get() = vectorifyPreferences.vectorifyMetrics
 
-    private val mDeviceWidth = metrics.width
-    private val mDeviceHeight = metrics.height
+    private val mDeviceWidth = mMetrics.width
+    private val mDeviceHeight = mMetrics.height
 
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {

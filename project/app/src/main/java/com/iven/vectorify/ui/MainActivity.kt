@@ -301,7 +301,7 @@ class MainActivity : AppCompatActivity(),
                     R.id.app_bar_theme -> {
 
                         vectorifyPreferences.theme =
-                                Utils.getProgressiveDefaultNightMode(this@MainActivity)
+                                Utils.getNextDefaultNightMode(this@MainActivity)
 
                         AppCompatDelegate.setDefaultNightMode(
                                 Utils.getDefaultNightMode(

@@ -12,7 +12,7 @@ import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
 import com.iven.vectorify.vectorifyPreferences
 
-class VectorsAdapter(private val context: Context) :
+class VectorsAdapter(private val ctx: Context) :
     RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
     var onVectorClick: ((Int) -> Unit)? = null
@@ -23,7 +23,7 @@ class VectorsAdapter(private val context: Context) :
 
     init {
         vectorifyPreferences.liveVectorifyWallpaper?.let { recent ->
-            mSelectedCategory = Utils.getCategory(context, recent.category).second
+            mSelectedCategory = Utils.getCategory(ctx, recent.category).second
             mSelectedDrawable = recent.resource
         }
     }
