@@ -9,6 +9,7 @@
         <item name="md_corner_radius">@dimen/md_corner_radius</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="android:statusBarColor">@color/activity_background_color</item>
         <item name="android:navigationBarColor">@color/activity_background_color</item>
     </style>
