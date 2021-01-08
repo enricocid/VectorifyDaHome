@@ -1,0 +1,3 @@
+Android 11: fix crash when opening wallpaper's preview
+
+Thanks Raphaël Bussa

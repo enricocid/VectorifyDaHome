@@ -1,0 +1,3 @@
+Android 11: corretto crash all'apertura della preview dello sfondo
+
+Grazie Raphaël Bussa
