@@ -102,22 +102,13 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         finishAndRemoveTask()
     }
 
-    override fun onCreateView(
-        parent: View?,
-        name: String,
-        context: Context,
-        attrs: AttributeSet
-    ): View? {
-        //set immersive mode
-        hideSystemUI()
-        return super.onCreateView(parent, name, context, attrs)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mPreviewActivityBinding = PreviewActivityBinding.inflate(layoutInflater)
         setContentView(mPreviewActivityBinding.root)
+        //set immersive mode
+        hideSystemUI()
 
         intent?.extras?.let { ext ->
             mTempBackgroundColor = ext.getInt(TEMP_BACKGROUND_COLOR)
