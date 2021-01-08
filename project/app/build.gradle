@@ -9,8 +9,8 @@ android {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 46
-        versionName "1.8.8"
+        versionCode 48
+        versionName "1.9.0"
 
         vectorDrawables.useSupportLibrary true
     }

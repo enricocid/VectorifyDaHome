@@ -1,0 +1,4 @@
+- Nuovo meraviglioso dialog per i setup recenti! :)
+- Revisioni del design
+- Migliorie codice
+- Aggiornamenti traduzioni

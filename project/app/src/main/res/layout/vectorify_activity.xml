@@ -120,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/accent_background"
@@ -188,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/accent_vector"

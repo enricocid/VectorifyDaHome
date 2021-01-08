@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- suppress AndroidLintUnusedResources  -->
-    <string name="app_name_release">Vectorify da home!</string>
-    <!-- suppress AndroidLintUnusedResources  -->
-    <string name="app_name_debug">VDH debug</string>
-
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name_release" tools:ignore="UnusedResources">Vectorify da home!</string>
+    <string name="app_name_debug" tools:ignore="UnusedResources">VDH debug</string>
     <string name="space_delimiter">&#160;</string>
     <string name="underscore_delimiter">&#95;</string>
     <string name="hex">#%1s</string>

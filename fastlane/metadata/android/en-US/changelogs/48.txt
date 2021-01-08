@@ -1,0 +1,4 @@
+- New awesome recent setups dialog! :)
+- Design reviews
+- Code improvements
+- Update translations
