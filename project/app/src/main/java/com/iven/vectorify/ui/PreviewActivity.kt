@@ -1,13 +1,11 @@
 package com.iven.vectorify.ui
 
 import android.app.WallpaperManager
-import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.*
 import android.widget.SeekBar
 import android.widget.Toast
@@ -107,6 +105,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         mPreviewActivityBinding = PreviewActivityBinding.inflate(layoutInflater)
         setContentView(mPreviewActivityBinding.root)
+
         //set immersive mode
         hideSystemUI()
 
