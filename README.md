@@ -52,7 +52,7 @@ The project is now hosted on [weblate](https://hosted.weblate.org/engage/vectori
 
 # License
 
-Copyright (C) 2020 **Enrico D'Ortenzio**
+Copyright (C) 2021 **Enrico D'Ortenzio**
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
