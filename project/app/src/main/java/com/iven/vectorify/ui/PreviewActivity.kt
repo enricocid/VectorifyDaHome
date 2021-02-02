@@ -7,9 +7,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.Loader
@@ -157,6 +159,16 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         setToolbarAndSeekBarColors()
 
         initializeSeekBar()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            window.decorView.afterMeasured {
+                val top = WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout?.safeInsetTop
+                val lp = mPreviewActivityBinding.toolbar.layoutParams as FrameLayout.LayoutParams
+                if (top != 0) {
+                    lp.setMargins(0, top!!, 0,0)
+                }
+            }
+        }
     }
 
     private fun initializeSeekBar() {

@@ -43,7 +43,7 @@
         </activity>
 
         <activity android:name=".ui.PreviewActivity"
-                  android:theme="@style/AppTheme"
+                  android:theme="@style/PreviewTheme"
                   android:screenOrientation="portrait"/>
 
         <service
