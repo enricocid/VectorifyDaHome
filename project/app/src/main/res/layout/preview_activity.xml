@@ -51,30 +51,27 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textStyle="bold" />
 
+            <!-- SCALING SEEKBAR -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <!-- SCALING SEEKBAR -->
-                <SeekBar
+                <com.google.android.material.slider.Slider
                     android:id="@+id/seek_size"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="16dp" />
+                    app:haloRadius="12dp"
+                    app:thumbRadius="6dp" />
 
-                <TextView
-                    android:id="@+id/scale_text"
+                <ImageView
+                    android:id="@+id/aspect_ratio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="16dp"
-                    android:textAlignment="textEnd"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:textStyle="bold" />
+                    android:padding="16dp"
+                    android:src="@drawable/ic_aspect_ratio" />
             </LinearLayout>
 
             <LinearLayout

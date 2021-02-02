@@ -524,7 +524,7 @@ class MainActivity : AppCompatActivity(),
         if (mTempBackgroundColor == mTempVectorColor) {
             setVectorColorForUI(mTempVectorColor, false)
         }
-        val textColor = mTempBackgroundColor.toSurfaceColor()
+        val textColor = mTempBackgroundColor.toSurfaceColor(this)
 
         //update shit colors
         mVectorifyActivityBinding.backgroundColor.setCardBackgroundColor(mTempBackgroundColor)
@@ -553,7 +553,7 @@ class MainActivity : AppCompatActivity(),
             mTempVectorColor = color
         }
 
-        val textColor = mTempVectorColor.toSurfaceColor()
+        val textColor = mTempVectorColor.toSurfaceColor(this)
 
         //update shit colors
         mVectorifyActivityBinding.vectorColor.setCardBackgroundColor(

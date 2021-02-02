@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
@@ -17,6 +16,7 @@ import androidx.loader.content.Loader
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onShow
 import com.afollestad.materialdialogs.customview.customView
+import com.google.android.material.slider.Slider
 import com.iven.vectorify.*
 import com.iven.vectorify.databinding.PreviewActivityBinding
 import com.iven.vectorify.models.VectorifyWallpaper
@@ -162,36 +162,29 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     private fun initializeSeekBar() {
         //observe SeekBar changes
         mPreviewActivityBinding.run {
-            seekSize.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
-                var userProgress = 0
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            var userProgress = 0F
+
+            seekSize.addOnChangeListener { _, value, fromUser ->
+                if (fromUser && value > 0.05F) {
+                    vectorView.setScaleFactor(value)
+                    userProgress = value
+                }
+            }
+
+            seekSize.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+                override fun onStartTrackingTouch(slider: Slider) {
                     sUserIsSeeking = true
                 }
 
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                    if (fromUser && progress >= 10) {
-                        userProgress = progress
-                        scaleText.text = (progress.toFloat() / 100).toDecimalFormat()
-                        vectorView.setScaleFactor(progress.toFloat() / 100)
-                    }
-                }
-
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                override fun onStopTrackingTouch(slider: Slider) {
                     sUserIsSeeking = false
-                    mTempScale = userProgress.toFloat() / 100
+                    mTempScale = userProgress
                 }
             })
 
             //restore saved scale value
-            seekSize.progress = (mTempScale * 100).toInt()
-
-            //set scale text
-            scaleText.text = mTempScale.toDecimalFormat()
+            seekSize.value = mTempScale
         }
     }
 
@@ -206,7 +199,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         //determine if background color is dark or light and select
         //the appropriate color for UI widgets
-        val widgetColor = mTempBackgroundColor.toSurfaceColor()
+        val widgetColor = mTempBackgroundColor.toSurfaceColor(this)
 
         val cardColor = ColorUtils.setAlphaComponent(mTempBackgroundColor, 100)
 
@@ -244,16 +237,18 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         }
 
         mPreviewActivityBinding.seekSize.run {
-            progressTintList = ColorStateList.valueOf(widgetColor)
-            thumbTintList = ColorStateList.valueOf(widgetColor)
-            progressBackgroundTintList = ColorStateList.valueOf(widgetColor)
+            val color = ColorStateList.valueOf(widgetColor)
+            thumbTintList = color
+            trackTintList = color
+            trackInactiveTintList = ColorStateList.valueOf(mTempBackgroundColor.toForegroundColor(this@PreviewActivity))
+            haloTintList = color
         }
 
         mPreviewActivityBinding.seekbarTitle.setTextColor(widgetColor)
-        mPreviewActivityBinding.scaleText.setTextColor(widgetColor)
 
         mPreviewActivityBinding.run {
             listOf(
+                aspectRatio,
                 up,
                 down,
                 left,
@@ -291,8 +286,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         mPreviewActivityBinding.run {
             vectorView.setScaleFactor(mTempScale)
-            seekSize.progress = (mTempScale * 100).toInt()
-            scaleText.text = (seekSize.progress.toFloat() / 100).toDecimalFormat()
+            seekSize.value = mTempScale
             vectorView.resetPosition()
         }
     }

@@ -11,6 +11,11 @@
     <color name="chips_color">#424242</color>
     <color name="vectors_color">@android:color/black</color>
 
+    <color name="preview_widgets_color_light">#1b1b1b</color>
+    <color name="preview_widgets_color_light_fg">#6d6d6d</color>
+    <color name="preview_widgets_color_dark">#bdbdbd</color>
+    <color name="preview_widgets_color_dark_fg">@color/chips_text_color</color>
+
     <!--  PRESETS -->
 
     <color name="midnight_blue">#1E1F26</color>
