@@ -176,7 +176,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
                 ) {
                     if (fromUser && progress >= 10) {
                         userProgress = progress
-                        seekbarTitle.text = (progress.toFloat() / 100).toDecimalFormat()
+                        scaleText.text = (progress.toFloat() / 100).toDecimalFormat()
                         vectorView.setScaleFactor(progress.toFloat() / 100)
                     }
                 }
@@ -191,7 +191,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             seekSize.progress = (mTempScale * 100).toInt()
 
             //set scale text
-            seekbarTitle.text = mTempScale.toDecimalFormat()
+            scaleText.text = mTempScale.toDecimalFormat()
         }
     }
 
@@ -250,7 +250,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         }
 
         mPreviewActivityBinding.seekbarTitle.setTextColor(widgetColor)
-        mPreviewActivityBinding.seekbarTitle.setTextColor(widgetColor)
+        mPreviewActivityBinding.scaleText.setTextColor(widgetColor)
 
         mPreviewActivityBinding.run {
             listOf(
@@ -292,7 +292,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         mPreviewActivityBinding.run {
             vectorView.setScaleFactor(mTempScale)
             seekSize.progress = (mTempScale * 100).toInt()
-            seekbarTitle.text = (seekSize.progress.toFloat() / 100).toDecimalFormat()
+            scaleText.text = (seekSize.progress.toFloat() / 100).toDecimalFormat()
             vectorView.resetPosition()
         }
     }
