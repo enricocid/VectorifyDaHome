@@ -292,7 +292,7 @@ class MainActivity : AppCompatActivity(),
             replaceMenu(R.menu.bottom_menu)
 
             val menuThemeItem = menu.findItem(R.id.app_bar_theme).apply {
-                icon = getDrawable(Utils.getDefaultNightModeIcon(this@MainActivity))
+                icon = ContextCompat.getDrawable(this@MainActivity, Utils.getDefaultNightModeIcon(this@MainActivity))
             }
 
             setOnMenuItemClickListener {
@@ -310,7 +310,7 @@ class MainActivity : AppCompatActivity(),
                         )
 
                         menuThemeItem.icon =
-                                getDrawable(Utils.getDefaultNightModeIcon(this@MainActivity))
+                                ContextCompat.getDrawable(this@MainActivity, Utils.getDefaultNightModeIcon(this@MainActivity))
                     }
 
                     R.id.app_bar_restore -> restoreDefaultWallpaper()
@@ -352,7 +352,7 @@ class MainActivity : AppCompatActivity(),
                             mBottomSheetBehavior.isDraggable = true
                             mVectorifyActivityBinding.run {
                                 shadowView.visibility = View.VISIBLE
-                                fab.setImageDrawable(getDrawable(R.drawable.ic_delete))
+                                fab.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_delete))
                                 fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity, R.color.red))
                             }
                         }
@@ -574,7 +574,7 @@ class MainActivity : AppCompatActivity(),
     private fun updateFabColor() {
 
         mVectorifyActivityBinding.fab.backgroundTintList = ColorStateList.valueOf(mTempBackgroundColor)
-        mVectorifyActivityBinding.fab.setImageDrawable(getDrawable(R.drawable.ic_check))
+        mVectorifyActivityBinding.fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_check))
 
         //check if colors are the same so we enable stroke to make vector visible
         val fabDrawableColor = mTempVectorColor.toContrastColor(mTempBackgroundColor)

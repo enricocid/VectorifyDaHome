@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="default_accent_color">#3427FF</color>
+    <color name="default_accent_color">#c0cfff</color>
     <color name="red">#ef9a9a</color>
 
     <color name="presets_card_color">#595959</color>
@@ -8,4 +8,7 @@
     <color name="system_bars_color">#313131</color>
     <color name="activity_background_color">@color/chips_color</color>
     <color name="vectors_color">@android:color/white</color>
+
+    <!--  PROGRESS COLOR -->
+    <color name="blue">#90caf9</color>
 </resources>

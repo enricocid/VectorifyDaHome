@@ -243,11 +243,11 @@ object Utils {
         var vectorProps = getVectorProps(vector)
 
         val bit = try {
-            context.getDrawable(vectorProps.first)
+            ContextCompat.getDrawable(context, vectorProps.first)
         } catch (e: Exception) {
             e.printStackTrace()
             vectorProps = getVectorProps(getDefaultVectorForApi())
-            context.getDrawable(vectorProps.first)
+            ContextCompat.getDrawable(context, vectorProps.first)
         }
 
         if (bit != null) {
@@ -307,7 +307,7 @@ object Utils {
 
     @JvmStatic
     fun createColouredRipple(context: Context, rippleColor: Int): Drawable {
-        val ripple = context.getDrawable(R.drawable.ripple) as RippleDrawable
+        val ripple = ContextCompat.getDrawable(context, R.drawable.ripple) as RippleDrawable
         ripple.setColor(ColorStateList.valueOf(rippleColor))
         return ripple
     }

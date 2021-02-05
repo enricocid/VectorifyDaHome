@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="default_accent_color">#3427FF</color>
+    <color name="default_accent_color">#304ffe</color>
     <color name="red">#f44336</color>
 
     <color name="bottom_bar_color">@color/chips_text_color</color>
@@ -17,7 +17,6 @@
     <color name="preview_widgets_color_dark_fg">@color/chips_text_color</color>
 
     <!--  PRESETS -->
-
     <color name="midnight_blue">#1E1F26</color>
     <color name="ink">#283655</color>
     <color name="light_blue_berry">#4D648D</color>
