@@ -12,5 +12,6 @@
     <ImageView
         android:id="@+id/recent_setups_vector"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:ignore="contentDescription" />
 </com.google.android.material.card.MaterialCardView>
