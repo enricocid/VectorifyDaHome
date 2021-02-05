@@ -1,7 +1,5 @@
 <resources>
 
-    <string name="error_get_resource">Oeps, niet gevonden!</string>
-
     <!-- Card titles -->
     <string name="title_background">Achtergrond</string>
     <string name="title_background_dialog">Achtergrondkleur</string>

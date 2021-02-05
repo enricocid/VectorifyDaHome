@@ -36,7 +36,6 @@
     <string name="message_clear_recent_setups">سيتم حذف جميع الخلفيات السابقة. هل أنت متأكد؟ إذا أردت حذف خلفية معينة يمكنك ذلك بالنقر مطوّلا عليها :).</string>
     <string name="message_no_recent_setups">لا يوجد خلفيات سابقة!</string>
     <string name="title_recent_setups">الخلفيات السابقة</string>
-    <string name="error_get_resource">للأسف! تعذر الحصول على العنصر!</string>
     <string name="title_accent_me">اجعلني اللون البارز!</string>
     <string name="title_vector">الفيكتور</string>
     <string name="selected_preset">الخلفية: %1s, الفيكتور: %1s</string>

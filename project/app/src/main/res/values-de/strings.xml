@@ -43,5 +43,4 @@
     <string name="title_presets">Vorlagen</string>
     <string name="title_background_dialog">Hintergrundfarbe</string>
     <string name="title_background">Hintergrund</string>
-    <string name="error_get_resource">Hoppla! Nicht gefunden!</string>
 </resources>

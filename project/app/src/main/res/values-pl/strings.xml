@@ -43,5 +43,4 @@
     <string name="title_vector_dialog">Kolor</string>
     <string name="title_background_dialog">"Kolor tła"</string>
     <string name="title_background">"Tło"</string>
-    <string name="error_get_resource">Ups!! Nie znaleziono!</string>
 </resources>

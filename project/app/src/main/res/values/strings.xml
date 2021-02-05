@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="error_get_resource">Oops!! Not found!</string>
-
     <!-- Card titles -->
     <string name="title_background">Background</string>
     <string name="title_background_dialog">Background color</string>

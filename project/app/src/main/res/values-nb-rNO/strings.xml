@@ -43,5 +43,4 @@
     <string name="title_vector">Vektoriell</string>
     <string name="title_background_dialog">Bakgrunnsfarge</string>
     <string name="title_background">Bakgrunn</string>
-    <string name="error_get_resource">Oida. Fant ikke dette.</string>
 </resources>

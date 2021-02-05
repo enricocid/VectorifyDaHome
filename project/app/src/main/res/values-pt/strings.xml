@@ -43,5 +43,4 @@
     <string name="title_vector">Vetor</string>
     <string name="title_background_dialog">Cor de fundo</string>
     <string name="title_background">Fundo</string>
-    <string name="error_get_resource">"Oops!! Não encontrado!"</string>
 </resources>
