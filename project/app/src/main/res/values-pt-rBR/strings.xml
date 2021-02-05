@@ -1,7 +1,5 @@
 <resources>
 
-<string name="error_get_resource">Oops!! Não encontrado!</string>
-
 <!-- Títulos dos cartões -->
     <string name="title_background">Fundo</string>
     <string name="title_background_dialog">Cor de fundo</string>

@@ -51,6 +51,9 @@ class RecentsAdapter(
                     )
 
             itemView.run {
+
+                contentDescription = ctx.getString(R.string.content_recent, adapterPosition)
+
                 setOnClickListener {
                     onRecentClick?.invoke(vectorifyWallpaper)
                 }

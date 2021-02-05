@@ -6,7 +6,6 @@
     android:layout_height="@dimen/vector_size"
     android:layout_margin="1dp"
     android:padding="2dp"
-    tools:ignore="ContentDescription"
     tools:viewBindingIgnore="true">
 
     <ImageView
@@ -16,11 +15,13 @@
         android:layout_gravity="center"
         android:scaleType="fitXY"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_checked" />
+        app:srcCompat="@drawable/ic_checked"
+        tools:ignore="contentDescription" />
 
     <ImageButton
         android:id="@+id/vector_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?android:attr/actionBarItemBackground" />
+        android:background="?android:attr/actionBarItemBackground"
+        tools:ignore="contentDescription" />
 </FrameLayout>

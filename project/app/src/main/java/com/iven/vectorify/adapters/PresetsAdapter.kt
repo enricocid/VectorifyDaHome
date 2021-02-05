@@ -85,44 +85,34 @@ class PresetsAdapter(private val ctx: Context) :
             colorItem.strokeColor = selectedBackgroundColor
 
             itemView.run {
+
+                val backgroundColorName =
+                    ctx.resources.getResourceEntryName(combo.first)
+                        .replace(
+                            ctx.getString(R.string.underscore_delimiter),
+                            ctx.getString(R.string.space_delimiter)
+                        )
+
+                val vectorColorName = ctx.resources.getResourceEntryName(combo.second)
+                    .replace(
+                        context.getString(R.string.underscore_delimiter),
+                        context.getString(R.string.space_delimiter)
+                    )
+
+                val resultName = ctx.getString(
+                    R.string.selected_preset,
+                    backgroundColorName.capitalize(),
+                    vectorColorName.capitalize()
+                )
+
+                contentDescription = resultName
+
                 setOnClickListener {
                     onPresetClick?.invoke(combo)
                 }
 
                 setOnLongClickListener {
-
-                    try {
-                        val backgroundColorName =
-                            ctx.resources.getResourceEntryName(combo.first)
-                                .replace(
-                                    ctx.getString(R.string.underscore_delimiter),
-                                    ctx.getString(R.string.space_delimiter)
-                                )
-                                .capitalize()
-
-                        val vectorColorName = ctx.resources.getResourceEntryName(combo.second)
-                            .replace(
-                                context.getString(R.string.underscore_delimiter),
-                                context.getString(R.string.space_delimiter)
-                            )
-                            .capitalize()
-
-                        Toast.makeText(
-                            ctx, context.getString(
-                                R.string.selected_preset,
-                                backgroundColorName,
-                                vectorColorName
-                            ), Toast.LENGTH_LONG
-                        ).show()
-
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        Toast.makeText(
-                            ctx, context.getString(
-                                R.string.error_get_resource
-                            ), Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    Toast.makeText(ctx, resultName, Toast.LENGTH_LONG).show()
                     return@setOnLongClickListener false
                 }
             }

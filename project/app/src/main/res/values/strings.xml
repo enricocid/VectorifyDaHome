@@ -36,6 +36,21 @@
     <string name="title_already_live">"Applying changes …"</string>
     <string name="message_saved_to">Saved to %1s</string>
 
+    <!-- Content descriptions -->
+    <string name="content_vectors">Available vectors and preview</string>
+    <string name="content_vector">Vector %1s</string>
+    <string name="content_selected_category">Selected category is %1s</string>
+    <string name="content_invert_bg_vector_colors">Exchange background and vector colors</string>
+    <string name="content_btn_up">Move vector up</string>
+    <string name="content_btn_down">Move vector down</string>
+    <string name="content_btn_left">Move vector left</string>
+    <string name="content_btn_right">Move vector right</string>
+    <string name="content_btn_align_horizontal">Horizontally center vector</string>
+    <string name="content_btn_align_vertical">Vertically center vector</string>
+    <string name="content_btn_reset">Restore previous configuration</string>
+    <string name="content_recent">Recent wallpaper number %1d</string>
+    <string name="content_go_to_prev">Go to preview</string>
+
     <!-- Categories -->
     <string name="title_categories">Categories</string>
     <string name="title_tech">Tech</string>

@@ -71,14 +71,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:src="@drawable/ic_aspect_ratio" />
+                    android:src="@drawable/ic_aspect_ratio"
+                    tools:ignore="contentDescription"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                tools:ignore="ContentDescription">
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/up"
@@ -86,7 +86,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_up" />
+                    app:srcCompat="@drawable/ic_up"
+                    android:contentDescription="@string/content_btn_up" />
 
                 <ImageButton
                     android:id="@+id/down"
@@ -94,7 +95,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_down" />
+                    app:srcCompat="@drawable/ic_down"
+                    android:contentDescription="@string/content_btn_down"/>
 
                 <ImageButton
                     android:id="@+id/left"
@@ -102,7 +104,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_left" />
+                    app:srcCompat="@drawable/ic_left"
+                    android:contentDescription="@string/content_btn_left"/>
 
                 <ImageButton
                     android:id="@+id/right"
@@ -110,7 +113,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_right" />
+                    app:srcCompat="@drawable/ic_right"
+                    android:contentDescription="@string/content_btn_right"/>
 
                 <ImageButton
                     android:id="@+id/center_horizontal"
@@ -118,7 +122,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_horizontal_align_center" />
+                    app:srcCompat="@drawable/ic_horizontal_align_center"
+                    android:contentDescription="@string/content_btn_align_horizontal"/>
 
                 <ImageButton
                     android:id="@+id/center_vertical"
@@ -126,7 +131,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_vertical_align_center" />
+                    app:srcCompat="@drawable/ic_vertical_align_center"
+                    android:contentDescription="@string/content_btn_align_vertical" />
 
                 <ImageButton
                     android:id="@+id/reset_position"
@@ -134,7 +140,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_restore" />
+                    app:srcCompat="@drawable/ic_restore"
+                    android:contentDescription="@string/content_btn_reset" />
             </LinearLayout>
         </LinearLayout>
 

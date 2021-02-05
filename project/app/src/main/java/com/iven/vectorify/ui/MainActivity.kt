@@ -450,25 +450,13 @@ class MainActivity : AppCompatActivity(),
 
                 @SuppressLint("DefaultLocale")
                 onVectorLongClick = { vector ->
-
-                    try {
-                        val iconName = resources.getResourceEntryName(vector)
-                                .replace(
-                                        getString(R.string.underscore_delimiter),
-                                        getString(R.string.space_delimiter)
-                                )
-                                .capitalize()
-
-                        Toast.makeText(this@MainActivity, iconName, Toast.LENGTH_LONG).show()
-
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                        Toast.makeText(
-                                this@MainActivity,
-                                getString(R.string.error_get_resource),
-                                Toast.LENGTH_LONG
-                        ).show()
-                    }
+                    val iconName = resources.getResourceEntryName(vector)
+                        .replace(
+                            getString(R.string.underscore_delimiter),
+                            getString(R.string.space_delimiter)
+                        )
+                        .capitalize()
+                    Toast.makeText(this@MainActivity, iconName, Toast.LENGTH_LONG).show()
                 }
             }
             adapter = mVectorsAdapter
@@ -654,7 +642,11 @@ class MainActivity : AppCompatActivity(),
         }
         val category = Utils.getCategory(this, mTempCategory)
         mVectorsAdapter.swapCategory(category.second)
-        mVectorifyActivityBinding.categoriesChip.text = category.first
+        mVectorifyActivityBinding.categoriesChip.run {
+            text = category.first
+            contentDescription = getString(R.string.content_selected_category, category.first)
+        }
+
 
         if (force) {
             scrollToVector(mTempVector)

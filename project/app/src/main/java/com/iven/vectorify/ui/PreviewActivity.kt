@@ -290,10 +290,11 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     }
 
     private fun resetVectorPosition() {
+
         mTempScale = 0.35F
 
-        vectorifyPreferences.liveVectorifyWallpaper?.let {
-            mTempScale = it.scale
+        vectorifyPreferences.liveVectorifyWallpaper?.let { vw ->
+            mTempScale = vw.scale
         }
 
         mPreviewActivityBinding.run {

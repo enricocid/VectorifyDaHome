@@ -80,6 +80,11 @@ class VectorsAdapter(private val ctx: Context) :
 
             itemView.findViewById<ImageButton>(R.id.vector_button).apply {
                 setImageResource(drawable)
+                contentDescription = ctx.getString(R.string.content_vector, resources.getResourceEntryName(drawable)
+                    .replace(
+                        ctx.getString(R.string.underscore_delimiter),
+                        ctx.getString(R.string.space_delimiter)
+                    ))
                 setOnClickListener {
                     if (mSelectedDrawable != drawable) {
                         notifyItemChanged(getVectorPosition(mSelectedDrawable))

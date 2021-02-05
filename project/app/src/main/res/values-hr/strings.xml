@@ -32,7 +32,6 @@
     <string name="title_categories">Kategorije</string>
     <string name="title_background_dialog">Boja pozadine</string>
     <string name="message_clear_recent_setups">"Izbrisat će se sve nedavne konfiguracije. Stvarno ih želiš izbrisati? Ako želiš izbrisati određene konfiguracije, pritisni ih dugo :)."</string>
-    <string name="error_get_resource">"Ups! Resurs nije pronađen!"</string>
     <string name="title_github">GitHub stranica</string>
     <string name="title_others">Ostalo</string>
     <string name="title_presets">"Predlošci"</string>

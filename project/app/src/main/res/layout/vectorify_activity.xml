@@ -2,8 +2,6 @@
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/vectorifyView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -29,7 +27,8 @@
             android:padding="2dp"
             app:cardBackgroundColor="@color/presets_card_color"
             app:cardCornerRadius="8dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            android:contentDescription="@string/content_vectors">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="8dp"
-                        tools:ignore="ContentDescription" />
+                        android:contentDescription="@string/title_vector"/>
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/categories_chip"
@@ -93,9 +92,10 @@
                 android:padding="2dp"
                 app:cardBackgroundColor="@android:color/black"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                android:contentDescription="@string/title_background_dialog">
 
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/background_color_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -146,7 +146,7 @@
                 android:layout_gravity="center"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 app:srcCompat="@drawable/ic_swap_horizontal"
-                tools:ignore="ContentDescription" />
+                android:contentDescription="@string/content_invert_bg_vector_colors" />
 
             <!-- VECTOR COLOR PREF CARD -->
             <com.google.android.material.card.MaterialCardView
@@ -161,7 +161,8 @@
                 android:padding="2dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp">
+                app:cardElevation="2dp"
+                android:contentDescription="@string/title_vector_dialog">
 
                 <LinearLayout
                     android:id="@+id/vector_color_picker"
@@ -220,7 +221,8 @@
             android:padding="2dp"
             app:cardBackgroundColor="@color/presets_card_color"
             app:cardCornerRadius="8dp"
-            app:cardElevation="2dp">
+            app:cardElevation="2dp"
+            android:contentDescription="@string/title_presets">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -322,5 +324,5 @@
         android:src="@drawable/ic_check"
         app:layout_anchor="@id/bar"
         app:useCompatPadding="true"
-        tools:ignore="ContentDescription" />
+        android:contentDescription="@string/content_go_to_prev"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -27,6 +27,21 @@
     <string name="title_go_live">Imposta come sfondo animato</string>
     <string name="title_already_live">"Applico i cambiamenti …"</string>
     <string name="message_saved_to">Salvato in %1s</string>
+    <!-- Content descriptions -->
+    <string name="content_vectors">Grafiche disponibili e anteprima</string>
+    <string name="content_vector">Grafica %1s</string>
+    <string name="content_selected_category">La categoria selezionata è %1s</string>
+    <string name="content_invert_bg_vector_colors">Scambia colori sfondo e grafica</string>
+    <string name="content_btn_up">Muove la grafica su</string>
+    <string name="content_btn_down">Muove il vettore giù</string>
+    <string name="content_btn_left">Muove il vettore a sinistra</string>
+    <string name="content_btn_right">Muove il vettore a destra</string>
+    <string name="content_btn_align_horizontal">Centra orizzontalmente il vettore</string>
+    <string name="content_btn_align_vertical">Centra verticalmente il vettore</string>
+    <string name="content_btn_reset">Ripristina configurazione precedente</string>
+    <string name="content_recent">Sfondo recente numero %1d</string>
+    <string name="content_go_to_prev">Vai alla anteprima</string>
+
     <!-- Categorie -->
     <string name="title_categories">Categorie</string>
     <string name="title_tech">Tecno</string>
