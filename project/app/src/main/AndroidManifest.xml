@@ -29,8 +29,7 @@
         </provider>
 
         <activity android:name=".ui.MainActivity"
-                  android:theme="@style/AppTheme"
-                  android:screenOrientation="portrait">
+                  android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -43,8 +42,7 @@
         </activity>
 
         <activity android:name=".ui.PreviewActivity"
-                  android:theme="@style/PreviewTheme"
-                  android:screenOrientation="portrait"/>
+                  android:theme="@style/PreviewTheme" />
 
         <service
                 android:name=".VectorifyDaHomeLP"

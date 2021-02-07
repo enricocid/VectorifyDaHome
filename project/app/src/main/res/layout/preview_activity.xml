@@ -53,6 +53,7 @@
 
             <!-- SCALING SEEKBAR -->
             <LinearLayout
+                android:id="@+id/move_btn_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -72,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:src="@drawable/ic_aspect_ratio"
-                    tools:ignore="contentDescription"/>
+                    tools:ignore="contentDescription" />
             </LinearLayout>
 
             <LinearLayout
@@ -85,63 +86,63 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/content_btn_up"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_up"
-                    android:contentDescription="@string/content_btn_up" />
+                    app:srcCompat="@drawable/ic_up" />
 
                 <ImageButton
                     android:id="@+id/down"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/content_btn_down"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_down"
-                    android:contentDescription="@string/content_btn_down"/>
+                    app:srcCompat="@drawable/ic_down" />
 
                 <ImageButton
                     android:id="@+id/left"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/content_btn_left"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_left"
-                    android:contentDescription="@string/content_btn_left"/>
+                    app:srcCompat="@drawable/ic_left" />
 
                 <ImageButton
                     android:id="@+id/right"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/content_btn_right"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_right"
-                    android:contentDescription="@string/content_btn_right"/>
+                    app:srcCompat="@drawable/ic_right" />
 
                 <ImageButton
                     android:id="@+id/center_horizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/content_btn_align_horizontal"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_horizontal_align_center"
-                    android:contentDescription="@string/content_btn_align_horizontal"/>
+                    app:srcCompat="@drawable/ic_horizontal_align_center" />
 
                 <ImageButton
                     android:id="@+id/center_vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/content_btn_align_vertical"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_vertical_align_center"
-                    android:contentDescription="@string/content_btn_align_vertical" />
+                    app:srcCompat="@drawable/ic_vertical_align_center" />
 
                 <ImageButton
                     android:id="@+id/reset_position"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/content_btn_reset"
                     android:padding="8dp"
-                    app:srcCompat="@drawable/ic_restore"
-                    android:contentDescription="@string/content_btn_reset" />
+                    app:srcCompat="@drawable/ic_restore" />
             </LinearLayout>
         </LinearLayout>
 

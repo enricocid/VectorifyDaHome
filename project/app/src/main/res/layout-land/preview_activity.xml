@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        app:title="@string/title_preview"
+        app:titleTextAppearance="@style/ToolbarStyle.Title" />
+
+    <com.iven.vectorify.ui.VectorView
+        android:id="@+id/vector_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/move_btn_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <ImageButton
+            android:id="@+id/up"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_btn_up"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_up" />
+
+        <ImageButton
+            android:id="@+id/down"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_btn_down"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_down" />
+
+        <ImageButton
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_btn_left"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_left" />
+
+        <ImageButton
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_btn_right"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_right" />
+
+        <ImageButton
+            android:id="@+id/center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_btn_align_horizontal"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_horizontal_align_center" />
+
+        <ImageButton
+            android:id="@+id/center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_btn_align_vertical"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_vertical_align_center" />
+
+        <ImageButton
+            android:id="@+id/reset_position"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/content_btn_reset"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_restore" />
+    </LinearLayout>
+
+    <!-- SIZE POSITION CARD -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/seekbar_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:padding="4dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/seekbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/title_size"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textStyle="bold" />
+
+            <!-- SCALING SEEKBAR -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/seek_size"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:haloRadius="12dp"
+                    app:thumbRadius="6dp" />
+
+                <ImageView
+                    android:id="@+id/aspect_ratio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_aspect_ratio"
+                    tools:ignore="contentDescription" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

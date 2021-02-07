@@ -7,6 +7,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.PorterDuff
@@ -27,6 +29,10 @@ import com.iven.vectorify.vectorifyPreferences
 
 
 object Utils {
+
+    @JvmStatic
+    fun isDeviceLand(resources: Resources) =
+            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     @JvmStatic
     fun getRoundedBGforRecent(context: Context): MaterialShapeDrawable {

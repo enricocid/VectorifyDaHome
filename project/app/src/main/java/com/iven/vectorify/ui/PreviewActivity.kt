@@ -162,10 +162,25 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             window.decorView.afterMeasured {
-                val top = WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout?.safeInsetTop
-                val lp = mPreviewActivityBinding.toolbar.layoutParams as FrameLayout.LayoutParams
-                if (top != 0) {
-                    lp.setMargins(0, top!!, 0,0)
+                val rootWindowInsets = WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout
+                mPreviewActivityBinding.run {
+                    if (Utils.isDeviceLand(resources)) {
+                        val left = rootWindowInsets?.safeInsetLeft
+                        val lpOptionsCard = seekbarCard.layoutParams as FrameLayout.LayoutParams
+                        lpOptionsCard.width = root.width/2
+
+                        val lpBtnContainer = moveBtnContainer.layoutParams as FrameLayout.LayoutParams
+                        lpBtnContainer.setMargins(0, toolbar.height, 0, 0)
+                        if (left != 0) {
+                            lpOptionsCard.setMargins(left!!, 0, left,0)
+                        }
+                    } else {
+                        val top = rootWindowInsets?.safeInsetTop
+                        val lpToolbar = toolbar.layoutParams as FrameLayout.LayoutParams
+                        if (top != 0) {
+                            lpToolbar.setMargins(0, top!!, 0,0)
+                        }
+                    }
                 }
             }
         }

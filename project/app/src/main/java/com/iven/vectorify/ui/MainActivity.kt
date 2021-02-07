@@ -158,7 +158,12 @@ class MainActivity : AppCompatActivity(),
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             window?.let { win ->
                 edgeToEdge {
-                    win.decorView.fit { Edge.Top }
+                    val edges = if (Utils.isDeviceLand(resources)) {
+                        Edge.Top + Edge.Right
+                    } else {
+                        Edge.Top
+                    }
+                    win.decorView.fit { edges }
                     mVectorifyActivityBinding.bar.fit { Edge.Bottom + Edge.Right }
                     mVectorifyActivityBinding.fab.run {
                         fit { Edge.Right }
