@@ -1,82 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.iven.vectorify">
+    package="com.iven.vectorify">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <uses-feature
-            android:name="android.software.live_wallpaper"
-            android:required="true"/>
+        android:name="android.software.live_wallpaper"
+        android:required="true" />
 
     <application
-            android:name=".VectorifyApp"
-            android:allowBackup="false"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+        android:name=".VectorifyApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
         <provider
-                android:name="androidx.core.content.FileProvider"
-                android:authorities="@string/app_name"
-                android:exported="false"
-                android:grantUriPermissions="true">
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="@string/app_name"
+            android:exported="false"
+            android:grantUriPermissions="true">
 
             <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/provider_paths"/>
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".ui.MainActivity"
-                  android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SET_WALLPAPER" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.PreviewActivity"
-                  android:theme="@style/PreviewTheme" />
+        <activity
+            android:name=".ui.PreviewActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/PreviewTheme" />
 
         <service
-                android:name=".VectorifyDaHomeLP"
-                android:label="@string/app_name"
-                android:permission="android.permission.BIND_WALLPAPER">
+            android:name=".VectorifyDaHomeLP"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
-                <action android:name="android.service.wallpaper.WallpaperService"/>
+                <action android:name="android.service.wallpaper.WallpaperService" />
             </intent-filter>
 
             <meta-data
-                    android:name="android.service.wallpaper"
-                    android:resource="@xml/vectorify_wallpaper"/>
+                android:name="android.service.wallpaper"
+                android:resource="@xml/vectorify_wallpaper" />
         </service>
 
 
         <uses-library
-                android:name="com.sec.android.app.multiwindow"
-                android:required="false"/>
+            android:name="com.sec.android.app.multiwindow"
+            android:required="false" />
 
         <meta-data
-                android:name="com.sec.android.support.multiwindow"
-                android:value="true"/>
+            android:name="com.sec.android.support.multiwindow"
+            android:value="true" />
         <meta-data
-                android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W"
-                android:value="632.0dip"/>
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_W"
+            android:value="632.0dip" />
         <meta-data
-                android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H"
-                android:value="598.0dip"/>
+            android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H"
+            android:value="598.0dip" />
         <meta-data
-                android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W"
-                android:value="632.0dip"/>
+            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W"
+            android:value="632.0dip" />
         <meta-data
-                android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H"
-                android:value="598.0dip"/>
+            android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H"
+            android:value="598.0dip" />
     </application>
 
 </manifest>

@@ -3,7 +3,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:alpha="0">
 
     <!-- CARDS CONTAINER -->
     <LinearLayout
@@ -24,11 +25,11 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
+            android:contentDescription="@string/content_vectors"
             android:padding="2dp"
             app:cardBackgroundColor="@color/presets_card_color"
             app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            android:contentDescription="@string/content_vectors">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,8 +46,8 @@
                         android:id="@+id/vector_frame"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="8dp"
-                        android:contentDescription="@string/title_vector"/>
+                        android:contentDescription="@string/title_vector"
+                        android:padding="8dp" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/categories_chip"
@@ -89,13 +90,13 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
                 android:layout_weight="1"
+                android:contentDescription="@string/title_background_dialog"
                 android:padding="2dp"
                 app:cardBackgroundColor="@android:color/black"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                android:contentDescription="@string/title_background_dialog">
+                app:cardElevation="2dp">
 
-            <LinearLayout
+                <LinearLayout
                     android:id="@+id/background_color_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,8 +146,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                app:srcCompat="@drawable/ic_swap_horizontal"
-                android:contentDescription="@string/content_invert_bg_vector_colors" />
+                android:contentDescription="@string/content_invert_bg_vector_colors"
+                app:srcCompat="@drawable/ic_swap_horizontal" />
 
             <!-- VECTOR COLOR PREF CARD -->
             <com.google.android.material.card.MaterialCardView
@@ -158,11 +159,11 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
                 android:layout_weight="1"
+                android:contentDescription="@string/title_vector_dialog"
                 android:padding="2dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="2dp"
-                android:contentDescription="@string/title_vector_dialog">
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:id="@+id/vector_color_picker"
@@ -218,11 +219,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
+            android:contentDescription="@string/title_presets"
             android:padding="2dp"
             app:cardBackgroundColor="@color/presets_card_color"
             app:cardCornerRadius="8dp"
-            app:cardElevation="2dp"
-            android:contentDescription="@string/title_presets">
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -321,8 +322,8 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/content_go_to_prev"
         android:src="@drawable/ic_check"
         app:layout_anchor="@id/bar"
-        app:useCompatPadding="true"
-        android:contentDescription="@string/content_go_to_prev"/>
+        app:useCompatPadding="true" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

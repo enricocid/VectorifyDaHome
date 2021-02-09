@@ -2,6 +2,7 @@ package com.iven.vectorify.ui
 
 import android.app.WallpaperManager
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
@@ -102,6 +103,11 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
         finishAndRemoveTask()
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        onBackPressed()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -162,10 +168,10 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             window.decorView.afterMeasured {
-                val rootWindowInsets = WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout
+                val displayCutoutCompat = WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout
                 mPreviewActivityBinding.run {
                     if (Utils.isDeviceLand(resources)) {
-                        val left = rootWindowInsets?.safeInsetLeft
+                        val left = displayCutoutCompat?.safeInsetLeft
                         val lpOptionsCard = seekbarCard.layoutParams as FrameLayout.LayoutParams
                         lpOptionsCard.width = root.width/2
 
@@ -174,8 +180,13 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
                         if (left != 0) {
                             lpOptionsCard.setMargins(left!!, 0, left,0)
                         }
+
+                        seekbarCard.animate().run {
+                            duration = 750
+                            alpha(1.0F)
+                        }
                     } else {
-                        val top = rootWindowInsets?.safeInsetTop
+                        val top = displayCutoutCompat?.safeInsetTop
                         val lpToolbar = toolbar.layoutParams as FrameLayout.LayoutParams
                         if (top != 0) {
                             lpToolbar.setMargins(0, top!!, 0,0)
