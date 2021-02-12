@@ -39,7 +39,7 @@
 # Downloads
 
 [<img alt="Get it on Google Play" height="80" src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png">](https://play.google.com/store/apps/details?id=com.iven.iconify)
-[<img alt="Get it on F-Droid" height="80" src="https://gitlab.com/enricocid/custom-badges/-/raw/master/badge_get-it-on.png">](https://f-droid.org/repository/browse/?fdid=com.iven.iconify)
+[<img alt="Get it on F-Droid" height="80" src="https://raw.githubusercontent.com/enricocid/fdroid-custom-badges/main/badge_get-it-on.png">](https://f-droid.org/repository/browse/?fdid=com.iven.iconify)
 
 
 # Want to contribute to translations?
