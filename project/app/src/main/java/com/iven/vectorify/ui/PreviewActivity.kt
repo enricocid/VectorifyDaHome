@@ -1,5 +1,6 @@
 package com.iven.vectorify.ui
 
+import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.res.ColorStateList
 import android.content.res.Configuration
@@ -7,6 +8,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.view.GestureDetector.SimpleOnGestureListener
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -92,15 +94,15 @@ class PreviewActivity : AppCompatActivity() {
 
         //set vector view
         mPreviewActivityBinding.vectorView.updateVectorView(
-                VectorifyWallpaper(
-                        mTempBackgroundColor,
-                        mTempVectorColor.toContrastColor(mTempBackgroundColor),
-                        mTempVector,
-                        mTempCategory,
-                        mTempScale,
-                        mTempHorizontalOffset,
-                        mTempVerticalOffset
-                )
+            VectorifyWallpaper(
+                mTempBackgroundColor,
+                mTempVectorColor.toContrastColor(mTempBackgroundColor),
+                mTempVector,
+                mTempCategory,
+                mTempScale,
+                mTempHorizontalOffset,
+                mTempVerticalOffset
+            )
         )
 
         mPreviewActivityBinding.vectorView.onSetWallpaper = { setWallpaper, bitmap ->
@@ -112,8 +114,8 @@ class PreviewActivity : AppCompatActivity() {
                 cancelable(false)
                 window?.run {
                     setFlags(
-                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                     )
                 }
                 show()
@@ -142,9 +144,9 @@ class PreviewActivity : AppCompatActivity() {
                 }
 
                 Toast.makeText(
-                        this,
-                        getString(R.string.message_saved_to, getExternalFilesDir(null)),
-                        Toast.LENGTH_LONG
+                    this,
+                    getString(R.string.message_saved_to, getExternalFilesDir(null)),
+                    Toast.LENGTH_LONG
                 ).show()
 
             })
@@ -154,18 +156,22 @@ class PreviewActivity : AppCompatActivity() {
         //match theme with background luminance
         setToolbarAndSeekBarColors()
 
+        mPreviewActivityBinding.scaleText.text = mTempScale.toFormattedScale()
+
         initializeSeekBar()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             window.decorView.afterMeasured {
-                val displayCutoutCompat = WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout
+                val displayCutoutCompat =
+                    WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout
                 mPreviewActivityBinding.run {
                     if (Utils.isDeviceLand(resources)) {
                         val left = displayCutoutCompat?.safeInsetLeft
                         val lpOptionsCard = seekbarCard.layoutParams as FrameLayout.LayoutParams
                         lpOptionsCard.width = root.width / 2
 
-                        val lpBtnContainer = moveBtnContainer.layoutParams as FrameLayout.LayoutParams
+                        val lpBtnContainer =
+                            moveBtnContainer.layoutParams as FrameLayout.LayoutParams
                         lpBtnContainer.setMargins(0, toolbar.height, 0, 0)
                         if (left != 0) {
                             lpOptionsCard.setMargins(left!!, 0, left, 0)
@@ -185,6 +191,8 @@ class PreviewActivity : AppCompatActivity() {
                 }
             }
         }
+
+        setDoubleTapListener()
     }
 
     private fun initializeSeekBar() {
@@ -208,6 +216,7 @@ class PreviewActivity : AppCompatActivity() {
                 override fun onStopTrackingTouch(slider: Slider) {
                     sUserIsSeeking = false
                     mTempScale = userProgress
+                    scaleText.text = mTempScale.toFormattedScale()
                 }
             })
 
@@ -215,6 +224,20 @@ class PreviewActivity : AppCompatActivity() {
             seekSize.value = mTempScale
         }
     }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setDoubleTapListener() {
+        val gestureDetector = GestureDetector(this, object : SimpleOnGestureListener() {
+            override fun onDoubleTap(e: MotionEvent): Boolean {
+                onBackPressed()
+                return false
+            }
+        })
+        mPreviewActivityBinding.root.setOnTouchListener { _, event ->
+            gestureDetector.onTouchEvent(event)
+        }
+    }
+
 
     private fun setWallpaper(set: Boolean) {
         mPreviewActivityBinding.vectorView.run {
@@ -231,59 +254,60 @@ class PreviewActivity : AppCompatActivity() {
 
         val cardColor = ColorUtils.setAlphaComponent(mTempBackgroundColor, 100)
 
-        mPreviewActivityBinding.toolbar.run {
-            setBackgroundColor(cardColor)
-            setTitleTextColor(widgetColor)
-            setNavigationIcon(R.drawable.ic_navigate_before)
-            inflateMenu(R.menu.toolbar_menu)
-            setNavigationOnClickListener { finishAndRemoveTask() }
-            setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.save -> setWallpaper(false)
-                    R.id.set -> setWallpaper(true)
-                    else -> updatePrefsAndSetLiveWallpaper()
+        with(mPreviewActivityBinding) {
+            toolbar.run {
+                setBackgroundColor(cardColor)
+                setTitleTextColor(widgetColor)
+                setNavigationIcon(R.drawable.ic_navigate_before)
+                inflateMenu(R.menu.toolbar_menu)
+                setNavigationOnClickListener { finishAndRemoveTask() }
+                setOnMenuItemClickListener { menuItem ->
+                    when (menuItem.itemId) {
+                        R.id.save -> setWallpaper(false)
+                        R.id.set -> setWallpaper(true)
+                        else -> updatePrefsAndSetLiveWallpaper()
+                    }
+                    return@setOnMenuItemClickListener true
                 }
-                return@setOnMenuItemClickListener true
+
+                //set menu items color according the the background luminance
+                menu.run {
+                    val drawablesList = children.map { it.icon }.toMutableList().apply {
+                        add(navigationIcon)
+                    }
+                    val iterator = drawablesList.iterator()
+                    while (iterator.hasNext()) {
+                        iterator.next().mutate().setTint(widgetColor)
+                    }
+                }
             }
 
-            //set menu items color according the the background luminance
-            menu.run {
-                val drawablesList = children.map { it.icon }.toMutableList().apply {
-                    add(navigationIcon)
-                }
-                val iterator = drawablesList.iterator()
-                while (iterator.hasNext()) {
-                    iterator.next().mutate().setTint(widgetColor)
-                }
+            //set SeekBar colors
+            seekbarCard.run {
+                setCardBackgroundColor(cardColor)
+                strokeColor = ColorUtils.setAlphaComponent(widgetColor, 25)
             }
-        }
 
-        //set SeekBar colors
-        mPreviewActivityBinding.seekbarCard.run {
-            setCardBackgroundColor(cardColor)
-            strokeColor = ColorUtils.setAlphaComponent(widgetColor, 25)
-        }
+            seekSize.run {
+                val color = ColorStateList.valueOf(widgetColor)
+                thumbTintList = color
+                trackTintList = color
+                trackInactiveTintList =
+                    ColorStateList.valueOf(mTempBackgroundColor.toForegroundColor(this@PreviewActivity))
+                haloTintList = color
+            }
 
-        mPreviewActivityBinding.seekSize.run {
-            val color = ColorStateList.valueOf(widgetColor)
-            thumbTintList = color
-            trackTintList = color
-            trackInactiveTintList = ColorStateList.valueOf(mTempBackgroundColor.toForegroundColor(this@PreviewActivity))
-            haloTintList = color
-        }
+            seekbarTitle.setTextColor(widgetColor)
+            scaleText.setTextColor(widgetColor)
 
-        mPreviewActivityBinding.seekbarTitle.setTextColor(widgetColor)
-
-        mPreviewActivityBinding.run {
             listOf(
-                    aspectRatio,
-                    up,
-                    down,
-                    left,
-                    right,
-                    centerHorizontal,
-                    centerVertical,
-                    resetPosition
+                up,
+                down,
+                left,
+                right,
+                centerHorizontal,
+                centerVertical,
+                resetPosition
             ).applyTint(this@PreviewActivity, widgetColor)
         }
     }
@@ -320,6 +344,7 @@ class PreviewActivity : AppCompatActivity() {
         }
 
         mPreviewActivityBinding.run {
+            scaleText.text = mTempScale.toFormattedScale()
             vectorView.setScaleFactor(mTempScale)
             seekSize.value = mTempScale
             vectorView.resetPosition()
@@ -347,7 +372,7 @@ class PreviewActivity : AppCompatActivity() {
             window.insetsController?.let { controller ->
                 controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
                 controller.systemBarsBehavior =
-                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
         } else {
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY

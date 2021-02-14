@@ -2,9 +2,10 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -29,6 +30,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
+        android:clickable="false"
+        android:focusable="false"
         android:padding="4dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
@@ -67,13 +70,12 @@
                     app:haloRadius="12dp"
                     app:thumbRadius="6dp" />
 
-                <ImageView
-                    android:id="@+id/aspect_ratio"
+                <TextView
+                    android:id="@+id/scale_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_aspect_ratio"
-                    tools:ignore="contentDescription" />
+                    android:layout_marginEnd="16dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
             </LinearLayout>
 
             <LinearLayout

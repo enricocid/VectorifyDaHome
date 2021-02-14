@@ -88,6 +88,8 @@ fun Int.toContrastColor(compareColor: Int) = if (this == compareColor) {
     this
 }
 
+fun Float.toFormattedScale() = String.format("%.2f", this)
+
 fun List<ImageView>.applyTint(context: Context, widgetColor: Int) {
     val iterator = iterator()
     while (iterator.hasNext()) {
