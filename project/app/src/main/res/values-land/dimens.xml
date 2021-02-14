@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recent_height">108dp</dimen>
+    <dimen name="recent_width">172dp</dimen>
+</resources>

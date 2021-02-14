@@ -44,7 +44,7 @@ class VectorView @JvmOverloads constructor(
         mHorizontalOffset = vectorifyWallpaper.horizontalOffset
         mVerticalOffset = vectorifyWallpaper.verticalOffset
 
-        mDeviceMetrics = vectorifyPreferences.vectorifyMetrics
+        mDeviceMetrics = vectorifyPreferences.savedMetrics
         mDrawable = Utils.tintDrawable(
                 context,
                 mVector,
@@ -117,7 +117,7 @@ class VectorView @JvmOverloads constructor(
         mHorizontalOffset = 0F
         mVerticalOffset = 0F
 
-        vectorifyPreferences.liveVectorifyWallpaper?.let { recent ->
+        vectorifyPreferences.savedLiveWallpaper?.let { recent ->
             mHorizontalOffset = recent.horizontalOffset
             mVerticalOffset = recent.verticalOffset
         }
@@ -127,19 +127,24 @@ class VectorView @JvmOverloads constructor(
 
     fun saveToPrefs() {
         //save wallpaper to prefs
-        vectorifyPreferences.liveVectorifyWallpaper = VectorifyWallpaper(
-            mBackgroundColor,
-            mVectorColor,
-            mVector,
-            mCategory,
-            mScaleFactor,
-            mHorizontalOffset,
-            mVerticalOffset
-        )
+        with(VectorifyWallpaper(
+                mBackgroundColor,
+                mVectorColor,
+                mVector,
+                mCategory,
+                mScaleFactor,
+                mHorizontalOffset,
+                mVerticalOffset
+        )) {
+            if (Utils.isDeviceLand(resources)) {
+                vectorifyPreferences.savedLiveWallpaperLand = this
+            } else {
+                vectorifyPreferences.savedLiveWallpaper = this
+            }
+        }
     }
 
     fun saveToRecentSetups() {
-
         //update recent setups
         VectorifyWallpaper(
             mBackgroundColor,
@@ -149,6 +154,6 @@ class VectorView @JvmOverloads constructor(
             mScaleFactor,
             mHorizontalOffset,
             mVerticalOffset
-        ).addToRecentSetups()
+        ).addToRecentSetups(Utils.isDeviceLand(resources))
     }
 }

@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onPause() {
         super.onPause()
-        vectorifyPreferences.restoreVectorifyWallpaper = VectorifyWallpaper(
+        with(VectorifyWallpaper(
                 mTempBackgroundColor,
                 mTempVectorColor,
                 mTempVector,
@@ -101,7 +101,13 @@ class MainActivity : AppCompatActivity(),
                 mTempScale,
                 mTempHorizontalOffset,
                 mTempVerticalOffset
-        )
+        )) {
+            if (Utils.isDeviceLand(resources)) {
+                vectorifyPreferences.savedWallpaperLand = this
+            } else {
+                vectorifyPreferences.savedWallpaper = this
+            }
+        }
     }
 
     override fun onStart() {
@@ -118,8 +124,14 @@ class MainActivity : AppCompatActivity(),
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            getString(R.string.recent_vectorify_wallpapers_key) -> if (vectorifyPreferences.vectorifyWallpaperSetups?.isNullOrEmpty()!! && mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            getString(R.string.recent_wallpapers_key) -> if (Utils.isDeviceLand(resources)) {
+                if (vectorifyPreferences.recentSetupsLand?.isNullOrEmpty()!! && mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                    mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+            } else {
+                if (vectorifyPreferences.recentSetups?.isNullOrEmpty()!! && mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                    mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                }
             }
             getString(R.string.theme_key) -> sThemeChanged = true
         }
@@ -142,15 +154,21 @@ class MainActivity : AppCompatActivity(),
             mTempCategory = bundle.getInt(TAG_CATEGORY_RESTORE)
         }
 
-        vectorifyPreferences.restoreVectorifyWallpaper?.let { vw ->
-            //get wallpaper shiz from prefs
-            mTempBackgroundColor = vw.backgroundColor
-            mTempVectorColor = vw.vectorColor
-            mTempVector = vw.resource
-            mTempCategory = vw.category
-            mTempScale = vw.scale
-            mTempHorizontalOffset = vw.horizontalOffset
-            mTempVerticalOffset = vw.verticalOffset
+        with(if (Utils.isDeviceLand(resources)) {
+            vectorifyPreferences.savedWallpaperLand
+        } else {
+            vectorifyPreferences.savedWallpaper
+        }) {
+            this?.let {  vw ->
+                //get wallpaper from prefs
+                mTempBackgroundColor = vw.backgroundColor
+                mTempVectorColor = vw.vectorColor
+                mTempVector = vw.resource
+                mTempCategory = vw.category
+                mTempScale = vw.scale
+                mTempHorizontalOffset = vw.horizontalOffset
+                mTempVerticalOffset = vw.verticalOffset
+            }
         }
 
         initViews()
@@ -261,7 +279,7 @@ class MainActivity : AppCompatActivity(),
         }
         if (display != null) {
             display.getRealMetrics(d)
-            vectorifyPreferences.vectorifyMetrics = Metrics(d.widthPixels, d.heightPixels)
+            vectorifyPreferences.savedMetrics = Metrics(d.widthPixels, d.heightPixels)
         }
     }
 
@@ -324,7 +342,7 @@ class MainActivity : AppCompatActivity(),
             }
 
             setNavigationOnClickListener {
-                if (!vectorifyPreferences.vectorifyWallpaperSetups.isNullOrEmpty()) {
+                if (Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetupsLand.isNullOrEmpty() || !Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetups.isNullOrEmpty()) {
                     openRecentSetups()
                 } else {
                     Toast.makeText(
@@ -437,12 +455,7 @@ class MainActivity : AppCompatActivity(),
                     if (!sRestoreVector) {
                         if (mTempVector != vector) {
 
-                            mTempVector = try {
-                                vector
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                Utils.getDefaultVectorForApi()
-                            }
+                            mTempVector = vector
 
                             mVectorifyActivityBinding.vectorFrame.setImageResource(
                                     Utils.getVectorProps(

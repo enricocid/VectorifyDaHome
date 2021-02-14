@@ -22,7 +22,7 @@ class VectorsAdapter(private val ctx: Context) :
     private var mSelectedCategory = VectorsCategories.TECH
 
     init {
-        vectorifyPreferences.liveVectorifyWallpaper?.let { recent ->
+        vectorifyPreferences.savedLiveWallpaper?.let { recent ->
             mSelectedCategory = Utils.getCategory(ctx, recent.category).second
             mSelectedDrawable = recent.resource
         }

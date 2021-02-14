@@ -4,18 +4,16 @@ import android.app.WallpaperManager
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
-import androidx.loader.app.LoaderManager
-import androidx.loader.content.Loader
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onShow
 import com.afollestad.materialdialogs.customview.customView
@@ -23,11 +21,10 @@ import com.google.android.material.slider.Slider
 import com.iven.vectorify.*
 import com.iven.vectorify.databinding.PreviewActivityBinding
 import com.iven.vectorify.models.VectorifyWallpaper
-import com.iven.vectorify.utils.SaveWallpaperLoader
 import com.iven.vectorify.utils.Utils
 
 
-class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?> {
+class PreviewActivity : AppCompatActivity() {
 
     // View binding class
     private lateinit var mPreviewActivityBinding: PreviewActivityBinding
@@ -43,60 +40,10 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     private var mTempVerticalOffset = 0F
 
     private lateinit var mSaveWallpaperDialog: MaterialDialog
-    private lateinit var mSaveImageLoader: Loader<Uri?>
 
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Uri?> {
 
-        mSaveWallpaperDialog = MaterialDialog(this).apply {
-            title(R.string.app_name)
-            customView(R.layout.progress_dialog)
-            cancelOnTouchOutside(false)
-            cancelable(false)
-            window?.run {
-                setFlags(
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                )
-            }
-            show()
-            onShow {
-                this.window?.clearFlags(
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                )
-            }
-        }
-
-        return mSaveImageLoader
-    }
-
-    override fun onLoadFinished(loader: Loader<Uri?>, wallpaperUri: Uri?) {
-
-        wallpaperUri?.let { uri ->
-            val wallpaperManager = WallpaperManager.getInstance(this)
-            try {
-                //start crop and set wallpaper intent
-                startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
-            } catch (e: Throwable) {
-                e.printStackTrace()
-            }
-
-        }
-
-        LoaderManager.getInstance(this).destroyLoader(SAVE_WALLPAPER_LOADER_ID)
-
-        if (mSaveWallpaperDialog.isShowing) {
-            mSaveWallpaperDialog.dismiss()
-        }
-
-        Toast.makeText(
-            this,
-            getString(R.string.message_saved_to, getExternalFilesDir(null)),
-            Toast.LENGTH_LONG
-        ).show()
-    }
-
-    override fun onLoaderReset(loader: Loader<Uri?>) {
-    }
+    // View model
+    private val mSaveWallpaperViewModel: SaveWallpaperViewModel by viewModels()
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -145,20 +92,63 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         //set vector view
         mPreviewActivityBinding.vectorView.updateVectorView(
-            VectorifyWallpaper(
-                mTempBackgroundColor,
-                mTempVectorColor.toContrastColor(mTempBackgroundColor),
-                mTempVector,
-                mTempCategory,
-                mTempScale,
-                mTempHorizontalOffset,
-                mTempVerticalOffset
-            )
+                VectorifyWallpaper(
+                        mTempBackgroundColor,
+                        mTempVectorColor.toContrastColor(mTempBackgroundColor),
+                        mTempVector,
+                        mTempCategory,
+                        mTempScale,
+                        mTempHorizontalOffset,
+                        mTempVerticalOffset
+                )
         )
 
         mPreviewActivityBinding.vectorView.onSetWallpaper = { setWallpaper, bitmap ->
-            mSaveImageLoader = SaveWallpaperLoader(this, bitmap, setWallpaper)
-            LoaderManager.getInstance(this).initLoader(SAVE_WALLPAPER_LOADER_ID, null, this)
+
+            mSaveWallpaperDialog = MaterialDialog(this).apply {
+                title(R.string.app_name)
+                customView(R.layout.progress_dialog)
+                cancelOnTouchOutside(false)
+                cancelable(false)
+                window?.run {
+                    setFlags(
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    )
+                }
+                show()
+                onShow {
+                    this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+                }
+            }
+
+            mSaveWallpaperViewModel.wallpaperUri.observe(this, { returnedUri ->
+
+                returnedUri?.let { uri ->
+                    val wallpaperManager = WallpaperManager.getInstance(this)
+                    try {
+                        //start crop and set wallpaper intent
+                        startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
+                    } catch (e: Throwable) {
+                        e.printStackTrace()
+                    }
+
+                }
+
+                mSaveWallpaperViewModel.cancel()
+
+                if (mSaveWallpaperDialog.isShowing) {
+                    mSaveWallpaperDialog.dismiss()
+                }
+
+                Toast.makeText(
+                        this,
+                        getString(R.string.message_saved_to, getExternalFilesDir(null)),
+                        Toast.LENGTH_LONG
+                ).show()
+
+            })
+            mSaveWallpaperViewModel.startSaveWallpaper(bitmap, setWallpaper)
         }
 
         //match theme with background luminance
@@ -173,12 +163,12 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
                     if (Utils.isDeviceLand(resources)) {
                         val left = displayCutoutCompat?.safeInsetLeft
                         val lpOptionsCard = seekbarCard.layoutParams as FrameLayout.LayoutParams
-                        lpOptionsCard.width = root.width/2
+                        lpOptionsCard.width = root.width / 2
 
                         val lpBtnContainer = moveBtnContainer.layoutParams as FrameLayout.LayoutParams
                         lpBtnContainer.setMargins(0, toolbar.height, 0, 0)
                         if (left != 0) {
-                            lpOptionsCard.setMargins(left!!, 0, left,0)
+                            lpOptionsCard.setMargins(left!!, 0, left, 0)
                         }
 
                         seekbarCard.animate().run {
@@ -189,7 +179,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
                         val top = displayCutoutCompat?.safeInsetTop
                         val lpToolbar = toolbar.layoutParams as FrameLayout.LayoutParams
                         if (top != 0) {
-                            lpToolbar.setMargins(0, top!!, 0,0)
+                            lpToolbar.setMargins(0, top!!, 0, 0)
                         }
                     }
                 }
@@ -286,14 +276,14 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         mPreviewActivityBinding.run {
             listOf(
-                aspectRatio,
-                up,
-                down,
-                left,
-                right,
-                centerHorizontal,
-                centerVertical,
-                resetPosition
+                    aspectRatio,
+                    up,
+                    down,
+                    left,
+                    right,
+                    centerHorizontal,
+                    centerVertical,
+                    resetPosition
             ).applyTint(this@PreviewActivity, widgetColor)
         }
     }
@@ -319,8 +309,14 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
 
         mTempScale = 0.35F
 
-        vectorifyPreferences.liveVectorifyWallpaper?.let { vw ->
-            mTempScale = vw.scale
+        if (Utils.isDeviceLand(resources)) {
+            vectorifyPreferences.savedWallpaperLand?.let { vw ->
+                mTempScale = vw.scale
+            }
+        } else {
+            vectorifyPreferences.savedWallpaper?.let { vw ->
+                mTempScale = vw.scale
+            }
         }
 
         mPreviewActivityBinding.run {
@@ -351,7 +347,7 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
             window.insetsController?.let { controller ->
                 controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
                 controller.systemBarsBehavior =
-                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                        WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             }
         } else {
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -367,9 +363,6 @@ class PreviewActivity : AppCompatActivity(), LoaderManager.LoaderCallbacks<Uri?>
     }
 
     companion object {
-
-        private const val SAVE_WALLPAPER_LOADER_ID = 25
-
         internal const val TEMP_BACKGROUND_COLOR = "TEMP_BACKGROUND_COLOR"
         internal const val TEMP_VECTOR_COLOR = "TEMP_VECTOR_COLOR"
         internal const val TEMP_VECTOR = "TEMP_VECTOR"

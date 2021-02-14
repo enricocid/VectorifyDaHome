@@ -2,6 +2,7 @@ package com.iven.vectorify
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.iven.vectorify.models.Metrics
@@ -14,14 +15,20 @@ class VectorifyPreferences(context: Context) {
 
     private val prefTheme = context.getString(R.string.theme_key)
     private val prefsThemeDefault = context.getString(R.string.theme_pref_auto)
-    private val prefSavedVectorifyWallpaper =
-            context.getString(R.string.saved_vectorify_wallpaper_key)
-    private val prefRestoreVectorifyWallpaper =
-            context.getString(R.string.restore_vectorify_wallpaper_key)
-    private val prefRecentVectorifySetups =
-            context.getString(R.string.recent_vectorify_wallpapers_key)
-    private val prefSavedVectorifyMetrics =
-            context.getString(R.string.saved_vectorify_metrics_key)
+    private val prefLiveWallpaper =
+            context.getString(R.string.live_wallpaper_key)
+    private val prefLiveWallpaperLand =
+            context.getString(R.string.live_wallpaper_land_key)
+    private val prefSavedWallpaper =
+            context.getString(R.string.saved_wallpaper_key)
+    private val prefSavedWallpaperLand =
+            context.getString(R.string.saved_wallpaper_land_key)
+    private val prefRecentSetups =
+            context.getString(R.string.recent_wallpapers_key)
+    private val prefRecentSetupsLand =
+            context.getString(R.string.recent_wallpapers_land_key)
+    private val prefSavedMetrics =
+            context.getString(R.string.saved_metrics_key)
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -34,41 +41,70 @@ class VectorifyPreferences(context: Context) {
         get() = mPrefs.getString(prefTheme, prefsThemeDefault)
         set(value) = mPrefs.edit { putString(prefTheme, value) }
 
-    var restoreVectorifyWallpaper: VectorifyWallpaper?
+    var savedWallpaper: VectorifyWallpaper?
         get() = getObjectForClass(
-                prefRestoreVectorifyWallpaper,
+                prefSavedWallpaper,
                 VectorifyWallpaper::class.java
-        )
+        ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
         set(value) = putObjectForClass(
-                prefRestoreVectorifyWallpaper,
+                prefSavedWallpaper,
                 value,
                 VectorifyWallpaper::class.java
         )
 
-    var vectorifyMetrics: Metrics
+    var savedWallpaperLand: VectorifyWallpaper?
         get() = getObjectForClass(
-                prefSavedVectorifyMetrics,
+                prefSavedWallpaperLand,
+                VectorifyWallpaper::class.java
+            ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
+        set(value) = putObjectForClass(
+                prefSavedWallpaperLand,
+                value,
+                VectorifyWallpaper::class.java
+        )
+
+    var savedMetrics: Metrics
+        get() = getObjectForClass(
+                prefSavedMetrics,
                 Metrics::class.java
         ) ?: Metrics(720, 1280)
-        set(value) = putObjectForClass(prefSavedVectorifyMetrics, value, Metrics::class.java)
+        set(value) = putObjectForClass(prefSavedMetrics, value, Metrics::class.java)
 
-    var liveVectorifyWallpaper: VectorifyWallpaper?
+    var savedLiveWallpaper: VectorifyWallpaper?
         get() = getObjectForClass(
-                prefSavedVectorifyWallpaper,
+                prefLiveWallpaper,
                 VectorifyWallpaper::class.java
         )
         set(value) = putObjectForClass(
-                prefSavedVectorifyWallpaper,
+                prefLiveWallpaper,
                 value,
                 VectorifyWallpaper::class.java
         )
 
-    var vectorifyWallpaperSetups: MutableList<VectorifyWallpaper>?
+    var savedLiveWallpaperLand: VectorifyWallpaper?
+        get() = getObjectForClass(
+                prefLiveWallpaperLand,
+                VectorifyWallpaper::class.java
+        )
+        set(value) = putObjectForClass(
+                prefLiveWallpaperLand,
+                value,
+                VectorifyWallpaper::class.java
+        )
+
+    var recentSetups: MutableList<VectorifyWallpaper>?
         get() = getObjectForType(
-                prefRecentVectorifySetups,
+                prefRecentSetups,
                 typeWallpapersList
         )
-        set(value) = putObjectForType(prefRecentVectorifySetups, value, typeWallpapersList)
+        set(value) = putObjectForType(prefRecentSetups, value, typeWallpapersList)
+
+    var recentSetupsLand: MutableList<VectorifyWallpaper>?
+        get() = getObjectForType(
+                prefRecentSetupsLand,
+                typeWallpapersList
+        )
+        set(value) = putObjectForType(prefRecentSetupsLand, value, typeWallpapersList)
 
     // Saves object into the Preferences using Moshi
     private fun <T : Any> getObjectForClass(key: String, clazz: Class<T>): T? {

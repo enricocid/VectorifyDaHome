@@ -198,21 +198,6 @@ object Utils {
     }
 
     @JvmStatic
-    fun getDefaultVectorForApi(): Int {
-        return when (Build.VERSION.SDK_INT) {
-            Build.VERSION_CODES.LOLLIPOP -> R.drawable.l
-            Build.VERSION_CODES.LOLLIPOP_MR1 -> R.drawable.l
-            Build.VERSION_CODES.M -> R.drawable.m_original
-            Build.VERSION_CODES.N -> R.drawable.n_original
-            Build.VERSION_CODES.N_MR1 -> R.drawable.n_original
-            Build.VERSION_CODES.O -> R.drawable.o_original
-            Build.VERSION_CODES.O_MR1 -> R.drawable.o_original
-            Build.VERSION_CODES.P -> R.drawable.p
-            else -> R.drawable.q
-        }
-    }
-
-    @JvmStatic
     fun getVectorProps(vector: Int): Pair<Int, Boolean> {
 
         var isSpecial = false
@@ -246,15 +231,9 @@ object Utils {
 
         //determine if we are facing android m, n, o vectors
         //so we can apply multiply tint mode to drawable
-        var vectorProps = getVectorProps(vector)
+        val vectorProps = getVectorProps(vector)
 
-        val bit = try {
-            ContextCompat.getDrawable(context, vectorProps.first)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            vectorProps = getVectorProps(getDefaultVectorForApi())
-            ContextCompat.getDrawable(context, vectorProps.first)
-        }
+        val bit = ContextCompat.getDrawable(context, vectorProps.first)
 
         if (bit != null) {
             try {
@@ -284,7 +263,11 @@ object Utils {
             message(R.string.message_clear_recent_setups)
             positiveButton {
                 //add an empty list to preferences
-                vectorifyPreferences.vectorifyWallpaperSetups = mutableListOf()
+                if (isDeviceLand(context.resources)) {
+                    vectorifyPreferences.recentSetupsLand = mutableListOf()
+                } else {
+                    vectorifyPreferences.recentSetups = mutableListOf()
+                }
             }
             negativeButton { dismiss() }
         }

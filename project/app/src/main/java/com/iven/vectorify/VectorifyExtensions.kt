@@ -26,19 +26,31 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
     })
 }
 
-fun VectorifyWallpaper.addToRecentSetups() {
+fun VectorifyWallpaper.addToRecentSetups(isLand: Boolean) {
+
+    val recentSetupsToUpdate = if (isLand) {
+        vectorifyPreferences.recentSetupsLand
+    } else {
+        vectorifyPreferences.recentSetups
+    }
+
     //update recent setups
     val recentSetups =
-        if (vectorifyPreferences.vectorifyWallpaperSetups != null) {
-            vectorifyPreferences.vectorifyWallpaperSetups
+        if (!recentSetupsToUpdate.isNullOrEmpty()) {
+            recentSetupsToUpdate
         } else {
             mutableListOf()
         }
 
-    if (!recentSetups?.contains(this)!!) {
+    if (!recentSetups.contains(this)) {
         recentSetups.add(this)
     }
-    vectorifyPreferences.vectorifyWallpaperSetups = recentSetups
+
+    if (isLand) {
+        vectorifyPreferences.recentSetupsLand = recentSetups
+    } else {
+        vectorifyPreferences.recentSetups = recentSetups
+    }
 }
 
 @SuppressLint("DefaultLocale")

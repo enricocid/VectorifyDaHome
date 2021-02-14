@@ -20,7 +20,11 @@ class RecentsAdapter(
         RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
-    private var mRecentSetups = vectorifyPreferences.vectorifyWallpaperSetups
+    private var mRecentSetups = if (Utils.isDeviceLand(ctx.resources)) {
+        vectorifyPreferences.recentSetupsLand
+    } else {
+        vectorifyPreferences.recentSetups
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
 
@@ -77,7 +81,7 @@ class RecentsAdapter(
                                     )
                                 }
                                 notifyDataSetChanged()
-                                vectorifyPreferences.vectorifyWallpaperSetups = mRecentSetups
+                                vectorifyPreferences.recentSetups = mRecentSetups
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
@@ -98,8 +102,8 @@ class RecentsAdapter(
                     scaleX = vectorifyWallpaper.scale
 
                     // properly calculate image view gravity to match set wallpaper
-                    x = (resources.getDimensionPixelOffset(R.dimen.recent_width) * vectorifyWallpaper.horizontalOffset) / vectorifyPreferences.vectorifyMetrics.width
-                    y = (resources.getDimensionPixelOffset(R.dimen.recent_height) * vectorifyWallpaper.verticalOffset) / vectorifyPreferences.vectorifyMetrics.height
+                    x = (resources.getDimensionPixelOffset(R.dimen.recent_width) * vectorifyWallpaper.horizontalOffset) / vectorifyPreferences.savedMetrics.width
+                    y = (resources.getDimensionPixelOffset(R.dimen.recent_height) * vectorifyWallpaper.verticalOffset) / vectorifyPreferences.savedMetrics.height
                 }
             }
         }

@@ -17,7 +17,7 @@ class VectorifyDaHomeLP : WallpaperService() {
     private var mHorizontalOffSet = 0F
     private var mVerticalOffSet = 0F
 
-    private val mMetrics get() = vectorifyPreferences.vectorifyMetrics
+    private val mMetrics get() = vectorifyPreferences.savedMetrics
 
     private val mDeviceWidth = mMetrics.width
     private val mDeviceHeight = mMetrics.height
@@ -32,7 +32,11 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private fun updatePaintProps() {
 
-        val selectedWallpaper = vectorifyPreferences.liveVectorifyWallpaper
+        val selectedWallpaper = if (Utils.isDeviceLand(resources)) {
+            vectorifyPreferences.savedLiveWallpaperLand
+        } else {
+            vectorifyPreferences.savedLiveWallpaper
+        }
 
         //set paints props
         selectedWallpaper?.let { recent ->
