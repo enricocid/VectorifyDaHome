@@ -24,7 +24,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.iven.vectorify.R
-import com.iven.vectorify.VectorifyDaHomeLP
+import com.iven.vectorify.LiveWallpaper
 import com.iven.vectorify.vectorifyPreferences
 
 
@@ -82,7 +82,7 @@ object Utils {
         )
         intent.putExtra(
                 WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                ComponentName(context, VectorifyDaHomeLP::class.java)
+                ComponentName(context, LiveWallpaper::class.java)
         )
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or Intent.FLAG_ACTIVITY_NO_ANIMATION)
         context.startActivity(intent)

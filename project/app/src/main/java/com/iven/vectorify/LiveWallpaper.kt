@@ -8,12 +8,12 @@ import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
 import com.iven.vectorify.utils.Utils
 
-class VectorifyDaHomeLP : WallpaperService() {
+class LiveWallpaper : WallpaperService() {
 
-    private var mSelectedBackgroundColor = Color.BLACK
-    private var mSelectedVectorColor = Color.WHITE
-    private var mSelectedVector = R.drawable.android_logo_2019
-    private var mSelectedScaleFactor = 0.35F
+    private var mBackgroundColor = Color.BLACK
+    private var mVectorColor = Color.WHITE
+    private var mVector = R.drawable.android_logo_2019
+    private var mScale = 0.35F
     private var mHorizontalOffSet = 0F
     private var mVerticalOffSet = 0F
 
@@ -32,20 +32,13 @@ class VectorifyDaHomeLP : WallpaperService() {
 
     private fun updatePaintProps() {
 
-        val selectedWallpaper = if (Utils.isDeviceLand(resources)) {
-            vectorifyPreferences.savedLiveWallpaperLand
-        } else {
-            vectorifyPreferences.savedLiveWallpaper
-        }
-
-        //set paints props
-        selectedWallpaper?.let { recent ->
-            mSelectedBackgroundColor = recent.backgroundColor
-            mSelectedVectorColor = recent.vectorColor.toContrastColor(mSelectedBackgroundColor)
-            mSelectedVector = recent.resource
-            mSelectedScaleFactor = recent.scale
-            mHorizontalOffSet = recent.horizontalOffset
-            mVerticalOffSet = recent.verticalOffset
+        with(vectorifyPreferences.liveWallpaper) {
+            mBackgroundColor = backgroundColor
+            mVectorColor = vectorColor.toContrastColor(mBackgroundColor)
+            mVector = resource
+            mScale = scale
+            mHorizontalOffSet = horizontalOffset
+            mVerticalOffSet = verticalOffset
         }
     }
 
@@ -87,12 +80,12 @@ class VectorifyDaHomeLP : WallpaperService() {
                 if (canvas != null && baseContext != null) {
 
                     //draw potato!
-                    canvas.drawColor(mSelectedBackgroundColor)
+                    canvas.drawColor(mBackgroundColor)
 
                     val drawable = Utils.tintDrawable(
                             baseContext,
-                            mSelectedVector,
-                            mSelectedVectorColor
+                            mVector,
+                            mVectorColor
                     )
 
                     Utils.drawBitmap(
@@ -100,7 +93,7 @@ class VectorifyDaHomeLP : WallpaperService() {
                             canvas,
                             mDeviceWidth,
                             mDeviceHeight,
-                            mSelectedScaleFactor,
+                            mScale,
                             mHorizontalOffSet,
                             mVerticalOffSet
                     )

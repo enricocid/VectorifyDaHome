@@ -15,10 +15,9 @@ class VectorifyPreferences(context: Context) {
 
     private val prefTheme = context.getString(R.string.theme_key)
     private val prefsThemeDefault = context.getString(R.string.theme_pref_auto)
+
     private val prefLiveWallpaper =
             context.getString(R.string.live_wallpaper_key)
-    private val prefLiveWallpaperLand =
-            context.getString(R.string.live_wallpaper_land_key)
     private val prefSavedWallpaper =
             context.getString(R.string.saved_wallpaper_key)
     private val prefSavedWallpaperLand =
@@ -41,7 +40,7 @@ class VectorifyPreferences(context: Context) {
         get() = mPrefs.getString(prefTheme, prefsThemeDefault)
         set(value) = mPrefs.edit { putString(prefTheme, value) }
 
-    var savedWallpaper: VectorifyWallpaper?
+    var savedWallpaper: VectorifyWallpaper
         get() = getObjectForClass(
                 prefSavedWallpaper,
                 VectorifyWallpaper::class.java
@@ -52,7 +51,7 @@ class VectorifyPreferences(context: Context) {
                 VectorifyWallpaper::class.java
         )
 
-    var savedWallpaperLand: VectorifyWallpaper?
+    var savedWallpaperLand: VectorifyWallpaper
         get() = getObjectForClass(
                 prefSavedWallpaperLand,
                 VectorifyWallpaper::class.java
@@ -63,34 +62,23 @@ class VectorifyPreferences(context: Context) {
                 VectorifyWallpaper::class.java
         )
 
+    var liveWallpaper: VectorifyWallpaper
+        get() = getObjectForClass(
+                prefLiveWallpaper,
+                VectorifyWallpaper::class.java
+        ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
+        set(value) = putObjectForClass(
+                prefLiveWallpaper,
+                value,
+                VectorifyWallpaper::class.java
+        )
+
     var savedMetrics: Metrics
         get() = getObjectForClass(
                 prefSavedMetrics,
                 Metrics::class.java
         ) ?: Metrics(720, 1280)
         set(value) = putObjectForClass(prefSavedMetrics, value, Metrics::class.java)
-
-    var savedLiveWallpaper: VectorifyWallpaper?
-        get() = getObjectForClass(
-                prefLiveWallpaper,
-                VectorifyWallpaper::class.java
-        )
-        set(value) = putObjectForClass(
-                prefLiveWallpaper,
-                value,
-                VectorifyWallpaper::class.java
-        )
-
-    var savedLiveWallpaperLand: VectorifyWallpaper?
-        get() = getObjectForClass(
-                prefLiveWallpaperLand,
-                VectorifyWallpaper::class.java
-        )
-        set(value) = putObjectForClass(
-                prefLiveWallpaperLand,
-                value,
-                VectorifyWallpaper::class.java
-        )
 
     var recentSetups: MutableList<VectorifyWallpaper>?
         get() = getObjectForType(

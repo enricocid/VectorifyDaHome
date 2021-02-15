@@ -52,6 +52,9 @@ private const val TAG_BG_COLOR_RESTORE = "TAG_BG_COLOR_RESTORE"
 private const val TAG_VECTOR_COLOR_RESTORE = "TAG_VECTOR_COLOR_RESTORE"
 private const val TAG_VECTOR_RESTORE = "TAG_VECTOR_RESTORE"
 private const val TAG_CATEGORY_RESTORE = "TAG_CATEGORY_RESTORE"
+private const val TAG_SCALE_RESTORE = "TAG_SCALE_RESTORE"
+private const val TAG_H_OFFSET_RESTORE = "TAG_H_OFFSET_RESTORE"
+private const val TAG_V_OFFSET_RESTORE = "TAG_V_OFFSET_RESTORE"
 
 
 class MainActivity : AppCompatActivity(),
@@ -82,11 +85,14 @@ class MainActivity : AppCompatActivity(),
     override fun onSaveInstanceState(outState: Bundle) {
         if (sThemeChanged) {
             super.onSaveInstanceState(outState)
-            outState.run {
+            with(outState) {
                 putInt(TAG_BG_COLOR_RESTORE, mTempBackgroundColor)
                 putInt(TAG_VECTOR_COLOR_RESTORE, mTempVectorColor)
                 putInt(TAG_VECTOR_RESTORE, mTempVector)
                 putInt(TAG_CATEGORY_RESTORE, mTempCategory)
+                putFloat(TAG_SCALE_RESTORE, mTempScale)
+                putFloat(TAG_H_OFFSET_RESTORE, mTempHorizontalOffset)
+                putFloat(TAG_V_OFFSET_RESTORE, mTempVerticalOffset)
             }
         }
     }
@@ -110,18 +116,6 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .registerOnSharedPreferenceChangeListener(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .unregisterOnSharedPreferenceChangeListener(this)
-    }
-
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             getString(R.string.recent_wallpapers_key) -> if (Utils.isDeviceLand(resources)) {
@@ -134,11 +128,35 @@ class MainActivity : AppCompatActivity(),
                 }
             }
             getString(R.string.theme_key) -> sThemeChanged = true
+            getString(R.string.saved_wallpaper_key) -> onWallpaperPrefChanged(vectorifyPreferences.savedWallpaper)
+            getString(R.string.saved_wallpaper_land_key) -> onWallpaperPrefChanged(vectorifyPreferences.savedWallpaperLand)
         }
+    }
+
+    private fun onWallpaperPrefChanged(wallpaper: VectorifyWallpaper) {
+        //get wallpaper from prefs
+        with(wallpaper) {
+            mTempBackgroundColor = backgroundColor
+            mTempVectorColor = vectorColor
+            mTempVector = resource
+            mTempCategory = category
+            mTempScale = scale
+            mTempHorizontalOffset = horizontalOffset
+            mTempVerticalOffset = verticalOffset
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .registerOnSharedPreferenceChangeListener(this)
 
         mVectorifyActivityBinding = VectorifyActivityBinding.inflate(layoutInflater)
 
@@ -152,6 +170,9 @@ class MainActivity : AppCompatActivity(),
             mTempVectorColor = bundle.getInt(TAG_VECTOR_COLOR_RESTORE)
             mTempVector = bundle.getInt(TAG_VECTOR_RESTORE)
             mTempCategory = bundle.getInt(TAG_CATEGORY_RESTORE)
+            mTempScale = bundle.getFloat(TAG_SCALE_RESTORE)
+            mTempHorizontalOffset = bundle.getFloat(TAG_H_OFFSET_RESTORE)
+            mTempVerticalOffset = bundle.getFloat(TAG_V_OFFSET_RESTORE)
         }
 
         with(if (Utils.isDeviceLand(resources)) {
@@ -159,16 +180,7 @@ class MainActivity : AppCompatActivity(),
         } else {
             vectorifyPreferences.savedWallpaper
         }) {
-            this?.let {  vw ->
-                //get wallpaper from prefs
-                mTempBackgroundColor = vw.backgroundColor
-                mTempVectorColor = vw.vectorColor
-                mTempVector = vw.resource
-                mTempCategory = vw.category
-                mTempScale = vw.scale
-                mTempHorizontalOffset = vw.horizontalOffset
-                mTempVerticalOffset = vw.verticalOffset
-            }
+            onWallpaperPrefChanged(this)
         }
 
         initViews()

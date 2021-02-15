@@ -11,10 +11,9 @@
     <string name="theme_pref_light">theme_pref_light</string>
     <string name="theme_pref_dark">theme_pref_dark</string>
     <string name="theme_pref_auto">theme_pref_auto</string>
-    <string name="live_wallpaper_key">live_wallpaper_key</string>
-    <string name="live_wallpaper_land_key">live_wallpaper_land_key</string>
     <string name="recent_wallpapers_key">recent_wallpapers_key</string>
     <string name="recent_wallpapers_land_key">recent_wallpapers_land_key</string>
+    <string name="live_wallpaper_key">live_wallpaper_key</string>
     <string name="saved_wallpaper_key">restore_wallpaper_key</string>
     <string name="saved_wallpaper_land_key">restore_wallpaper_land_key</string>
     <string name="saved_metrics_key">saved_metrics_key</string>

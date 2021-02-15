@@ -81,29 +81,41 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun initViews() {
 
-        // init click listeners
-        mPreviewActivityBinding.run {
-            up.setOnClickListener { vectorView.moveUp() }
-            down.setOnClickListener { vectorView.moveDown() }
-            left.setOnClickListener { vectorView.moveLeft() }
-            right.setOnClickListener { vectorView.moveRight() }
-            centerHorizontal.setOnClickListener { vectorView.centerHorizontal() }
-            centerVertical.setOnClickListener { vectorView.centerVertical() }
-            resetPosition.setOnClickListener { resetVectorPosition() }
-        }
+        with(mPreviewActivityBinding) {
 
-        //set vector view
-        mPreviewActivityBinding.vectorView.updateVectorView(
-            VectorifyWallpaper(
-                mTempBackgroundColor,
-                mTempVectorColor.toContrastColor(mTempBackgroundColor),
-                mTempVector,
-                mTempCategory,
-                mTempScale,
-                mTempHorizontalOffset,
-                mTempVerticalOffset
+            // init click listeners
+            up.setOnClickListener { mTempVerticalOffset = vectorView.moveUp() }
+            down.setOnClickListener { mTempVerticalOffset = vectorView.moveDown() }
+            left.setOnClickListener { mTempHorizontalOffset = vectorView.moveLeft() }
+            right.setOnClickListener { mTempHorizontalOffset = vectorView.moveRight() }
+            centerHorizontal.setOnClickListener {
+                vectorView.centerHorizontal()
+                mTempHorizontalOffset = 0F
+            }
+            centerVertical.setOnClickListener {
+                vectorView.centerVertical()
+                mTempVerticalOffset = 0F
+            }
+
+            resetPosition.setOnClickListener { resetVectorPosition(false) }
+            resetPosition.setOnLongClickListener {
+                resetVectorPosition(true)
+                return@setOnLongClickListener true
+            }
+
+            //set vector view
+            vectorView.updateVectorView(
+                    VectorifyWallpaper(
+                            mTempBackgroundColor,
+                            mTempVectorColor.toContrastColor(mTempBackgroundColor),
+                            mTempVector,
+                            mTempCategory,
+                            mTempScale,
+                            mTempHorizontalOffset,
+                            mTempVerticalOffset
+                    )
             )
-        )
+        }
 
         mPreviewActivityBinding.vectorView.onSetWallpaper = { setWallpaper, bitmap ->
 
@@ -176,17 +188,16 @@ class PreviewActivity : AppCompatActivity() {
                         if (left != 0) {
                             lpOptionsCard.setMargins(left!!, 0, left, 0)
                         }
-
-                        seekbarCard.animate().run {
-                            duration = 750
-                            alpha(1.0F)
-                        }
                     } else {
                         val top = displayCutoutCompat?.safeInsetTop
                         val lpToolbar = toolbar.layoutParams as FrameLayout.LayoutParams
                         if (top != 0) {
                             lpToolbar.setMargins(0, top!!, 0, 0)
                         }
+                    }
+                    root.animate().run {
+                        duration = 750
+                        alpha(1.0F)
                     }
                 }
             }
@@ -314,6 +325,18 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun updatePrefsAndSetLiveWallpaper() {
 
+        //update prefs
+        with(mPreviewActivityBinding.vectorView) {
+            saveToPrefs()
+            saveToRecentSetups()
+        }
+
+        vectorifyPreferences.liveWallpaper = if (Utils.isDeviceLand(resources)) {
+            vectorifyPreferences.savedWallpaperLand
+        } else {
+            vectorifyPreferences.savedWallpaper
+        }
+
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences
         if (!Utils.isLiveWallpaperRunning(this)) {
@@ -321,33 +344,32 @@ class PreviewActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_LONG).show()
         }
-
-        //update prefs
-        mPreviewActivityBinding.vectorView.run {
-            saveToPrefs()
-            saveToRecentSetups()
-        }
     }
 
-    private fun resetVectorPosition() {
+    private fun resetVectorPosition(isResetToDefault: Boolean) {
 
         mTempScale = 0.35F
+        mTempHorizontalOffset = 0F
+        mTempVerticalOffset = 0F
 
-        if (Utils.isDeviceLand(resources)) {
-            vectorifyPreferences.savedWallpaperLand?.let { vw ->
-                mTempScale = vw.scale
-            }
-        } else {
-            vectorifyPreferences.savedWallpaper?.let { vw ->
-                mTempScale = vw.scale
-            }
+        if (!isResetToDefault) {
+           val savedWallpaper = if (Utils.isDeviceLand(resources)) {
+               vectorifyPreferences.savedWallpaperLand
+           } else {
+               vectorifyPreferences.savedWallpaper
+           }
+           with(savedWallpaper) {
+               mTempScale = scale
+               mTempHorizontalOffset = horizontalOffset
+               mTempVerticalOffset = verticalOffset
+           }
         }
 
         mPreviewActivityBinding.run {
             scaleText.text = mTempScale.toFormattedScale()
             vectorView.setScaleFactor(mTempScale)
             seekSize.value = mTempScale
-            vectorView.resetPosition()
+            vectorView.resetPosition(mTempHorizontalOffset, mTempVerticalOffset)
         }
     }
 
@@ -355,6 +377,25 @@ class PreviewActivity : AppCompatActivity() {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
             hideSystemUI()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        with(VectorifyWallpaper(
+            mTempBackgroundColor,
+            mTempVectorColor,
+            mTempVector,
+            mTempCategory,
+            mTempScale,
+            mTempHorizontalOffset,
+            mTempVerticalOffset
+        )) {
+            if (Utils.isDeviceLand(resources)) {
+                vectorifyPreferences.savedWallpaperLand = this
+            } else {
+                vectorifyPreferences.savedWallpaper = this
+            }
         }
     }
 
@@ -388,12 +429,12 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     companion object {
-        internal const val TEMP_BACKGROUND_COLOR = "TEMP_BACKGROUND_COLOR"
-        internal const val TEMP_VECTOR_COLOR = "TEMP_VECTOR_COLOR"
-        internal const val TEMP_VECTOR = "TEMP_VECTOR"
-        internal const val TEMP_CATEGORY = "TEMP_CATEGORY"
-        internal const val TEMP_SCALE = "TEMP_SCALE"
-        internal const val TEMP_H_OFFSET = "TEMP_H_OFFSET"
-        internal const val TEMP_V_OFFSET = "TEMP_V_OFFSET"
+        const val TEMP_BACKGROUND_COLOR = "TEMP_BACKGROUND_COLOR"
+        const val TEMP_VECTOR_COLOR = "TEMP_VECTOR_COLOR"
+        const val TEMP_VECTOR = "TEMP_VECTOR"
+        const val TEMP_CATEGORY = "TEMP_CATEGORY"
+        const val TEMP_SCALE = "TEMP_SCALE"
+        const val TEMP_H_OFFSET = "TEMP_H_OFFSET"
+        const val TEMP_V_OFFSET = "TEMP_V_OFFSET"
     }
 }

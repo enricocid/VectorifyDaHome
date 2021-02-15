@@ -22,10 +22,13 @@ class VectorsAdapter(private val ctx: Context) :
     private var mSelectedCategory = VectorsCategories.TECH
 
     init {
-        vectorifyPreferences.savedLiveWallpaper?.let { recent ->
-            mSelectedCategory = Utils.getCategory(ctx, recent.category).second
-            mSelectedDrawable = recent.resource
+        val wallpaperToRestore = if (Utils.isDeviceLand(ctx.resources)) {
+            vectorifyPreferences.savedWallpaperLand
+        } else {
+            vectorifyPreferences.savedWallpaper
         }
+        mSelectedCategory = Utils.getCategory(ctx, wallpaperToRestore.category).second
+        mSelectedDrawable = wallpaperToRestore.resource
     }
 
     fun swapCategory(selectedCategory: List<Int>) {

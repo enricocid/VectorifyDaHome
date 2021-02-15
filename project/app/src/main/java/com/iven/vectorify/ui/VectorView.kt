@@ -35,14 +35,16 @@ class VectorView @JvmOverloads constructor(
 
     private var mDrawable: Drawable? = null
 
-    fun updateVectorView(vectorifyWallpaper: VectorifyWallpaper) {
-        mBackgroundColor = vectorifyWallpaper.backgroundColor
-        mVectorColor = vectorifyWallpaper.vectorColor
-        mVector = vectorifyWallpaper.resource
-        mCategory = vectorifyWallpaper.category
-        mScaleFactor = vectorifyWallpaper.scale
-        mHorizontalOffset = vectorifyWallpaper.horizontalOffset
-        mVerticalOffset = vectorifyWallpaper.verticalOffset
+    fun updateVectorView(wallpaper: VectorifyWallpaper) {
+        with(wallpaper) {
+            mBackgroundColor = backgroundColor
+            mVectorColor = vectorColor
+            mVector = resource
+            mCategory = category
+            mScaleFactor = scale
+            mHorizontalOffset = horizontalOffset
+            mVerticalOffset = verticalOffset
+        }
 
         mDeviceMetrics = vectorifyPreferences.savedMetrics
         mDrawable = Utils.tintDrawable(
@@ -82,24 +84,28 @@ class VectorView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun moveUp() {
+    fun moveUp(): Float {
         mVerticalOffset -= mStep
         invalidate()
+        return mVerticalOffset
     }
 
-    fun moveDown() {
+    fun moveDown(): Float {
         mVerticalOffset += mStep
         invalidate()
+        return mVerticalOffset
     }
 
-    fun moveLeft() {
+    fun moveLeft(): Float {
         mHorizontalOffset -= mStep
         invalidate()
+        return mHorizontalOffset
     }
 
-    fun moveRight() {
+    fun moveRight(): Float {
         mHorizontalOffset += mStep
         invalidate()
+        return mHorizontalOffset
     }
 
     fun centerHorizontal() {
@@ -112,15 +118,10 @@ class VectorView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun resetPosition() {
+    fun resetPosition(horizontalOffset: Float, verticalOffset: Float) {
 
-        mHorizontalOffset = 0F
-        mVerticalOffset = 0F
-
-        vectorifyPreferences.savedLiveWallpaper?.let { recent ->
-            mHorizontalOffset = recent.horizontalOffset
-            mVerticalOffset = recent.verticalOffset
-        }
+        mHorizontalOffset = horizontalOffset
+        mVerticalOffset = verticalOffset
 
         invalidate()
     }
@@ -137,9 +138,9 @@ class VectorView @JvmOverloads constructor(
                 mVerticalOffset
         )) {
             if (Utils.isDeviceLand(resources)) {
-                vectorifyPreferences.savedLiveWallpaperLand = this
+                vectorifyPreferences.savedWallpaperLand = this
             } else {
-                vectorifyPreferences.savedLiveWallpaper = this
+                vectorifyPreferences.savedWallpaper = this
             }
         }
     }
