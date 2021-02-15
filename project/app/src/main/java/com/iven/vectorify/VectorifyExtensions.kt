@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
@@ -61,16 +60,10 @@ fun Int.toHex(context: Context) =
 private fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
 
 //method to calculate colors for cards titles
-fun Int.toSurfaceColor(context: Context) = if (isDark()) {
-    ContextCompat.getColor(context, R.color.preview_widgets_color_dark)
+fun Int.toSurfaceColor() = if (isDark()) {
+    Color.WHITE
 } else {
-    ContextCompat.getColor(context, R.color.preview_widgets_color_light)
-}
-
-fun Int.toForegroundColor(context: Context) = if (isDark()) {
-    ContextCompat.getColor(context, R.color.preview_widgets_color_dark_fg)
-} else {
-    ContextCompat.getColor(context, R.color.preview_widgets_color_light_fg)
+    Color.BLACK
 }
 
 fun Int.darkenOrLighten(): Int {

@@ -13,6 +13,7 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
@@ -261,7 +262,7 @@ class PreviewActivity : AppCompatActivity() {
 
         //determine if background color is dark or light and select
         //the appropriate color for UI widgets
-        val widgetColor = mTempBackgroundColor.toSurfaceColor(this)
+        val widgetColor = mTempBackgroundColor.toSurfaceColor()
 
         val cardColor = ColorUtils.setAlphaComponent(mTempBackgroundColor, 100)
 
@@ -304,7 +305,7 @@ class PreviewActivity : AppCompatActivity() {
                 thumbTintList = color
                 trackTintList = color
                 trackInactiveTintList =
-                    ColorStateList.valueOf(mTempBackgroundColor.toForegroundColor(this@PreviewActivity))
+                    ColorStateList.valueOf(ContextCompat.getColor(this@PreviewActivity, R.color.slider_fg))
                 haloTintList = color
             }
 
