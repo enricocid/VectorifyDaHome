@@ -197,7 +197,7 @@ class PreviewActivity : AppCompatActivity() {
                         }
                     }
                     root.animate().run {
-                        duration = 750
+                        duration = 500
                         alpha(1.0F)
                     }
                 }
