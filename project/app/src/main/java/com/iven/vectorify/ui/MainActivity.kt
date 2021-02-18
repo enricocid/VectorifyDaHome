@@ -418,7 +418,7 @@ class MainActivity : AppCompatActivity(),
                     bottom.setPadding(0, 0, 0, fab.height + fab.marginBottom)
 
                     root.animate().run {
-                        duration = 500
+                        duration = 750
                         alpha(1.0F)
                     }
                 }
