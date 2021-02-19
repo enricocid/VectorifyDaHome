@@ -23,6 +23,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.marginBottom
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -693,23 +694,23 @@ class MainActivity : AppCompatActivity(),
         if (mBottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
             mVectorifyActivityBinding.recentsRv.run {
                 setHasFixedSize(true)
-                val recentSetupsAdapter = RecentsAdapter(this@MainActivity).apply {
-                    onRecentClick = { recent ->
-                        sUpdateFab = false
-                        recent.run {
-                            onRecentSelected(
-                                    backgroundColor,
-                                    vectorColor,
-                                    resource,
-                                    category,
-                                    scale,
-                                    horizontalOffset,
-                                    verticalOffset
-                            )
-                        }
+                val recentSetupsAdapter = RecentsAdapter(this@MainActivity)
+                recentSetupsAdapter.onRecentClick = { recent ->
+                    sUpdateFab = false
+                    recent.run {
+                        onRecentSelected(
+                                backgroundColor,
+                                vectorColor,
+                                resource,
+                                category,
+                                scale,
+                                horizontalOffset,
+                                verticalOffset
+                        )
                         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                     }
                 }
+                ItemTouchHelper(recentSetupsAdapter.itemTouchCallback).attachToRecyclerView(this)
                 adapter = recentSetupsAdapter
             }
 

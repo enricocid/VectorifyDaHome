@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.card.MaterialCardView
@@ -13,6 +14,7 @@ import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.toContrastColor
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
+import java.util.*
 
 class RecentsAdapter(
         private val ctx: Context
@@ -61,32 +63,9 @@ class RecentsAdapter(
                 setOnClickListener {
                     onRecentClick?.invoke(wallpaper)
                 }
+
                 setOnLongClickListener {
-
-                    MaterialDialog(ctx).show {
-
-                        title(R.string.title_recent_setups)
-                        message(
-                                text = ctx.getString(
-                                        R.string.message_clear_single_recent_setup,
-                                        adapterPosition.toString()
-                                )
-                        )
-                        positiveButton {
-                            //add an empty list to preferences
-                            try {
-                                if (mRecentSetups?.contains(wallpaper)!!) {
-                                    mRecentSetups?.remove(wallpaper)
-                                }
-                                notifyDataSetChanged()
-                                vectorifyPreferences.recentSetups = mRecentSetups
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
-                        }
-                        negativeButton { dismiss() }
-                    }
-
+                    performRecentDeletion(adapterPosition, false)
                     return@setOnLongClickListener true
                 }
 
@@ -104,6 +83,51 @@ class RecentsAdapter(
                     y = (resources.getDimensionPixelOffset(R.dimen.recent_height) * wallpaper.verticalOffset) / vectorifyPreferences.savedMetrics.height
                 }
             }
+        }
+    }
+
+    // https://mobikul.com/drag-and-drop-item-on-recyclerview/
+    val itemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.UP) {
+        override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+        ): Boolean = false
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            performRecentDeletion(viewHolder.adapterPosition, true)
+        }
+    }
+
+    private fun performRecentDeletion(adapterPosition: Int, isSwiped: Boolean) {
+
+        val wallpaper = mRecentSetups?.get(adapterPosition)
+
+        MaterialDialog(ctx).show {
+
+            title(R.string.title_recent_setups)
+            message(
+                    text = ctx.getString(
+                            R.string.message_clear_single_recent_setup,
+                            adapterPosition.toString()
+                    )
+            )
+            positiveButton {
+                //add an empty list to preferences
+                try {
+                    if (mRecentSetups?.contains(wallpaper)!!) {
+                        mRecentSetups?.remove(wallpaper)
+                    }
+                    notifyDataSetChanged()
+                    vectorifyPreferences.recentSetups = mRecentSetups
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            negativeButton { dismiss() }
+        }
+        if (isSwiped) {
+            notifyItemChanged(adapterPosition)
         }
     }
 }
