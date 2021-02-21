@@ -710,8 +710,13 @@ class MainActivity : AppCompatActivity(),
                         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                     }
                 }
-                ItemTouchHelper(recentSetupsAdapter.itemTouchCallback).attachToRecyclerView(this)
                 adapter = recentSetupsAdapter
+                ItemTouchHelper(ItemSwipeCallback { recyclerViewHolder ->
+                    val position = recyclerViewHolder.adapterPosition
+                    synchronized(recentSetupsAdapter.performRecentDeletion(position)) {
+                        recentSetupsAdapter.notifyItemChanged(position)
+                    }
+                }).attachToRecyclerView(this)
             }
 
             mVectorifyActivityBinding.recentsRv.afterMeasured {

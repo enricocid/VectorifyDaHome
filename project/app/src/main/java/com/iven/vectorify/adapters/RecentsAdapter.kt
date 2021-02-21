@@ -65,7 +65,7 @@ class RecentsAdapter(
                 }
 
                 setOnLongClickListener {
-                    performRecentDeletion(adapterPosition, false)
+                    performRecentDeletion(adapterPosition)
                     return@setOnLongClickListener true
                 }
 
@@ -86,20 +86,7 @@ class RecentsAdapter(
         }
     }
 
-    // https://mobikul.com/drag-and-drop-item-on-recyclerview/
-    val itemTouchCallback: ItemTouchHelper.SimpleCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.UP) {
-        override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-        ): Boolean = false
-
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            performRecentDeletion(viewHolder.adapterPosition, true)
-        }
-    }
-
-    private fun performRecentDeletion(adapterPosition: Int, isSwiped: Boolean) {
+    fun performRecentDeletion(adapterPosition: Int) {
 
         val wallpaper = mRecentSetups?.get(adapterPosition)
 
@@ -125,9 +112,6 @@ class RecentsAdapter(
                 }
             }
             negativeButton { dismiss() }
-        }
-        if (isSwiped) {
-            notifyItemChanged(adapterPosition)
         }
     }
 }
