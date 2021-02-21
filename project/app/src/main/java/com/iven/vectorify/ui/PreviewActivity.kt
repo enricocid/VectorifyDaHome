@@ -250,7 +250,6 @@ class PreviewActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setWallpaper(set: Boolean) {
         mPreviewActivityBinding.vectorView.run {
             saveToRecentSetups()
