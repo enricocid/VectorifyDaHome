@@ -116,6 +116,14 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
+    override fun onBackPressed() {
+        if (mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             getString(R.string.recent_wallpapers_key) -> if (Utils.isDeviceLand(resources)) {
@@ -681,8 +689,6 @@ class MainActivity : AppCompatActivity(),
             text = category.first
             contentDescription = getString(R.string.content_selected_category, category.first)
         }
-
-
         if (force) {
             scrollToVector(mTempVector)
         }
