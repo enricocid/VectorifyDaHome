@@ -23,7 +23,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.marginBottom
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -711,18 +710,13 @@ class MainActivity : AppCompatActivity(),
                     }
                 }
                 adapter = recentSetupsAdapter
-                ItemTouchHelper(ItemSwipeCallback { recyclerViewHolder ->
-                    val position = recyclerViewHolder.adapterPosition
-                    synchronized(recentSetupsAdapter.performRecentDeletion(position)) {
-                        recentSetupsAdapter.notifyItemChanged(position)
-                    }
-                }).attachToRecyclerView(this)
             }
 
             mVectorifyActivityBinding.recentsRv.afterMeasured {
                 mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
         } else {
+            mVectorifyActivityBinding.recentsRv.adapter = null
             mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }

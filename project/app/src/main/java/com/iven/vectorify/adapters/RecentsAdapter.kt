@@ -15,10 +15,7 @@ import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
 import java.util.*
 
-class RecentsAdapter(
-        private val ctx: Context
-) :
-        RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
+class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
     private var mRecentSetups = if (Utils.isDeviceLand(ctx.resources)) {
@@ -64,7 +61,31 @@ class RecentsAdapter(
                 }
 
                 setOnLongClickListener {
-                    performRecentDeletion(adapterPosition)
+
+                    MaterialDialog(ctx).show {
+
+                        title(R.string.title_recent_setups)
+                        message(
+                                text = ctx.getString(
+                                        R.string.message_clear_single_recent_setup,
+                                        adapterPosition.toString()
+                                )
+                        )
+                        positiveButton {
+                            //add an empty list to preferences
+                            try {
+                                if (mRecentSetups?.contains(wallpaper)!!) {
+                                    mRecentSetups?.remove(wallpaper)
+                                }
+                                notifyDataSetChanged()
+                                vectorifyPreferences.recentSetups = mRecentSetups
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                        negativeButton { dismiss() }
+                    }
+
                     return@setOnLongClickListener true
                 }
 
@@ -82,35 +103,6 @@ class RecentsAdapter(
                     y = (resources.getDimensionPixelOffset(R.dimen.recent_height) * wallpaper.verticalOffset) / vectorifyPreferences.savedMetrics.height
                 }
             }
-        }
-    }
-
-    fun performRecentDeletion(adapterPosition: Int) {
-
-        val wallpaper = mRecentSetups?.get(adapterPosition)
-
-        MaterialDialog(ctx).show {
-
-            title(R.string.title_recent_setups)
-            message(
-                    text = ctx.getString(
-                            R.string.message_clear_single_recent_setup,
-                            adapterPosition.toString()
-                    )
-            )
-            positiveButton {
-                //add an empty list to preferences
-                try {
-                    if (mRecentSetups?.contains(wallpaper)!!) {
-                        mRecentSetups?.remove(wallpaper)
-                    }
-                    notifyDataSetChanged()
-                    vectorifyPreferences.recentSetups = mRecentSetups
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-            negativeButton { dismiss() }
         }
     }
 }
