@@ -175,27 +175,37 @@ class PreviewActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             window.decorView.afterMeasured {
+
                 val displayCutoutCompat =
                     WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout
+
                 mPreviewActivityBinding.run {
                     if (Utils.isDeviceLand(resources)) {
-                        val left = displayCutoutCompat?.safeInsetLeft
                         val lpOptionsCard = seekbarCard.layoutParams as FrameLayout.LayoutParams
                         lpOptionsCard.width = root.width / 2
 
                         val lpBtnContainer =
                             moveBtnContainer.layoutParams as FrameLayout.LayoutParams
                         lpBtnContainer.setMargins(0, toolbar.height, 0, 0)
-                        if (left != 0) {
-                            lpOptionsCard.setMargins(left!!, 0, left, 0)
+
+                        displayCutoutCompat?.let { dc ->
+                            val left = dc.safeInsetLeft
+                            if (left != 0) {
+                                lpOptionsCard.setMargins(left, 0, left, 0)
+                            }
                         }
+
                     } else {
-                        val top = displayCutoutCompat?.safeInsetTop
+
                         val lpToolbar = toolbar.layoutParams as FrameLayout.LayoutParams
-                        if (top != 0) {
-                            lpToolbar.setMargins(0, top!!, 0, 0)
+                        displayCutoutCompat?.let { dc ->
+                            val top = dc.safeInsetTop
+                            if (top != 0) {
+                                lpToolbar.setMargins(0, top, 0, 0)
+                            }
                         }
                     }
+
                     root.animate().run {
                         duration = 500
                         alpha(1.0F)
