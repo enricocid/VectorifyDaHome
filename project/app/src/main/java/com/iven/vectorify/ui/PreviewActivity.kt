@@ -4,16 +4,18 @@ import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.res.ColorStateList
 import android.content.res.Configuration
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
@@ -25,6 +27,11 @@ import com.iven.vectorify.*
 import com.iven.vectorify.databinding.PreviewActivityBinding
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
+import kotlinx.coroutines.*
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PreviewActivity : AppCompatActivity() {
@@ -44,9 +51,14 @@ class PreviewActivity : AppCompatActivity() {
 
     private lateinit var mSaveWallpaperDialog: MaterialDialog
 
+    private val mHandler = CoroutineExceptionHandler { _, exception ->
+        exception.printStackTrace()
+    }
 
-    // View model
-    private val mSaveWallpaperViewModel: SaveWallpaperViewModel by viewModels()
+    private val mUiDispatcher = Dispatchers.Main
+    private val mIoDispatcher = Dispatchers.IO + mHandler
+    private val mUiScope = CoroutineScope(mUiDispatcher)
+
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -131,39 +143,43 @@ class PreviewActivity : AppCompatActivity() {
                         WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                     )
                 }
+
                 show()
+
                 onShow {
+
                     this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+
+                    mUiScope.launch {
+
+                       val resultUri = saveWallpaperAsync(bitmap, setWallpaper)
+
+                        withContext(mUiDispatcher) {
+
+                            resultUri?.let { uri ->
+                                val wallpaperManager = WallpaperManager.getInstance(this@PreviewActivity)
+                                try {
+                                    //start crop and set wallpaper intent
+                                    startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
+                                } catch (e: Throwable) {
+                                    e.printStackTrace()
+                                }
+                            }
+
+                            if (mSaveWallpaperDialog.isShowing) {
+                                mSaveWallpaperDialog.dismiss()
+                            }
+
+                            Toast.makeText(
+                                this@PreviewActivity,
+                                getString(R.string.message_saved_to, getExternalFilesDir(null)),
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                        }
+                    }
                 }
             }
-
-            mSaveWallpaperViewModel.wallpaperUri.observe(this, { returnedUri ->
-
-                returnedUri?.let { uri ->
-                    val wallpaperManager = WallpaperManager.getInstance(this)
-                    try {
-                        //start crop and set wallpaper intent
-                        startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
-                    } catch (e: Throwable) {
-                        e.printStackTrace()
-                    }
-
-                }
-
-                mSaveWallpaperViewModel.cancel()
-
-                if (mSaveWallpaperDialog.isShowing) {
-                    mSaveWallpaperDialog.dismiss()
-                }
-
-                Toast.makeText(
-                    this,
-                    getString(R.string.message_saved_to, getExternalFilesDir(null)),
-                    Toast.LENGTH_LONG
-                ).show()
-
-            })
-            mSaveWallpaperViewModel.startSaveWallpaper(bitmap, setWallpaper)
         }
 
         //match theme with background luminance
@@ -381,6 +397,91 @@ class PreviewActivity : AppCompatActivity() {
             seekSize.value = mTempScale
             vectorView.resetPosition(mTempHorizontalOffset, mTempVerticalOffset)
         }
+    }
+
+    private suspend fun saveWallpaperAsync(bitmapToProcess: Bitmap, isSetWallpaper: Boolean) : Uri? = withContext(mIoDispatcher) {
+        saveWallpaper(cropBitmapFromCenterAndScreenSize(bitmapToProcess), isSetWallpaper)
+    }
+
+    private fun saveWallpaper(bitmap: Bitmap, isSetWallpaper: Boolean) : Uri? {
+
+        return try {
+            // Get the external storage directory path
+            application.getExternalFilesDir(null)?.let { path ->
+
+                val format = SimpleDateFormat(
+                    application.getString(R.string.time_pattern),
+                    Locale.getDefault()
+                ).format(Date())
+
+                // Create a file to save the image
+                val wallpaperToSave =
+                    File(path, "${application.getString(R.string.save_pattern) + format}.png")
+
+                // Get the file output stream
+                val stream = FileOutputStream(wallpaperToSave)
+
+                // Compress the bitmap
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+
+                // Flush and close the output stream
+                stream.run {
+                    flush()
+                    close()
+                }
+
+                if (isSetWallpaper) {
+                    FileProvider.getUriForFile(
+                        application,
+                        application.getString(R.string.app_name),
+                        wallpaperToSave
+                    )
+                } else {
+                    null
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun cropBitmapFromCenterAndScreenSize(bitmapToProcess: Bitmap): Bitmap {
+        //https://stackoverflow.com/a/25699365
+
+        val displayMetrics = vectorifyPreferences.savedMetrics
+        val deviceWidth = displayMetrics.width
+        val deviceHeight = displayMetrics.height
+
+        val bitmapWidth = bitmapToProcess.width.toFloat()
+        val bitmapHeight = bitmapToProcess.height.toFloat()
+
+        val bitmapRatio = bitmapWidth / bitmapHeight
+        val screenRatio = deviceWidth / deviceHeight
+        val bitmapNewWidth: Int
+        val bitmapNewHeight: Int
+
+        if (screenRatio > bitmapRatio) {
+            bitmapNewWidth = deviceWidth
+            bitmapNewHeight = (bitmapNewWidth / bitmapRatio).toInt()
+        } else {
+            bitmapNewHeight = deviceHeight
+            bitmapNewWidth = (bitmapNewHeight * bitmapRatio).toInt()
+        }
+
+        val newBitmap = Bitmap.createScaledBitmap(
+            bitmapToProcess, bitmapNewWidth,
+            bitmapNewHeight, true
+        )
+
+        val bitmapGapX = ((bitmapNewWidth - deviceWidth) / 2.0f).toInt()
+        val bitmapGapY = ((bitmapNewHeight - deviceHeight) / 2.0f).toInt()
+
+        //final bitmap
+        return Bitmap.createBitmap(
+            newBitmap, bitmapGapX, bitmapGapY,
+            deviceWidth, deviceHeight
+        )
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {

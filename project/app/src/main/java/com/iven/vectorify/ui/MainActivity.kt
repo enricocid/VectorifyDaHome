@@ -293,15 +293,15 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     private fun getDisplayMetrics() {
         //retrieve display specifications
         val window = applicationContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val d = DisplayMetrics()
+        val dm = DisplayMetrics()
         val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             display
         } else {
             window.defaultDisplay
         }
-        if (display != null) {
-            display.getRealMetrics(d)
-            vectorifyPreferences.savedMetrics = Metrics(d.widthPixels, d.heightPixels)
+        display?.let { d ->
+            d.getRealMetrics(dm)
+            vectorifyPreferences.savedMetrics = Metrics(dm.widthPixels, dm.heightPixels)
         }
     }
 

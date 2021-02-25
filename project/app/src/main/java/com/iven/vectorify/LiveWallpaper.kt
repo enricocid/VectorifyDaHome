@@ -99,8 +99,8 @@ class LiveWallpaper : WallpaperService() {
                     )
                 }
             } finally {
-                if (canvas != null) {
-                    holder.unlockCanvasAndPost(canvas)
+                canvas?.let { cv ->
+                    holder.unlockCanvasAndPost(cv)
                 }
             }
             handler.removeCallbacks(drawRunner)

@@ -235,16 +235,16 @@ object Utils {
 
         val bit = ContextCompat.getDrawable(context, vectorProps.first)
 
-        if (bit != null) {
+        bit?.let { b ->
             try {
                 //to avoid shared drawables get tinted too!
-                bit.mutate()
+                b.mutate()
 
                 //set tint mode multiply for special vectors
                 if (vectorProps.second) {
-                    bit.setTintMode(PorterDuff.Mode.MULTIPLY)
+                    b.setTintMode(PorterDuff.Mode.MULTIPLY)
                 }
-                bit.setTint(vectorColor)
+                b.setTint(vectorColor)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
