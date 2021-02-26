@@ -48,4 +48,17 @@
     <string name="title_roman">Chiffres romains</string>
     <string name="title_zodiac">Zodiaque</string>
     <string name="title_others">Autres</string>
+    <string name="content_go_to_prev">Voir l\'aperçu</string>
+    <string name="content_recent">Fond d\'écran récent numéro %1d</string>
+    <string name="content_btn_reset">Restaurer la configuration précédente</string>
+    <string name="content_btn_align_vertical">Centrer l\'image vectorielle verticalement</string>
+    <string name="content_btn_align_horizontal">Centrer l\'image vectorielle horizontalement</string>
+    <string name="content_btn_right">Déplacer l\'image vectorielle vers la droite</string>
+    <string name="content_btn_left">Déplacer l\'image vectorielle vers la gauche</string>
+    <string name="content_btn_down">Déplacer l\'image vectorielle vers le bas</string>
+    <string name="content_btn_up">Déplacer l\'image vectorielle vers le haut</string>
+    <string name="content_invert_bg_vector_colors">Inverser la couleur d\'arrière-plan et la couleur de l\'image vectorielle</string>
+    <string name="content_selected_category">La catégorie sélectionnée est %1s</string>
+    <string name="content_vector">Image vectorielle %1s</string>
+    <string name="content_vectors">Images vectorielles disponibles et aperçu</string>
 </resources>

@@ -39,8 +39,21 @@
     <string name="message_no_recent_setups">Keine neuesten Zusammenstellungen gefunden!</string>
     <string name="title_recent_setups">Neueste Zusammenstellungen</string>
     <string name="title_accent_me">"Einfärben!"</string>
-    <string name="selected_preset">Hintergrund: %1s, Bild: %1s</string>
+    <string name="selected_preset">Hintergrund: %1s, Vek­tor­gra­fik: %1s</string>
     <string name="title_presets">Vorlagen</string>
     <string name="title_background_dialog">Hintergrundfarbe</string>
     <string name="title_background">Hintergrund</string>
+    <string name="content_recent">Nummer des kürzlich benutzten Hintergrundbildes %1d</string>
+    <string name="content_go_to_prev">Zur Vorschau</string>
+    <string name="content_btn_reset">Vorherige Konfiguration wiederherstellen</string>
+    <string name="content_selected_category">Ausgewählte Kategorie ist %1s</string>
+    <string name="content_btn_align_vertical">Vek­tor­gra­fik senkrecht zentrieren</string>
+    <string name="content_btn_align_horizontal">Vek­tor­gra­fik waagerecht zentrieren</string>
+    <string name="content_btn_right">Vek­tor­gra­fik nach rechts verschieben</string>
+    <string name="content_btn_left">Vek­tor­gra­fik nach links verschieben</string>
+    <string name="content_btn_down">Vek­tor­gra­fik nach unten verschieben</string>
+    <string name="content_btn_up">Vek­tor­gra­fik nach oben verschieben</string>
+    <string name="content_invert_bg_vector_colors">Hintergrund- und Vek­tor­gra­fikfarben austauschen</string>
+    <string name="content_vector">Vek­tor­gra­fik %1s</string>
+    <string name="content_vectors">Verfügbare Vek­tor­gra­fiken und Vorschau</string>
 </resources>

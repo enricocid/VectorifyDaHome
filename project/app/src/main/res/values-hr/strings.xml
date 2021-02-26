@@ -14,12 +14,12 @@
     <string name="title_zodiac">Zodijak</string>
     <string name="title_animals">"Životinje"</string>
     <string name="title_math">Matematika</string>
-    <string name="title_go_live">"Postavi sliku pozadine uživo"</string>
+    <string name="title_go_live">Postavi kao animiranu sliku pozadine</string>
     <string name="title_save_to">Spremi u internu memoriju</string>
     <string name="title_tech">"Tehničke"</string>
     <string name="title_music">Glazba</string>
     <string name="message_saved_to">Spremljeno u %1s</string>
-    <string name="message_clear_single_recent_setup">"Izbrisat će se konfiguracija #%1s. Stvarno je želiš izbrisati?"</string>
+    <string name="message_clear_single_recent_setup">Izbrisat će se konfiguracija broj %1s. Stvarno je želiš izbrisati\?</string>
     <string name="title_symbols">Simboli</string>
     <string name="title_background">Pozadina</string>
     <string name="title_nerdy">Štreber</string>
@@ -43,4 +43,17 @@
     <string name="install_browser_message">Najprije instaliraj web preglednik!</string>
     <string name="title_alpha">Slova</string>
     <string name="title_preview">Pretprikaz</string>
+    <string name="content_go_to_prev">Prijeđi na pretprikaz</string>
+    <string name="content_vectors">Dostupne grafike i pretprikaz</string>
+    <string name="content_recent">Broj nedavne slike pozadine %1d</string>
+    <string name="content_btn_reset">Obnovi prethodnu konfiguraciju</string>
+    <string name="content_selected_category">Odabrana kategorija je %1s</string>
+    <string name="content_btn_align_vertical">Centriraj grafiku okomito</string>
+    <string name="content_btn_align_horizontal">Centriraj grafiku vodoravno</string>
+    <string name="content_btn_right">Pomakni grafiku desno</string>
+    <string name="content_btn_left">Pomakni grafiku lijevo</string>
+    <string name="content_btn_down">Pomakni grafiku dolje</string>
+    <string name="content_btn_up">Pomakni grafiku gore</string>
+    <string name="content_invert_bg_vector_colors">Zamijeni boje pozadine i grafike</string>
+    <string name="content_vector">Grafika %1s</string>
 </resources>
