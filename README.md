@@ -26,12 +26,12 @@
 - Category chooser
 
 - Recent setups management 
-  >tip: long click to delete a single setup)
+  >tip: setup deletion by long click
 
 - Preview screen where you can customize the size and position of the vector graphic
 
 - 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper)
-  >note: wallpapers are now being saved to the private's app folder (internal storage > Android > data > com.iven.iconify > files). The system will clear the folder if You uninstall the app so make sure to backup them.
+  >note: wallpapers are now being saved to /Pictures folder.
 
 - Light, dark and automatic (following the system settings on Android Q and battery level on older devices) themes
 
@@ -44,7 +44,7 @@
 
 # Want to contribute to translations?
 
-The project is now hosted on [weblate](https://hosted.weblate.org/engage/vectorify-da-home/). If You want to support weblate guys please consider a [donation](https://weblate.org/it/donate/new/) :)
+Help translate the project on [weblate](https://hosted.weblate.org/engage/vectorify-da-home/). Consider supporting the Weblate guys by sending a [donation](https://weblate.org/it/donate/new/) with our full approval :)
 
 <a href="https://hosted.weblate.org/engage/vectorify-da-home/">
 <img src="https://hosted.weblate.org/widgets/vectorify-da-home/-/88x31-white.png" alt="Stato traduzione" />
@@ -52,13 +52,7 @@ The project is now hosted on [weblate](https://hosted.weblate.org/engage/vectori
 
 # License
 
-Copyright (C) 2021 **Enrico D'Ortenzio**
+Copyright ??© 2021 **Enrico D'Ortenzio**
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and limitations under the License.
+This repository is copylefted libre software, licensed [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0), as described in the [LICENSE](LICENSE.md) file.
+Use, study, change and share at will; with all.

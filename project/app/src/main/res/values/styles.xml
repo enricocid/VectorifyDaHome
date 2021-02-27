@@ -12,6 +12,8 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
+    <style name="PreviewTheme" parent="AppTheme" />
+
     <style name="Widget.App.CircularProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
         <item name="trackThickness">20dp</item>
     </style>

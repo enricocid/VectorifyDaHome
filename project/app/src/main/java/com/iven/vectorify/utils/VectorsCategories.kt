@@ -1,5 +1,3 @@
-@file:JvmName("VectorsCategories")
-
 package com.iven.vectorify.utils
 
 import com.iven.vectorify.R

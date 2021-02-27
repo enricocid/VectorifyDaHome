@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="boo">Bouh&#160;! Pas d\'accès, pas de fête&#160;! Utilisez le fond d\'écran en direct&#160;!</string>
+
     <!-- Card titles -->
     <string name="title_background">"Arrière-plan"</string>
     <string name="title_background_dialog">"Couleur d'arrière-plan"</string>

@@ -12,7 +12,9 @@ This page is used to inform visitors regarding my policies with the collection, 
 
 **We don't store any data. Period. We physically can't. We have nowhere to store it. We are very poor so we don't even have a server database to store any kind of information.**
 
-**No permissions are requested** to save wallpapers to storage! Wallpapers are saved to the private app's folder (internal storage > Android > data > com.iven.iconify > files).
+For utilization of Vectorify da home! on Android version lower than **Android 10 (Q - Api 29)**, the software is designed to request only the **write storage permission** on the device on which the software's services is intended.
+
+This permission has to be enabled so the software can save the wallpapers to /Pictures folder.
 
 The app does not implement any APIs or SDKs that are not approved for use in child-directed services including Google Sign-In (or any other API Service that accesses data associated with a Google Account), Google Play Games Services, and any other API Service using OAuth technology for authentication and authorization.<hr>
 

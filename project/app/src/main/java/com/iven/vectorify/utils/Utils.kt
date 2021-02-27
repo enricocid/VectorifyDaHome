@@ -1,6 +1,5 @@
-@file:JvmName("Utils")
-
 package com.iven.vectorify.utils
+
 
 import android.app.WallpaperManager
 import android.content.ComponentName

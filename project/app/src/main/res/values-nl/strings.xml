@@ -1,5 +1,7 @@
 <resources>
 
+    <string name="boo">Verdorie! Geen toegang, geen feest! Gebruik de live-achtergrond!</string>
+
     <!-- Card titles -->
     <string name="title_background">Achtergrond</string>
     <string name="title_background_dialog">Achtergrondkleur</string>
