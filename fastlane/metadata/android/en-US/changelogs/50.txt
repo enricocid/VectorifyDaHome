@@ -1,0 +1,10 @@
+- Wallpapers are now saved to /Pictures folder
+- Landscape support
+- Preview: support display cutouts
+- Preview: double tap to close
+- Preview: review reset button behaviour
+  - Click: restore previous wallpaper scale/position
+  - Long click: restore default scale/position settings
+- Many other UI improvements
+- Update translations
+- Upgrade dependencies

@@ -1,0 +1,10 @@
+- Gli sfondi sono salvati nella cartella /Pictures
+- Supporto landscape
+- Anteprima: supporto display cutouts
+- Anteprima: double tap per chiudere
+- Anteprima: rivisto comportamento pulsante reset
+  - Click: ripristina dimensione/posizione dello sfondo precedente
+  - Long click: ripristina dimensione/posizione predefinita
+- Molti altri miglioramenti dell'interfaccia
+- Aggiornate traduzioni
+- Aggiornate dipendenze
