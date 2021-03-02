@@ -369,7 +369,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 } else {
                     Toast.makeText(
                             this@MainActivity,
-                            getString(R.string.message_no_recent_setups),
+                            R.string.message_no_recent_setups,
                             Toast.LENGTH_LONG
                     ).show()
                 }

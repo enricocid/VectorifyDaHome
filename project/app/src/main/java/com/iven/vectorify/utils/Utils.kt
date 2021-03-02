@@ -286,7 +286,7 @@ object Utils {
         } catch (e: Exception) {
             Toast.makeText(
                     context,
-                    context.getString(R.string.install_browser_message),
+                    R.string.install_browser_message,
                     Toast.LENGTH_LONG
             ).show()
             e.printStackTrace()

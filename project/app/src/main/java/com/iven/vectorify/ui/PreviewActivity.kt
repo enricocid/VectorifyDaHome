@@ -385,7 +385,7 @@ class PreviewActivity : AppCompatActivity() {
         if (!Utils.isLiveWallpaperRunning(this)) {
             Utils.openLiveWallpaperIntent(this)
         } else {
-            Toast.makeText(this, getString(R.string.title_already_live), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, R.string.title_already_live, Toast.LENGTH_LONG).show()
         }
     }
 
