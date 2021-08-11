@@ -48,9 +48,9 @@ class VectorView @JvmOverloads constructor(
 
         mDeviceMetrics = vectorifyPreferences.savedMetrics
         mDrawable = Utils.tintDrawable(
-                context,
-                mVector,
-                mVectorColor
+            context,
+            mVector,
+            mVectorColor
         )
     }
 
@@ -129,13 +129,13 @@ class VectorView @JvmOverloads constructor(
     fun saveToPrefs() {
         //save wallpaper to prefs
         with(VectorifyWallpaper(
-                mBackgroundColor,
-                mVectorColor,
-                mVector,
-                mCategory,
-                mScaleFactor,
-                mHorizontalOffset,
-                mVerticalOffset
+            mBackgroundColor,
+            mVectorColor,
+            mVector,
+            mCategory,
+            mScaleFactor,
+            mHorizontalOffset,
+            mVerticalOffset
         )) {
             if (Utils.isDeviceLand(resources)) {
                 vectorifyPreferences.savedWallpaperLand = this

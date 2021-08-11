@@ -27,9 +27,9 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
 
         return RecentSetupsHolder(LayoutInflater.from(parent.context).inflate(
-                R.layout.recent_option,
-                parent,
-                false)
+            R.layout.recent_option,
+            parent,
+            false)
         )
     }
 
@@ -47,14 +47,14 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
 
             val drawable =
                     Utils.tintDrawable(
-                            ctx,
-                            wallpaper.resource,
-                            wallpaper.vectorColor.toContrastColor(wallpaper.backgroundColor)
+                        ctx,
+                        wallpaper.resource,
+                        wallpaper.vectorColor.toContrastColor(wallpaper.backgroundColor)
                     )
 
             itemView.run {
 
-                contentDescription = ctx.getString(R.string.content_recent, adapterPosition)
+                contentDescription = ctx.getString(R.string.content_recent, absoluteAdapterPosition)
 
                 setOnClickListener {
                     onRecentClick?.invoke(wallpaper)
@@ -66,10 +66,10 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
 
                         title(R.string.title_recent_setups)
                         message(
-                                text = ctx.getString(
-                                        R.string.message_clear_single_recent_setup,
-                                        adapterPosition.toString()
-                                )
+                            text = ctx.getString(
+                                R.string.message_clear_single_recent_setup,
+                                absoluteAdapterPosition.toString()
+                            )
                         )
                         positiveButton {
                             //add an empty list to preferences

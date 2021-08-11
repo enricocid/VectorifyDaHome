@@ -54,7 +54,7 @@ fun VectorifyWallpaper.addToRecentSetups(isLand: Boolean) {
 
 @SuppressLint("DefaultLocale")
 fun Int.toHex(context: Context) =
-    context.getString(R.string.hex, Integer.toHexString(this)).toUpperCase()
+    context.getString(R.string.hex, Integer.toHexString(this)).uppercase()
 
 //method to determine colors luminance
 private fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35

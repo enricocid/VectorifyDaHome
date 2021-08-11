@@ -99,13 +99,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onPause() {
         super.onPause()
         with(VectorifyWallpaper(
-                mTempBackgroundColor,
-                mTempVectorColor,
-                mTempVector,
-                mTempCategory,
-                mTempScale,
-                mTempHorizontalOffset,
-                mTempVerticalOffset
+            mTempBackgroundColor,
+            mTempVectorColor,
+            mTempVector,
+            mTempCategory,
+            mTempScale,
+            mTempHorizontalOffset,
+            mTempVerticalOffset
         )) {
             if (Utils.isDeviceLand(resources)) {
                 vectorifyPreferences.savedWallpaperLand = this
@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     override fun onDestroy() {
         super.onDestroy()
         PreferenceManager.getDefaultSharedPreferences(this)
-                .unregisterOnSharedPreferenceChangeListener(this)
+            .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -208,7 +208,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
 
         PreferenceManager.getDefaultSharedPreferences(this)
-                .registerOnSharedPreferenceChangeListener(this)
+            .registerOnSharedPreferenceChangeListener(this)
     }
 
     private fun initViews() {
@@ -218,23 +218,23 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             categoriesChip.setOnClickListener { startCategoryChooser() }
             backgroundColorPicker.setOnClickListener { //method to start color picker for background
                 startColorPicker(
-                        getString(R.string.background_color_key),
-                        R.string.title_background_dialog
+                    getString(R.string.background_color_key),
+                    R.string.title_background_dialog
                 )
             }
 
             accentBackground.setOnClickListener {
                 setBackgroundColorForUI(
-                        Utils.getSystemAccentColor(
-                                this@MainActivity
-                        ), true
+                    Utils.getSystemAccentColor(
+                        this@MainActivity
+                    ), true
                 )
             }
 
             vectorColorPicker.setOnClickListener {  //method to start color picker for vector
                 startColorPicker(
-                        getString(R.string.vectors_color_key),
-                        R.string.title_vector_dialog
+                    getString(R.string.vectors_color_key),
+                    R.string.title_vector_dialog
                 )
             }
 
@@ -245,10 +245,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             swapCardColors.setOnClickListener { swapBtn ->
                 if (sSwapColor) {
                     ObjectAnimator.ofFloat(
-                            swapBtn,
-                            View.ROTATION,
-                            0f,
-                            180f
+                        swapBtn,
+                        View.ROTATION,
+                        0f,
+                        180f
                     ).apply {
                         duration = 500
                         start()
@@ -314,15 +314,15 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 //start preview activity
                 val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
                     putExtras(
-                            bundleOf(
-                                    TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
-                                    TEMP_VECTOR_COLOR to mTempVectorColor,
-                                    TEMP_VECTOR to mTempVector,
-                                    TEMP_CATEGORY to mTempCategory,
-                                    TEMP_SCALE to mTempScale,
-                                    TEMP_H_OFFSET to mTempHorizontalOffset,
-                                    TEMP_V_OFFSET to mTempVerticalOffset
-                            )
+                        bundleOf(
+                            TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
+                            TEMP_VECTOR_COLOR to mTempVectorColor,
+                            TEMP_VECTOR to mTempVector,
+                            TEMP_CATEGORY to mTempCategory,
+                            TEMP_SCALE to mTempScale,
+                            TEMP_H_OFFSET to mTempHorizontalOffset,
+                            TEMP_V_OFFSET to mTempVerticalOffset
+                        )
                     )
                 }
                 startActivity(intent)
@@ -346,16 +346,16 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     R.id.app_bar_theme -> {
 
                         vectorifyPreferences.theme =
-                                Utils.getNextDefaultNightMode(this@MainActivity)
+                            Utils.getNextDefaultNightMode(this@MainActivity)
 
                         AppCompatDelegate.setDefaultNightMode(
-                                Utils.getDefaultNightMode(
-                                        this@MainActivity
-                                )
+                            Utils.getDefaultNightMode(
+                                this@MainActivity
+                            )
                         )
 
                         menuThemeItem.icon =
-                                ContextCompat.getDrawable(this@MainActivity, Utils.getDefaultNightModeIcon(this@MainActivity))
+                            ContextCompat.getDrawable(this@MainActivity, Utils.getDefaultNightModeIcon(this@MainActivity))
                     }
 
                     R.id.app_bar_restore -> restoreDefaultWallpaper()
@@ -368,16 +368,16 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     openRecentSetups()
                 } else {
                     Toast.makeText(
-                            this@MainActivity,
-                            R.string.message_no_recent_setups,
-                            Toast.LENGTH_LONG
+                        this@MainActivity,
+                        R.string.message_no_recent_setups,
+                        Toast.LENGTH_LONG
                     ).show()
                 }
             }
 
             // setup bottom sheet behavior
             mBottomSheetBehavior.addBottomSheetCallback(object :
-                    BottomSheetBehavior.BottomSheetCallback() {
+                BottomSheetBehavior.BottomSheetCallback() {
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
                     if (slideOffset >= 0) {
@@ -420,10 +420,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     val lp = version.layoutParams as CoordinatorLayout.LayoutParams
                     lp.setMargins(0, 0, 0, height)
                     cardsContainer.setPadding(
-                            0,
-                            0,
-                            0,
-                            height + version.height
+                        0,
+                        0,
+                        0,
+                        height + version.height
                     )
                     bottom.setPadding(0, 0, 0, fab.height + fab.marginBottom)
 
@@ -449,12 +449,12 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
                     //update background and vector colors
                     setBackgroundColorForUI(
-                            ContextCompat.getColor(this@MainActivity, combo.first),
-                            true
+                        ContextCompat.getColor(this@MainActivity, combo.first),
+                        true
                     )
                     setVectorColorForUI(
-                            ContextCompat.getColor(this@MainActivity, combo.second),
-                            true
+                        ContextCompat.getColor(this@MainActivity, combo.second),
+                        true
                     )
 
                     //update vector frame colors
@@ -468,7 +468,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         mMainActivityBinding.vectorsRv.run {
 
             mVectorsRecyclerViewLayoutManager =
-                    GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
+                GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
             layoutManager = mVectorsRecyclerViewLayoutManager
             setHasFixedSize(true)
 
@@ -480,9 +480,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                             mTempVector = vector
 
                             mMainActivityBinding.vectorFrame.setImageResource(
-                                    Utils.getVectorProps(
-                                            vector
-                                    ).first
+                                Utils.getVectorProps(
+                                    vector
+                                ).first
                             )
 
                             //update drawable tint
@@ -500,7 +500,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                             getString(R.string.underscore_delimiter),
                             getString(R.string.space_delimiter)
                         )
-                        .capitalize()
+                        .replaceFirstChar(Char::uppercase)
                     Toast.makeText(this@MainActivity, iconName, Toast.LENGTH_LONG).show()
                 }
             }
@@ -510,13 +510,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     //update UI on recent selected
     private fun onRecentSelected(
-            selectedBackgroundColor: Int,
-            selectedVectorColor: Int,
-            selectedVector: Int,
-            selectedCategory: Int,
-            selectedScale: Float,
-            selectedHorizontalOffset: Float,
-            selectedVerticalOffset: Float
+        selectedBackgroundColor: Int,
+        selectedVectorColor: Int,
+        selectedVector: Int,
+        selectedCategory: Int,
+        selectedScale: Float,
+        selectedHorizontalOffset: Float,
+        selectedVerticalOffset: Float
     ) {
 
         updateFabColor()
@@ -540,9 +540,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
 
         val vector = Utils.tintDrawable(
-                this,
-                mTempVector,
-                mTempVectorColor.toContrastColor(mTempBackgroundColor)
+            this,
+            mTempVector,
+            mTempVectorColor.toContrastColor(mTempBackgroundColor)
         )
         mMainActivityBinding.vectorFrame.setImageDrawable(vector)
     }
@@ -570,7 +570,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
 
         mMainActivityBinding.fab.backgroundTintList =
-                ColorStateList.valueOf(mTempBackgroundColor)
+            ColorStateList.valueOf(mTempBackgroundColor)
 
         //check if colors are the same so we make vector color more visible
         updateFabColor()
@@ -590,9 +590,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         //update shit colors
         mMainActivityBinding.vectorColor.setCardBackgroundColor(
-                mTempVectorColor.toContrastColor(
-                        mTempBackgroundColor
-                )
+            mTempVectorColor.toContrastColor(
+                mTempBackgroundColor
+            )
         )
 
         mMainActivityBinding.vectorColorHead.setTextColor(textColor)
@@ -618,9 +618,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         mVectorsAdapter.onVectorClick?.invoke(vector)
         mVectorsAdapter.swapSelectedDrawable(mTempVector)
         mMainActivityBinding.vectorsRv.scrollToPosition(
-                mVectorsAdapter.getVectorPosition(
-                        mTempVector
-                )
+            mVectorsAdapter.getVectorPosition(
+                mTempVector
+            )
         )
     }
 
@@ -645,11 +645,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             title(title)
 
             colorChooser(
-                    colors = ColorPalette.Primary,
-                    subColors = ColorPalette.PrimarySub,
-                    allowCustomArgb = true,
-                    showAlphaSelector = false
-
+                colors = ColorPalette.Primary,
+                subColors = ColorPalette.PrimarySub,
+                allowCustomArgb = true,
+                showAlphaSelector = false
             ) { _, color ->
                 when (key) {
                     getString(R.string.background_color_key) -> {
@@ -706,13 +705,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     sUpdateFab = false
                     recent.run {
                         onRecentSelected(
-                                backgroundColor,
-                                vectorColor,
-                                resource,
-                                category,
-                                scale,
-                                horizontalOffset,
-                                verticalOffset
+                            backgroundColor,
+                            vectorColor,
+                            resource,
+                            category,
+                            scale,
+                            horizontalOffset,
+                            verticalOffset
                         )
                         mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                     }

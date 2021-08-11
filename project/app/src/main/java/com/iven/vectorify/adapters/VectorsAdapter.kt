@@ -66,7 +66,7 @@ class VectorsAdapter(private val ctx: Context) :
     }
 
     override fun onBindViewHolder(holder: VectorsHolder, position: Int) {
-        holder.bindItems(mSelectedCategory[holder.adapterPosition])
+        holder.bindItems(mSelectedCategory[holder.absoluteAdapterPosition])
     }
 
     inner class VectorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

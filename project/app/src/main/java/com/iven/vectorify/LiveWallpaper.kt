@@ -83,19 +83,19 @@ class LiveWallpaper : WallpaperService() {
                     canvas.drawColor(mBackgroundColor)
 
                     val drawable = Utils.tintDrawable(
-                            baseContext,
-                            mVector,
-                            mVectorColor
+                        baseContext,
+                        mVector,
+                        mVectorColor
                     )
 
                     Utils.drawBitmap(
-                            drawable,
-                            canvas,
-                            mDeviceWidth,
-                            mDeviceHeight,
-                            mScale,
-                            mHorizontalOffSet,
-                            mVerticalOffSet
+                        drawable,
+                        canvas,
+                        mDeviceWidth,
+                        mDeviceHeight,
+                        mScale,
+                        mHorizontalOffSet,
+                        mVerticalOffSet
                     )
                 }
             } finally {

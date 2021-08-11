@@ -68,7 +68,7 @@ class PresetsAdapter(private val ctx: Context) :
     }
 
     override fun onBindViewHolder(holder: ColorsHolder, position: Int) {
-        holder.bindItems(mPresets[holder.adapterPosition])
+        holder.bindItems(mPresets[holder.absoluteAdapterPosition])
     }
 
     inner class ColorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -101,8 +101,8 @@ class PresetsAdapter(private val ctx: Context) :
 
                 val resultName = ctx.getString(
                     R.string.selected_preset,
-                    backgroundColorName.capitalize(),
-                    vectorColorName.capitalize()
+                    backgroundColorName.replaceFirstChar(Char::uppercase),
+                    vectorColorName.replaceFirstChar(Char::uppercase)
                 )
 
                 contentDescription = resultName

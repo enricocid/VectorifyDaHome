@@ -126,15 +126,15 @@ class PreviewActivity : AppCompatActivity() {
 
             //set vector view
             vectorView.updateVectorView(
-                    VectorifyWallpaper(
-                            mTempBackgroundColor,
-                            mTempVectorColor.toContrastColor(mTempBackgroundColor),
-                            mTempVector,
-                            mTempCategory,
-                            mTempScale,
-                            mTempHorizontalOffset,
-                            mTempVerticalOffset
-                    )
+                VectorifyWallpaper(
+                    mTempBackgroundColor,
+                    mTempVectorColor.toContrastColor(mTempBackgroundColor),
+                    mTempVector,
+                    mTempCategory,
+                    mTempScale,
+                    mTempHorizontalOffset,
+                    mTempVerticalOffset
+                )
             )
         }
 
@@ -147,8 +147,8 @@ class PreviewActivity : AppCompatActivity() {
                 cancelable(false)
                 window?.run {
                     setFlags(
-                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                     )
                 }
 
@@ -184,9 +184,9 @@ class PreviewActivity : AppCompatActivity() {
                                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
                             }
                             Toast.makeText(
-                                    this@PreviewActivity,
-                                    getString(R.string.message_saved_to, directory?.name),
-                                    Toast.LENGTH_LONG
+                                this@PreviewActivity,
+                                getString(R.string.message_saved_to, directory?.name),
+                                Toast.LENGTH_LONG
                             ).show()
                         }
                     }
@@ -212,7 +212,7 @@ class PreviewActivity : AppCompatActivity() {
                     lpOptionsCard.width = mPreviewActivityBinding.root.width / 2
 
                     val lpBtnContainer =
-                            mPreviewActivityBinding.moveBtnContainer.layoutParams as FrameLayout.LayoutParams
+                        mPreviewActivityBinding.moveBtnContainer.layoutParams as FrameLayout.LayoutParams
                     lpBtnContainer.setMargins(0, mPreviewActivityBinding.toolbar.height, 0, 0)
 
                     displayCutoutCompat?.let { dc ->
@@ -355,13 +355,13 @@ class PreviewActivity : AppCompatActivity() {
             scaleText.setTextColor(widgetColor)
 
             listOf(
-                    up,
-                    down,
-                    left,
-                    right,
-                    centerHorizontal,
-                    centerVertical,
-                    resetPosition
+                up,
+                down,
+                left,
+                right,
+                centerHorizontal,
+                centerVertical,
+                resetPosition
             ).applyTint(this@PreviewActivity, widgetColor)
         }
     }
@@ -427,8 +427,8 @@ class PreviewActivity : AppCompatActivity() {
 
             var fos: OutputStream? = null
             val format = SimpleDateFormat(
-                    getString(R.string.time_pattern),
-                    Locale.getDefault()
+                getString(R.string.time_pattern),
+                Locale.getDefault()
             ).format(Date())
 
             val name = "${getString(R.string.save_pattern) + format}.png"
@@ -456,13 +456,13 @@ class PreviewActivity : AppCompatActivity() {
 
             //refresh media store database
             MediaScannerConnection.scanFile(this, arrayOf(wallpaperToSave.toString()),
-                    null, null)
+                null, null)
 
             if (isSetWallpaper) {
                 FileProvider.getUriForFile(
-                        this,
-                        getString(R.string.app_name),
-                        wallpaperToSave
+                    this,
+                    getString(R.string.app_name),
+                    wallpaperToSave
                 )
             } else {
                 null
@@ -497,8 +497,8 @@ class PreviewActivity : AppCompatActivity() {
         }
 
         val newBitmap = Bitmap.createScaledBitmap(
-                bitmapToProcess, bitmapNewWidth,
-                bitmapNewHeight, true
+            bitmapToProcess, bitmapNewWidth,
+            bitmapNewHeight, true
         )
 
         val bitmapGapX = ((bitmapNewWidth - deviceWidth) / 2.0f).toInt()
@@ -506,8 +506,8 @@ class PreviewActivity : AppCompatActivity() {
 
         //final bitmap
         return Bitmap.createBitmap(
-                newBitmap, bitmapGapX, bitmapGapY,
-                deviceWidth, deviceHeight
+            newBitmap, bitmapGapX, bitmapGapY,
+            deviceWidth, deviceHeight
         )
     }
 
@@ -521,13 +521,13 @@ class PreviewActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         with(VectorifyWallpaper(
-                mTempBackgroundColor,
-                mTempVectorColor,
-                mTempVector,
-                mTempCategory,
-                mTempScale,
-                mTempHorizontalOffset,
-                mTempVerticalOffset
+            mTempBackgroundColor,
+            mTempVectorColor,
+            mTempVector,
+            mTempCategory,
+            mTempScale,
+            mTempHorizontalOffset,
+            mTempVerticalOffset
         )) {
             if (Utils.isDeviceLand(resources)) {
                 vectorifyPreferences.savedWallpaperLand = this
@@ -540,8 +540,8 @@ class PreviewActivity : AppCompatActivity() {
     //manage request permission result, continue loading ui if permissions is granted
     @TargetApi(Build.VERSION_CODES.M)
     override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<String>, grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {

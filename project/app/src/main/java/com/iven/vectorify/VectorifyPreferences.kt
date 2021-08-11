@@ -17,17 +17,17 @@ class VectorifyPreferences(context: Context) {
     private val prefsThemeDefault = context.getString(R.string.theme_pref_auto)
 
     private val prefLiveWallpaper =
-            context.getString(R.string.live_wallpaper_key)
+        context.getString(R.string.live_wallpaper_key)
     private val prefSavedWallpaper =
-            context.getString(R.string.saved_wallpaper_key)
+        context.getString(R.string.saved_wallpaper_key)
     private val prefSavedWallpaperLand =
-            context.getString(R.string.saved_wallpaper_land_key)
+        context.getString(R.string.saved_wallpaper_land_key)
     private val prefRecentSetups =
-            context.getString(R.string.recent_wallpapers_key)
+        context.getString(R.string.recent_wallpapers_key)
     private val prefRecentSetupsLand =
-            context.getString(R.string.recent_wallpapers_land_key)
+        context.getString(R.string.recent_wallpapers_land_key)
     private val prefSavedMetrics =
-            context.getString(R.string.saved_metrics_key)
+        context.getString(R.string.saved_metrics_key)
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -42,55 +42,55 @@ class VectorifyPreferences(context: Context) {
 
     var savedWallpaper: VectorifyWallpaper
         get() = getObjectForClass(
-                prefSavedWallpaper,
-                VectorifyWallpaper::class.java
+            prefSavedWallpaper,
+            VectorifyWallpaper::class.java
         ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
         set(value) = putObjectForClass(
-                prefSavedWallpaper,
-                value,
-                VectorifyWallpaper::class.java
+            prefSavedWallpaper,
+            value,
+            VectorifyWallpaper::class.java
         )
 
     var savedWallpaperLand: VectorifyWallpaper
         get() = getObjectForClass(
-                prefSavedWallpaperLand,
-                VectorifyWallpaper::class.java
-            ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
+            prefSavedWallpaperLand,
+            VectorifyWallpaper::class.java
+        ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
         set(value) = putObjectForClass(
-                prefSavedWallpaperLand,
-                value,
-                VectorifyWallpaper::class.java
+            prefSavedWallpaperLand,
+            value,
+            VectorifyWallpaper::class.java
         )
 
     var liveWallpaper: VectorifyWallpaper
         get() = getObjectForClass(
-                prefLiveWallpaper,
-                VectorifyWallpaper::class.java
+            prefLiveWallpaper,
+            VectorifyWallpaper::class.java
         ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
         set(value) = putObjectForClass(
-                prefLiveWallpaper,
-                value,
-                VectorifyWallpaper::class.java
+            prefLiveWallpaper,
+            value,
+            VectorifyWallpaper::class.java
         )
 
     var savedMetrics: Metrics
         get() = getObjectForClass(
-                prefSavedMetrics,
-                Metrics::class.java
+            prefSavedMetrics,
+            Metrics::class.java
         ) ?: Metrics(720, 1280)
         set(value) = putObjectForClass(prefSavedMetrics, value, Metrics::class.java)
 
     var recentSetups: MutableList<VectorifyWallpaper>?
         get() = getObjectForType(
-                prefRecentSetups,
-                typeWallpapersList
+            prefRecentSetups,
+            typeWallpapersList
         )
         set(value) = putObjectForType(prefRecentSetups, value, typeWallpapersList)
 
     var recentSetupsLand: MutableList<VectorifyWallpaper>?
         get() = getObjectForType(
-                prefRecentSetupsLand,
-                typeWallpapersList
+            prefRecentSetupsLand,
+            typeWallpapersList
         )
         set(value) = putObjectForType(prefRecentSetupsLand, value, typeWallpapersList)
 
