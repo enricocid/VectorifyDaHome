@@ -417,11 +417,11 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     private suspend fun saveWallpaperAsync(bitmapToProcess: Bitmap, isSetWallpaper: Boolean) : Uri? = withContext(mIoDispatcher) {
-        saveWallpaper(cropBitmapFromCenterAndScreenSize(bitmapToProcess), isSetWallpaper)
+        doSave(cropBitmapFromCenterAndScreenSize(bitmapToProcess), isSetWallpaper)
     }
 
     //https://stackoverflow.com/a/59536115
-    private fun saveWallpaper(bitmap: Bitmap, isSetWallpaper: Boolean) : Uri? {
+    private fun doSave(bitmap: Bitmap, isSetWallpaper: Boolean) : Uri? {
 
         return try {
 
@@ -433,37 +433,43 @@ class PreviewActivity : AppCompatActivity() {
 
             val name = "${getString(R.string.save_pattern) + format}.png"
 
-            val wallpaperToSave: File
+            var returnUri: Uri = Uri.EMPTY
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+
                 val contentValues = ContentValues().apply {
                     put(MediaStore.MediaColumns.DISPLAY_NAME, name)
                     put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
                     put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
                 }
-                contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)?.run {
-                    fos = contentResolver.openOutputStream(Objects.requireNonNull(this))
+
+                contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)?.let { uri ->
+                    returnUri = uri
+                    fos = contentResolver.openOutputStream(Objects.requireNonNull(returnUri))
                 }
-                val imagesDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                wallpaperToSave = File(imagesDir, name)
+
             } else {
+
                 val imagesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                wallpaperToSave = File(imagesDir, name)
-                fos = FileOutputStream(wallpaperToSave)
-            }
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
-            Objects.requireNonNull(fos)?.close()
+                val wallpaperToSave = File(imagesDir, name)
 
-            //refresh media store database
-            MediaScannerConnection.scanFile(this, arrayOf(wallpaperToSave.toString()),
-                null, null)
-
-            if (isSetWallpaper) {
-                FileProvider.getUriForFile(
+                returnUri = FileProvider.getUriForFile(
                     this,
                     getString(R.string.app_name),
                     wallpaperToSave
                 )
+                fos = FileOutputStream(wallpaperToSave)
+                //refresh media store database
+                MediaScannerConnection.scanFile(this, arrayOf(wallpaperToSave.toString()),
+                    null, null)
+            }
+
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
+            fos?.flush()
+            fos?.close()
+
+            if (isSetWallpaper) {
+                returnUri
             } else {
                 null
             }
