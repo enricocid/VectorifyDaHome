@@ -40,6 +40,8 @@
 
 - [ZJRDroid](https://github.com/ZJRDroid) for Brazilian Portuguese translations!
 
+- [OraBB1t](https://github.com/OraBB1t) for this [bug reporting](https://github.com/enricocid/VectorifyDaHome/issues/32)
+
 - Abdul Kahlawi for reporting and letting me to fix an issue on Lollipop!
 
 

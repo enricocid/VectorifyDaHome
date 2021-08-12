@@ -11,8 +11,7 @@
     <!-- Recent setups things -->
     <string name="title_recent_setups">Fondos recientes</string>
     <string name="message_no_recent_setups">"¡No se han encontrado fondos recientes!"</string>
-    <string name="message_clear_recent_setups">"Todos los fondos recientes serán borrados. ¿Estás seguro? Si quieres borrar fondos específicos sólo mantén presionado sobre ellos :)"
-    </string>
+    <string name="message_clear_recent_setups">Todos los fondos recientes serán borrados. ¿Estás seguro\? Si quieres borrar fondos específicos sólo mantén presionado sobre ellos :).</string>
     <string name="message_clear_single_recent_setup">"El fondo #%1s será borrado. ¿Seguro?"</string>
     <!-- BottomBar menu items -->
     <string name="title_github">"Página en GitHub"</string>
@@ -49,4 +48,19 @@
     <string name="title_roman">Romanos</string>
     <string name="title_zodiac">Zodíaco</string>
     <string name="title_others">Otros</string>
+    <string name="content_go_to_prev">Ir a la vista previa</string>
+    <string name="content_recent">Número reciendo de fondo %1d</string>
+    <string name="content_btn_reset">Restaurar ajustes predeterminados</string>
+    <string name="content_btn_align_vertical">Centrar vector en vertical</string>
+    <string name="content_btn_align_horizontal">Centrar vector en horizontal</string>
+    <string name="content_btn_right">Mover vector a la derecha</string>
+    <string name="content_btn_left">Mover vector a la izquierda</string>
+    <string name="content_btn_down">Mover vector hacia abajo</string>
+    <string name="content_btn_up">Mover vector hacia arriba</string>
+    <string name="content_invert_bg_vector_colors">Intercambio de fondo y vectoriales</string>
+    <string name="content_selected_category">La categoría seleccionada es %1s</string>
+    <string name="content_vector">Vector %1s</string>
+    <string name="content_vectors">Vectores disponibles y vista previa</string>
+    <string name="boo">¡Bu! ¡Sin acceso no hay fiesta! Usa el fondo de pantalla en vivo :)</string>
+    <string name="rationale">Vectorify da home! necesita acceso a la memoria interna para guardar los fondos de pantalla</string>
 </resources>

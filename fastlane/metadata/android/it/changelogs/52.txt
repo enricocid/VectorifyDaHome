@@ -1,0 +1,4 @@
+- Android 10: corretto problema settaggio sfondo (grazie OraBB1t)
+- Aggiunti nuovi vettori ginnastica
+- Aggiornamento plugins/librerie
+- Aggiornamento traduzioni (grazie a tutti)

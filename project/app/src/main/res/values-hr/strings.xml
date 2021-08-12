@@ -56,4 +56,6 @@
     <string name="content_btn_up">Pomakni grafiku gore</string>
     <string name="content_invert_bg_vector_colors">Zamijeni boje pozadine i grafike</string>
     <string name="content_vector">Grafika %1s</string>
+    <string name="rationale">Za spremanje slika pozadine Vectorify da home! treba pristup internoj memoriji</string>
+    <string name="boo">Boo! Bez pristupa nema zabave! Koristi živu sliku pozadine! :)</string>
 </resources>

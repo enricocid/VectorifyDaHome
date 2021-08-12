@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_recent_setups">Πρόσφατες ρυθμίσεις</string>
+    <string name="title_accent_me">Με έμφαση!</string>
+    <string name="selected_preset">Υπόβαθρο: %1s, Διάνυσμα: %1s</string>
+    <string name="title_presets">Προεπιλογές</string>
+    <string name="title_vector_dialog">Διανυσματικό χρώμα</string>
+    <string name="title_vector">Διάνυσμα</string>
+    <string name="title_background_dialog">Χρώμα υποβάθρου</string>
+    <string name="title_background">Υπόβαθρο</string>
+</resources>

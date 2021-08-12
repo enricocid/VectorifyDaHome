@@ -1,0 +1,4 @@
+- Android 10: fix wallpaper not being set (thanks OraBB1t)
+- Add new gym vectors
+- Update plugins/libs
+- Update translations (thanks everyone)
