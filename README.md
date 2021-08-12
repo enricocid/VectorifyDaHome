@@ -1,4 +1,4 @@
-# <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> Vectorify da home!
+# Vectorify da home!
 
 
 [![Privacy policy](https://img.shields.io/static/v1?label=Privacy-policy&message=read&color=ef9a9a)](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md)
