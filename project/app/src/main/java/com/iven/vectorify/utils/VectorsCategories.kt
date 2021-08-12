@@ -255,6 +255,18 @@ object VectorsCategories {
 
     @JvmStatic
     val SPORT = listOf(
+        R.drawable.olympic_games,
+        R.drawable.gymnast,
+        R.drawable.gymnast_1,
+        R.drawable.gymnast_2,
+        R.drawable.gymnast_3,
+        R.drawable.gymnast_4,
+        R.drawable.gymnast_5,
+        R.drawable.gymnast_6,
+        R.drawable.gymnast_7,
+        R.drawable.gymnast_8,
+        R.drawable.gymnast_9,
+        R.drawable.gymnast_medal,
         R.drawable.baseball,
         R.drawable.basketball,
         R.drawable.basketball_hoop,
