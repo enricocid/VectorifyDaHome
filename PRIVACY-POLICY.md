@@ -73,4 +73,4 @@ The developer will not be held accountable for how you decide to use this softwa
 
 This project would certainly improve with your contributions.
 Feel free to propose contributions and suggestions to this project either by opening an issue or a pull requests.
-For further inquiry regarding this privacy policy or any other issue, please contact the developer directly via email (enrico.dortenzio@outlook.com) or by opening an issue on the app's official [GitHub repository](https://github.com/enricocid/VectorifyDaHome/issues/new).
+For further inquiry regarding this privacy policy or any other issue, please contact the developer directly via [email](enrico.dortenzio@outlook.com) or by opening an issue on the app's official [GitHub repository](https://github.com/enricocid/VectorifyDaHome/issues/new).
