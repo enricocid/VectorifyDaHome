@@ -39,8 +39,8 @@ The developer does **NOT** collect personally identifiable data while the softwa
 ## Children's Privacy
 
 The app does not address anyone under the age of 13. 
-The developer do not knowingly collect personally identifiable information from children under 13.
-If you are a parent or guardian and you are aware that your child has provided us with personal information by [email](enrico.dortenzio@outlook.com), please contact the team so that it will be able to take necessary actions.
+The developer does not knowingly collect personally identifiable information from children under 13.
+If you are a parent or guardian and you are aware that your child has provided us with personal information by [email](mailto:enrico.dortenzio@outlook.com), please contact the team so that it will be able to take necessary actions.
 
 This software is intended for general use, and has no restrictions on utilization by children.
 
@@ -73,4 +73,4 @@ The developer will not be held accountable for how you decide to use this softwa
 
 This project would certainly improve with your contributions.
 Feel free to propose contributions and suggestions to this project either by opening an issue or a pull requests.
-For further inquiry regarding this privacy policy or any other issue, please contact the developer directly via [email](enrico.dortenzio@outlook.com) or by opening an issue on the app's official [GitHub repository](https://github.com/enricocid/VectorifyDaHome/issues/new).
+For further inquiry regarding this privacy policy or any other issue, please contact the developer directly via [email](mailto:enrico.dortenzio@outlook.com) or by opening an issue on the app's official [GitHub repository](https://github.com/enricocid/VectorifyDaHome/issues/new).
