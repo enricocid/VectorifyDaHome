@@ -52,7 +52,7 @@ Help translate the project on [weblate](https://hosted.weblate.org/engage/vector
 
 # License
 
-Copyright © 2021 **Enrico D'Ortenzio**
+Copyright &copy; 2022 **Enrico D'Ortenzio**
 
 This repository is copylefted libre software, licensed [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0), as described in the [LICENSE](LICENSE.md) file.
 Use, study, change and share at will; with all.
