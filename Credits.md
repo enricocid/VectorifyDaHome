@@ -8,17 +8,17 @@
 
 ### Libraries/dependencies/dev/support
 
-- [Jnss98b](https://github.com/Jnss98b) for his support on different issues: [3](https://github.com/enricocid/VectorifyDaHome/issues/3), [4](https://github.com/enricocid/VectorifyDaHome/issues/4), [7](https://github.com/enricocid/VectorifyDaHome/issues/7),[8](https://github.com/enricocid/VectorifyDaHome/issues/8), [14](https://github.com/enricocid/VectorifyDaHome/issues/14), [16](https://github.com/enricocid/VectorifyDaHome/issues/16), [17](https://github.com/enricocid/VectorifyDaHome/issues/17)!
-
-- [Raphaël Bussa](https://github.com/raphaelbussa) for PreviewActivity crash [fix](https://github.com/enricocid/VectorifyDaHome/pull/30)
-
-- [john2020star](https://github.com/john2020star) for having contributed to fix this[issue](https://github.com/enricocid/VectorifyDaHome/issues/24)
+- [Maximilian Keppeler](https://github.com/maxkeppeler) for beautiful [Color sheet](https://github.com/maxkeppeler/sheets/) library!
 
 - [Square](https://github.com/square/) for [Moshi](https://github.com/square/moshi/) library!
 
-- [Aidan Follestad](https://github.com/afollestad) for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs/) library!
+- [Chris Banes](https://github.com/chrisbanes) for the awesome [Insetter](https://github.com/chrisbanes/insetter/) library!
 
-- [Sergej Shafarenka](https://github.com/beworker) for the awesome [Edge-to-Edge](https://github.com/beworker/edge-to-edge/) library!
+- [Jnss98b](https://github.com/Jnss98b) for his support on different issues: [3](https://github.com/enricocid/VectorifyDaHome/issues/3), [4](https://github.com/enricocid/VectorifyDaHome/issues/4), [7](https://github.com/enricocid/VectorifyDaHome/issues/7),[8](https://github.com/enricocid/VectorifyDaHome/issues/8), [14](https://github.com/enricocid/VectorifyDaHome/issues/14), [16](https://github.com/enricocid/VectorifyDaHome/issues/16), [17](https://github.com/enricocid/VectorifyDaHome/issues/17)!
+
+- [Raphael Bussa](https://github.com/raphaelbussa) for PreviewActivity crash [fix](https://github.com/enricocid/VectorifyDaHome/pull/30)
+
+- [john2020star](https://github.com/john2020star) for having contributed to fix this[issue](https://github.com/enricocid/VectorifyDaHome/issues/24)
 
 - [Canva](https://www.canva.com/learn/100-color-combinations) for some color presets!
 
