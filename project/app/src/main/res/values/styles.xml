@@ -7,16 +7,46 @@
         <item name="android:statusBarColor">@color/system_bars_color</item>
         <item name="android:navigationBarColor">@color/system_bars_color</item>
         <item name="android:windowBackground">@color/activity_background_color</item>
-        <item name="md_color_button_text">@color/vectors_color</item>
-        <item name="md_corner_radius">@dimen/md_corner_radius</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="sheetsBackgroundColor">@color/bottom_bar_color</item>
+        <item name="sheetsIconsColor">@color/vectors_color</item>
+        <item name="sheetsPrimaryColor">@color/vectors_color</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
     </style>
+
+    <!-- Dialogs theming -->
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/vectors_color</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text
+        </item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
+        </item>
+    </style>
+
+    <!-- Stuff to make the bottom sheet with round top borders -->
+    <!-- https://gist.github.com/ArthurNagy/1c4a64e6c8a7ddfca58638a9453e4aed -->
+    <style name="BottomSheetShapeAppearance" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+    </style>
+
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="shapeAppearance">@style/BottomSheetShapeAppearance</item>
+    </style>
+
+    <style name="BaseBottomSheetMenu" parent="@style/Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+        <item name="android:colorBackground">@color/bottom_bar_color</item>
+    </style>
+
+    <style name="BottomSheetMenuTheme" parent="@style/BaseBottomSheetMenu" />
 
     <style name="PreviewTheme" parent="AppTheme" />
-
-    <style name="Widget.App.CircularProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
-        <item name="trackThickness">20dp</item>
-    </style>
 
     <!-- This will set the fade in animation on all the activities by default -->
     <style name="WindowAnimationTransition">

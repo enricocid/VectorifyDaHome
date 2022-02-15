@@ -15,6 +15,7 @@
     <!-- Setup recenti -->
     <string name="title_recent_setups">Configurazioni recenti</string>
     <string name="message_no_recent_setups">Nessuna configurazione recente trovata!</string>
+    <string name="title_clear_recent_setups">Cancella</string>
     <string name="message_clear_recent_setups">Tutte le configurazioni recenti saranno cancellate. Sei sicuro/a? Per cancellare una configurazione, clicca a lungo su di essa. :)</string>
     <string name="message_clear_single_recent_setup">La configurazione #%1s sarà cancellata. Sei sicuro/a?</string>
     <!-- Items del menu della BottomBar -->
@@ -47,7 +48,7 @@
 
     <!-- Categorie -->
     <string name="title_categories">Categorie</string>
-    <string name="title_tech">Tecno</string>
+    <string name="title_tech">Tech</string>
     <string name="title_symbols">Simboli</string>
     <string name="title_animals">Animali</string>
     <string name="title_emoticons">Faccine</string>

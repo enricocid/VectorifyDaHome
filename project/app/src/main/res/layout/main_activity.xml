@@ -269,42 +269,6 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
         android:textColor="@color/vectors_color" />
 
-    <!-- RECENT SETUPS BOTTOM SHEET -->
-    <View
-        android:id="@+id/shadow_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0"
-        android:background="@android:color/background_dark"
-        android:visibility="gone" />
-
-    <LinearLayout
-        android:id="@+id/bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:background="@color/bottom_bar_color"
-        android:orientation="vertical"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:text="@string/title_recent_setups"
-            android:textAppearance="@android:style/TextAppearance.Material.Title" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recents_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:overScrollMode="never"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-    </LinearLayout>
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bar"
         android:layout_width="match_parent"

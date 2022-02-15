@@ -4,7 +4,6 @@
     <dimen name="preset_option_dim">28dp</dimen>
     <dimen name="vector_size">40dp</dimen>
     <dimen name="recent_setups_elevation">8dp</dimen>
-    <dimen name="md_corner_radius">8dp</dimen>
-    <dimen name="recent_height">172dp</dimen>
-    <dimen name="recent_width">108dp</dimen>
+    <dimen name="recent_height">188dp</dimen>
+    <dimen name="recent_width">124dp</dimen>
 </resources>

@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.afollestad.materialdialogs.MaterialDialog
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iven.vectorify.R
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.toContrastColor
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
-import java.util.*
+
 
 class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
@@ -27,7 +27,7 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
 
         return RecentSetupsHolder(LayoutInflater.from(parent.context).inflate(
-            R.layout.recent_option,
+            R.layout.recent_item,
             parent,
             false)
         )
@@ -61,31 +61,29 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
                 }
 
                 setOnLongClickListener {
-
-                    MaterialDialog(ctx).show {
-
-                        title(R.string.title_recent_setups)
-                        message(
-                            text = ctx.getString(
-                                R.string.message_clear_single_recent_setup,
-                                absoluteAdapterPosition.toString()
-                            )
-                        )
-                        positiveButton {
+                    MaterialAlertDialogBuilder(ctx)
+                        .setTitle(R.string.title_recent_setups)
+                        .setMessage(ctx.getString(
+                            R.string.message_clear_single_recent_setup,
+                            absoluteAdapterPosition.toString()
+                        ))
+                        .setPositiveButton(android.R.string.ok) { _, _ ->
                             //add an empty list to preferences
                             try {
+                                val index = mRecentSetups?.indexOf(wallpaper)!!
                                 if (mRecentSetups?.contains(wallpaper)!!) {
                                     mRecentSetups?.remove(wallpaper)
                                 }
-                                notifyDataSetChanged()
+                                notifyItemRemoved(index)
                                 vectorifyPreferences.recentSetups = mRecentSetups
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
                         }
-                        negativeButton { dismiss() }
-                    }
-
+                        .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                     return@setOnLongClickListener true
                 }
 

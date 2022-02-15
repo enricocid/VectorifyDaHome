@@ -16,6 +16,7 @@
     <!-- Recent setups things -->
     <string name="title_recent_setups">Recent setups</string>
     <string name="message_no_recent_setups">No recent setups found!</string>
+    <string name="title_clear_recent_setups">Delete</string>
     <string name="message_clear_recent_setups">All recent setups will be deleted. Are You sure? If You want to delete
         specific setups just long click on them :).
     </string>

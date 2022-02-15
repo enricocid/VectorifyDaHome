@@ -8,6 +8,7 @@ import android.view.ViewTreeObserver
 import android.widget.ImageView
 import androidx.core.graphics.ColorUtils
 import com.iven.vectorify.models.VectorifyWallpaper
+import com.iven.vectorify.utils.SingleClickHelper
 import com.iven.vectorify.utils.Utils
 
 
@@ -89,6 +90,14 @@ fun List<ImageView>.applyTint(context: Context, widgetColor: Int) {
         iterator.next().run {
             drawable.mutate().setTint(widgetColor)
             background = Utils.createColouredRipple(context, widgetColor)
+        }
+    }
+}
+
+fun View.safeClickListener(safeClickListener: (view: View) -> Unit) {
+    this.setOnClickListener {
+        if (!SingleClickHelper.isBlockingClick()) {
+            safeClickListener(it)
         }
     }
 }

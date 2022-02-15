@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:paddingStart="8dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="14dp"
+        android:text="@string/title_categories"
+        android:textColor="@color/vectors_color" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/modal_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:overScrollMode="never" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_recents_btn"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="16dp"
+        android:text="@string/title_clear_recent_setups"
+        android:textColor="@color/vectors_color"
+        android:visibility="gone"
+        app:backgroundTint="@color/red_300"
+        app:icon="@drawable/ic_delete"
+        app:iconTint="@color/vectors_color" />
+</LinearLayout>

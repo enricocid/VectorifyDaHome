@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -20,19 +19,13 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.core.view.marginBottom
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.color.ColorPalette
-import com.afollestad.materialdialogs.color.colorChooser
-import com.afollestad.materialdialogs.list.listItems
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iven.vectorify.*
 import com.iven.vectorify.adapters.PresetsAdapter
-import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.databinding.MainActivityBinding
 import com.iven.vectorify.models.Metrics
@@ -45,8 +38,9 @@ import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_VECTOR
 import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_VECTOR_COLOR
 import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_V_OFFSET
 import com.iven.vectorify.utils.Utils
-import de.halfbit.edgetoedge.Edge
-import de.halfbit.edgetoedge.edgeToEdge
+import com.maxkeppeler.sheets.color.ColorSheet
+import dev.chrisbanes.insetter.Insetter
+import dev.chrisbanes.insetter.windowInsetTypesOf
 
 private const val TAG_BG_COLOR_RESTORE = "TAG_BG_COLOR_RESTORE"
 private const val TAG_VECTOR_COLOR_RESTORE = "TAG_VECTOR_COLOR_RESTORE"
@@ -57,13 +51,10 @@ private const val TAG_H_OFFSET_RESTORE = "TAG_H_OFFSET_RESTORE"
 private const val TAG_V_OFFSET_RESTORE = "TAG_V_OFFSET_RESTORE"
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, ModalSheet.ModalSheetCallback {
 
     // View binding class
     private lateinit var mMainActivityBinding: MainActivityBinding
-
-    private lateinit var mBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
-    private var sUpdateFab = true
 
     private lateinit var mVectorsRecyclerViewLayoutManager: LinearLayoutManager
     private lateinit var mVectorsAdapter: VectorsAdapter
@@ -115,25 +106,8 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
     }
 
-    override fun onBackPressed() {
-        if (mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        } else {
-            super.onBackPressed()
-        }
-    }
-
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
-            getString(R.string.recent_wallpapers_key) -> if (Utils.isDeviceLand(resources)) {
-                if (vectorifyPreferences.recentSetupsLand?.isNullOrEmpty()!! && mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                    mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                }
-            } else {
-                if (vectorifyPreferences.recentSetups?.isNullOrEmpty()!! && mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                    mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                }
-            }
             getString(R.string.theme_key) -> sThemeChanged = true
             getString(R.string.saved_wallpaper_key) -> onWallpaperPrefChanged(vectorifyPreferences.savedWallpaper)
             getString(R.string.saved_wallpaper_land_key) -> onWallpaperPrefChanged(vectorifyPreferences.savedWallpaperLand)
@@ -190,21 +164,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         initViews()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            window?.let { win ->
-                edgeToEdge {
-                    val edges = if (Utils.isDeviceLand(resources)) {
-                        Edge.Top + Edge.Right
-                    } else {
-                        Edge.Top
-                    }
-                    win.decorView.fit { edges }
-                    mMainActivityBinding.bar.fit { Edge.Bottom + Edge.Right }
-                    mMainActivityBinding.fab.run {
-                        fit { Edge.Right }
-                        fitPadding { Edge.Bottom }
-                    }
-                }
-            }
+            window?.navigationBarColor = ContextCompat.getColor(this, R.color.bottom_bar_color)
+            Insetter.builder()
+                .padding(windowInsetTypesOf(navigationBars = true))
+                .margin(windowInsetTypesOf(statusBars = true))
+                .applyToView(mMainActivityBinding.root)
         }
 
         PreferenceManager.getDefaultSharedPreferences(this)
@@ -215,8 +179,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         //set all click listeners
         mMainActivityBinding.run {
+
             categoriesChip.setOnClickListener { startCategoryChooser() }
-            backgroundColorPicker.setOnClickListener { //method to start color picker for background
+            backgroundColorPicker.safeClickListener {
                 startColorPicker(
                     getString(R.string.background_color_key),
                     R.string.title_background_dialog
@@ -231,7 +196,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 )
             }
 
-            vectorColorPicker.setOnClickListener {  //method to start color picker for vector
+            vectorColorPicker.safeClickListener {
                 startColorPicker(
                     getString(R.string.vectors_color_key),
                     R.string.title_vector_dialog
@@ -260,18 +225,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     }
                 }
             }
-
-            bottom.run {
-                mBottomSheetBehavior = BottomSheetBehavior.from(this)
-                background = Utils.getRoundedBGforRecent(this@MainActivity)
-            }
-
-            shadowView.setOnClickListener {
-                mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-
-            mBottomSheetBehavior.peekHeight = 0
-            mBottomSheetBehavior.isDraggable = false
         }
 
         //update background card color and text from preferences
@@ -281,11 +234,8 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         setVectorColorForUI(mTempVectorColor, false)
 
         setupFabButtonClick()
-
         setupBottomBar()
-
         setupRecyclerViews()
-
         updateSelectedCategory(mTempCategory, true)
     }
 
@@ -307,26 +257,21 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun setupFabButtonClick() {
         mMainActivityBinding.fab.setOnClickListener {
-
-            if (mBottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                Utils.clearRecentSetups(this@MainActivity)
-            } else {
-                //start preview activity
-                val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
-                    putExtras(
-                        bundleOf(
-                            TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
-                            TEMP_VECTOR_COLOR to mTempVectorColor,
-                            TEMP_VECTOR to mTempVector,
-                            TEMP_CATEGORY to mTempCategory,
-                            TEMP_SCALE to mTempScale,
-                            TEMP_H_OFFSET to mTempHorizontalOffset,
-                            TEMP_V_OFFSET to mTempVerticalOffset
-                        )
+            //start preview activity
+            val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
+                putExtras(
+                    bundleOf(
+                        TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
+                        TEMP_VECTOR_COLOR to mTempVectorColor,
+                        TEMP_VECTOR to mTempVector,
+                        TEMP_CATEGORY to mTempCategory,
+                        TEMP_SCALE to mTempScale,
+                        TEMP_H_OFFSET to mTempHorizontalOffset,
+                        TEMP_V_OFFSET to mTempVerticalOffset
                     )
-                }
-                startActivity(intent)
+                )
             }
+            startActivity(intent)
         }
     }
 
@@ -365,7 +310,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
             setNavigationOnClickListener {
                 if (Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetupsLand.isNullOrEmpty() || !Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetups.isNullOrEmpty()) {
-                    openRecentSetups()
+                    ModalSheet.newInstance().show(supportFragmentManager, ModalSheet.TAG_MODAL)
                 } else {
                     Toast.makeText(
                         this@MainActivity,
@@ -374,46 +319,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     ).show()
                 }
             }
-
-            // setup bottom sheet behavior
-            mBottomSheetBehavior.addBottomSheetCallback(object :
-                BottomSheetBehavior.BottomSheetCallback() {
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    if (slideOffset >= 0) {
-                        mMainActivityBinding.run {
-                            bottom.alpha = slideOffset
-                            shadowView.alpha = slideOffset * 0.50F
-                            bar.elevation = (1 - slideOffset) * resources.getDimension(R.dimen.recent_setups_elevation)
-                        }
-                    }
-                }
-
-                @SuppressLint("SwitchIntDef")
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-                    when (newState) {
-                        BottomSheetBehavior.STATE_EXPANDED -> {
-                            mMainActivityBinding.bar.elevation = 0F
-                            mBottomSheetBehavior.isDraggable = true
-                            mMainActivityBinding.run {
-                                shadowView.visibility = View.VISIBLE
-                                fab.setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_delete))
-                                fab.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this@MainActivity, R.color.red))
-                            }
-                        }
-                        BottomSheetBehavior.STATE_DRAGGING -> if (!sUpdateFab) {
-                            sUpdateFab = true
-                        }
-                        BottomSheetBehavior.STATE_COLLAPSED -> {
-                            mBottomSheetBehavior.isDraggable = false
-                            mMainActivityBinding.shadowView.visibility = View.GONE
-                            if (sUpdateFab) {
-                                updateFabColor()
-                            }
-                        }
-                    }
-                }
-            })
 
             afterMeasured {
                 mMainActivityBinding.run {
@@ -425,8 +330,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                         0,
                         height + version.height
                     )
-                    bottom.setPadding(0, 0, 0, fab.height + fab.marginBottom)
-
                     root.animate().run {
                         duration = 750
                         alpha(1.0F)
@@ -508,8 +411,12 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
     }
 
+    override fun onCategorySelected(category: Int) {
+        updateSelectedCategory(category, false)
+    }
+
     //update UI on recent selected
-    private fun onRecentSelected(
+    override fun onRecentSelected(
         selectedBackgroundColor: Int,
         selectedVectorColor: Int,
         selectedVector: Int,
@@ -640,16 +547,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     //start material dialog
     private fun startColorPicker(key: String, title: Int) {
-        MaterialDialog(this).show {
-
+        ColorSheet().show(this) {
+            disableAlpha()
+            colorsRes(Utils.colors)
             title(title)
-
-            colorChooser(
-                colors = ColorPalette.Primary,
-                subColors = ColorPalette.PrimarySub,
-                allowCustomArgb = true,
-                showAlphaSelector = false
-            ) { _, color ->
+            onPositive(android.R.string.ok) { color ->
                 when (key) {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
@@ -665,18 +567,20 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     }
                 }
             }
-            positiveButton()
+            onNegative(android.R.string.cancel)
         }
     }
 
     //method to start categories chooser
     private fun startCategoryChooser() {
-        MaterialDialog(this).show {
-            title(R.string.title_categories)
-            listItems(R.array.categories) { _, index, _ ->
-                updateSelectedCategory(index, false)
+        val items = resources.getStringArray(R.array.categories)
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.title_categories)
+            .setItems(items) { _, which ->
+                // Respond to item chosen
+                updateSelectedCategory(which, false)
             }
-        }
+            .show()
     }
 
     private fun updateSelectedCategory(index: Int, force: Boolean) {
@@ -692,39 +596,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
         if (force) {
             scrollToVector(mTempVector)
-        }
-    }
-
-    private fun openRecentSetups() {
-
-        if (mBottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
-            mMainActivityBinding.recentsRv.run {
-                setHasFixedSize(true)
-                val recentSetupsAdapter = RecentsAdapter(this@MainActivity)
-                recentSetupsAdapter.onRecentClick = { recent ->
-                    sUpdateFab = false
-                    recent.run {
-                        onRecentSelected(
-                            backgroundColor,
-                            vectorColor,
-                            resource,
-                            category,
-                            scale,
-                            horizontalOffset,
-                            verticalOffset
-                        )
-                        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                    }
-                }
-                adapter = recentSetupsAdapter
-            }
-
-            mMainActivityBinding.recentsRv.afterMeasured {
-                mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            }
-        } else {
-            mMainActivityBinding.recentsRv.adapter = null
-            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
 }

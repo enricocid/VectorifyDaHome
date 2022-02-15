@@ -22,5 +22,4 @@
     </string>
     <string name="save_pattern">vdh_</string>
     <string name="time_pattern">dd_MM_yy_hh-ss</string>
-    <string name="loading">"Vectorifying da home …"</string>
 </resources>

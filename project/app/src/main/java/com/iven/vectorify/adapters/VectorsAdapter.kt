@@ -1,5 +1,6 @@
 package com.iven.vectorify.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,7 @@ class VectorsAdapter(private val ctx: Context) :
         mSelectedDrawable = wallpaperToRestore.resource
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun swapCategory(selectedCategory: List<Int>) {
         mSelectedCategory = selectedCategory
         notifyDataSetChanged()
@@ -54,7 +56,7 @@ class VectorsAdapter(private val ctx: Context) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VectorsHolder {
         return VectorsHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.vector_option,
+                R.layout.vector_item,
                 parent,
                 false
             )

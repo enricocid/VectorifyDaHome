@@ -77,14 +77,13 @@ class PresetsAdapter(private val ctx: Context) :
         fun bindItems(combo: Pair<Int, Int>) {
 
             val colorItem = itemView as MaterialCardView
-
             val selectedVectorColor = ContextCompat.getColor(ctx, combo.second)
-            colorItem.setCardBackgroundColor(selectedVectorColor)
-
             val selectedBackgroundColor = ContextCompat.getColor(ctx, combo.first)
-            colorItem.strokeColor = selectedBackgroundColor
 
-            itemView.run {
+            colorItem.run {
+
+                setCardBackgroundColor(selectedVectorColor)
+                strokeColor = selectedBackgroundColor
 
                 val backgroundColorName =
                     ctx.resources.getResourceEntryName(combo.first)

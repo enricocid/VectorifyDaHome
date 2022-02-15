@@ -20,14 +20,11 @@ import android.view.GestureDetector.SimpleOnGestureListener
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.callbacks.onShow
-import com.afollestad.materialdialogs.customview.customView
+import androidx.core.view.isVisible
 import com.google.android.material.slider.Slider
 import com.iven.vectorify.*
 import com.iven.vectorify.databinding.PreviewActivityBinding
@@ -58,8 +55,6 @@ class PreviewActivity : AppCompatActivity() {
     private var mTempHorizontalOffset = 0F
     private var mTempVerticalOffset = 0F
 
-    private lateinit var mSaveWallpaperDialog: MaterialDialog
-
     private val mHandler = CoroutineExceptionHandler { _, exception ->
         exception.printStackTrace()
     }
@@ -70,7 +65,7 @@ class PreviewActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finishAndRemoveTask()
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -140,56 +135,37 @@ class PreviewActivity : AppCompatActivity() {
 
         mPreviewActivityBinding.vectorView.onSetWallpaper = { setWallpaper, bitmap ->
 
-            mSaveWallpaperDialog = MaterialDialog(this).apply {
-                title(R.string.app_name)
-                customView(R.layout.progress_dialog)
-                cancelOnTouchOutside(false)
-                cancelable(false)
-                window?.run {
-                    setFlags(
-                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                    )
-                }
+            mPreviewActivityBinding.progressIndicator.show()
+            mUiScope.launch {
 
-                show()
+                val resultUri = saveWallpaperAsync(bitmap, setWallpaper)
 
-                onShow {
+                withContext(mUiDispatcher) {
 
-                    this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-
-                    mUiScope.launch {
-
-                       val resultUri = saveWallpaperAsync(bitmap, setWallpaper)
-
-                        withContext(mUiDispatcher) {
-
-                            resultUri?.let { uri ->
-                                val wallpaperManager = WallpaperManager.getInstance(this@PreviewActivity)
-                                try {
-                                    //start crop and set wallpaper intent
-                                    startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
-                                } catch (e: Throwable) {
-                                    e.printStackTrace()
-                                }
-                            }
-
-                            if (mSaveWallpaperDialog.isShowing) {
-                                mSaveWallpaperDialog.dismiss()
-                            }
-
-                            val directory = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                                 getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                            } else {
-                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                            }
-                            Toast.makeText(
-                                this@PreviewActivity,
-                                getString(R.string.message_saved_to, directory?.name),
-                                Toast.LENGTH_LONG
-                            ).show()
+                    resultUri?.let { uri ->
+                        val wallpaperManager = WallpaperManager.getInstance(this@PreviewActivity)
+                        try {
+                            //start crop and set wallpaper intent
+                            startActivity(wallpaperManager.getCropAndSetWallpaperIntent(uri))
+                        } catch (e: Throwable) {
+                            e.printStackTrace()
                         }
                     }
+
+                    if (mPreviewActivityBinding.progressIndicator.isVisible) {
+                        mPreviewActivityBinding.progressIndicator.hide()
+                    }
+
+                    val directory = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                    } else {
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    }
+                    Toast.makeText(
+                        this@PreviewActivity,
+                        getString(R.string.message_saved_to, directory?.name),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -242,6 +218,7 @@ class PreviewActivity : AppCompatActivity() {
         setDoubleTapListener()
     }
 
+    @SuppressLint("RestrictedApi")
     private fun initializeSeekBar() {
         //observe SeekBar changes
         mPreviewActivityBinding.run {
@@ -304,17 +281,17 @@ class PreviewActivity : AppCompatActivity() {
 
         //determine if background color is dark or light and select
         //the appropriate color for UI widgets
-        val widgetColor = mTempBackgroundColor.toSurfaceColor()
-
         val cardColor = ColorUtils.setAlphaComponent(mTempBackgroundColor, 100)
+        val vectorColor = mTempBackgroundColor.toSurfaceColor()
+        val vectorColorAlpha = ColorUtils.setAlphaComponent(vectorColor, 25)
 
         with(mPreviewActivityBinding) {
             toolbar.run {
                 setBackgroundColor(cardColor)
-                setTitleTextColor(widgetColor)
+                setTitleTextColor(vectorColor)
                 setNavigationIcon(R.drawable.ic_navigate_before)
                 inflateMenu(R.menu.toolbar_menu)
-                setNavigationOnClickListener { finishAndRemoveTask() }
+                setNavigationOnClickListener { onBackPressed() }
                 setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.save -> setWallpaper(false)
@@ -331,28 +308,33 @@ class PreviewActivity : AppCompatActivity() {
                     }
                     val iterator = drawablesList.iterator()
                     while (iterator.hasNext()) {
-                        iterator.next().mutate().setTint(widgetColor)
+                        iterator.next().mutate().setTint(vectorColor)
                     }
                 }
+            }
+
+            progressIndicator.run {
+                setIndicatorColor(vectorColor)
+                trackColor = vectorColorAlpha
             }
 
             //set SeekBar colors
             seekbarCard.run {
                 setCardBackgroundColor(cardColor)
-                strokeColor = ColorUtils.setAlphaComponent(widgetColor, 25)
+                strokeColor = vectorColorAlpha
             }
 
             seekSize.run {
-                val color = ColorStateList.valueOf(widgetColor)
+                val color = ColorStateList.valueOf(vectorColor)
                 thumbTintList = color
                 trackTintList = color
                 trackInactiveTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this@PreviewActivity, R.color.slider_fg))
+                    ColorStateList.valueOf(vectorColorAlpha)
                 haloTintList = color
             }
 
-            seekbarTitle.setTextColor(widgetColor)
-            scaleText.setTextColor(widgetColor)
+            seekbarTitle.setTextColor(vectorColor)
+            scaleText.setTextColor(vectorColor)
 
             listOf(
                 up,
@@ -362,7 +344,7 @@ class PreviewActivity : AppCompatActivity() {
                 centerHorizontal,
                 centerVertical,
                 resetPosition
-            ).applyTint(this@PreviewActivity, widgetColor)
+            ).applyTint(this@PreviewActivity, vectorColor)
         }
     }
 
