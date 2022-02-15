@@ -81,7 +81,6 @@ class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefere
                         } else {
                             vectorifyPreferences.recentSetups = mutableListOf()
                         }
-                        dismiss()
                     }
                     .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                         dialog.dismiss()
@@ -122,8 +121,13 @@ class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefere
     }
 
     override fun onSharedPreferenceChanged(p0: SharedPreferences?, key: String?) {
-        if (key == getString(R.string.recent_wallpapers_key)) {
-            dismiss()
+        when {
+            Utils.isDeviceLand(resources) -> if (vectorifyPreferences.recentSetupsLand.isNullOrEmpty()) {
+                dismiss()
+            }
+            else -> if (vectorifyPreferences.recentSetups.isNullOrEmpty()) {
+                dismiss()
+            }
         }
     }
 
