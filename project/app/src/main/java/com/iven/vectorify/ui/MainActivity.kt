@@ -411,10 +411,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
     }
 
-    override fun onCategorySelected(category: Int) {
-        updateSelectedCategory(category, false)
-    }
-
     //update UI on recent selected
     override fun onRecentSelected(
         selectedBackgroundColor: Int,

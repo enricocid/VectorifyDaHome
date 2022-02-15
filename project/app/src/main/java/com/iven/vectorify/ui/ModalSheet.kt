@@ -27,7 +27,6 @@ class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefere
     private var _modalRvBinding: ModalRvBinding? = null
 
     interface ModalSheetCallback {
-        fun onCategorySelected(category: Int)
         fun onRecentSelected(selectedBackgroundColor: Int,
                              selectedVectorColor: Int,
                              selectedVector: Int,
