@@ -63,4 +63,5 @@
     <string name="content_vector">Image vectorielle %1s</string>
     <string name="content_vectors">Images vectorielles disponibles et aperçu</string>
     <string name="rationale">Vectorify da home! nécessite un accès à la mémoire interne pour sauvegarder les fonds d\'écran</string>
+    <string name="title_clear_recent_setups">Supprimer</string>
 </resources>
