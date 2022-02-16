@@ -38,8 +38,6 @@ class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefere
 
     private lateinit var mModalSheetCallback: ModalSheetCallback
 
-    override fun getTheme() = R.style.BottomSheetMenuTheme
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 

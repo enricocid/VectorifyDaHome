@@ -13,6 +13,7 @@
         <item name="sheetsBackgroundColor">@color/bottom_bar_color</item>
         <item name="sheetsIconsColor">@color/vectors_color</item>
         <item name="sheetsPrimaryColor">@color/vectors_color</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Demo.BottomSheetDialog</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
     </style>
 </resources>
