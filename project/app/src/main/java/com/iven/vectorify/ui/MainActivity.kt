@@ -51,7 +51,7 @@ private const val TAG_H_OFFSET_RESTORE = "TAG_H_OFFSET_RESTORE"
 private const val TAG_V_OFFSET_RESTORE = "TAG_V_OFFSET_RESTORE"
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener, ModalSheet.ModalSheetCallback {
+class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     // View binding class
     private lateinit var mMainActivityBinding: MainActivityBinding
@@ -310,7 +310,24 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
             setNavigationOnClickListener {
                 if (Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetupsLand.isNullOrEmpty() || !Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetups.isNullOrEmpty()) {
-                    ModalSheet.newInstance().show(supportFragmentManager, ModalSheet.TAG_MODAL)
+                    ModalSheet.newInstance().run {
+                        onRecentClick = { recent ->
+                            updateFabColor()
+                            setBackgroundColorForUI(recent.backgroundColor, true)
+                            setVectorColorForUI(recent.vectorColor, true)
+
+                            updateSelectedCategory(recent.category, false)
+
+                            scrollToVector(recent.resource)
+
+                            mTempScale = recent.scale
+                            mTempHorizontalOffset = recent.horizontalOffset
+                            mTempVerticalOffset = recent.verticalOffset
+
+                            dismiss()
+                        }
+                        show(supportFragmentManager, ModalSheet.TAG_MODAL)
+                    }
                 } else {
                     Toast.makeText(
                         this@MainActivity,
@@ -409,30 +426,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
             adapter = mVectorsAdapter
         }
-    }
-
-    //update UI on recent selected
-    override fun onRecentSelected(
-        selectedBackgroundColor: Int,
-        selectedVectorColor: Int,
-        selectedVector: Int,
-        selectedCategory: Int,
-        selectedScale: Float,
-        selectedHorizontalOffset: Float,
-        selectedVerticalOffset: Float
-    ) {
-
-        updateFabColor()
-        setBackgroundColorForUI(selectedBackgroundColor, true)
-        setVectorColorForUI(selectedVectorColor, true)
-
-        updateSelectedCategory(selectedCategory, false)
-
-        scrollToVector(selectedVector)
-
-        mTempScale = selectedScale
-        mTempHorizontalOffset = selectedHorizontalOffset
-        mTempVerticalOffset = selectedVerticalOffset
     }
 
     //update vector frame

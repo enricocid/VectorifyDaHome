@@ -1,6 +1,6 @@
 package com.iven.vectorify.ui
 
-import android.content.Context
+
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
@@ -16,6 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iven.vectorify.R
 import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.databinding.ModalRvBinding
+import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
 import dev.chrisbanes.insetter.Insetter
@@ -26,29 +27,7 @@ class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefere
 
     private var _modalRvBinding: ModalRvBinding? = null
 
-    interface ModalSheetCallback {
-        fun onRecentSelected(selectedBackgroundColor: Int,
-                             selectedVectorColor: Int,
-                             selectedVector: Int,
-                             selectedCategory: Int,
-                             selectedScale: Float,
-                             selectedHorizontalOffset: Float,
-                             selectedVerticalOffset: Float)
-    }
-
-    private lateinit var mModalSheetCallback: ModalSheetCallback
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
-        // This makes sure that the container activity has implemented
-        // the callback interface. If not, it throws an exception
-        try {
-            mModalSheetCallback = activity as ModalSheetCallback
-        } catch (e: ClassCastException) {
-            e.printStackTrace()
-        }
-    }
+    var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _modalRvBinding = ModalRvBinding.inflate(inflater, container, false)
@@ -90,18 +69,7 @@ class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefere
             modalRv.layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
             modalRv.adapter = recentsAdapter
             recentsAdapter.onRecentClick = { recent ->
-                recent.run {
-                    mModalSheetCallback.onRecentSelected(
-                        backgroundColor,
-                        vectorColor,
-                        resource,
-                        category,
-                        scale,
-                        horizontalOffset,
-                        verticalOffset
-                    )
-                }
-                dismiss()
+                onRecentClick?.invoke(recent)
             }
         }
 
