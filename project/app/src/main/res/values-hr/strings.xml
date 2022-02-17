@@ -58,4 +58,5 @@
     <string name="content_vector">Grafika %1s</string>
     <string name="rationale">Za spremanje slika pozadine Vectorify da home! treba pristup internoj memoriji</string>
     <string name="boo">Boo! Bez pristupa nema zabave! Koristi živu sliku pozadine! :)</string>
+    <string name="title_clear_recent_setups">Izbriži</string>
 </resources>
