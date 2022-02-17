@@ -43,4 +43,20 @@
     <string name="title_vector">Vektoriell</string>
     <string name="title_background_dialog">Bakgrunnsfarge</string>
     <string name="title_background">Bakgrunn</string>
+    <string name="content_go_to_prev">Gå til forhåndsvisning</string>
+    <string name="content_recent">Nylig bakgrunnsbilde nummer %1d</string>
+    <string name="content_vectors">Tilgjengelig vektorgrafikk og forhåndsvisning</string>
+    <string name="content_btn_up">Flytt vektorgrafikk oppover</string>
+    <string name="content_btn_left">Flytt vektorgrafikk til venstre</string>
+    <string name="content_btn_right">Flytt vektorgrafikk til høyre</string>
+    <string name="content_btn_align_horizontal">Sentrer vektorgrafikk vannrett</string>
+    <string name="content_btn_down">Flytt vektorgrafikk nedover</string>
+    <string name="rationale">Vektorifiser hjemmet! trenger tilgang til internminne for å lagre bakgrunnene.</string>
+    <string name="boo">Buu. Ingen tilgang, ingen fest. Bruk sanntidsbakgrunnen. :)</string>
+    <string name="content_vector">Vektorgrafikk %1s</string>
+    <string name="content_selected_category">Valgt kategori er %1s</string>
+    <string name="content_invert_bg_vector_colors">Utveksle bakgrunner og vektorielle farger</string>
+    <string name="content_btn_align_vertical">Sentrer vektorgrafikk loddrett</string>
+    <string name="content_btn_reset">Gjenopprett forrige oppsett</string>
+    <string name="title_clear_recent_setups">Slett</string>
 </resources>
