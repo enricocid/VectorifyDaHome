@@ -23,7 +23,7 @@ import dev.chrisbanes.insetter.Insetter
 import dev.chrisbanes.insetter.windowInsetTypesOf
 
 
-class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
+class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private var _modalRvBinding: ModalRvBinding? = null
 
@@ -66,6 +66,7 @@ class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefere
             }
 
             val recentsAdapter = RecentsAdapter(requireActivity())
+            modalRv.itemAnimator = null
             modalRv.layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
             modalRv.adapter = recentsAdapter
             recentsAdapter.onRecentClick = { recent ->
@@ -108,6 +109,6 @@ class ModalSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefere
          * @return A new instance of fragment ModalSheet.
          */
         @JvmStatic
-        fun newInstance() = ModalSheet()
+        fun newInstance() = RecentsSheet()
     }
 }

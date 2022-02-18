@@ -310,7 +310,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
             setNavigationOnClickListener {
                 if (Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetupsLand.isNullOrEmpty() || !Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetups.isNullOrEmpty()) {
-                    ModalSheet.newInstance().run {
+                    RecentsSheet.newInstance().run {
                         onRecentClick = { recent ->
                             updateFabColor()
                             setBackgroundColorForUI(recent.backgroundColor, true)
@@ -326,7 +326,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
                             dismiss()
                         }
-                        show(supportFragmentManager, ModalSheet.TAG_MODAL)
+                        show(supportFragmentManager, RecentsSheet.TAG_MODAL)
                     }
                 } else {
                     Toast.makeText(
