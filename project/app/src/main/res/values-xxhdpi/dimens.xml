@@ -2,4 +2,6 @@
 <resources>
     <dimen name="activity_padding">32dp</dimen>
     <dimen name="preset_option_dim">36dp</dimen>
+    <dimen name="preset_option_radius">18dp</dimen>
+    <dimen name="preset_option_stroke">3dp</dimen>
 </resources>

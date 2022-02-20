@@ -2,6 +2,8 @@
 <resources>
     <dimen name="activity_padding">16dp</dimen>
     <dimen name="preset_option_dim">28dp</dimen>
+    <dimen name="preset_option_radius">14dp</dimen>
+    <dimen name="preset_option_stroke">2dp</dimen>
     <dimen name="vector_size">40dp</dimen>
     <dimen name="recent_setups_elevation">8dp</dimen>
     <dimen name="recent_height">188dp</dimen>
