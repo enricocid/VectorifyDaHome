@@ -1,6 +1,5 @@
 package com.iven.vectorify.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -73,7 +72,6 @@ class PresetsAdapter(private val ctx: Context) :
 
     inner class ColorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        @SuppressLint("DefaultLocale")
         fun bindItems(combo: Pair<Int, Int>) {
 
             val colorItem = itemView as MaterialCardView

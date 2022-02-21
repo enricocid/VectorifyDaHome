@@ -39,7 +39,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-@Suppress("DEPRECATION")
 class PreviewActivity : AppCompatActivity() {
 
     // View binding class
@@ -63,6 +62,7 @@ class PreviewActivity : AppCompatActivity() {
     private val mIoDispatcher = Dispatchers.IO + mHandler
     private val mUiScope = CoroutineScope(mUiDispatcher)
 
+    @Suppress("DEPRECATION")
     override fun onBackPressed() {
         super.onBackPressed()
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
@@ -544,6 +544,7 @@ class PreviewActivity : AppCompatActivity() {
 
     //immersive mode
     //https://developer.android.com/training/system-ui/immersive
+    @Suppress("DEPRECATION")
     private fun hideSystemUI() {
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
