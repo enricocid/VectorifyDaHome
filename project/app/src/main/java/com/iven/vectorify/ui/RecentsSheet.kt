@@ -106,7 +106,7 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment ModalSheet.
+         * @return A new instance of fragment [RecentsSheet].
          */
         @JvmStatic
         fun newInstance() = RecentsSheet()

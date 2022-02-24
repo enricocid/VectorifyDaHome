@@ -5,7 +5,7 @@
 [![Credits](https://img.shields.io/static/v1?label=Contributors&message=many&color=81d4fa)](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
 
 [![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
-[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.9.5.1&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases)
+[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.9.6&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases)
 <a href="https://github.com/enricocid/VectorifyDaHome/actions">
 <img alt="CI" src="https://github.com/enricocid/VectorifyDaHome/workflows/Android%20CI/badge.svg">
 </a>
@@ -47,7 +47,7 @@
 Help translate the project on [weblate](https://hosted.weblate.org/engage/vectorify-da-home/). Consider supporting the Weblate guys by sending a [donation](https://weblate.org/it/donate/new/) with our full approval :)
 
 <a href="https://hosted.weblate.org/engage/vectorify-da-home/">
-<img src="https://hosted.weblate.org/widgets/vectorify-da-home/-/88x31-white.png" alt="Stato traduzione" />
+<img src="https://hosted.weblate.org/widgets/vectorify-da-home/-/horizontal-auto.svg" alt="Stato traduzione" />
 </a>
 
 # License

@@ -1,0 +1,9 @@
+Note: recents and current wallpaper will be cleared after the update.
+Before updating, consider saving them from the preview screen! 
+Sorry and thanks for Your patience! 
+
+Changes:
+- Replaced/removed outdated libraries
+- Update dependencies
+- Code improvements/cleaning
+- Update translations

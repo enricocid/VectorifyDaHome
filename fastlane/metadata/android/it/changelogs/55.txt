@@ -1,0 +1,9 @@
+Nota: i recenti e lo sfondo corrente saranno cancellati dall'aggiornamento. 
+Prima di aggiornare, considera di salvarli sulla memoria dalla schermata di anteprima!
+Scusate e grazie per la pazienza!
+
+Cambiamenti:
+- Sostituite/rimosse vecchie librerie
+- Aggiornamento dipendenze
+- Miglioramento e pulizia codice
+- Aggiornamento traduzioni
