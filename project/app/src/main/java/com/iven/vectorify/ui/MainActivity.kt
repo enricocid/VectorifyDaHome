@@ -38,6 +38,7 @@ import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_VECTOR
 import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_VECTOR_COLOR
 import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_V_OFFSET
 import com.iven.vectorify.utils.Utils
+import com.iven.vectorify.utils.VectorsCategories
 import com.maxkeppeler.sheets.color.ColorSheet
 import dev.chrisbanes.insetter.Insetter
 import dev.chrisbanes.insetter.windowInsetTypesOf
@@ -264,7 +265,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                         TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
                         TEMP_VECTOR_COLOR to mTempVectorColor,
                         TEMP_VECTOR to mTempVector,
-                        TEMP_CATEGORY to mTempCategory,
+                        TEMP_CATEGORY to VectorsCategories.safeGetVectorCategory(mTempVector),
                         TEMP_SCALE to mTempScale,
                         TEMP_H_OFFSET to mTempHorizontalOffset,
                         TEMP_V_OFFSET to mTempVerticalOffset

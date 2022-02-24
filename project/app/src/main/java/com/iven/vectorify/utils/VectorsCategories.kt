@@ -13,6 +13,25 @@ object VectorsCategories {
     //https://github.com/PotatoProject/website/blob/master/src/assets/
 
     @JvmStatic
+    fun safeGetVectorCategory(vector: Int): Int {
+        val categories = listOf(
+            TECH, SYMBOLS, ANIMALS, EMOTICONS, FUN, FOOD, NATURE,
+            WEATHER, SPORT, MATH, SCIENCE, CHERNOFF, MUSIC, NERDY,
+            BUILDINGS, ALERT, ALPHABET, ROMAN, ZODIAC, OTHERS
+        )
+
+        categories.iterator().withIndex().run {
+            while (hasNext()) {
+                val item = next()
+                if (item.value.contains(vector)) {
+                    return item.index
+                }
+            }
+        }
+        return 0
+    }
+
+    @JvmStatic
     val TECH = listOf(
         R.drawable.android,
         R.drawable.android_alt,
