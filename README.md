@@ -14,7 +14,7 @@
 <img src="https://hosted.weblate.org/widgets/vectorify-da-home/-/287x66-white.png" />
 </a>
 
-<img align="right" src="art3.gif" height="500px"/>
+<img align="right" src="art3.gif" width="400px"/>
 
 
 # Description:
