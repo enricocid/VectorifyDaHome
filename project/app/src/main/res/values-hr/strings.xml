@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">U redu</string>
+    <string name="cancel">Odustani</string>
     <string name="selected_preset">Pozadina: %1s, Grafika: %1s</string>
     <string name="title_accent_me">Oboji me!</string>
     <string name="title_crop">"Obreži i postavi kao sliku pozadine"</string>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">OK</string>
+    <string name="cancel">Peru</string>
     <string name="title_others">Muut</string>
     <string name="title_zodiac">"Eläinrata"</string>
     <string name="title_roman">Roomalainen</string>

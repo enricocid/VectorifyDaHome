@@ -38,13 +38,13 @@ object PermissionsUtils {
                 .setCancelable(false)
                 .setTitle(R.string.app_name)
                 .setMessage(R.string.rationale)
-                .setPositiveButton(android.R.string.ok) { _, _ ->
+                .setPositiveButton(R.string.ok) { _, _ ->
                     askForReadStoragePermission(
                         activity,
                         requestCode
                     )
                 }
-                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                .setNegativeButton(R.string.cancel) { _, _ ->
                     Toast.makeText(activity, R.string.boo, Toast.LENGTH_LONG).show()
                 }
                 .show()

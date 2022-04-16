@@ -1,5 +1,8 @@
 <resources>
 
+    <string name="ok">Tamam</string>
+    <string name="cancel">İptal</string>
+
     <string name="boo">Verdorie! Geen toegang, geen feest! Gebruik de live-achtergrond!</string>
 
     <!-- Card titles -->

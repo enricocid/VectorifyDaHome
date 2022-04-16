@@ -67,7 +67,7 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
                             R.string.message_clear_single_recent_setup,
                             absoluteAdapterPosition.toString()
                         ))
-                        .setPositiveButton(android.R.string.ok) { _, _ ->
+                        .setPositiveButton(R.string.ok) { _, _ ->
                             //add an empty list to preferences
                             try {
                                 val index = mRecentSetups?.indexOf(wallpaper)!!
@@ -80,7 +80,7 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
                                 e.printStackTrace()
                             }
                         }
-                        .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                        .setNegativeButton(R.string.cancel) { dialog, _ ->
                             dialog.dismiss()
                         }
                         .show()

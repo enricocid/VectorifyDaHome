@@ -52,14 +52,14 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
                 MaterialAlertDialogBuilder(requireActivity())
                     .setTitle(R.string.title_recent_setups)
                     .setMessage(R.string.message_clear_recent_setups)
-                    .setPositiveButton(android.R.string.ok) { _, _ ->
+                    .setPositiveButton(R.string.ok) { _, _ ->
                         if (Utils.isDeviceLand(resources)) {
                             vectorifyPreferences.recentSetupsLand = mutableListOf()
                         } else {
                             vectorifyPreferences.recentSetups = mutableListOf()
                         }
                     }
-                    .setNegativeButton(android.R.string.cancel) { dialog, _ ->
+                    .setNegativeButton(R.string.cancel) { dialog, _ ->
                         dialog.dismiss()
                     }
                     .show()

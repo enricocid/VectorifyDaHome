@@ -541,7 +541,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             disableAlpha()
             colorsRes(Utils.colors)
             title(title)
-            onPositive(android.R.string.ok) { color ->
+            onPositive(R.string.ok) { color ->
                 when (key) {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
@@ -557,7 +557,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     }
                 }
             }
-            onNegative(android.R.string.cancel)
+            onNegative(R.string.cancel)
         }
     }
 

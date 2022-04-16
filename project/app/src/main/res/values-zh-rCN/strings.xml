@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
     <string name="title_accent_me">使用系统主题色</string>
     <string name="rationale">Vectorify da home! 需要使用内部存储空间来保存壁纸</string>
     <string name="title_presets">预设</string>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="ok">OK</string>
+    <string name="cancel">Annulla</string>
+
     <string name="rationale">Vectorify da home! deve poter accedere alla memoria interna per salvare gli sfondi</string>
     <string name="boo">Boo! No accesso no party! Usa il live wallpaper! :)</string>
 

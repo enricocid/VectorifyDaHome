@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">OK</string>
+    <string name="cancel">Ακύρωση</string>
     <string name="title_recent_setups">Πρόσφατες ρυθμίσεις</string>
     <string name="title_accent_me">Με έμφαση!</string>
     <string name="selected_preset">Υπόβαθρο: %1s, Διάνυσμα: %1s</string>

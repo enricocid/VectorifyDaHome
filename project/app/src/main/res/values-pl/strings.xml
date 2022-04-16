@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">OK</string>
+    <string name="cancel">Anuluj</string>
     <string name="title_others">Inne</string>
     <string name="title_buildings">Budynki</string>
     <string name="title_nerdy">Nerdowskie</string>

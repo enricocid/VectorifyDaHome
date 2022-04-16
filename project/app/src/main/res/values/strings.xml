@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Dialogs -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Messages -->
     <string name="rationale">Vectorify da home! needs access to the internal memory to save the wallpapers</string>
     <string name="boo">Boo! No access no party! Use the live wallpaper! :)</string>
 

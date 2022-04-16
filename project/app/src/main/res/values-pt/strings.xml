@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
     <string name="title_others">Outros</string>
     <string name="title_zodiac">"Zodíaco"</string>
     <string name="title_roman">Números romanos</string>

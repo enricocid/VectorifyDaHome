@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">حسنًا</string>
+    <string name="cancel">إلغاء</string>
     <string name="title_nerdy">المهووس</string>
     <string name="title_others">أخرى</string>
     <string name="title_zodiac">الأبراج</string>

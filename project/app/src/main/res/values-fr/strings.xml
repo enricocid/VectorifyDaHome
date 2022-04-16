@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="ok">OK</string>
+    <string name="cancel">Annuler</string>
     <string name="boo">Bouh ! Pas d\'accès, pas de fête ! Utilisez le fond d\'écran en direct ! :)</string>
     <!-- Card titles -->
     <string name="title_background">"Arrière-plan"</string>
