@@ -63,4 +63,5 @@
     <string name="content_vectors">Vetores disponíveis e pré-visualização</string>
     <string name="boo">Boo! Sem acesso, sem festa! Use o papel de parede animado! :)</string>
     <string name="rationale">Vectorify da home! precisa ter acesso à memoria interna para salvar os papéis de parede</string>
+    <string name="title_clear_recent_setups">Apagar</string>
 </resources>
