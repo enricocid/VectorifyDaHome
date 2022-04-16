@@ -238,9 +238,11 @@ class PreviewActivity : AppCompatActivity() {
                 }
 
                 override fun onStopTrackingTouch(slider: Slider) {
-                    sUserIsSeeking = false
-                    mTempScale = userProgress
-                    scaleText.text = mTempScale.toFormattedScale()
+                    if (sUserIsSeeking) {
+                        sUserIsSeeking = false
+                        mTempScale = userProgress
+                        scaleText.text = mTempScale.toFormattedScale()
+                    }
                 }
             })
 
