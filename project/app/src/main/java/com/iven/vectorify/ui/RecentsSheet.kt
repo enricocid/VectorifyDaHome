@@ -59,9 +59,7 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
                             vectorifyPreferences.recentSetups = mutableListOf()
                         }
                     }
-                    .setNegativeButton(R.string.cancel) { dialog, _ ->
-                        dialog.dismiss()
-                    }
+                    .setNegativeButton(R.string.cancel, null)
                     .show()
             }
 

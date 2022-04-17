@@ -80,9 +80,7 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
                                 e.printStackTrace()
                             }
                         }
-                        .setNegativeButton(R.string.cancel) { dialog, _ ->
-                            dialog.dismiss()
-                        }
+                        .setNegativeButton(R.string.cancel, null)
                         .show()
                     return@setOnLongClickListener true
                 }

@@ -570,6 +570,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 // Respond to item chosen
                 updateSelectedCategory(which, false)
             }
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
