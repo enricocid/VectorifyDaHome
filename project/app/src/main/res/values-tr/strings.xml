@@ -59,4 +59,6 @@
     <string name="title_chernoff">Chernoff yüzleri</string>
     <string name="title_nerdy">Modası geçmiş</string>
     <string name="title_clear_recent_setups">Sil</string>
+    <string name="ok">Tamam</string>
+    <string name="cancel">İptal</string>
 </resources>
