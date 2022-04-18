@@ -59,4 +59,6 @@
     <string name="content_btn_align_vertical">Sentrer vektorgrafikk loddrett</string>
     <string name="content_btn_reset">Gjenopprett forrige oppsett</string>
     <string name="title_clear_recent_setups">Slett</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Avbryt</string>
 </resources>

@@ -65,4 +65,5 @@
     <string name="content_vectors">Vectores disponibles y vista previa</string>
     <string name="boo">¡Bu! ¡Sin acceso no hay fiesta! Usa el fondo de pantalla en vivo :)</string>
     <string name="rationale">Vectorify da home! necesita acceso a la memoria interna para guardar los fondos de pantalla</string>
+    <string name="title_clear_recent_setups">Eliminar</string>
 </resources>
