@@ -181,6 +181,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         //set all click listeners
         mMainActivityBinding.run {
 
+            vectorFrame.safeClickListener { startCategoryChooser() }
             categoriesChip.setOnClickListener { startCategoryChooser() }
             backgroundColorPicker.safeClickListener {
                 startColorPicker(

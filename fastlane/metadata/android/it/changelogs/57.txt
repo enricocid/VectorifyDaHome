@@ -1,0 +1,3 @@
+- Fix minore
+- Apri il selettore categoria cliccando direttamente sull'immagine vettoriale
+- Aggiornate traduzioni (Turco, Norvegiese Bokmål, Spagnolo)

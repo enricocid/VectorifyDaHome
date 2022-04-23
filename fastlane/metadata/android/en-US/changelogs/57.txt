@@ -1,0 +1,3 @@
+- Minor fix
+- Open category chooser clicking on vector image
+- Update translations (Turkish, Norwegian Bokmål, Spanish)
