@@ -3,6 +3,9 @@
 
 [![Privacy policy](https://img.shields.io/static/v1?label=Privacy-policy&message=read&color=ef9a9a)](https://github.com/enricocid/VectorifyDaHome/blob/master/PRIVACY-POLICY.md)
 [![Credits](https://img.shields.io/static/v1?label=Contributors&message=many&color=81d4fa)](https://github.com/enricocid/VectorifyDaHome/blob/master/Credits.md)
+<a href="https://war.ukraine.ua/support-ukraine/">
+<img alt="Support Ukraine" src="https://img.shields.io/static/v1?label=Support Ukraine&message=now!&color=005BBB">
+</a>
 
 [![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
 [![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.9.6.2&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases)
