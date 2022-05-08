@@ -1,0 +1,2 @@
+- Added new translations (Ukrainian, ...)
+- Dependencies updates

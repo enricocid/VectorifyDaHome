@@ -9,8 +9,8 @@ android {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 57
-        versionName "1.9.6.2"
+        versionCode 58
+        versionName "1.9.6.3"
 
         vectorDrawables.useSupportLibrary true
     }
@@ -66,8 +66,8 @@ dependencies {
     //https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //https://github.com/Kotlin/kotlinx.coroutines/blob/master/CHANGES.md
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
 
 // Support
     //https://developer.android.com/jetpack/androidx/versions
@@ -76,7 +76,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.browser:browser:1.4.0'
     //https://github.com/material-components/material-components-android/releases
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.6.0'
 
 // Third-party
     //https://github.com/square/moshi

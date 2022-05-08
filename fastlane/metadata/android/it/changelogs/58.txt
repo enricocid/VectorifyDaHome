@@ -1,0 +1,2 @@
+- Aggiunte nuove traduzioni (Ucraino, ...)
+- Aggiornamento dipendenze
