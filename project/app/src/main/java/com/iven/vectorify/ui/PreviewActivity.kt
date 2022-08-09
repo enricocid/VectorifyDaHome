@@ -17,7 +17,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.view.*
 import android.view.GestureDetector.SimpleOnGestureListener
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
@@ -25,6 +24,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import com.google.android.material.slider.Slider
 import com.iven.vectorify.*
 import com.iven.vectorify.databinding.PreviewActivityBinding
@@ -177,37 +177,13 @@ class PreviewActivity : AppCompatActivity() {
 
         initializeSeekBar()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            window.decorView.afterMeasured {
-
-                val displayCutoutCompat =
-                    WindowInsetsCompat.toWindowInsetsCompat(window.decorView.rootWindowInsets).displayCutout
-
-                if (Utils.isDeviceLand(resources)) {
-                    val lpOptionsCard = mPreviewActivityBinding.seekbarCard.layoutParams as FrameLayout.LayoutParams
-                    lpOptionsCard.width = mPreviewActivityBinding.root.width / 2
-
-                    val lpBtnContainer =
-                        mPreviewActivityBinding.moveBtnContainer.layoutParams as FrameLayout.LayoutParams
-                    lpBtnContainer.setMargins(0, mPreviewActivityBinding.toolbar.height, 0, 0)
-
-                    displayCutoutCompat?.let { dc ->
-                        val left = dc.safeInsetLeft
-                        if (left != 0) {
-                            lpOptionsCard.setMargins(left, 0, left, 0)
-                        }
-                    }
-                } else {
-
-                    val lpToolbar = mPreviewActivityBinding.toolbar.layoutParams as FrameLayout.LayoutParams
-                    displayCutoutCompat?.let { dc ->
-                        val top = dc.safeInsetTop
-                        if (top != 0) {
-                            lpToolbar.setMargins(0, top, 0, 0)
-                        }
-                    }
+        window.decorView.afterMeasured {
+            if (Utils.isDeviceLand(resources)) {
+                mPreviewActivityBinding.seekbarCard.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    width = mPreviewActivityBinding.root.width / 2
                 }
             }
+            updateLayoutForDisplayCutoutIfNeeded(this)
         }
 
         mPreviewActivityBinding.root.animate().run {
@@ -216,6 +192,44 @@ class PreviewActivity : AppCompatActivity() {
         }
 
         setDoubleTapListener()
+    }
+
+    private fun updateLayoutForDisplayCutoutIfNeeded(view: View) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1) return
+        val dc =
+            WindowInsetsCompat.toWindowInsetsCompat(view.rootWindowInsets).displayCutout ?: return
+
+        with(mPreviewActivityBinding) {
+
+            // expand toolbar background to the top edge
+            toolbar.setPadding(0, dc.safeInsetTop, 0, 0)
+
+            toolbar.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                height += dc.safeInsetTop
+            }
+
+            val newToolbarHeight = toolbar.layoutParams.height
+
+            // update progress bar position
+            progressIndicator.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                topMargin = newToolbarHeight
+            }
+
+            // update size card position
+            seekbarCard.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin += dc.safeInsetBottom
+            }
+
+            if (Utils.isDeviceLand(resources)) {
+                // update move button container position
+                moveBtnContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    topMargin = newToolbarHeight
+                    rightMargin += dc.safeInsetRight
+                }
+                // prevent toolbar buttons form being cutout
+                toolbar.setPadding(dc.safeInsetLeft, dc.safeInsetTop, dc.safeInsetRight, 0)
+            }
+        }
     }
 
     @SuppressLint("RestrictedApi")
