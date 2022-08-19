@@ -2,6 +2,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alpha="0"
@@ -34,11 +35,12 @@
         android:id="@+id/move_btn_container"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="16dp"
         android:orientation="vertical"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        tools:ignore="RtlHardcoded">
 
         <ImageButton
             android:id="@+id/up"
@@ -110,8 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:padding="4dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
