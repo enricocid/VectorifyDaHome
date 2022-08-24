@@ -4,13 +4,14 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 32
+    //noinspection GradleDependency
     buildToolsVersion "32.0.0"
     defaultConfig {
         applicationId "com.iven.iconify"
         minSdkVersion 21
         targetSdkVersion 32
-        versionCode 58
-        versionName "1.9.6.3"
+        versionCode 59
+        versionName "1.9.6.4"
 
         vectorDrawables.useSupportLibrary true
     }
@@ -71,12 +72,12 @@ dependencies {
 
 // Support
     //https://developer.android.com/jetpack/androidx/versions
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.browser:browser:1.4.0'
     //https://github.com/material-components/material-components-android/releases
-    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'com.google.android.material:material:1.6.1'
 
 // Third-party
     //https://github.com/square/moshi

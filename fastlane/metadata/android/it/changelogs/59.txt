@@ -1,0 +1,3 @@
+- Corretto supporto display cutout
+Grazie Cheng Wang (wangcheng)
+- Aggiornate dipendenze

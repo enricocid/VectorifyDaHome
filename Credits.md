@@ -16,6 +16,8 @@
 
 - [Jnss98b](https://github.com/Jnss98b) for his support on different issues: [3](https://github.com/enricocid/VectorifyDaHome/issues/3), [4](https://github.com/enricocid/VectorifyDaHome/issues/4), [7](https://github.com/enricocid/VectorifyDaHome/issues/7),[8](https://github.com/enricocid/VectorifyDaHome/issues/8), [14](https://github.com/enricocid/VectorifyDaHome/issues/14), [16](https://github.com/enricocid/VectorifyDaHome/issues/16), [17](https://github.com/enricocid/VectorifyDaHome/issues/17)!
 
+- [Cheng Wang](https://github.com/wangcheng) for [display cutout support fixes](https://github.com/enricocid/VectorifyDaHome/pull/46)
+
 - [Raphael Bussa](https://github.com/raphaelbussa) for PreviewActivity crash [fix](https://github.com/enricocid/VectorifyDaHome/pull/30)
 
 - [john2020star](https://github.com/john2020star) for having contributed to fix this[issue](https://github.com/enricocid/VectorifyDaHome/issues/24)

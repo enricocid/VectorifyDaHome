@@ -1,16 +1,16 @@
 Vectorify da home! is a minimal and open source app to apply wallpapers from a vast (400+) collection of vector graphics:
 
-- Background and graphic colors are customizable thanks to a fantastic color picker, presets or the device accent color.
-You can also swap them if You want!
+- Customizable and swappable background/graphic colors!
 
 - Category chooser
 
-- Preview screen where you can customize the size and position of the vector graphic
+- Recent setups
 
-- Recent setups management
-  - Tip: long click to delete a single setup
+- Preview screen to customize size/position of the graphic
 
-- 3 ways to set the wallpaper (save, direct apply - involves saving, live wallpaper)
-  - Wallpapers are now being saved to the private's app folder (internal storage > Android > data > com.iven.iconify > files). The system will clear the folder if You uninstall the app so make sure to backup them.
+- Recent setups
 
-- Light, dark and automatic (following the system settings on Android Q and battery level on pre-Q devices) themes
+- Save, apply directly or as live wallpaper!
+  - Note: wallpapers are saved to /Pictures.
+
+- Light, dark and automatic themes

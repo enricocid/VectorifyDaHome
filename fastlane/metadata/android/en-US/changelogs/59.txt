@@ -1,0 +1,3 @@
+- Fix display cutout support
+Thanks Cheng Wang (wangcheng)
+- Update dependencies
