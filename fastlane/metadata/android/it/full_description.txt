@@ -6,10 +6,9 @@ Vectorify da home! applicazione minimale ed open source per applicare wallpapers
 
 - Schermata di preview per modificare grandezza e posizione della grafica
 
-- Setup recenti
-
 - Salva lo sfondo, applicalo direttamente o come live wallpaper!
   - Nota: gli sfondi sono salvati in /Pictures.
 
+- Setup recenti
 
 - Temi chiaro, scuro ed automatico

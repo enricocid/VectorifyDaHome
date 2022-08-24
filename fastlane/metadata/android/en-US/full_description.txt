@@ -4,13 +4,11 @@ Vectorify da home! is a minimal and open source app to apply wallpapers from a v
 
 - Category chooser
 
-- Recent setups
-
 - Preview screen to customize size/position of the graphic
-
-- Recent setups
 
 - Save, apply directly or as live wallpaper!
   - Note: wallpapers are saved to /Pictures.
+
+- Recent setups
 
 - Light, dark and automatic themes

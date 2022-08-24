@@ -31,7 +31,7 @@
 - Preview screen to customize size/position of the graphic
 
 - Save, apply directly or as live wallpaper!
-  > Note: wallpapers are now saved to /Pictures.
+  > Note: wallpapers are saved to /Pictures.
 
 - Recent setups
 
