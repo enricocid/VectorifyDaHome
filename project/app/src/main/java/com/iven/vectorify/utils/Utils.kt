@@ -1,6 +1,7 @@
 package com.iven.vectorify.utils
 
 
+import android.annotation.SuppressLint
 import android.app.WallpaperManager
 import android.content.ComponentName
 import android.content.Context
@@ -264,6 +265,7 @@ object Utils {
     }
 
     //get system accent color
+    @SuppressLint("DiscouragedApi")
     @JvmStatic
     fun getSystemAccentColor(context: Context): Int {
         return try {
