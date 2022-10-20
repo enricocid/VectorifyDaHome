@@ -291,6 +291,5 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/content_go_to_prev"
         android:src="@drawable/ic_check"
-        app:layout_anchor="@id/bar"
-        app:useCompatPadding="true" />
+        app:layout_anchor="@id/bar" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

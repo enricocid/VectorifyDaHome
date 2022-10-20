@@ -18,13 +18,11 @@ import android.provider.MediaStore
 import android.view.*
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.graphics.ColorUtils
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.children
-import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
+import androidx.core.view.*
 import com.google.android.material.slider.Slider
 import com.iven.vectorify.*
 import com.iven.vectorify.databinding.PreviewActivityBinding
@@ -62,25 +60,28 @@ class PreviewActivity : AppCompatActivity() {
     private val mIoDispatcher = Dispatchers.IO + mHandler
     private val mUiScope = CoroutineScope(mUiDispatcher)
 
-    @Suppress("DEPRECATION")
-    override fun onBackPressed() {
-        super.onBackPressed()
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+    private val onBackPressedCallback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            showSystemBars()
+            finishAndRemoveTask()
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
         mPreviewActivityBinding = PreviewActivityBinding.inflate(layoutInflater)
         setContentView(mPreviewActivityBinding.root)
 
         //set immersive mode
-        hideSystemUI()
+        hideSystemBars()
 
         intent?.extras?.let { ext ->
             mTempBackgroundColor = ext.getInt(TEMP_BACKGROUND_COLOR)
@@ -269,7 +270,7 @@ class PreviewActivity : AppCompatActivity() {
     private fun setDoubleTapListener() {
         val gestureDetector = GestureDetector(this, object : SimpleOnGestureListener() {
             override fun onDoubleTap(e: MotionEvent): Boolean {
-                onBackPressed()
+                onBackPressedCallback.handleOnBackPressed()
                 return false
             }
         })
@@ -307,7 +308,7 @@ class PreviewActivity : AppCompatActivity() {
                 setTitleTextColor(vectorColor)
                 setNavigationIcon(R.drawable.ic_navigate_before)
                 inflateMenu(R.menu.toolbar_menu)
-                setNavigationOnClickListener { onBackPressed() }
+                setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
                 setOnMenuItemClickListener { menuItem ->
                     when (menuItem.itemId) {
                         R.id.save -> setWallpaper(false)
@@ -324,7 +325,7 @@ class PreviewActivity : AppCompatActivity() {
                     }
                     val iterator = drawablesList.iterator()
                     while (iterator.hasNext()) {
-                        iterator.next().mutate().setTint(vectorColor)
+                        iterator.next()?.mutate()?.setTint(vectorColor)
                     }
                 }
             }
@@ -518,7 +519,7 @@ class PreviewActivity : AppCompatActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
-            hideSystemUI()
+            hideSystemBars()
         }
     }
 
@@ -560,31 +561,20 @@ class PreviewActivity : AppCompatActivity() {
 
     //immersive mode
     //https://developer.android.com/training/system-ui/immersive
-    @Suppress("DEPRECATION")
-    private fun hideSystemUI() {
-        // Enables regular immersive mode.
-        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+    private fun hideSystemBars() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            //https://stackoverflow.com/a/62643518
-            window.setDecorFitsSystemWindows(false)
-            window.insetsController?.let { controller ->
-                controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-                controller.systemBarsBehavior =
-                    WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            }
-        } else {
-            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    // Set the content to appear under the system bars so that the
-                    // content doesn't resize when the system bars hide and show.
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    // Hide the nav bar and status bar
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        WindowCompat.getInsetsController(window, window.decorView).run {
+            // Configure the behavior of the hidden system bars
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            // Hide both the status bar and the navigation bar
+            hide(WindowInsetsCompat.Type.systemBars())
         }
+    }
+
+    private fun showSystemBars() {
+        WindowCompat.setDecorFitsSystemWindows(window, true)
+        WindowInsetsControllerCompat(window, window.decorView).show(WindowInsetsCompat.Type.systemBars())
     }
 
     companion object {

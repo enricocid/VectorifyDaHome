@@ -19,6 +19,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,8 +43,6 @@ import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_V_OFFSET
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
 import com.maxkeppeler.sheets.color.ColorSheet
-import dev.chrisbanes.insetter.Insetter
-import dev.chrisbanes.insetter.windowInsetTypesOf
 
 private const val TAG_BG_COLOR_RESTORE = "TAG_BG_COLOR_RESTORE"
 private const val TAG_VECTOR_COLOR_RESTORE = "TAG_VECTOR_COLOR_RESTORE"
@@ -155,21 +156,21 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
 
         with(if (Utils.isDeviceLand(resources)) {
-            vectorifyPreferences.savedWallpaperLand
-        } else {
-            vectorifyPreferences.savedWallpaper
-        }) {
+            vectorifyPreferences.savedWallpaperLand } else { vectorifyPreferences.savedWallpaper }) {
             onWallpaperPrefChanged(this)
         }
 
         initViews()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            window?.navigationBarColor = ContextCompat.getColor(this, R.color.bottom_bar_color)
-            Insetter.builder()
-                .padding(windowInsetTypesOf(navigationBars = true))
-                .margin(windowInsetTypesOf(statusBars = true))
-                .applyToView(mMainActivityBinding.root)
+            window?.navigationBarColor =  ContextCompat.getColor(this, R.color.bottom_bar_color)
+            WindowCompat.setDecorFitsSystemWindows(window, true)
+            mMainActivityBinding.root.setOnApplyWindowInsetsListener { view, insets ->
+                val bars = WindowInsetsCompat.toWindowInsetsCompat(insets)
+                    .getInsets(WindowInsetsCompat.Type.systemBars())
+                view.updatePadding(left = bars.left, right = bars.right)
+                insets
+            }
         }
 
         PreferenceManager.getDefaultSharedPreferences(this)

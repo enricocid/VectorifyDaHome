@@ -2,12 +2,10 @@ package com.iven.vectorify.ui
 
 
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +17,6 @@ import com.iven.vectorify.databinding.ModalRvBinding
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
-import dev.chrisbanes.insetter.Insetter
-import dev.chrisbanes.insetter.windowInsetTypesOf
 
 
 class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -74,15 +70,6 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
 
         PreferenceManager.getDefaultSharedPreferences(requireActivity())
             .registerOnSharedPreferenceChangeListener(this)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            dialog?.window?.navigationBarColor = ContextCompat.getColor(requireActivity(),
-                R.color.activity_background_color)
-            Insetter.builder()
-                .padding(windowInsetTypesOf(navigationBars = true))
-                .margin(windowInsetTypesOf(statusBars = true))
-                .applyToView(view)
-        }
     }
 
     override fun onSharedPreferenceChanged(p0: SharedPreferences?, key: String?) {

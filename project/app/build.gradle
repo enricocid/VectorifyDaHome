@@ -3,13 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
     //noinspection GradleDependency
-    buildToolsVersion "32.0.0"
     defaultConfig {
         applicationId "com.iven.iconify"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 59
         versionName "1.9.6.4"
 
@@ -67,12 +66,12 @@ dependencies {
     //https://github.com/JetBrains/kotlin/blob/master/ChangeLog.md
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //https://github.com/Kotlin/kotlinx.coroutines/blob/master/CHANGES.md
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
 // Support
     //https://developer.android.com/jetpack/androidx/versions
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.browser:browser:1.4.0'
@@ -81,13 +80,10 @@ dependencies {
 
 // Third-party
     //https://github.com/square/moshi
-    implementation 'com.squareup.moshi:moshi:1.13.0'
-    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.13.0'
+    implementation 'com.squareup.moshi:moshi:1.14.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
 
     //https://github.com/maxkeppeler/sheets/releases
-    implementation 'com.maxkeppeler.sheets:core:2.2.7'
-    implementation 'com.maxkeppeler.sheets:color:2.2.7'
-
-    //https://github.com/chrisbanes/insetter/releases
-    implementation 'dev.chrisbanes.insetter:insetter:0.6.1'
+    implementation 'com.maxkeppeler.sheets:core:2.3.0'
+    implementation 'com.maxkeppeler.sheets:color:2.3.0'
 }
