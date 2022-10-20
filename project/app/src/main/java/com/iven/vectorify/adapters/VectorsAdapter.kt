@@ -5,10 +5,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
+import com.iven.vectorify.databinding.VectorItemBinding
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
 import com.iven.vectorify.vectorifyPreferences
@@ -54,13 +53,8 @@ class VectorsAdapter(private val ctx: Context) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VectorsHolder {
-        return VectorsHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.vector_item,
-                parent,
-                false
-            )
-        )
+        val binding = VectorItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return VectorsHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -71,19 +65,17 @@ class VectorsAdapter(private val ctx: Context) :
         holder.bindItems(mSelectedCategory[holder.absoluteAdapterPosition])
     }
 
-    inner class VectorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class VectorsHolder(private val binding: VectorItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(drawable: Int) {
 
-            val checkbox = itemView.findViewById<ImageView>(R.id.checkbox).apply {
-                visibility = if (mSelectedDrawable == drawable) {
-                    View.VISIBLE
-                } else {
-                    View.GONE
-                }
+            binding.checkbox.visibility = if (mSelectedDrawable == drawable) {
+                View.VISIBLE
+            } else {
+                View.GONE
             }
 
-            itemView.findViewById<ImageButton>(R.id.vector_button).apply {
+            binding.vectorButton.run {
                 setImageResource(drawable)
                 contentDescription = ctx.getString(R.string.content_vector, resources.getResourceEntryName(drawable)
                     .replace(
@@ -94,7 +86,7 @@ class VectorsAdapter(private val ctx: Context) :
                     if (mSelectedDrawable != drawable) {
                         notifyItemChanged(getVectorPosition(mSelectedDrawable))
                         mSelectedDrawable = drawable
-                        checkbox.visibility = View.VISIBLE
+                        binding.checkbox.visibility = View.VISIBLE
                         onVectorClick?.invoke(drawable)
                     }
                 }

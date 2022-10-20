@@ -6,8 +6,7 @@
     android:layout_width="@dimen/recent_width"
     android:layout_height="@dimen/recent_height"
     android:layout_margin="6dp"
-    app:cardCornerRadius="4dp"
-    tools:viewBindingIgnore="true">
+    app:cardCornerRadius="4dp">
 
     <ImageView
         android:id="@+id/recent_setups_vector"

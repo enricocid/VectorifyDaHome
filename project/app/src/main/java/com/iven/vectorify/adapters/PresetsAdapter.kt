@@ -2,13 +2,12 @@ package com.iven.vectorify.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.iven.vectorify.R
+import com.iven.vectorify.databinding.PresetOptionBinding
 
 class PresetsAdapter(private val ctx: Context) :
     RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
@@ -53,13 +52,8 @@ class PresetsAdapter(private val ctx: Context) :
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorsHolder {
-        return ColorsHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.preset_option,
-                parent,
-                false
-            )
-        )
+        val binding = PresetOptionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ColorsHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -70,15 +64,14 @@ class PresetsAdapter(private val ctx: Context) :
         holder.bindItems(mPresets[holder.absoluteAdapterPosition])
     }
 
-    inner class ColorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ColorsHolder(private val binding: PresetOptionBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(combo: Pair<Int, Int>) {
 
-            val colorItem = itemView as MaterialCardView
             val selectedVectorColor = ContextCompat.getColor(ctx, combo.second)
             val selectedBackgroundColor = ContextCompat.getColor(ctx, combo.first)
 
-            colorItem.run {
+            binding.root.run {
 
                 setCardBackgroundColor(selectedVectorColor)
                 strokeColor = selectedBackgroundColor

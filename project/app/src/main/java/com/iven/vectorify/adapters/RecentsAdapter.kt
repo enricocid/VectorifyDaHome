@@ -2,13 +2,11 @@ package com.iven.vectorify.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iven.vectorify.R
+import com.iven.vectorify.databinding.RecentItemBinding
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.toContrastColor
 import com.iven.vectorify.utils.Utils
@@ -25,12 +23,8 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
-
-        return RecentSetupsHolder(LayoutInflater.from(parent.context).inflate(
-            R.layout.recent_item,
-            parent,
-            false)
-        )
+        val binding = RecentItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return RecentSetupsHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -41,7 +35,7 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
         holder.bindItems(mRecentSetups?.get(position)!!)
     }
 
-    inner class RecentSetupsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class RecentSetupsHolder(private val binding: RecentItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(wallpaper: VectorifyWallpaper) {
 
@@ -52,7 +46,7 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
                         wallpaper.vectorColor.toContrastColor(wallpaper.backgroundColor)
                     )
 
-            itemView.run {
+            binding.root.run {
 
                 contentDescription = ctx.getString(R.string.content_recent, absoluteAdapterPosition)
 
@@ -85,9 +79,9 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
                     return@setOnLongClickListener true
                 }
 
-                (this as MaterialCardView).setCardBackgroundColor(wallpaper.backgroundColor)
+                setCardBackgroundColor(wallpaper.backgroundColor)
 
-                findViewById<ImageView>(R.id.recent_setups_vector).apply {
+                binding.recentSetupsVector.run {
 
                     setImageDrawable(drawable)
 
