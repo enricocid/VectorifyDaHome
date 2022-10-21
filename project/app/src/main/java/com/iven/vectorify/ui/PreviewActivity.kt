@@ -277,16 +277,16 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun setWallpaper(set: Boolean) {
         if (PermissionsUtils.hasToAskForReadStoragePermission(this)) {
-            PermissionsUtils.manageAskForReadStoragePermission(this, if (set) {
-                PermissionsUtils.SAVE_WALLPAPER
-            } else {
-                PermissionsUtils.SET_WALLPAPER
-            })
-        } else {
-            mPreviewActivityBinding.vectorView.run {
+            var kind = PermissionsUtils.SET_WALLPAPER
+            if (set) {
+                kind = PermissionsUtils.SAVE_WALLPAPER
+            }
+            PermissionsUtils.manageAskForReadStoragePermission(this, kind)
+            return
+        }
+        mPreviewActivityBinding.vectorView.run {
             saveToRecentSetups()
             vectorifyDaHome(set)
-            }
         }
     }
 
@@ -341,24 +341,22 @@ class PreviewActivity : AppCompatActivity() {
                 val color = ColorStateList.valueOf(vectorColor)
                 thumbTintList = color
                 trackTintList = color
-                trackInactiveTintList =
-                    ColorStateList.valueOf(vectorColorAlpha)
+                trackInactiveTintList = ColorStateList.valueOf(vectorColorAlpha)
                 haloTintList = color
             }
 
             seekbarTitle.setTextColor(vectorColor)
             scaleText.setTextColor(vectorColor)
 
-            listOf(
-                up,
-                down,
-                left,
-                right,
-                centerHorizontal,
-                centerVertical,
-                resetPosition
-            ).applyTint(this@PreviewActivity, vectorColor)
+            listOf(up, down, left, right, centerHorizontal, centerVertical, resetPosition)
+                .applyTint(this@PreviewActivity, vectorColor)
         }
+    }
+
+    private fun getWallpaperToSave() = if (Utils.isDeviceLand(resources)) {
+        vectorifyPreferences.savedWallpaperLand
+    } else {
+        vectorifyPreferences.savedWallpaper
     }
 
     private fun updatePrefsAndSetLiveWallpaper() {
@@ -369,19 +367,15 @@ class PreviewActivity : AppCompatActivity() {
             saveToRecentSetups()
         }
 
-        vectorifyPreferences.liveWallpaper = if (Utils.isDeviceLand(resources)) {
-            vectorifyPreferences.savedWallpaperLand
-        } else {
-            vectorifyPreferences.savedWallpaper
-        }
+        vectorifyPreferences.liveWallpaper = getWallpaperToSave()
 
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences
         if (!Utils.isLiveWallpaperRunning(this)) {
             Utils.openLiveWallpaperIntent(this)
-        } else {
-            Toast.makeText(this, R.string.title_already_live, Toast.LENGTH_LONG).show()
+            return
         }
+        Toast.makeText(this, R.string.title_already_live, Toast.LENGTH_LONG).show()
     }
 
     private fun resetVectorPosition(isResetToDefault: Boolean) {
@@ -391,11 +385,7 @@ class PreviewActivity : AppCompatActivity() {
         mTempVerticalOffset = 0F
 
         if (!isResetToDefault) {
-           val savedWallpaper = if (Utils.isDeviceLand(resources)) {
-               vectorifyPreferences.savedWallpaperLand
-           } else {
-               vectorifyPreferences.savedWallpaper
-           }
+           val savedWallpaper = getWallpaperToSave()
            with(savedWallpaper) {
                mTempScale = scale
                mTempHorizontalOffset = horizontalOffset
@@ -428,7 +418,7 @@ class PreviewActivity : AppCompatActivity() {
 
             val name = "${getString(R.string.save_pattern) + format}.png"
 
-            var returnUri: Uri = Uri.EMPTY
+            var returnUri = Uri.EMPTY
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
@@ -463,11 +453,7 @@ class PreviewActivity : AppCompatActivity() {
             fos?.flush()
             fos?.close()
 
-            if (isSetWallpaper) {
-                returnUri
-            } else {
-                null
-            }
+            if (isSetWallpaper) returnUri else null
         } catch (e: Exception) {
             e.printStackTrace()
             null
@@ -486,15 +472,12 @@ class PreviewActivity : AppCompatActivity() {
 
         val bitmapRatio = bitmapWidth / bitmapHeight
         val screenRatio = deviceWidth / deviceHeight
-        val bitmapNewWidth: Int
-        val bitmapNewHeight: Int
+        var bitmapNewHeight = deviceHeight
+        var bitmapNewWidth = (bitmapNewHeight * bitmapRatio).toInt()
 
         if (screenRatio > bitmapRatio) {
             bitmapNewWidth = deviceWidth
             bitmapNewHeight = (bitmapNewWidth / bitmapRatio).toInt()
-        } else {
-            bitmapNewHeight = deviceHeight
-            bitmapNewWidth = (bitmapNewHeight * bitmapRatio).toInt()
         }
 
         val newBitmap = Bitmap.createScaledBitmap(
@@ -512,30 +495,16 @@ class PreviewActivity : AppCompatActivity() {
         )
     }
 
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            hideSystemBars()
-        }
-    }
-
     override fun onPause() {
         super.onPause()
-        with(VectorifyWallpaper(
-            mTempBackgroundColor,
-            mTempVectorColor,
-            mTempVector,
-            mTempCategory,
-            mTempScale,
-            mTempHorizontalOffset,
-            mTempVerticalOffset
-        )) {
-            if (Utils.isDeviceLand(resources)) {
-                vectorifyPreferences.savedWallpaperLand = this
-            } else {
-                vectorifyPreferences.savedWallpaper = this
-            }
+        val toSave = VectorifyWallpaper(mTempBackgroundColor, mTempVectorColor, mTempVector,
+            mTempCategory, mTempScale, mTempHorizontalOffset, mTempVerticalOffset
+        )
+        if (Utils.isDeviceLand(resources)) {
+            vectorifyPreferences.savedWallpaperLand = toSave
+            return
         }
+        vectorifyPreferences.savedWallpaper = toSave
     }
 
     //manage request permission result, continue loading ui if permissions is granted
@@ -547,11 +516,11 @@ class PreviewActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (grantResults.isNotEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, R.string.boo, Toast.LENGTH_LONG).show()
-        } else {
-            when (requestCode) {
-                PermissionsUtils.SAVE_WALLPAPER -> setWallpaper(false)
-                PermissionsUtils.SET_WALLPAPER -> setWallpaper(true)
-            }
+            return
+        }
+        when (requestCode) {
+            PermissionsUtils.SAVE_WALLPAPER -> setWallpaper(false)
+            PermissionsUtils.SET_WALLPAPER -> setWallpaper(true)
         }
     }
 
@@ -559,7 +528,6 @@ class PreviewActivity : AppCompatActivity() {
     //https://developer.android.com/training/system-ui/immersive
     private fun hideSystemBars() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
         WindowCompat.getInsetsController(window, window.decorView).run {
             // Configure the behavior of the hidden system bars
             systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE

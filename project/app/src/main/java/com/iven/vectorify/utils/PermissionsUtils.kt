@@ -24,16 +24,9 @@ object PermissionsUtils {
         ) != PackageManager.PERMISSION_GRANTED
 
     @JvmStatic
-    fun manageAskForReadStoragePermission(
-        activity: Activity,
-        requestCode: Int
-    ) {
+    fun manageAskForReadStoragePermission(activity: Activity, requestCode: Int) {
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                activity,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            )
-        ) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             MaterialAlertDialogBuilder(activity)
                 .setCancelable(false)
                 .setTitle(R.string.app_name)
@@ -48,12 +41,12 @@ object PermissionsUtils {
                     Toast.makeText(activity, R.string.boo, Toast.LENGTH_LONG).show()
                 }
                 .show()
-        } else {
-            askForReadStoragePermission(
-                activity,
-                requestCode
-            )
+            return
         }
+        askForReadStoragePermission(
+            activity,
+            requestCode
+        )
     }
 
     @TargetApi(Build.VERSION_CODES.M)

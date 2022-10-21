@@ -100,9 +100,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         )) {
             if (Utils.isDeviceLand(resources)) {
                 vectorifyPreferences.savedWallpaperLand = this
-            } else {
-                vectorifyPreferences.savedWallpaper = this
+                return
             }
+            vectorifyPreferences.savedWallpaper = this
         }
     }
 
@@ -153,10 +153,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             mTempVerticalOffset = bundle.getFloat(TAG_V_OFFSET_RESTORE)
         }
 
-        with(if (Utils.isDeviceLand(resources)) {
-            vectorifyPreferences.savedWallpaperLand } else { vectorifyPreferences.savedWallpaper }) {
-            onWallpaperPrefChanged(this)
+        var wallpaper = vectorifyPreferences.savedWallpaper
+        if (Utils.isDeviceLand(resources)) {
+            wallpaper = vectorifyPreferences.savedWallpaperLand
         }
+        onWallpaperPrefChanged(wallpaper)
 
         initViews()
 

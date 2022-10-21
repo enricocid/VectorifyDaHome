@@ -66,14 +66,8 @@ class VectorView @JvmOverloads constructor(
                 cv.drawColor(mBackgroundColor)
 
                 //draw the vector!
-                Utils.drawBitmap(
-                    mDrawable,
-                    cv,
-                    mDeviceMetrics.width,
-                    mDeviceMetrics.height,
-                    mScaleFactor,
-                    mHorizontalOffset,
-                    mVerticalOffset
+                Utils.drawBitmap(mDrawable, cv, mDeviceMetrics.width, mDeviceMetrics.height,
+                    mScaleFactor, mHorizontalOffset, mVerticalOffset
                 )
             }
     }
@@ -128,33 +122,21 @@ class VectorView @JvmOverloads constructor(
 
     fun saveToPrefs() {
         //save wallpaper to prefs
-        with(VectorifyWallpaper(
-            mBackgroundColor,
-            mVectorColor,
-            mVector,
-            mCategory,
-            mScaleFactor,
-            mHorizontalOffset,
-            mVerticalOffset
-        )) {
-            if (Utils.isDeviceLand(resources)) {
-                vectorifyPreferences.savedWallpaperLand = this
-            } else {
-                vectorifyPreferences.savedWallpaper = this
-            }
+        val toSave = VectorifyWallpaper(mBackgroundColor, mVectorColor, mVector, mCategory,
+            mScaleFactor, mHorizontalOffset, mVerticalOffset
+        )
+        if (Utils.isDeviceLand(resources)) {
+            vectorifyPreferences.savedWallpaperLand = toSave
+            return
         }
+        vectorifyPreferences.savedWallpaper = toSave
     }
 
     fun saveToRecentSetups() {
         //update recent setups
-        VectorifyWallpaper(
-            mBackgroundColor,
-            mVectorColor,
-            mVector,
-            mCategory,
-            mScaleFactor,
-            mHorizontalOffset,
-            mVerticalOffset
-        ).addToRecentSetups(Utils.isDeviceLand(resources))
+        val toSave = VectorifyWallpaper(mBackgroundColor, mVectorColor, mVector, mCategory,
+            mScaleFactor, mHorizontalOffset, mVerticalOffset
+        )
+        toSave.addToRecentSetups(Utils.isDeviceLand(resources))
     }
 }

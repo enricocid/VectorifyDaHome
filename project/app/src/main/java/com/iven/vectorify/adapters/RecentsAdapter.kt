@@ -16,10 +16,12 @@ import com.iven.vectorify.vectorifyPreferences
 class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
-    private var mRecentSetups = if (Utils.isDeviceLand(ctx.resources)) {
-        vectorifyPreferences.recentSetupsLand
-    } else {
-        vectorifyPreferences.recentSetups
+    private var mRecentSetups = vectorifyPreferences.recentSetups
+
+    init {
+        if (Utils.isDeviceLand(ctx.resources)) {
+            mRecentSetups = vectorifyPreferences.recentSetupsLand
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {

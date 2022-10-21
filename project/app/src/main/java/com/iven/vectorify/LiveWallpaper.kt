@@ -46,9 +46,9 @@ class LiveWallpaper : WallpaperService() {
             if (visible) {
                 updatePaintProps()
                 handler.post(drawRunner)
-            } else {
-                handler.removeCallbacks(drawRunner)
+                return
             }
+            handler.removeCallbacks(drawRunner)
         }
 
         override fun onSurfaceDestroyed(holder: SurfaceHolder) {

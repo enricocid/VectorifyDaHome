@@ -12,6 +12,7 @@ object VectorsCategories {
     //https://iconscout.com/icon/naruto
     //https://github.com/PotatoProject/website/blob/master/src/assets/
 
+    @Suppress("SameReturnValue")
     @JvmStatic
     fun safeGetVectorCategory(vector: Int): Int {
         val categories = listOf(

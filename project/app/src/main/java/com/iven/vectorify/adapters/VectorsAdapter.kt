@@ -20,12 +20,11 @@ class VectorsAdapter(private val ctx: Context) :
 
     private var mSelectedDrawable = R.drawable.android_logo_2019
     private var mSelectedCategory = VectorsCategories.TECH
+    private var wallpaperToRestore = vectorifyPreferences.savedWallpaper
 
     init {
-        val wallpaperToRestore = if (Utils.isDeviceLand(ctx.resources)) {
-            vectorifyPreferences.savedWallpaperLand
-        } else {
-            vectorifyPreferences.savedWallpaper
+        if (Utils.isDeviceLand(ctx.resources)) {
+            wallpaperToRestore = vectorifyPreferences.savedWallpaperLand
         }
         mSelectedCategory = Utils.getCategory(ctx, wallpaperToRestore.category).second
         mSelectedDrawable = wallpaperToRestore.resource
@@ -69,11 +68,7 @@ class VectorsAdapter(private val ctx: Context) :
 
         fun bindItems(drawable: Int) {
 
-            binding.checkbox.visibility = if (mSelectedDrawable == drawable) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            binding.checkbox.visibility = if (mSelectedDrawable == drawable) View.VISIBLE else View.GONE
 
             binding.vectorButton.run {
                 setImageResource(drawable)
