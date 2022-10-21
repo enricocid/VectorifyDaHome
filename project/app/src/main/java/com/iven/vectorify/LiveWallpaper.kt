@@ -17,11 +17,6 @@ class LiveWallpaper : WallpaperService() {
     private var mHorizontalOffSet = 0F
     private var mVerticalOffSet = 0F
 
-    private val mMetrics get() = vectorifyPreferences.savedMetrics
-
-    private val mDeviceWidth = mMetrics.width
-    private val mDeviceHeight = mMetrics.height
-
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
 
@@ -45,11 +40,9 @@ class LiveWallpaper : WallpaperService() {
     private inner class VectorifyEngine : WallpaperService.Engine() {
 
         private val handler = Handler(Looper.getMainLooper())
-        private var sVisible = true
         private val drawRunner = Runnable { draw() }
 
         override fun onVisibilityChanged(visible: Boolean) {
-            sVisible = visible
             if (visible) {
                 updatePaintProps()
                 handler.post(drawRunner)
@@ -60,13 +53,11 @@ class LiveWallpaper : WallpaperService() {
 
         override fun onSurfaceDestroyed(holder: SurfaceHolder) {
             super.onSurfaceDestroyed(holder)
-            sVisible = false
             handler.removeCallbacks(drawRunner)
         }
 
         override fun onDestroy() {
             super.onDestroy()
-            sVisible = false
             handler.removeCallbacks(drawRunner)
         }
 
@@ -91,8 +82,8 @@ class LiveWallpaper : WallpaperService() {
                     Utils.drawBitmap(
                         drawable,
                         canvas,
-                        mDeviceWidth,
-                        mDeviceHeight,
+                        vectorifyPreferences.savedMetrics.width,
+                        vectorifyPreferences.savedMetrics.height,
                         mScale,
                         mHorizontalOffSet,
                         mVerticalOffSet
