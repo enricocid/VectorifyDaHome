@@ -1,12 +1,17 @@
 package com.iven.vectorify
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.core.graphics.ColorUtils
+import androidx.window.layout.WindowMetricsCalculator
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.SingleClickHelper
 import com.iven.vectorify.utils.Utils
@@ -95,9 +100,20 @@ fun List<ImageView>.applyTint(context: Context, widgetColor: Int) {
 }
 
 fun View.safeClickListener(safeClickListener: (view: View) -> Unit) {
-    this.setOnClickListener {
+    setOnClickListener {
         if (!SingleClickHelper.isBlockingClick()) {
             safeClickListener(it)
         }
+    }
+}
+
+fun Dialog?.applyFullHeightDialog(activity: Activity) {
+    // to ensure full dialog's height
+
+    val windowMetrics = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)
+    val height = windowMetrics.bounds.height()
+
+    this?.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)?.let { bs ->
+        BottomSheetBehavior.from(bs).peekHeight = height
     }
 }

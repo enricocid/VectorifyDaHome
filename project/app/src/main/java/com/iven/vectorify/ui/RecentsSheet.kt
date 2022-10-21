@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iven.vectorify.R
 import com.iven.vectorify.adapters.RecentsAdapter
+import com.iven.vectorify.applyFullHeightDialog
 import com.iven.vectorify.databinding.ModalRvBinding
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
@@ -67,6 +68,8 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
                 onRecentClick?.invoke(recent)
             }
         }
+
+        dialog.applyFullHeightDialog(requireActivity())
 
         PreferenceManager.getDefaultSharedPreferences(requireActivity())
             .registerOnSharedPreferenceChangeListener(this)
