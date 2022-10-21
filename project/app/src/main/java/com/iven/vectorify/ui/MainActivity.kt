@@ -69,8 +69,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     private var mTempHorizontalOffset = 0F
     private var mTempVerticalOffset = 0F
 
-    private val sSwapColor get() = mTempVectorColor != mTempBackgroundColor
-
     private var sThemeChanged = false
     private var sRestoreVector = false
 
@@ -211,7 +209,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
 
             swapCardColors.setOnClickListener { swapBtn ->
-                if (sSwapColor) {
+                if (mTempVectorColor != mTempBackgroundColor) {
                     ObjectAnimator.ofFloat(
                         swapBtn,
                         View.ROTATION,
