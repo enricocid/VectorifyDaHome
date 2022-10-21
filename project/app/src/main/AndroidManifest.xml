@@ -12,6 +12,14 @@
         android:name="android.software.live_wallpaper"
         android:required="true" />
 
+    <queries>
+        <!-- Browser -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
+    </queries>
+
     <application
         android:name=".VectorifyApp"
         android:icon="@mipmap/ic_launcher"

@@ -288,16 +288,14 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
             setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.app_bar_info -> Utils.openCustomTab(this@MainActivity)
+                    R.id.app_bar_info -> Utils.openGitHubPage(this@MainActivity)
                     R.id.app_bar_theme -> {
 
                         vectorifyPreferences.theme =
                             Utils.getNextDefaultNightMode(this@MainActivity)
 
                         AppCompatDelegate.setDefaultNightMode(
-                            Utils.getDefaultNightMode(
-                                this@MainActivity
-                            )
+                            Utils.getDefaultNightMode(this@MainActivity)
                         )
 
                         menuThemeItem.icon =

@@ -6,6 +6,8 @@ import android.app.WallpaperManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -431,24 +433,44 @@ object Utils {
     }
 
     @JvmStatic
-    fun openCustomTab(
-        context: Context
-    ) {
-        try {
-            CustomTabsIntent.Builder().apply {
-                setShareState(CustomTabsIntent.SHARE_STATE_ON)
-                setShowTitle(true)
-                val link = context.getString(R.string.app_github_link)
-                build().launchUrl(context, link.toUri())
+    fun openGitHubPage(context: Context) {
+
+        @Suppress("DEPRECATION")
+        fun solveInfo(context: Context, intent: Intent): MutableList<ResolveInfo> {
+            val manager = context.packageManager
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                manager.queryIntentActivities(intent, PackageManager.ResolveInfoFlags.of(
+                    PackageManager.MATCH_DEFAULT_ONLY.toLong()
+                ))
+            } else {
+                manager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
             }
-        } catch (e: Exception) {
-            Toast.makeText(
-                context,
-                R.string.install_browser_message,
-                Toast.LENGTH_LONG
-            ).show()
-            e.printStackTrace()
         }
+
+        val customTabsIntent = CustomTabsIntent.Builder()
+            .setShareState(CustomTabsIntent.SHARE_STATE_ON)
+            .setShowTitle(true)
+            .build()
+
+        val parsedUri = context.getString(R.string.app_github_link).toUri()
+
+        val info = solveInfo(context, customTabsIntent.intent)
+
+        if (info.size > 0) {
+            customTabsIntent.launchUrl(context, parsedUri)
+            return
+        }
+
+        //from: https://github.com/immuni-app/immuni-app-android/blob/development/extensions/src/main/java/it/ministerodellasalute/immuni/extensions/utils/ExternalLinksHelper.kt
+        val browserIntent = Intent(Intent.ACTION_VIEW, parsedUri)
+        browserIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+        val fallbackInfo = solveInfo(context, browserIntent)
+        if (fallbackInfo.size > 0) {
+            context.startActivity(browserIntent)
+            return
+        }
+        Toast.makeText(context, R.string.install_browser_message, Toast.LENGTH_SHORT).show()
     }
 
     @JvmStatic
