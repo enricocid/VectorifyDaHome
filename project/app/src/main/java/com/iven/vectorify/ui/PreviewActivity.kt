@@ -6,7 +6,6 @@ import android.app.WallpaperManager
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
-import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.media.MediaScannerConnection
@@ -15,8 +14,11 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.*
+import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -62,14 +64,8 @@ class PreviewActivity : AppCompatActivity() {
 
     private val onBackPressedCallback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            showSystemBars()
             finishAndRemoveTask()
         }
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        onBackPressedDispatcher.onBackPressed()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -570,11 +566,6 @@ class PreviewActivity : AppCompatActivity() {
             // Hide both the status bar and the navigation bar
             hide(WindowInsetsCompat.Type.systemBars())
         }
-    }
-
-    private fun showSystemBars() {
-        WindowCompat.setDecorFitsSystemWindows(window, true)
-        WindowInsetsControllerCompat(window, window.decorView).show(WindowInsetsCompat.Type.systemBars())
     }
 
     companion object {
