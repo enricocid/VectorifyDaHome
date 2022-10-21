@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.annotation.ColorInt
 import androidx.core.graphics.ColorUtils
 import androidx.window.layout.WindowMetricsCalculator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -33,28 +34,23 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
 
 fun VectorifyWallpaper.addToRecentSetups(isLand: Boolean) {
 
-    val recentSetupsToUpdate = if (isLand) {
-        vectorifyPreferences.recentSetupsLand
-    } else {
-        vectorifyPreferences.recentSetups
+    var toUpdate = vectorifyPreferences.recentSetups
+    if (isLand) {
+        toUpdate = vectorifyPreferences.recentSetupsLand
     }
 
+    if (toUpdate.isNullOrEmpty()) {
+        toUpdate = mutableListOf()
+    }
     //update recent setups
-    val recentSetups =
-        if (!recentSetupsToUpdate.isNullOrEmpty()) {
-            recentSetupsToUpdate
-        } else {
-            mutableListOf()
-        }
-
-    if (!recentSetups.contains(this)) {
-        recentSetups.add(this)
+    if (!toUpdate.contains(this)) {
+        toUpdate.add(this)
     }
 
     if (isLand) {
-        vectorifyPreferences.recentSetupsLand = recentSetups
+        vectorifyPreferences.recentSetupsLand = toUpdate
     } else {
-        vectorifyPreferences.recentSetups = recentSetups
+        vectorifyPreferences.recentSetups = toUpdate
     }
 }
 
@@ -66,25 +62,23 @@ fun Int.toHex(context: Context) =
 private fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
 
 //method to calculate colors for cards titles
-fun Int.toSurfaceColor() = if (isDark()) {
-    Color.WHITE
-} else {
-    Color.BLACK
-}
-
-fun Int.darkenOrLighten(): Int {
-    val mask = if (isDark()) {
-        Color.WHITE
-    } else {
-        Color.BLACK
+@ColorInt
+fun Int.toSurfaceColor(): Int {
+    if (isDark()) {
+        return Color.WHITE
     }
-    return ColorUtils.blendARGB(this, mask, 0.20F)
+    return Color.BLACK
 }
 
-fun Int.toContrastColor(compareColor: Int) = if (this == compareColor) {
-    darkenOrLighten()
-} else {
-    this
+@ColorInt
+fun Int.darkenOrLighten() = ColorUtils.blendARGB(this, toSurfaceColor(), 0.20F)
+
+@ColorInt
+fun Int.toContrastColor(compareColor: Int): Int {
+    if (this == compareColor) {
+        return darkenOrLighten()
+    }
+    return this
 }
 
 fun Float.toFormattedScale() = String.format("%.2f", this)
