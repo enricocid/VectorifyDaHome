@@ -495,6 +495,13 @@ class PreviewActivity : AppCompatActivity() {
         )
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            hideSystemBars()
+        }
+    }
+
     override fun onPause() {
         super.onPause()
         val toSave = VectorifyWallpaper(mTempBackgroundColor, mTempVectorColor, mTempVector,
