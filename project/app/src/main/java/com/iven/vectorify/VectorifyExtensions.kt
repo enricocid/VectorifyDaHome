@@ -58,13 +58,10 @@ fun VectorifyWallpaper.addToRecentSetups(isLand: Boolean) {
 fun Int.toHex(context: Context) =
     context.getString(R.string.hex, Integer.toHexString(this)).uppercase()
 
-//method to determine colors luminance
-fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
-
-//method to calculate colors for cards titles
+//method to calculate ui elements color according to main color luminance
 @ColorInt
 fun Int.toSurfaceColor(): Int {
-    if (isDark()) {
+    if (ColorUtils.calculateLuminance(this) < 0.35) {
         return Color.WHITE
     }
     return Color.BLACK
