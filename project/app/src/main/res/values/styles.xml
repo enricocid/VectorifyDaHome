@@ -32,8 +32,6 @@
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
     </style>
 
-    <style name="PreviewTheme" parent="AppTheme" />
-
     <!-- This will set the fade in animation on all the activities by default -->
     <style name="WindowAnimationTransition">
         <item name="android:windowEnterTransition">@android:anim/fade_in</item>
