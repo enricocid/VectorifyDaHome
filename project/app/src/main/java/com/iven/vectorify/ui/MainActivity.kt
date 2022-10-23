@@ -534,6 +534,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     //start material dialog
     private fun startColorPicker(key: String, title: Int) {
         ColorSheet().show(this) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1 && Utils.isThemeLight(this@MainActivity.resources)) {
+                navigationBarColor(ContextCompat.getColor(this@MainActivity, R.color.color_picker_nav_bar_color))
+            }
             disableAlpha()
             colorsRes(Utils.colors)
             title(title)

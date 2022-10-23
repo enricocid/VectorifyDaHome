@@ -228,6 +228,12 @@ object Utils {
         resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     @JvmStatic
+    fun isThemeLight(resources: Resources) : Boolean {
+        val uiMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return uiMode != Configuration.UI_MODE_NIGHT_YES
+    }
+
+    @JvmStatic
     fun getDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
         context.getString(R.string.theme_pref_light) -> AppCompatDelegate.MODE_NIGHT_NO
         context.getString(R.string.theme_pref_dark) -> AppCompatDelegate.MODE_NIGHT_YES
