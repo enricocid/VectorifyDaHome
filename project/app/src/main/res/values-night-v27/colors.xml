@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="status_bar_color">@android:color/transparent</color>
-    <color name="nav_bar_color">@color/bottom_bar_color</color>
-</resources>
