@@ -11,15 +11,13 @@
     <string name="theme_pref_light">theme_pref_light</string>
     <string name="theme_pref_dark">theme_pref_dark</string>
     <string name="theme_pref_auto">theme_pref_auto</string>
-    <string name="recent_wallpapers_key">recents_key</string>
-    <string name="recent_wallpapers_land_key">recents_land_key</string>
-    <string name="live_wallpaper_key">live_wall_key</string>
-    <string name="saved_wallpaper_key">recent_wall_key</string>
-    <string name="saved_wallpaper_land_key">restore_wallpaper_land_key</string>
-    <string name="saved_metrics_key">restore_metrics_key</string>
-    <string name="app_github_link">
-        https://github.com/enricocid/VectorifyDaHome
-    </string>
+    <string name="recent_wallpapers_key">recentwallpapers_key</string>
+    <string name="recent_wallpapers_land_key">recentwallpapers_land_key</string>
+    <string name="live_wallpaper_key">livewallpaper_key</string>
+    <string name="saved_wallpaper_key">recentwallpaper_key</string>
+    <string name="saved_wallpaper_land_key">recentwallpaper_land_key</string>
+    <string name="saved_metrics_key">recentmetrics_key</string>
+    <string name="app_github_link">https://github.com/enricocid/VectorifyDaHome</string>
     <string name="save_pattern">vdh_</string>
     <string name="time_pattern">dd_MM_yy_hh-ss</string>
 </resources>

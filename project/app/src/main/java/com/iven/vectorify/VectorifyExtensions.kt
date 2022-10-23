@@ -59,7 +59,7 @@ fun Int.toHex(context: Context) =
     context.getString(R.string.hex, Integer.toHexString(this)).uppercase()
 
 //method to determine colors luminance
-private fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
+fun Int.isDark() = ColorUtils.calculateLuminance(this) < 0.35
 
 //method to calculate colors for cards titles
 @ColorInt

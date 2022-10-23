@@ -162,7 +162,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         initViews()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            window?.navigationBarColor =  ContextCompat.getColor(this, R.color.bottom_bar_color)
             WindowCompat.setDecorFitsSystemWindows(window, true)
             mMainActivityBinding.root.setOnApplyWindowInsetsListener { view, insets ->
                 val bars = WindowInsetsCompat.toWindowInsetsCompat(insets)
@@ -400,9 +399,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                             mTempVector = vector
 
                             mMainActivityBinding.vectorFrame.setImageResource(
-                                Utils.getVectorProps(
-                                    vector
-                                ).first
+                                Utils.getVectorProps(vector).first
                             )
 
                             //update drawable tint

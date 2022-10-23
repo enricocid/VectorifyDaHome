@@ -2,9 +2,14 @@
 <resources>
     <color name="default_accent_color">#c0cfff</color>
 
+    <color name="primary_color">#313131</color>
+
+    <color name="status_bar_color">@android:color/transparent</color>
+    <color name="nav_bar_color">@color/bottom_bar_color</color>
+    <color name="nav_bar_color_sheets">@android:color/transparent</color>
+
     <color name="presets_card_color">#595959</color>
     <color name="bottom_bar_color">#303030</color>
-    <color name="system_bars_color">#313131</color>
     <color name="activity_background_color">@color/chips_color</color>
     <color name="vectors_color">@android:color/white</color>
 

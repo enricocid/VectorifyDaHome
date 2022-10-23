@@ -1,26 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Base DayNight theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/system_bars_color</item>
-        <item name="colorPrimaryDark">@color/system_bars_color</item>
-        <item name="android:statusBarColor">@color/system_bars_color</item>
-        <item name="android:navigationBarColor">@color/system_bars_color</item>
-        <item name="android:windowBackground">@color/activity_background_color</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
-        <item name="sheetsBackgroundColor">@color/bottom_bar_color</item>
-        <item name="sheetsIconsColor">@color/vectors_color</item>
-        <item name="sheetsPrimaryColor">@color/vectors_color</item>
-        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.Demo.BottomSheetDialog</item>
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
-    </style>
-
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!--  Bottom sheets theming  -->
     <!--  https://bryanherbst.com/2020/05/04/bottom-sheet-corners/  -->
     <style name="ThemeOverlay.Demo.BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/Widget.Demo.BottomSheet</item>
-        <item name="android:navigationBarColor">@color/bottom_bar_color</item>
         <item name="android:windowIsFloating">false</item>
+        <item name="android:navigationBarColor">@color/nav_bar_color_sheets</item>
+        <item name="enableEdgeToEdge" tools:targetApi="o_mr1">true</item>
     </style>
 
     <style name="Widget.Demo.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
