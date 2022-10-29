@@ -414,7 +414,7 @@ class PreviewActivity : AppCompatActivity() {
 
             val name = "${getString(R.string.save_pattern) + format}.png"
 
-            var returnUri: Uri = Uri.EMPTY
+            var returnUri = Uri.EMPTY
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
@@ -449,11 +449,7 @@ class PreviewActivity : AppCompatActivity() {
             fos?.flush()
             fos?.close()
 
-            if (isSetWallpaper) {
-                returnUri
-            } else {
-                null
-            }
+            if (isSetWallpaper) returnUri else null
         } catch (e: Exception) {
             e.printStackTrace()
             null
