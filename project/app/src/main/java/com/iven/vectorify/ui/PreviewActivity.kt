@@ -80,13 +80,15 @@ class PreviewActivity : AppCompatActivity() {
         hideSystemBars()
 
         intent?.extras?.let { ext ->
-            mTempBackgroundColor = ext.getInt(TEMP_BACKGROUND_COLOR)
-            mTempVectorColor = ext.getInt(TEMP_VECTOR_COLOR)
-            mTempVector = ext.getInt(TEMP_VECTOR)
-            mTempCategory = ext.getInt(TEMP_CATEGORY)
-            mTempScale = ext.getFloat(TEMP_SCALE)
-            mTempHorizontalOffset = ext.getFloat(TEMP_H_OFFSET)
-            mTempVerticalOffset = ext.getFloat(TEMP_V_OFFSET)
+            LiveWallpaper.run {
+                mTempBackgroundColor = ext.getInt(BACKGROUND_COLOR)
+                mTempVectorColor = ext.getInt(VECTOR_COLOR)
+                mTempVector = ext.getInt(VECTOR)
+                mTempCategory = ext.getInt(CATEGORY)
+                mTempScale = ext.getFloat(SCALE)
+                mTempHorizontalOffset = ext.getFloat(H_OFFSET)
+                mTempVerticalOffset = ext.getFloat(V_OFFSET)
+            }
         }
 
         initViews()
@@ -285,8 +287,8 @@ class PreviewActivity : AppCompatActivity() {
             return
         }
         mPreviewActivityBinding.vectorView.run {
-            saveToRecentSetups()
             vectorifyDaHome(set)
+            saveToPrefs()
         }
     }
 
@@ -353,21 +355,12 @@ class PreviewActivity : AppCompatActivity() {
         }
     }
 
-    private fun getWallpaperToSave() = if (Utils.isDeviceLand(resources)) {
-        vectorifyPreferences.savedWallpaperLand
-    } else {
-        vectorifyPreferences.savedWallpaper
-    }
-
     private fun updatePrefsAndSetLiveWallpaper() {
 
         //update prefs
-        with(mPreviewActivityBinding.vectorView) {
-            saveToPrefs()
-            saveToRecentSetups()
-        }
+        val toSave = mPreviewActivityBinding.vectorView.saveToPrefs()
 
-        vectorifyPreferences.liveWallpaper = getWallpaperToSave()
+        vectorifyPreferences.liveWallpaper = toSave
 
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences
@@ -385,8 +378,11 @@ class PreviewActivity : AppCompatActivity() {
         mTempVerticalOffset = 0F
 
         if (!isResetToDefault) {
-           val savedWallpaper = getWallpaperToSave()
-           with(savedWallpaper) {
+            var savedWallpaper = vectorifyPreferences.savedWallpaper
+            if (Utils.isDeviceLand(resources)) {
+                savedWallpaper = vectorifyPreferences.savedWallpaperLand
+            }
+            with(savedWallpaper) {
                mTempScale = scale
                mTempHorizontalOffset = horizontalOffset
                mTempVerticalOffset = verticalOffset
@@ -418,7 +414,7 @@ class PreviewActivity : AppCompatActivity() {
 
             val name = "${getString(R.string.save_pattern) + format}.png"
 
-            var returnUri = Uri.EMPTY
+            var returnUri: Uri = Uri.EMPTY
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 
@@ -453,7 +449,11 @@ class PreviewActivity : AppCompatActivity() {
             fos?.flush()
             fos?.close()
 
-            if (isSetWallpaper) returnUri else null
+            if (isSetWallpaper) {
+                returnUri
+            } else {
+                null
+            }
         } catch (e: Exception) {
             e.printStackTrace()
             null
@@ -541,15 +541,5 @@ class PreviewActivity : AppCompatActivity() {
             // Hide both the status bar and the navigation bar
             hide(WindowInsetsCompat.Type.systemBars())
         }
-    }
-
-    companion object {
-        const val TEMP_BACKGROUND_COLOR = "TEMP_BACKGROUND_COLOR"
-        const val TEMP_VECTOR_COLOR = "TEMP_VECTOR_COLOR"
-        const val TEMP_VECTOR = "TEMP_VECTOR"
-        const val TEMP_CATEGORY = "TEMP_CATEGORY"
-        const val TEMP_SCALE = "TEMP_SCALE"
-        const val TEMP_H_OFFSET = "TEMP_H_OFFSET"
-        const val TEMP_V_OFFSET = "TEMP_V_OFFSET"
     }
 }

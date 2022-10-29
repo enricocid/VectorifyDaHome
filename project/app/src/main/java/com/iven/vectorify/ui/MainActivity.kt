@@ -28,29 +28,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iven.vectorify.*
+import com.iven.vectorify.LiveWallpaper.Companion.BACKGROUND_COLOR
+import com.iven.vectorify.LiveWallpaper.Companion.CATEGORY
+import com.iven.vectorify.LiveWallpaper.Companion.H_OFFSET
+import com.iven.vectorify.LiveWallpaper.Companion.SCALE
+import com.iven.vectorify.LiveWallpaper.Companion.VECTOR
+import com.iven.vectorify.LiveWallpaper.Companion.VECTOR_COLOR
+import com.iven.vectorify.LiveWallpaper.Companion.V_OFFSET
 import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
 import com.iven.vectorify.databinding.MainActivityBinding
 import com.iven.vectorify.models.Metrics
 import com.iven.vectorify.models.VectorifyWallpaper
-import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_BACKGROUND_COLOR
-import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_CATEGORY
-import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_H_OFFSET
-import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_SCALE
-import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_VECTOR
-import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_VECTOR_COLOR
-import com.iven.vectorify.ui.PreviewActivity.Companion.TEMP_V_OFFSET
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
 import com.maxkeppeler.sheets.color.ColorSheet
-
-private const val TAG_BG_COLOR_RESTORE = "TAG_BG_COLOR_RESTORE"
-private const val TAG_VECTOR_COLOR_RESTORE = "TAG_VECTOR_COLOR_RESTORE"
-private const val TAG_VECTOR_RESTORE = "TAG_VECTOR_RESTORE"
-private const val TAG_CATEGORY_RESTORE = "TAG_CATEGORY_RESTORE"
-private const val TAG_SCALE_RESTORE = "TAG_SCALE_RESTORE"
-private const val TAG_H_OFFSET_RESTORE = "TAG_H_OFFSET_RESTORE"
-private const val TAG_V_OFFSET_RESTORE = "TAG_V_OFFSET_RESTORE"
 
 
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -76,13 +68,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         if (sThemeChanged) {
             super.onSaveInstanceState(outState)
             with(outState) {
-                putInt(TAG_BG_COLOR_RESTORE, mTempBackgroundColor)
-                putInt(TAG_VECTOR_COLOR_RESTORE, mTempVectorColor)
-                putInt(TAG_VECTOR_RESTORE, mTempVector)
-                putInt(TAG_CATEGORY_RESTORE, mTempCategory)
-                putFloat(TAG_SCALE_RESTORE, mTempScale)
-                putFloat(TAG_H_OFFSET_RESTORE, mTempHorizontalOffset)
-                putFloat(TAG_V_OFFSET_RESTORE, mTempVerticalOffset)
+                putInt(BACKGROUND_COLOR, mTempBackgroundColor)
+                putInt(VECTOR_COLOR, mTempVectorColor)
+                putInt(VECTOR, mTempVector)
+                putInt(CATEGORY, mTempCategory)
+                putFloat(SCALE, mTempScale)
+                putFloat(H_OFFSET, mTempHorizontalOffset)
+                putFloat(V_OFFSET, mTempVerticalOffset)
             }
         }
     }
@@ -144,13 +136,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
         savedInstanceState?.let { bundle ->
             sRestoreVector = true
-            mTempBackgroundColor = bundle.getInt(TAG_BG_COLOR_RESTORE)
-            mTempVectorColor = bundle.getInt(TAG_VECTOR_COLOR_RESTORE)
-            mTempVector = bundle.getInt(TAG_VECTOR_RESTORE)
-            mTempCategory = bundle.getInt(TAG_CATEGORY_RESTORE)
-            mTempScale = bundle.getFloat(TAG_SCALE_RESTORE)
-            mTempHorizontalOffset = bundle.getFloat(TAG_H_OFFSET_RESTORE)
-            mTempVerticalOffset = bundle.getFloat(TAG_V_OFFSET_RESTORE)
+            mTempBackgroundColor = bundle.getInt(BACKGROUND_COLOR)
+            mTempVectorColor = bundle.getInt(VECTOR_COLOR)
+            mTempVector = bundle.getInt(VECTOR)
+            mTempCategory = bundle.getInt(CATEGORY)
+            mTempScale = bundle.getFloat(SCALE)
+            mTempHorizontalOffset = bundle.getFloat(H_OFFSET)
+            mTempVerticalOffset = bundle.getFloat(V_OFFSET)
         }
 
         var wallpaper = vectorifyPreferences.savedWallpaper
@@ -262,13 +254,13 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
                 putExtras(
                     bundleOf(
-                        TEMP_BACKGROUND_COLOR to mTempBackgroundColor,
-                        TEMP_VECTOR_COLOR to mTempVectorColor,
-                        TEMP_VECTOR to mTempVector,
-                        TEMP_CATEGORY to VectorsCategories.safeGetVectorCategory(mTempVector),
-                        TEMP_SCALE to mTempScale,
-                        TEMP_H_OFFSET to mTempHorizontalOffset,
-                        TEMP_V_OFFSET to mTempVerticalOffset
+                        BACKGROUND_COLOR to mTempBackgroundColor,
+                        VECTOR_COLOR to mTempVectorColor,
+                        VECTOR to mTempVector,
+                        CATEGORY to VectorsCategories.safeGetVectorCategory(mTempVector),
+                        SCALE to mTempScale,
+                        H_OFFSET to mTempHorizontalOffset,
+                        V_OFFSET to mTempVerticalOffset
                     )
                 )
             }

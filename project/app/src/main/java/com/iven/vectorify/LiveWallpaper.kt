@@ -1,11 +1,13 @@
 package com.iven.vectorify
 
+import android.content.SharedPreferences
 import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.service.wallpaper.WallpaperService
 import android.view.SurfaceHolder
+import androidx.preference.PreferenceManager
 import com.iven.vectorify.utils.Utils
 
 class LiveWallpaper : WallpaperService() {
@@ -18,12 +20,7 @@ class LiveWallpaper : WallpaperService() {
     private var mVerticalOffSet = 0F
 
     //the vectorify live wallpaper service and engine
-    override fun onCreateEngine(): Engine {
-
-        updatePaintProps()
-
-        return VectorifyEngine()
-    }
+    override fun onCreateEngine(): Engine = VectorifyEngine()
 
     private fun updatePaintProps() {
 
@@ -37,32 +34,43 @@ class LiveWallpaper : WallpaperService() {
         }
     }
 
-    private inner class VectorifyEngine : WallpaperService.Engine() {
+    private inner class VectorifyEngine : WallpaperService.Engine(), SharedPreferences.OnSharedPreferenceChangeListener {
 
         private val handler = Handler(Looper.getMainLooper())
         private val drawRunner = Runnable { draw() }
+        private var sDrawn = false
 
-        override fun onVisibilityChanged(visible: Boolean) {
-            if (visible) {
+        override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+            if (key == getString(R.string.live_wallpaper_key) && sDrawn) {
                 updatePaintProps()
                 handler.post(drawRunner)
-                return
             }
-            handler.removeCallbacks(drawRunner)
+        }
+
+        override fun onCreate(surfaceHolder: SurfaceHolder?) {
+            super.onCreate(surfaceHolder)
+            PreferenceManager.getDefaultSharedPreferences(baseContext)
+                .registerOnSharedPreferenceChangeListener(this)
+        }
+
+        override fun onVisibilityChanged(visible: Boolean) {
+            if (visible && !sDrawn) {
+                updatePaintProps()
+                handler.post(drawRunner)
+            } else {
+                handler.removeCallbacks(drawRunner)
+            }
         }
 
         override fun onSurfaceDestroyed(holder: SurfaceHolder) {
             super.onSurfaceDestroyed(holder)
             handler.removeCallbacks(drawRunner)
-        }
-
-        override fun onDestroy() {
-            super.onDestroy()
-            handler.removeCallbacks(drawRunner)
+            PreferenceManager.getDefaultSharedPreferences(baseContext)
+                .unregisterOnSharedPreferenceChangeListener(this)
         }
 
         //draw potato according to battery level
-        private fun draw() {
+        fun draw() {
             val holder = surfaceHolder
             var canvas: Canvas? = null
             try {
@@ -70,7 +78,7 @@ class LiveWallpaper : WallpaperService() {
                 canvas = holder.lockCanvas()
                 if (canvas != null && baseContext != null) {
 
-                    //draw potato!
+                    //draw background!
                     canvas.drawColor(mBackgroundColor)
 
                     val drawable = Utils.tintDrawable(
@@ -79,11 +87,14 @@ class LiveWallpaper : WallpaperService() {
                         mVectorColor
                     )
 
+                    val metrics = vectorifyPreferences.savedMetrics
+
+                    // draw vector!
                     Utils.drawBitmap(
                         drawable,
                         canvas,
-                        vectorifyPreferences.savedMetrics.width,
-                        vectorifyPreferences.savedMetrics.height,
+                        metrics.width,
+                        metrics.height,
                         mScale,
                         mHorizontalOffSet,
                         mVerticalOffSet
@@ -92,9 +103,20 @@ class LiveWallpaper : WallpaperService() {
             } finally {
                 canvas?.let { cv ->
                     holder.unlockCanvasAndPost(cv)
+                    if (!sDrawn) sDrawn = true
                 }
             }
             handler.removeCallbacks(drawRunner)
         }
+    }
+
+    companion object {
+        const val BACKGROUND_COLOR = "BACKGROUND_COLOR"
+        const val VECTOR_COLOR = "VECTOR_COLOR"
+        const val VECTOR = "VECTOR"
+        const val CATEGORY = "CATEGORY"
+        const val SCALE = "SCALE"
+        const val H_OFFSET = "H_OFFSET"
+        const val V_OFFSET = "V_OFFSET"
     }
 }

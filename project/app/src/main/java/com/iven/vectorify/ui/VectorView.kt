@@ -120,23 +120,17 @@ class VectorView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun saveToPrefs() {
+    fun saveToPrefs() : VectorifyWallpaper {
         //save wallpaper to prefs
-        val toSave = VectorifyWallpaper(mBackgroundColor, mVectorColor, mVector, mCategory,
-            mScaleFactor, mHorizontalOffset, mVerticalOffset
-        )
-        if (Utils.isDeviceLand(resources)) {
-            vectorifyPreferences.savedWallpaperLand = toSave
-            return
-        }
-        vectorifyPreferences.savedWallpaper = toSave
-    }
-
-    fun saveToRecentSetups() {
-        //update recent setups
-        val toSave = VectorifyWallpaper(mBackgroundColor, mVectorColor, mVector, mCategory,
-            mScaleFactor, mHorizontalOffset, mVerticalOffset
+        val toSave = VectorifyWallpaper(mBackgroundColor, mVectorColor,
+            mVector, mCategory, mScaleFactor, mHorizontalOffset, mVerticalOffset
         )
         toSave.addToRecentSetups(Utils.isDeviceLand(resources))
+        if (Utils.isDeviceLand(resources)) {
+            vectorifyPreferences.savedWallpaperLand = toSave
+            return toSave
+        }
+        vectorifyPreferences.savedWallpaper = toSave
+        return toSave
     }
 }

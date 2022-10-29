@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.iven.vectorify">
 
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -25,7 +26,8 @@
         android:enableOnBackInvokedCallback="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="UnusedAttribute">
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -41,6 +43,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/AppTheme"
+            android:screenOrientation="user"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,7 +59,7 @@
 
         <activity
             android:name=".ui.PreviewActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="user"
             android:theme="@style/AppTheme" />
 
         <service
