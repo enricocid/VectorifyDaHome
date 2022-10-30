@@ -32,9 +32,9 @@
         android:layout_gravity="end"
         android:layout_margin="16dp"
         android:text="@string/title_clear_recent_setups"
-        android:textColor="@color/vectors_color"
+        android:textColor="@color/red_300"
         android:visibility="gone"
-        app:backgroundTint="@color/red_300"
         app:icon="@drawable/ic_delete"
-        app:iconTint="@color/vectors_color" />
+        app:iconTint="@color/red_300"
+        app:rippleColor="@color/red_300" />
 </LinearLayout>
