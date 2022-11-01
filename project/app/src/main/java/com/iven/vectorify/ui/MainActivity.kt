@@ -146,9 +146,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
 
         var wallpaper = vectorifyPreferences.savedWallpaper
-        if (Utils.isDeviceLand(resources)) {
-            wallpaper = vectorifyPreferences.savedWallpaperLand
-        }
+        if (Utils.isDeviceLand(resources)) wallpaper = vectorifyPreferences.savedWallpaperLand
         onWallpaperPrefChanged(wallpaper)
 
         initViews()
@@ -355,7 +353,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
 
-            val presetsAdapter = PresetsAdapter(this@MainActivity).apply {
+            val presetsAdapter = PresetsAdapter().apply {
                 onPresetClick = { combo ->
 
                     //update background and vector colors
@@ -383,13 +381,18 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             layoutManager = mVectorsRecyclerViewLayoutManager
             setHasFixedSize(true)
 
-            mVectorsAdapter = VectorsAdapter(this@MainActivity).apply {
+            val wallpaperToRestore = if (Utils.isDeviceLand(resources)) {
+                vectorifyPreferences.savedWallpaperLand
+            } else {
+                vectorifyPreferences.savedWallpaper
+            }
+            val category = Utils.getCategory(this@MainActivity, wallpaperToRestore.category).second
+            mVectorsAdapter = VectorsAdapter(wallpaperToRestore, category).apply {
                 onVectorClick = { vector ->
                     if (!sRestoreVector) {
                         if (mTempVector != vector) {
 
                             mTempVector = vector
-
                             mMainActivityBinding.vectorFrame.setImageResource(
                                 Utils.getVectorProps(vector).first
                             )
@@ -420,9 +423,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     //update vector frame
     private fun setVectorFrameColors(tintBackground: Boolean) {
 
-        if (tintBackground) {
-            mMainActivityBinding.vectorFrame.setBackgroundColor(mTempBackgroundColor)
-        }
+        if (tintBackground) mMainActivityBinding.vectorFrame.setBackgroundColor(mTempBackgroundColor)
 
         val vector = Utils.tintDrawable(
             this,
@@ -435,9 +436,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     //update background card colors
     private fun setBackgroundColorForUI(color: Int, updateColor: Boolean) {
 
-        if (updateColor) {
-            mTempBackgroundColor = color
-        }
+        if (updateColor) mTempBackgroundColor = color
 
         if (mTempBackgroundColor == mTempVectorColor) {
             setVectorColorForUI(mTempVectorColor, false)
@@ -467,9 +466,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     //update vector card colors
     private fun setVectorColorForUI(color: Int, updateColor: Boolean) {
 
-        if (updateColor) {
-            mTempVectorColor = color
-        }
+        if (updateColor) mTempVectorColor = color
 
         val textColor = mTempVectorColor.toSurfaceColor()
 
@@ -576,8 +573,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             text = category.first
             contentDescription = getString(R.string.content_selected_category, category.first)
         }
-        if (force) {
-            scrollToVector(mTempVector)
-        }
+        if (force) scrollToVector(mTempVector)
     }
 }

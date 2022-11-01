@@ -1,6 +1,5 @@
 package com.iven.vectorify.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,16 +12,9 @@ import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
 
 
-class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
+class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?) : RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
-    private var mRecentSetups = vectorifyPreferences.recentSetups
-
-    init {
-        if (Utils.isDeviceLand(ctx.resources)) {
-            mRecentSetups = vectorifyPreferences.recentSetupsLand
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentSetupsHolder {
         val binding = RecentItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,48 +22,47 @@ class RecentsAdapter(private val ctx: Context) : RecyclerView.Adapter<RecentsAda
     }
 
     override fun getItemCount(): Int {
-        return mRecentSetups?.size!!
+        return recentSetups?.size!!
     }
 
     override fun onBindViewHolder(holder: RecentSetupsHolder, position: Int) {
-        holder.bindItems(mRecentSetups?.get(position)!!)
+        holder.bindItems(recentSetups?.get(position)!!)
     }
 
     inner class RecentSetupsHolder(private val binding: RecentItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(wallpaper: VectorifyWallpaper) {
 
+            val context = binding.root.context
             val drawable =
                     Utils.tintDrawable(
-                        ctx,
+                        context,
                         wallpaper.resource,
                         wallpaper.vectorColor.toContrastColor(wallpaper.backgroundColor)
                     )
 
             binding.root.run {
 
-                contentDescription = ctx.getString(R.string.content_recent, absoluteAdapterPosition)
+                contentDescription = context.getString(R.string.content_recent, absoluteAdapterPosition)
 
                 setOnClickListener {
                     onRecentClick?.invoke(wallpaper)
                 }
 
                 setOnLongClickListener {
-                    MaterialAlertDialogBuilder(ctx)
+                    MaterialAlertDialogBuilder(context)
                         .setTitle(R.string.title_recent_setups)
-                        .setMessage(ctx.getString(
+                        .setMessage(context.getString(
                             R.string.message_clear_single_recent_setup,
                             absoluteAdapterPosition.toString()
                         ))
                         .setPositiveButton(R.string.ok) { _, _ ->
                             //add an empty list to preferences
                             try {
-                                val index = mRecentSetups?.indexOf(wallpaper)!!
-                                if (mRecentSetups?.contains(wallpaper)!!) {
-                                    mRecentSetups?.remove(wallpaper)
-                                }
+                                val index = recentSetups?.indexOf(wallpaper)!!
+                                if (recentSetups.contains(wallpaper)) recentSetups.remove(wallpaper)
                                 notifyItemRemoved(index)
-                                vectorifyPreferences.recentSetups = mRecentSetups
+                                vectorifyPreferences.recentSetups = recentSetups
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }

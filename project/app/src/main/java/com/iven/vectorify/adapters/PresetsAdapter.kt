@@ -1,6 +1,5 @@
 package com.iven.vectorify.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -9,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
 import com.iven.vectorify.databinding.PresetOptionBinding
 
-class PresetsAdapter(private val ctx: Context) :
-    RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
+class PresetsAdapter : RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
 
     var onPresetClick: ((Pair<Int, Int>) -> Unit)? = null
 
@@ -68,8 +66,11 @@ class PresetsAdapter(private val ctx: Context) :
 
         fun bindItems(combo: Pair<Int, Int>) {
 
-            val selectedVectorColor = ContextCompat.getColor(ctx, combo.second)
-            val selectedBackgroundColor = ContextCompat.getColor(ctx, combo.first)
+            val context = binding.root.context
+            val resources = context.resources
+
+            val selectedVectorColor = ContextCompat.getColor(context, combo.second)
+            val selectedBackgroundColor = ContextCompat.getColor(context, combo.first)
 
             binding.root.run {
 
@@ -77,19 +78,19 @@ class PresetsAdapter(private val ctx: Context) :
                 strokeColor = selectedBackgroundColor
 
                 val backgroundColorName =
-                    ctx.resources.getResourceEntryName(combo.first)
+                    resources.getResourceEntryName(combo.first)
                         .replace(
-                            ctx.getString(R.string.underscore_delimiter),
-                            ctx.getString(R.string.space_delimiter)
+                            context.getString(R.string.underscore_delimiter),
+                            context.getString(R.string.space_delimiter)
                         )
 
-                val vectorColorName = ctx.resources.getResourceEntryName(combo.second)
+                val vectorColorName = resources.getResourceEntryName(combo.second)
                     .replace(
                         context.getString(R.string.underscore_delimiter),
                         context.getString(R.string.space_delimiter)
                     )
 
-                val resultName = ctx.getString(
+                val resultName = context.getString(
                     R.string.selected_preset,
                     backgroundColorName.replaceFirstChar(Char::uppercase),
                     vectorColorName.replaceFirstChar(Char::uppercase)
@@ -102,7 +103,7 @@ class PresetsAdapter(private val ctx: Context) :
                 }
 
                 setOnLongClickListener {
-                    Toast.makeText(ctx, resultName, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, resultName, Toast.LENGTH_LONG).show()
                     return@setOnLongClickListener false
                 }
             }

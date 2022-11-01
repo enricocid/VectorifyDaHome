@@ -24,9 +24,7 @@ object VectorsCategories {
         categories.iterator().withIndex().run {
             while (hasNext()) {
                 val item = next()
-                if (item.value.contains(vector)) {
-                    return item.index
-                }
+                if (item.value.contains(vector)) return item.index
             }
         }
         return 0

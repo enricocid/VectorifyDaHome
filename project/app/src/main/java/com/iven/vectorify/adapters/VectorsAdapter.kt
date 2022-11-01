@@ -1,32 +1,28 @@
 package com.iven.vectorify.adapters
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
 import com.iven.vectorify.databinding.VectorItemBinding
-import com.iven.vectorify.utils.Utils
+import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.VectorsCategories
-import com.iven.vectorify.vectorifyPreferences
 
-class VectorsAdapter(private val ctx: Context) :
-    RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
+class VectorsAdapter(
+    wallpaperToRestore: VectorifyWallpaper,
+    selectedCategory: List<Int>
+    ) : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
     var onVectorClick: ((Int) -> Unit)? = null
     var onVectorLongClick: ((Int) -> Unit)? = null
 
     private var mSelectedDrawable = R.drawable.android_logo_2019
     private var mSelectedCategory = VectorsCategories.TECH
-    private var wallpaperToRestore = vectorifyPreferences.savedWallpaper
 
     init {
-        if (Utils.isDeviceLand(ctx.resources)) {
-            wallpaperToRestore = vectorifyPreferences.savedWallpaperLand
-        }
-        mSelectedCategory = Utils.getCategory(ctx, wallpaperToRestore.category).second
+        mSelectedCategory = selectedCategory
         mSelectedDrawable = wallpaperToRestore.resource
     }
 
@@ -68,14 +64,16 @@ class VectorsAdapter(private val ctx: Context) :
 
         fun bindItems(drawable: Int) {
 
+            val context = binding.root.context
+
             binding.checkbox.visibility = if (mSelectedDrawable == drawable) View.VISIBLE else View.GONE
 
             binding.vectorButton.run {
                 setImageResource(drawable)
-                contentDescription = ctx.getString(R.string.content_vector, resources.getResourceEntryName(drawable)
+                contentDescription = context.getString(R.string.content_vector, resources.getResourceEntryName(drawable)
                     .replace(
-                        ctx.getString(R.string.underscore_delimiter),
-                        ctx.getString(R.string.space_delimiter)
+                        context.getString(R.string.underscore_delimiter),
+                        context.getString(R.string.space_delimiter)
                     ))
                 setOnClickListener {
                     if (mSelectedDrawable != drawable) {

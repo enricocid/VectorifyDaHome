@@ -60,7 +60,11 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
                     .show()
             }
 
-            val recentsAdapter = RecentsAdapter(requireActivity())
+            val recentsAdapter = RecentsAdapter(if (Utils.isDeviceLand(resources)) {
+                vectorifyPreferences.recentSetupsLand
+            } else {
+                vectorifyPreferences.recentSetups
+            })
             modalRv.itemAnimator = null
             modalRv.layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
             modalRv.adapter = recentsAdapter

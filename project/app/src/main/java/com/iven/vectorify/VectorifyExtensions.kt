@@ -35,17 +35,12 @@ inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
 fun VectorifyWallpaper.addToRecentSetups(isLand: Boolean) {
 
     var toUpdate = vectorifyPreferences.recentSetups
-    if (isLand) {
-        toUpdate = vectorifyPreferences.recentSetupsLand
-    }
+    if (isLand) toUpdate = vectorifyPreferences.recentSetupsLand
 
-    if (toUpdate.isNullOrEmpty()) {
-        toUpdate = mutableListOf()
-    }
+    if (toUpdate.isNullOrEmpty()) toUpdate = mutableListOf()
+
     //update recent setups
-    if (!toUpdate.contains(this)) {
-        toUpdate.add(this)
-    }
+    if (!toUpdate.contains(this)) toUpdate.add(this)
 
     if (isLand) {
         vectorifyPreferences.recentSetupsLand = toUpdate
@@ -61,9 +56,7 @@ fun Int.toHex(context: Context) =
 //method to calculate ui elements color according to main color luminance
 @ColorInt
 fun Int.toSurfaceColor(): Int {
-    if (ColorUtils.calculateLuminance(this) < 0.35) {
-        return Color.WHITE
-    }
+    if (ColorUtils.calculateLuminance(this) < 0.35) return Color.WHITE
     return Color.BLACK
 }
 
@@ -72,9 +65,7 @@ fun Int.darkenOrLighten() = ColorUtils.blendARGB(this, toSurfaceColor(), 0.20F)
 
 @ColorInt
 fun Int.toContrastColor(compareColor: Int): Int {
-    if (this == compareColor) {
-        return darkenOrLighten()
-    }
+    if (this == compareColor) return darkenOrLighten()
     return this
 }
 
@@ -92,9 +83,7 @@ fun List<ImageView>.applyTint(context: Context, widgetColor: Int) {
 
 fun View.safeClickListener(safeClickListener: (view: View) -> Unit) {
     setOnClickListener {
-        if (!SingleClickHelper.isBlockingClick()) {
-            safeClickListener(it)
-        }
+        if (!SingleClickHelper.isBlockingClick()) safeClickListener(it)
     }
 }
 

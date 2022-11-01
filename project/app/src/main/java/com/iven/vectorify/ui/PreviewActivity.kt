@@ -280,9 +280,7 @@ class PreviewActivity : AppCompatActivity() {
     private fun setWallpaper(set: Boolean) {
         if (PermissionsUtils.hasToAskForReadStoragePermission(this)) {
             var kind = PermissionsUtils.SET_WALLPAPER
-            if (set) {
-                kind = PermissionsUtils.SAVE_WALLPAPER
-            }
+            if (set) kind = PermissionsUtils.SAVE_WALLPAPER
             PermissionsUtils.manageAskForReadStoragePermission(this, kind)
             return
         }
@@ -493,9 +491,7 @@ class PreviewActivity : AppCompatActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            hideSystemBars()
-        }
+        if (hasFocus) hideSystemBars()
     }
 
     override fun onPause() {
