@@ -10,7 +10,7 @@ import android.view.SurfaceHolder
 import androidx.preference.PreferenceManager
 import com.iven.vectorify.utils.Utils
 
-class LiveWallpaper : WallpaperService() {
+class LiveWallpaper: WallpaperService() {
 
     private var mBackgroundColor = Color.BLACK
     private var mVectorColor = Color.WHITE
@@ -23,7 +23,6 @@ class LiveWallpaper : WallpaperService() {
     override fun onCreateEngine(): Engine = VectorifyEngine()
 
     private fun updatePaintProps() {
-
         with(vectorifyPreferences.liveWallpaper) {
             mBackgroundColor = backgroundColor
             mVectorColor = vectorColor.toContrastColor(mBackgroundColor)
@@ -34,7 +33,7 @@ class LiveWallpaper : WallpaperService() {
         }
     }
 
-    private inner class VectorifyEngine : WallpaperService.Engine(), SharedPreferences.OnSharedPreferenceChangeListener {
+    private inner class VectorifyEngine: WallpaperService.Engine(), SharedPreferences.OnSharedPreferenceChangeListener {
 
         private val handler = Handler(Looper.getMainLooper())
         private val drawRunner = Runnable { draw() }
@@ -81,11 +80,7 @@ class LiveWallpaper : WallpaperService() {
                     //draw background!
                     canvas.drawColor(mBackgroundColor)
 
-                    val drawable = Utils.tintDrawable(
-                        baseContext,
-                        mVector,
-                        mVectorColor
-                    )
+                    val drawable = Utils.tintDrawable(baseContext, mVector, mVectorColor)
 
                     val metrics = vectorifyPreferences.savedMetrics
 

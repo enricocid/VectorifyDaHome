@@ -39,7 +39,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class PreviewActivity : AppCompatActivity() {
+class PreviewActivity: AppCompatActivity() {
 
     // View binding class
     private lateinit var mPreviewActivityBinding: PreviewActivityBinding
@@ -62,7 +62,7 @@ class PreviewActivity : AppCompatActivity() {
     private val mIoDispatcher = Dispatchers.IO + mHandler
     private val mUiScope = CoroutineScope(mUiDispatcher)
 
-    private val onBackPressedCallback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+    private val onBackPressedCallback: OnBackPressedCallback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             finishAndRemoveTask()
         }
@@ -80,7 +80,7 @@ class PreviewActivity : AppCompatActivity() {
         hideSystemBars()
 
         intent?.extras?.let { ext ->
-            LiveWallpaper.run {
+            with(LiveWallpaper) {
                 mTempBackgroundColor = ext.getInt(BACKGROUND_COLOR)
                 mTempVectorColor = ext.getInt(VECTOR_COLOR)
                 mTempVector = ext.getInt(VECTOR)
@@ -185,7 +185,7 @@ class PreviewActivity : AppCompatActivity() {
             updateLayoutForDisplayCutoutIfNeeded(this)
         }
 
-        mPreviewActivityBinding.root.animate().run {
+        with(mPreviewActivityBinding.root.animate()) {
             duration = 750
             alpha(1.0F)
         }
@@ -234,7 +234,7 @@ class PreviewActivity : AppCompatActivity() {
     @SuppressLint("RestrictedApi")
     private fun initializeSeekBar() {
         //observe SeekBar changes
-        mPreviewActivityBinding.run {
+        with(mPreviewActivityBinding) {
 
             var userProgress = 0F
 
@@ -245,7 +245,7 @@ class PreviewActivity : AppCompatActivity() {
                 }
             }
 
-            seekSize.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+            seekSize.addOnSliderTouchListener(object: Slider.OnSliderTouchListener {
                 override fun onStartTrackingTouch(slider: Slider) {
                     sUserIsSeeking = true
                 }
@@ -266,7 +266,7 @@ class PreviewActivity : AppCompatActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setDoubleTapListener() {
-        val gestureDetector = GestureDetector(this, object : SimpleOnGestureListener() {
+        val gestureDetector = GestureDetector(this, object: SimpleOnGestureListener() {
             override fun onDoubleTap(e: MotionEvent): Boolean {
                 onBackPressedCallback.handleOnBackPressed()
                 return false
@@ -284,7 +284,7 @@ class PreviewActivity : AppCompatActivity() {
             PermissionsUtils.manageAskForReadStoragePermission(this, kind)
             return
         }
-        mPreviewActivityBinding.vectorView.run {
+        with(mPreviewActivityBinding.vectorView) {
             vectorifyDaHome(set)
             saveToPrefs()
         }
@@ -298,8 +298,8 @@ class PreviewActivity : AppCompatActivity() {
         val vectorColor = mTempBackgroundColor.toSurfaceColor()
         val vectorColorAlpha = ColorUtils.setAlphaComponent(vectorColor, 25)
 
-        with(mPreviewActivityBinding) {
-            toolbar.run {
+        mPreviewActivityBinding.let { binding ->
+            with(binding.toolbar) {
                 setBackgroundColor(cardColor)
                 setTitleTextColor(vectorColor)
                 setNavigationIcon(R.drawable.ic_navigate_before)
@@ -315,29 +315,27 @@ class PreviewActivity : AppCompatActivity() {
                 }
 
                 //set menu items color according the the background luminance
-                menu.run {
-                    val drawablesList = children.map { it.icon }.toMutableList().apply {
-                        add(navigationIcon)
-                    }
-                    val iterator = drawablesList.iterator()
-                    while (iterator.hasNext()) {
-                        iterator.next()?.mutate()?.setTint(vectorColor)
-                    }
+                val drawablesList = menu.children.map { it.icon }.toMutableList().apply {
+                    add(navigationIcon)
+                }
+                val iterator = drawablesList.iterator()
+                while (iterator.hasNext()) {
+                    iterator.next()?.mutate()?.setTint(vectorColor)
                 }
             }
 
-            progressIndicator.run {
+            with(binding.progressIndicator) {
                 setIndicatorColor(vectorColor)
                 trackColor = vectorColorAlpha
             }
 
             //set SeekBar colors
-            seekbarCard.run {
+            with(binding.seekbarCard) {
                 setCardBackgroundColor(cardColor)
                 strokeColor = vectorColorAlpha
             }
 
-            seekSize.run {
+            with(binding.seekSize) {
                 val color = ColorStateList.valueOf(vectorColor)
                 thumbTintList = color
                 trackTintList = color
@@ -345,11 +343,12 @@ class PreviewActivity : AppCompatActivity() {
                 haloTintList = color
             }
 
-            seekbarTitle.setTextColor(vectorColor)
-            scaleText.setTextColor(vectorColor)
-
-            listOf(up, down, left, right, centerHorizontal, centerVertical, resetPosition)
-                .applyTint(this@PreviewActivity, vectorColor)
+            with(binding) {
+                seekbarTitle.setTextColor(vectorColor)
+                scaleText.setTextColor(vectorColor)
+                listOf(up, down, left, right, centerHorizontal, centerVertical, resetPosition)
+                    .applyTint(this@PreviewActivity, vectorColor)
+            }
         }
     }
 
@@ -357,7 +356,6 @@ class PreviewActivity : AppCompatActivity() {
 
         //update prefs
         val toSave = mPreviewActivityBinding.vectorView.saveToPrefs()
-
         vectorifyPreferences.liveWallpaper = toSave
 
         //check if the live wallpaper is already running
@@ -387,7 +385,7 @@ class PreviewActivity : AppCompatActivity() {
            }
         }
 
-        mPreviewActivityBinding.run {
+        with(mPreviewActivityBinding) {
             scaleText.text = mTempScale.toFormattedScale()
             vectorView.setScaleFactor(mTempScale)
             seekSize.value = mTempScale
@@ -395,20 +393,17 @@ class PreviewActivity : AppCompatActivity() {
         }
     }
 
-    private suspend fun saveWallpaperAsync(bitmapToProcess: Bitmap, isSetWallpaper: Boolean) : Uri? = withContext(mIoDispatcher) {
+    private suspend fun saveWallpaperAsync(bitmapToProcess: Bitmap, isSetWallpaper: Boolean): Uri? = withContext(mIoDispatcher) {
         doSave(cropBitmapFromCenterAndScreenSize(bitmapToProcess), isSetWallpaper)
     }
 
     //https://stackoverflow.com/a/59536115
-    private fun doSave(bitmap: Bitmap, isSetWallpaper: Boolean) : Uri? {
+    private fun doSave(bitmap: Bitmap, isSetWallpaper: Boolean): Uri? {
 
         return try {
 
             var fos: OutputStream? = null
-            val format = SimpleDateFormat(
-                getString(R.string.time_pattern),
-                Locale.getDefault()
-            ).format(Date())
+            val format = SimpleDateFormat(getString(R.string.time_pattern), Locale.getDefault()).format(Date())
 
             val name = "${getString(R.string.save_pattern) + format}.png"
 
@@ -527,7 +522,7 @@ class PreviewActivity : AppCompatActivity() {
     //https://developer.android.com/training/system-ui/immersive
     private fun hideSystemBars() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        WindowCompat.getInsetsController(window, window.decorView).run {
+        with(WindowCompat.getInsetsController(window, window.decorView)) {
             // Configure the behavior of the hidden system bars
             systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             // Hide both the status bar and the navigation bar

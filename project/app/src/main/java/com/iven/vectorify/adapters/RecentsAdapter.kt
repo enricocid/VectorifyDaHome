@@ -12,7 +12,7 @@ import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.vectorifyPreferences
 
 
-class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?) : RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
+class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?): RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
 
     var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
 
@@ -29,19 +29,18 @@ class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?)
         holder.bindItems(recentSetups?.get(position)!!)
     }
 
-    inner class RecentSetupsHolder(private val binding: RecentItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class RecentSetupsHolder(private val binding: RecentItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(wallpaper: VectorifyWallpaper) {
 
-            val context = binding.root.context
-            val drawable =
+            binding.root.run {
+
+                val drawable =
                     Utils.tintDrawable(
                         context,
                         wallpaper.resource,
                         wallpaper.vectorColor.toContrastColor(wallpaper.backgroundColor)
                     )
-
-            binding.root.run {
 
                 contentDescription = context.getString(R.string.content_recent, absoluteAdapterPosition)
 

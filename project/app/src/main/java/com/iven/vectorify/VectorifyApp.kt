@@ -8,7 +8,7 @@ val vectorifyPreferences: VectorifyPreferences by lazy {
     VectorifyApp.prefs
 }
 
-class VectorifyApp : Application() {
+class VectorifyApp: Application() {
 
     companion object {
         lateinit var prefs: VectorifyPreferences
@@ -16,9 +16,7 @@ class VectorifyApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         prefs = VectorifyPreferences(applicationContext)
-
         AppCompatDelegate.setDefaultNightMode(Utils.getDefaultNightMode(applicationContext))
     }
 }

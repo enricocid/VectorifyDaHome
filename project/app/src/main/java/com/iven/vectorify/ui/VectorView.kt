@@ -17,7 +17,7 @@ import com.iven.vectorify.vectorifyPreferences
 
 class VectorView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, defStyleAttr) {
+): AppCompatImageView(context, attrs, defStyleAttr) {
 
     var onSetWallpaper: ((Boolean, Bitmap) -> Unit)? = null
 
@@ -120,7 +120,7 @@ class VectorView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun saveToPrefs() : VectorifyWallpaper {
+    fun saveToPrefs(): VectorifyWallpaper {
         //save wallpaper to prefs
         val toSave = VectorifyWallpaper(mBackgroundColor, mVectorColor,
             mVector, mCategory, mScaleFactor, mHorizontalOffset, mVerticalOffset

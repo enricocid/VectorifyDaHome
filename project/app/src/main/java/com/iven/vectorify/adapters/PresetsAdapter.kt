@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.iven.vectorify.R
 import com.iven.vectorify.databinding.PresetOptionBinding
 
-class PresetsAdapter : RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
+class PresetsAdapter: RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
 
     var onPresetClick: ((Pair<Int, Int>) -> Unit)? = null
 
@@ -26,10 +26,8 @@ class PresetsAdapter : RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
         Pair(R.color.navy, R.color.android_blue),
         Pair(R.color.navy, R.color.android_green),
         Pair(R.color.greece, R.color.plaster),
-
         Pair(R.color.cocoa, R.color.chocolate),
         Pair(R.color.slate, R.color.ceramic),
-
         Pair(R.color.chocolate, R.color.toffee),
         Pair(R.color.chocolate, R.color.frosting),
         Pair(R.color.egg_plant, R.color.lemon_lime),
@@ -62,17 +60,15 @@ class PresetsAdapter : RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
         holder.bindItems(mPresets[holder.absoluteAdapterPosition])
     }
 
-    inner class ColorsHolder(private val binding: PresetOptionBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ColorsHolder(private val binding: PresetOptionBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(combo: Pair<Int, Int>) {
 
-            val context = binding.root.context
-            val resources = context.resources
-
-            val selectedVectorColor = ContextCompat.getColor(context, combo.second)
-            val selectedBackgroundColor = ContextCompat.getColor(context, combo.first)
-
             binding.root.run {
+
+                val resources = context.resources
+                val selectedVectorColor = ContextCompat.getColor(context, combo.second)
+                val selectedBackgroundColor = ContextCompat.getColor(context, combo.first)
 
                 setCardBackgroundColor(selectedVectorColor)
                 strokeColor = selectedBackgroundColor

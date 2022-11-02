@@ -20,8 +20,8 @@ import com.iven.vectorify.utils.Utils
 
 //viewTreeObserver extension to measure layout params
 //https://antonioleiva.com/kotlin-ongloballayoutlistener/
-inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
-    viewTreeObserver.addOnGlobalLayoutListener(object :
+inline fun <T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
+    viewTreeObserver.addOnGlobalLayoutListener(object:
         ViewTreeObserver.OnGlobalLayoutListener {
         override fun onGlobalLayout() {
             if (measuredWidth > 0 && measuredHeight > 0) {

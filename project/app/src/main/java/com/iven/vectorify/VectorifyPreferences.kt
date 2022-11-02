@@ -95,7 +95,7 @@ class VectorifyPreferences(context: Context) {
         set(value) = putObjectForType(prefRecentSetupsLand, value, typeWallpapersList)
 
     // Saves object into the Preferences using Moshi
-    private fun <T : Any> getObjectForClass(key: String, clazz: Class<T>): T? {
+    private fun <T: Any> getObjectForClass(key: String, clazz: Class<T>): T? {
         val json = mPrefs.getString(key, null)
         return if (json == null) {
             null
@@ -109,18 +109,18 @@ class VectorifyPreferences(context: Context) {
         }
     }
 
-    private fun <T : Any> putObjectForClass(key: String, value: T?, clazz: Class<T>) {
+    private fun <T: Any> putObjectForClass(key: String, value: T?, clazz: Class<T>) {
         val json = mMoshi.adapter(clazz).toJson(value)
         mPrefs.edit { putString(key, json) }
     }
 
     // Saves object into the Preferences using Moshi
-    private fun <T : Any> putObjectForType(key: String, value: T?, type: Type) {
+    private fun <T: Any> putObjectForType(key: String, value: T?, type: Type) {
         val json = mMoshi.adapter<T>(type).toJson(value)
         mPrefs.edit { putString(key, json) }
     }
 
-    private fun <T : Any> getObjectForType(key: String, type: Type): T? {
+    private fun <T: Any> getObjectForType(key: String, type: Type): T? {
         val json = mPrefs.getString(key, null)
         return if (json == null) {
             null

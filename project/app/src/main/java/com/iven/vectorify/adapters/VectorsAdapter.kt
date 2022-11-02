@@ -13,7 +13,7 @@ import com.iven.vectorify.utils.VectorsCategories
 class VectorsAdapter(
     wallpaperToRestore: VectorifyWallpaper,
     selectedCategory: List<Int>
-    ) : RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
+    ): RecyclerView.Adapter<VectorsAdapter.VectorsHolder>() {
 
     var onVectorClick: ((Int) -> Unit)? = null
     var onVectorLongClick: ((Int) -> Unit)? = null
@@ -60,7 +60,7 @@ class VectorsAdapter(
         holder.bindItems(mSelectedCategory[holder.absoluteAdapterPosition])
     }
 
-    inner class VectorsHolder(private val binding: VectorItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class VectorsHolder(private val binding: VectorItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(drawable: Int) {
 

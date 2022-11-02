@@ -228,7 +228,7 @@ object Utils {
         resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     @JvmStatic
-    fun isThemeLight(resources: Resources) : Boolean {
+    fun isThemeLight(resources: Resources): Boolean {
         val uiMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         return uiMode != Configuration.UI_MODE_NIGHT_YES
     }
@@ -261,9 +261,7 @@ object Utils {
     //method to open live wallpaper intent
     @JvmStatic
     fun openLiveWallpaperIntent(context: Context) {
-        val intent = Intent(
-            WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
-        )
+        val intent = Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER)
         intent.putExtra(
             WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
             ComponentName(context, LiveWallpaper::class.java)
@@ -298,11 +296,7 @@ object Utils {
         verticalOffset: Float
     ) {
 
-        val dimension = if (deviceWidth > deviceHeight) {
-            deviceHeight
-        } else {
-            deviceWidth
-        }
+        val dimension = if (deviceWidth > deviceHeight) deviceHeight else deviceWidth
         val bitmap = Bitmap.createBitmap(
             (dimension * scale).toInt(),
             (dimension * scale).toInt(), Bitmap.Config.ARGB_8888
@@ -331,46 +325,22 @@ object Utils {
     fun getCategory(context: Context, index: Int): Pair<String, List<Int>> {
         return when (index) {
             0 -> Pair(context.getString(R.string.title_tech), VectorsCategories.TECH) //tech
-            1 -> Pair(
-                context.getString(R.string.title_symbols),
-                VectorsCategories.SYMBOLS
-            ) //symbols
-            2 -> Pair(
-                context.getString(R.string.title_animals),
-                VectorsCategories.ANIMALS
-            ) //animals
-            3 -> Pair(
-                context.getString(R.string.title_emoticons),
-                VectorsCategories.EMOTICONS
-            ) //emoticons
+            1 -> Pair(context.getString(R.string.title_symbols), VectorsCategories.SYMBOLS) //symbols
+            2 -> Pair(context.getString(R.string.title_animals), VectorsCategories.ANIMALS) //animals
+            3 -> Pair(context.getString(R.string.title_emoticons), VectorsCategories.EMOTICONS) //emoticons
             4 -> Pair(context.getString(R.string.title_fun), VectorsCategories.FUN) //fun
             5 -> Pair(context.getString(R.string.title_food), VectorsCategories.FOOD) //food
             6 -> Pair(context.getString(R.string.title_nature), VectorsCategories.NATURE) //nature
-            7 -> Pair(
-                context.getString(R.string.title_weather),
-                VectorsCategories.WEATHER
-            ) //weather
+            7 -> Pair(context.getString(R.string.title_weather), VectorsCategories.WEATHER) //weather
             8 -> Pair(context.getString(R.string.title_sport), VectorsCategories.SPORT) //sport
             9 -> Pair(context.getString(R.string.title_math), VectorsCategories.MATH) //math
-            10 -> Pair(
-                context.getString(R.string.title_science),
-                VectorsCategories.SCIENCE
-            ) //science
-            11 -> Pair(
-                context.getString(R.string.title_chernoff),
-                VectorsCategories.CHERNOFF
-            ) //Chernoff faceS
+            10 -> Pair(context.getString(R.string.title_science), VectorsCategories.SCIENCE) //science
+            11 -> Pair(context.getString(R.string.title_chernoff), VectorsCategories.CHERNOFF) //Chernoff faces
             12 -> Pair(context.getString(R.string.title_music), VectorsCategories.MUSIC) //music
             13 -> Pair(context.getString(R.string.title_nerdy), VectorsCategories.NERDY) //nerdy
-            14 -> Pair(
-                context.getString(R.string.title_buildings),
-                VectorsCategories.BUILDINGS
-            ) //buildings
+            14 -> Pair(context.getString(R.string.title_buildings), VectorsCategories.BUILDINGS) //buildings
             15 -> Pair(context.getString(R.string.title_alert), VectorsCategories.ALERT) //alert
-            16 -> Pair(
-                context.getString(R.string.title_alpha),
-                VectorsCategories.ALPHABET
-            ) //letters
+            16 -> Pair(context.getString(R.string.title_alpha), VectorsCategories.ALPHABET) //letters
             17 -> Pair(context.getString(R.string.title_roman), VectorsCategories.ROMAN) //roman
             18 -> Pair(context.getString(R.string.title_zodiac), VectorsCategories.ZODIAC) //zodiac
             else -> Pair(context.getString(R.string.title_others), VectorsCategories.OTHERS)
@@ -379,58 +349,34 @@ object Utils {
 
     @JvmStatic
     fun getVectorProps(vector: Int): Pair<Int, Boolean> {
-
-        var isSpecial = false
-        var returnedVector = vector
-        when (vector) {
-
-            R.drawable.m_original -> {
-                returnedVector = R.drawable.m
-                isSpecial = true
-            }
-
-            R.drawable.n_original -> {
-                returnedVector = R.drawable.n
-                isSpecial = true
-            }
-
-            R.drawable.o_original -> {
-                returnedVector = R.drawable.o
-                isSpecial = true
-            }
+        return when (vector) {
+            R.drawable.m_original -> Pair(R.drawable.m, true)
+            R.drawable.n_original -> Pair(R.drawable.n, true)
+            R.drawable.o_original -> Pair(R.drawable.o, true)
+            else -> Pair(vector, false)
         }
-        return Pair(returnedVector, isSpecial)
     }
 
     @JvmStatic
-    fun tintDrawable(
-        context: Context,
-        vector: Int,
-        vectorColor: Int
-    ): Drawable? {
+    fun tintDrawable(context: Context, vector: Int, vectorColor: Int): Drawable? {
 
         //determine if we are facing android m, n, o vectors
         //so we can apply multiply tint mode to drawable
         val vectorProps = getVectorProps(vector)
 
-        val bit = ContextCompat.getDrawable(context, vectorProps.first)
-
-        bit?.let { b ->
+        ContextCompat.getDrawable(context, vectorProps.first)?.run {
             try {
                 //to avoid shared drawables get tinted too!
-                b.mutate()
-
+                mutate()
                 //set tint mode multiply for special vectors
-                if (vectorProps.second) {
-                    b.setTintMode(PorterDuff.Mode.MULTIPLY)
-                }
-                b.setTint(vectorColor)
+                if (vectorProps.second) setTintMode(PorterDuff.Mode.MULTIPLY)
+                setTint(vectorColor)
+                return this
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-
-        return bit
+        return null
     }
 
     @JvmStatic

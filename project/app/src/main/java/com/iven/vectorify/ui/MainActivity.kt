@@ -45,7 +45,7 @@ import com.iven.vectorify.utils.VectorsCategories
 import com.maxkeppeler.sheets.color.ColorSheet
 
 
-class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     // View binding class
     private lateinit var mMainActivityBinding: MainActivityBinding
@@ -168,7 +168,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     private fun initViews() {
 
         //set all click listeners
-        mMainActivityBinding.run {
+        with(mMainActivityBinding) {
 
             vectorFrame.safeClickListener { startCategoryChooser() }
             categoriesChip.setOnClickListener { startCategoryChooser() }
@@ -268,7 +268,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun setupBottomBar() {
         //set the bottom bar menu
-        mMainActivityBinding.bar.run {
+        with(mMainActivityBinding.bar) {
 
             replaceMenu(R.menu.bottom_menu)
 
@@ -299,7 +299,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
             setNavigationOnClickListener {
                 if (Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetupsLand.isNullOrEmpty() || !Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetups.isNullOrEmpty()) {
-                    RecentsSheet.newInstance().run {
+                    with(RecentsSheet.newInstance()) {
                         onRecentClick = { recent ->
                             updateFabColor()
                             setBackgroundColorForUI(recent.backgroundColor, true)
@@ -327,7 +327,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
 
             afterMeasured {
-                mMainActivityBinding.run {
+                with(mMainActivityBinding) {
                     val lp = version.layoutParams as CoordinatorLayout.LayoutParams
                     lp.setMargins(0, 0, 0, height)
                     cardsContainer.setPadding(
@@ -336,7 +336,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                         0,
                         height + version.height
                     )
-                    root.animate().run {
+                    with(root.animate()) {
                         duration = 750
                         alpha(1.0F)
                     }
@@ -348,7 +348,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     private fun setupRecyclerViews() {
 
         //setup presets
-        mMainActivityBinding.presetsRv.run {
+        with(mMainActivityBinding.presetsRv) {
 
             layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
@@ -374,7 +374,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
 
         //setup vectors
-        mMainActivityBinding.vectorsRv.run {
+        with(mMainActivityBinding.vectorsRv) {
 
             mVectorsRecyclerViewLayoutManager =
                 GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
@@ -391,12 +391,10 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 onVectorClick = { vector ->
                     if (!sRestoreVector) {
                         if (mTempVector != vector) {
-
                             mTempVector = vector
                             mMainActivityBinding.vectorFrame.setImageResource(
                                 Utils.getVectorProps(vector).first
                             )
-
                             //update drawable tint
                             setVectorFrameColors(false)
                         }
@@ -447,7 +445,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         mMainActivityBinding.backgroundColor.setCardBackgroundColor(mTempBackgroundColor)
 
         mMainActivityBinding.backgroundColorHead.setTextColor(textColor)
-        mMainActivityBinding.backgroundColorSubhead.run {
+        with(mMainActivityBinding.backgroundColorSubhead) {
             setTextColor(textColor)
             text = color.toHex(this@MainActivity)
             setTextColor(textColor)
@@ -478,7 +476,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         )
 
         mMainActivityBinding.vectorColorHead.setTextColor(textColor)
-        mMainActivityBinding.vectorColorSubhead.run {
+        with(mMainActivityBinding.vectorColorSubhead) {
             setTextColor(textColor)
             text = mTempVectorColor.toHex(this@MainActivity)
         }
@@ -533,15 +531,11 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                 when (key) {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
-                        if (mTempBackgroundColor != color) {
-                            setBackgroundColorForUI(color, true)
-                        }
+                        if (mTempBackgroundColor != color) setBackgroundColorForUI(color, true)
                     }
                     else -> {
                         //update the color only if it really changed
-                        if (mTempVectorColor != color) {
-                            setVectorColorForUI(color, true)
-                        }
+                        if (mTempVectorColor != color) setVectorColorForUI(color, true)
                     }
                 }
             }
@@ -569,7 +563,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         }
         val category = Utils.getCategory(this, mTempCategory)
         mVectorsAdapter.swapCategory(category.second)
-        mMainActivityBinding.categoriesChip.run {
+        with(mMainActivityBinding.categoriesChip) {
             text = category.first
             contentDescription = getString(R.string.content_selected_category, category.first)
         }
