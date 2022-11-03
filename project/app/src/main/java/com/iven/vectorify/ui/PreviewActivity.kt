@@ -62,6 +62,8 @@ class PreviewActivity: AppCompatActivity() {
     private val mIoDispatcher = Dispatchers.IO + mHandler
     private val mUiScope = CoroutineScope(mUiDispatcher)
 
+    private val mVectorifyPreferences get() = VectorifyPreferences.getPrefsInstance()
+
     private val onBackPressedCallback: OnBackPressedCallback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             finishAndRemoveTask()
@@ -356,7 +358,7 @@ class PreviewActivity: AppCompatActivity() {
 
         //update prefs
         val toSave = mPreviewActivityBinding.vectorView.saveToPrefs()
-        vectorifyPreferences.liveWallpaper = toSave
+        mVectorifyPreferences.liveWallpaper = toSave
 
         //check if the live wallpaper is already running
         //if so, don't open the live wallpaper picker, just updated preferences
@@ -374,9 +376,9 @@ class PreviewActivity: AppCompatActivity() {
         mTempVerticalOffset = 0F
 
         if (!isResetToDefault) {
-            var savedWallpaper = vectorifyPreferences.savedWallpaper
+            var savedWallpaper = mVectorifyPreferences.savedWallpaper
             if (Utils.isDeviceLand(resources)) {
-                savedWallpaper = vectorifyPreferences.savedWallpaperLand
+                savedWallpaper = mVectorifyPreferences.savedWallpaperLand
             }
             with(savedWallpaper) {
                mTempScale = scale
@@ -452,7 +454,7 @@ class PreviewActivity: AppCompatActivity() {
     private fun cropBitmapFromCenterAndScreenSize(bitmapToProcess: Bitmap): Bitmap {
         //https://stackoverflow.com/a/25699365
 
-        val displayMetrics = vectorifyPreferences.savedMetrics
+        val displayMetrics = mVectorifyPreferences.savedMetrics
         val deviceWidth = displayMetrics.width
         val deviceHeight = displayMetrics.height
 
@@ -495,10 +497,10 @@ class PreviewActivity: AppCompatActivity() {
             mTempCategory, mTempScale, mTempHorizontalOffset, mTempVerticalOffset
         )
         if (Utils.isDeviceLand(resources)) {
-            vectorifyPreferences.savedWallpaperLand = toSave
+            mVectorifyPreferences.savedWallpaperLand = toSave
             return
         }
-        vectorifyPreferences.savedWallpaper = toSave
+        mVectorifyPreferences.savedWallpaper = toSave
     }
 
     //manage request permission result, continue loading ui if permissions is granted

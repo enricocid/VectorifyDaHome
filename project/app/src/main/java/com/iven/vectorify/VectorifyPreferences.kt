@@ -133,4 +133,26 @@ class VectorifyPreferences(context: Context) {
             }
         }
     }
+
+    companion object {
+        // Singleton prevents multiple instances of
+        // VectorifyPreferences opening at the same time.
+        @Volatile
+        private var INSTANCE: VectorifyPreferences? = null
+
+        fun initPrefs(context: Context): VectorifyPreferences {
+            // if the INSTANCE is not null, then return it,
+            // if it is, then create the preferences
+            return INSTANCE ?: synchronized(this) {
+                val instance = VectorifyPreferences(context)
+                INSTANCE = instance
+                // return instance
+                instance
+            }
+        }
+
+        fun getPrefsInstance(): VectorifyPreferences {
+            return INSTANCE ?: error("Preferences not initialized!")
+        }
+    }
 }

@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iven.vectorify.R
+import com.iven.vectorify.VectorifyPreferences
 import com.iven.vectorify.databinding.RecentItemBinding
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.toContrastColor
 import com.iven.vectorify.utils.Utils
-import com.iven.vectorify.vectorifyPreferences
 
 
 class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?): RecyclerView.Adapter<RecentsAdapter.RecentSetupsHolder>() {
@@ -32,6 +32,8 @@ class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?)
     inner class RecentSetupsHolder(private val binding: RecentItemBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bindItems(wallpaper: VectorifyWallpaper) {
+
+            val prefs = VectorifyPreferences.getPrefsInstance()
 
             binding.root.run {
 
@@ -61,7 +63,7 @@ class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?)
                                 val index = recentSetups?.indexOf(wallpaper)!!
                                 if (recentSetups.contains(wallpaper)) recentSetups.remove(wallpaper)
                                 notifyItemRemoved(index)
-                                vectorifyPreferences.recentSetups = recentSetups
+                                prefs.recentSetups = recentSetups
                             } catch (e: Exception) {
                                 e.printStackTrace()
                             }
@@ -81,8 +83,8 @@ class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?)
                     scaleX = wallpaper.scale
 
                     // properly calculate image view gravity to match set wallpaper
-                    x = (resources.getDimensionPixelOffset(R.dimen.recent_width) * wallpaper.horizontalOffset) / vectorifyPreferences.savedMetrics.width
-                    y = (resources.getDimensionPixelOffset(R.dimen.recent_height) * wallpaper.verticalOffset) / vectorifyPreferences.savedMetrics.height
+                    x = (resources.getDimensionPixelOffset(R.dimen.recent_width) * wallpaper.horizontalOffset) / prefs.savedMetrics.width
+                    y = (resources.getDimensionPixelOffset(R.dimen.recent_height) * wallpaper.verticalOffset) / prefs.savedMetrics.height
                 }
             }
         }

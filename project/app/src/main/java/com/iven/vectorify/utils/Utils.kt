@@ -24,7 +24,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.iven.vectorify.LiveWallpaper
 import com.iven.vectorify.R
-import com.iven.vectorify.vectorifyPreferences
+import com.iven.vectorify.VectorifyPreferences
 
 
 object Utils {
@@ -234,7 +234,7 @@ object Utils {
     }
 
     @JvmStatic
-    fun getDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
+    fun getDefaultNightMode(context: Context) = when (VectorifyPreferences.getPrefsInstance().theme) {
         context.getString(R.string.theme_pref_light) -> AppCompatDelegate.MODE_NIGHT_NO
         context.getString(R.string.theme_pref_dark) -> AppCompatDelegate.MODE_NIGHT_YES
         else -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -245,14 +245,14 @@ object Utils {
     }
 
     @JvmStatic
-    fun getNextDefaultNightMode(context: Context) = when (vectorifyPreferences.theme) {
+    fun getNextDefaultNightMode(context: Context) = when (VectorifyPreferences.getPrefsInstance().theme) {
         context.getString(R.string.theme_pref_light) -> context.getString(R.string.theme_pref_dark)
         context.getString(R.string.theme_pref_dark) -> context.getString(R.string.theme_pref_auto)
         else -> context.getString(R.string.theme_pref_light)
     }
 
     @JvmStatic
-    fun getDefaultNightModeIcon(context: Context) = when (vectorifyPreferences.theme) {
+    fun getDefaultNightModeIcon(context: Context) = when (VectorifyPreferences.getPrefsInstance().theme) {
         context.getString(R.string.theme_pref_light) -> R.drawable.ic_theme_light
         context.getString(R.string.theme_pref_dark) -> R.drawable.ic_theme_night
         else -> R.drawable.ic_theme_auto

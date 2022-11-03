@@ -19,11 +19,13 @@ class LiveWallpaper: WallpaperService() {
     private var mHorizontalOffSet = 0F
     private var mVerticalOffSet = 0F
 
+    private val mVectorifyPreferences get() = VectorifyPreferences.getPrefsInstance()
+
     //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine = VectorifyEngine()
 
     private fun updatePaintProps() {
-        with(vectorifyPreferences.liveWallpaper) {
+        with(mVectorifyPreferences.liveWallpaper) {
             mBackgroundColor = backgroundColor
             mVectorColor = vectorColor.toContrastColor(mBackgroundColor)
             mVector = resource
@@ -82,7 +84,7 @@ class LiveWallpaper: WallpaperService() {
 
                     val drawable = Utils.tintDrawable(baseContext, mVector, mVectorColor)
 
-                    val metrics = vectorifyPreferences.savedMetrics
+                    val metrics = mVectorifyPreferences.savedMetrics
 
                     // draw vector!
                     Utils.drawBitmap(

@@ -64,6 +64,8 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
     private var sThemeChanged = false
     private var sRestoreVector = false
 
+    private val mVectorifyPreferences = VectorifyPreferences.getPrefsInstance()
+
     override fun onSaveInstanceState(outState: Bundle) {
         if (sThemeChanged) {
             super.onSaveInstanceState(outState)
@@ -91,18 +93,18 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             mTempVerticalOffset
         )) {
             if (Utils.isDeviceLand(resources)) {
-                vectorifyPreferences.savedWallpaperLand = this
+                mVectorifyPreferences.savedWallpaperLand = this
                 return
             }
-            vectorifyPreferences.savedWallpaper = this
+            mVectorifyPreferences.savedWallpaper = this
         }
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             getString(R.string.theme_key) -> sThemeChanged = true
-            getString(R.string.saved_wallpaper_key) -> onWallpaperPrefChanged(vectorifyPreferences.savedWallpaper)
-            getString(R.string.saved_wallpaper_land_key) -> onWallpaperPrefChanged(vectorifyPreferences.savedWallpaperLand)
+            getString(R.string.saved_wallpaper_key) -> onWallpaperPrefChanged(mVectorifyPreferences.savedWallpaper)
+            getString(R.string.saved_wallpaper_land_key) -> onWallpaperPrefChanged(mVectorifyPreferences.savedWallpaperLand)
         }
     }
 
@@ -145,8 +147,8 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             mTempVerticalOffset = bundle.getFloat(V_OFFSET)
         }
 
-        var wallpaper = vectorifyPreferences.savedWallpaper
-        if (Utils.isDeviceLand(resources)) wallpaper = vectorifyPreferences.savedWallpaperLand
+        var wallpaper = mVectorifyPreferences.savedWallpaper
+        if (Utils.isDeviceLand(resources)) wallpaper = mVectorifyPreferences.savedWallpaperLand
         onWallpaperPrefChanged(wallpaper)
 
         initViews()
@@ -181,17 +183,13 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
 
             accentBackground.setOnClickListener {
                 setBackgroundColorForUI(
-                    Utils.getSystemAccentColor(
-                        this@MainActivity
-                    ), true
+                    Utils.getSystemAccentColor(this@MainActivity),
+                    true
                 )
             }
 
             vectorColorPicker.safeClickListener {
-                startColorPicker(
-                    getString(R.string.vectors_color_key),
-                    R.string.title_vector_dialog
-                )
+                startColorPicker(getString(R.string.vectors_color_key), R.string.title_vector_dialog)
             }
 
             accentVector.setOnClickListener {
@@ -242,7 +240,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         }
         display?.let { d ->
             d.getRealMetrics(dm)
-            vectorifyPreferences.savedMetrics = Metrics(dm.widthPixels, dm.heightPixels)
+            mVectorifyPreferences.savedMetrics = Metrics(dm.widthPixels, dm.heightPixels)
         }
     }
 
@@ -281,7 +279,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
                     R.id.app_bar_info -> Utils.openGitHubPage(this@MainActivity)
                     R.id.app_bar_theme -> {
 
-                        vectorifyPreferences.theme =
+                        mVectorifyPreferences.theme =
                             Utils.getNextDefaultNightMode(this@MainActivity)
 
                         AppCompatDelegate.setDefaultNightMode(
@@ -298,7 +296,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             }
 
             setNavigationOnClickListener {
-                if (Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetupsLand.isNullOrEmpty() || !Utils.isDeviceLand(resources) && !vectorifyPreferences.recentSetups.isNullOrEmpty()) {
+                if (Utils.isDeviceLand(resources) && !mVectorifyPreferences.recentSetupsLand.isNullOrEmpty() || !Utils.isDeviceLand(resources) && !mVectorifyPreferences.recentSetups.isNullOrEmpty()) {
                     with(RecentsSheet.newInstance()) {
                         onRecentClick = { recent ->
                             updateFabColor()
@@ -382,9 +380,9 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             setHasFixedSize(true)
 
             val wallpaperToRestore = if (Utils.isDeviceLand(resources)) {
-                vectorifyPreferences.savedWallpaperLand
+                mVectorifyPreferences.savedWallpaperLand
             } else {
-                vectorifyPreferences.savedWallpaper
+                mVectorifyPreferences.savedWallpaper
             }
             val category = Utils.getCategory(this@MainActivity, wallpaperToRestore.category).second
             mVectorsAdapter = VectorsAdapter(wallpaperToRestore, category).apply {

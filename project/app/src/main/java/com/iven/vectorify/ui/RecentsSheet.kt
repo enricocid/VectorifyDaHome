@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.iven.vectorify.R
+import com.iven.vectorify.VectorifyPreferences
 import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.applyFullHeightDialog
 import com.iven.vectorify.databinding.ModalRvBinding
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
-import com.iven.vectorify.vectorifyPreferences
 
 
 class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -25,6 +25,8 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
     private var _modalRvBinding: ModalRvBinding? = null
 
     var onRecentClick: ((VectorifyWallpaper) -> Unit)? = null
+
+    private val mVectorifyPreferences get() = VectorifyPreferences.getPrefsInstance()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _modalRvBinding = ModalRvBinding.inflate(inflater, container, false)
@@ -51,9 +53,9 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
                     .setMessage(R.string.message_clear_recent_setups)
                     .setPositiveButton(R.string.ok) { _, _ ->
                         if (Utils.isDeviceLand(resources)) {
-                            vectorifyPreferences.recentSetupsLand = mutableListOf()
+                            mVectorifyPreferences.recentSetupsLand = mutableListOf()
                         } else {
-                            vectorifyPreferences.recentSetups = mutableListOf()
+                            mVectorifyPreferences.recentSetups = mutableListOf()
                         }
                     }
                     .setNegativeButton(R.string.cancel, null)
@@ -61,9 +63,9 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
             }
 
             val recentsAdapter = RecentsAdapter(if (Utils.isDeviceLand(resources)) {
-                vectorifyPreferences.recentSetupsLand
+                mVectorifyPreferences.recentSetupsLand
             } else {
-                vectorifyPreferences.recentSetups
+                mVectorifyPreferences.recentSetups
             })
             modalRv.itemAnimator = null
             modalRv.layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
@@ -81,12 +83,10 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
 
     override fun onSharedPreferenceChanged(p0: SharedPreferences?, key: String?) {
         when {
-            Utils.isDeviceLand(resources) -> if (vectorifyPreferences.recentSetupsLand.isNullOrEmpty()) {
+            Utils.isDeviceLand(resources) -> if (mVectorifyPreferences.recentSetupsLand.isNullOrEmpty()) {
                 dismiss()
             }
-            else -> if (vectorifyPreferences.recentSetups.isNullOrEmpty()) {
-                dismiss()
-            }
+            else -> if (mVectorifyPreferences.recentSetups.isNullOrEmpty()) dismiss()
         }
     }
 

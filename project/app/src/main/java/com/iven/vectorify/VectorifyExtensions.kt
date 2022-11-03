@@ -34,8 +34,9 @@ inline fun <T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
 
 fun VectorifyWallpaper.addToRecentSetups(isLand: Boolean) {
 
-    var toUpdate = vectorifyPreferences.recentSetups
-    if (isLand) toUpdate = vectorifyPreferences.recentSetupsLand
+    val prefs = VectorifyPreferences.getPrefsInstance()
+    var toUpdate = prefs.recentSetups
+    if (isLand) toUpdate = prefs.recentSetupsLand
 
     if (toUpdate.isNullOrEmpty()) toUpdate = mutableListOf()
 
@@ -43,9 +44,9 @@ fun VectorifyWallpaper.addToRecentSetups(isLand: Boolean) {
     if (!toUpdate.contains(this)) toUpdate.add(this)
 
     if (isLand) {
-        vectorifyPreferences.recentSetupsLand = toUpdate
+        prefs.recentSetupsLand = toUpdate
     } else {
-        vectorifyPreferences.recentSetups = toUpdate
+        prefs.recentSetups = toUpdate
     }
 }
 

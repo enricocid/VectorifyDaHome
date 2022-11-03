@@ -9,11 +9,12 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.drawToBitmap
 import com.iven.vectorify.R
+import com.iven.vectorify.VectorifyPreferences
 import com.iven.vectorify.addToRecentSetups
 import com.iven.vectorify.models.Metrics
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
-import com.iven.vectorify.vectorifyPreferences
+
 
 class VectorView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -35,6 +36,8 @@ class VectorView @JvmOverloads constructor(
 
     private var mDrawable: Drawable? = null
 
+    private val mVectorifyPreferences get() = VectorifyPreferences.getPrefsInstance()
+
     fun updateVectorView(wallpaper: VectorifyWallpaper) {
         with(wallpaper) {
             mBackgroundColor = backgroundColor
@@ -46,7 +49,7 @@ class VectorView @JvmOverloads constructor(
             mVerticalOffset = verticalOffset
         }
 
-        mDeviceMetrics = vectorifyPreferences.savedMetrics
+        mDeviceMetrics = mVectorifyPreferences.savedMetrics
         mDrawable = Utils.tintDrawable(
             context,
             mVector,
@@ -127,10 +130,10 @@ class VectorView @JvmOverloads constructor(
         )
         toSave.addToRecentSetups(Utils.isDeviceLand(resources))
         if (Utils.isDeviceLand(resources)) {
-            vectorifyPreferences.savedWallpaperLand = toSave
+            mVectorifyPreferences.savedWallpaperLand = toSave
             return toSave
         }
-        vectorifyPreferences.savedWallpaper = toSave
+        mVectorifyPreferences.savedWallpaper = toSave
         return toSave
     }
 }
