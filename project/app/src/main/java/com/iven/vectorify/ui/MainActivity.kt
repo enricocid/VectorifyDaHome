@@ -13,6 +13,7 @@ import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -66,6 +67,12 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
 
     private val mVectorifyPreferences = VectorifyPreferences.getPrefsInstance()
 
+    private val onBackPressedCallback: OnBackPressedCallback = object: OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            finishAndRemoveTask()
+        }
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         if (sThemeChanged) {
             super.onSaveInstanceState(outState)
@@ -79,6 +86,12 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
                 putFloat(V_OFFSET, mTempVerticalOffset)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onPause() {
@@ -98,6 +111,8 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             }
             mVectorifyPreferences.savedWallpaper = this
         }
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
@@ -121,14 +136,10 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .unregisterOnSharedPreferenceChangeListener(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         mMainActivityBinding = MainActivityBinding.inflate(layoutInflater)
 
@@ -162,9 +173,6 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
                 insets
             }
         }
-
-        PreferenceManager.getDefaultSharedPreferences(this)
-            .registerOnSharedPreferenceChangeListener(this)
     }
 
     private fun initViews() {
@@ -198,12 +206,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
 
             swapCardColors.setOnClickListener { swapBtn ->
                 if (mTempVectorColor != mTempBackgroundColor) {
-                    ObjectAnimator.ofFloat(
-                        swapBtn,
-                        View.ROTATION,
-                        0f,
-                        180f
-                    ).apply {
+                    ObjectAnimator.ofFloat(swapBtn, View.ROTATION, 0f, 180f).apply {
                         duration = 500
                         start()
                         doOnEnd {
