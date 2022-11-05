@@ -2,4 +2,5 @@
 <resources>
     <dimen name="recent_height">108dp</dimen>
     <dimen name="recent_width">172dp</dimen>
+    <dimen name="vector_size">72dp</dimen>
 </resources>

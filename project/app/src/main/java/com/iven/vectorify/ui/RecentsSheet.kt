@@ -17,7 +17,6 @@ import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.applyFullHeightDialog
 import com.iven.vectorify.databinding.ModalRvBinding
 import com.iven.vectorify.models.VectorifyWallpaper
-import com.iven.vectorify.utils.Utils
 
 
 class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -52,21 +51,13 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
                     .setTitle(R.string.title_recent_setups)
                     .setMessage(R.string.message_clear_recent_setups)
                     .setPositiveButton(R.string.ok) { _, _ ->
-                        if (Utils.isDeviceLand(resources)) {
-                            mVectorifyPreferences.recentSetupsLand = mutableListOf()
-                        } else {
-                            mVectorifyPreferences.recentSetups = mutableListOf()
-                        }
+                        mVectorifyPreferences.recentSetups = mutableListOf()
                     }
                     .setNegativeButton(R.string.cancel, null)
                     .show()
             }
 
-            val recentsAdapter = RecentsAdapter(if (Utils.isDeviceLand(resources)) {
-                mVectorifyPreferences.recentSetupsLand
-            } else {
-                mVectorifyPreferences.recentSetups
-            })
+            val recentsAdapter = RecentsAdapter(mVectorifyPreferences.recentSetups)
             modalRv.itemAnimator = null
             modalRv.layoutManager = LinearLayoutManager(requireActivity(), RecyclerView.HORIZONTAL, false)
             modalRv.adapter = recentsAdapter
@@ -82,12 +73,7 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
     }
 
     override fun onSharedPreferenceChanged(p0: SharedPreferences?, key: String?) {
-        when {
-            Utils.isDeviceLand(resources) -> if (mVectorifyPreferences.recentSetupsLand.isNullOrEmpty()) {
-                dismiss()
-            }
-            else -> if (mVectorifyPreferences.recentSetups.isNullOrEmpty()) dismiss()
-        }
+        if (mVectorifyPreferences.recentSetups.isNullOrEmpty()) dismiss()
     }
 
     companion object {

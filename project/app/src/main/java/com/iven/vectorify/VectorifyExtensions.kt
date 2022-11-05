@@ -32,22 +32,17 @@ inline fun <T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
     })
 }
 
-fun VectorifyWallpaper.addToRecentSetups(isLand: Boolean) {
+fun VectorifyWallpaper.addToRecentSetups() {
 
     val prefs = VectorifyPreferences.getPrefsInstance()
     var toUpdate = prefs.recentSetups
-    if (isLand) toUpdate = prefs.recentSetupsLand
 
     if (toUpdate.isNullOrEmpty()) toUpdate = mutableListOf()
 
     //update recent setups
     if (!toUpdate.contains(this)) toUpdate.add(this)
 
-    if (isLand) {
-        prefs.recentSetupsLand = toUpdate
-    } else {
-        prefs.recentSetups = toUpdate
-    }
+    prefs.recentSetups = toUpdate
 }
 
 @SuppressLint("DefaultLocale")

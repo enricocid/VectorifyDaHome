@@ -220,16 +220,6 @@ class PreviewActivity: AppCompatActivity() {
             seekbarCard.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin += dc.safeInsetBottom
             }
-
-            if (Utils.isDeviceLand(resources)) {
-                // update move button container position
-                moveBtnContainer.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    topMargin = newToolbarHeight
-                    rightMargin += dc.safeInsetRight
-                }
-                // prevent toolbar buttons form being cutout
-                toolbar.setPadding(dc.safeInsetLeft, dc.safeInsetTop, dc.safeInsetRight, 0)
-            }
         }
     }
 
@@ -376,10 +366,7 @@ class PreviewActivity: AppCompatActivity() {
         mTempVerticalOffset = 0F
 
         if (!isResetToDefault) {
-            var savedWallpaper = mVectorifyPreferences.savedWallpaper
-            if (Utils.isDeviceLand(resources)) {
-                savedWallpaper = mVectorifyPreferences.savedWallpaperLand
-            }
+            val savedWallpaper = mVectorifyPreferences.savedWallpaper
             with(savedWallpaper) {
                mTempScale = scale
                mTempHorizontalOffset = horizontalOffset
@@ -496,10 +483,6 @@ class PreviewActivity: AppCompatActivity() {
         val toSave = VectorifyWallpaper(mTempBackgroundColor, mTempVectorColor, mTempVector,
             mTempCategory, mTempScale, mTempHorizontalOffset, mTempVerticalOffset
         )
-        if (Utils.isDeviceLand(resources)) {
-            mVectorifyPreferences.savedWallpaperLand = toSave
-            return
-        }
         mVectorifyPreferences.savedWallpaper = toSave
     }
 

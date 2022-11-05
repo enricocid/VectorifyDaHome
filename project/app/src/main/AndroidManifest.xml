@@ -43,7 +43,6 @@
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/AppTheme"
-            android:screenOrientation="user"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,14 +51,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.SET_WALLPAPER" />
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.PreviewActivity"
-            android:screenOrientation="user"
             android:theme="@style/AppTheme" />
 
         <service

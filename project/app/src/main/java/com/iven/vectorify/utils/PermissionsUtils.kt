@@ -25,7 +25,6 @@ object PermissionsUtils {
 
     @JvmStatic
     fun manageAskForReadStoragePermission(activity: Activity, requestCode: Int) {
-
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             MaterialAlertDialogBuilder(activity)
                 .setCancelable(false)

@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -105,10 +106,6 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             mTempHorizontalOffset,
             mTempVerticalOffset
         )) {
-            if (Utils.isDeviceLand(resources)) {
-                mVectorifyPreferences.savedWallpaperLand = this
-                return
-            }
             mVectorifyPreferences.savedWallpaper = this
         }
         PreferenceManager.getDefaultSharedPreferences(this)
@@ -119,7 +116,6 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         when (key) {
             getString(R.string.theme_key) -> sThemeChanged = true
             getString(R.string.saved_wallpaper_key) -> onWallpaperPrefChanged(mVectorifyPreferences.savedWallpaper)
-            getString(R.string.saved_wallpaper_land_key) -> onWallpaperPrefChanged(mVectorifyPreferences.savedWallpaperLand)
         }
     }
 
@@ -158,8 +154,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             mTempVerticalOffset = bundle.getFloat(V_OFFSET)
         }
 
-        var wallpaper = mVectorifyPreferences.savedWallpaper
-        if (Utils.isDeviceLand(resources)) wallpaper = mVectorifyPreferences.savedWallpaperLand
+        val wallpaper = mVectorifyPreferences.savedWallpaper
         onWallpaperPrefChanged(wallpaper)
 
         initViews()
@@ -180,8 +175,12 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         //set all click listeners
         with(mMainActivityBinding) {
 
-            vectorFrame.safeClickListener { startCategoryChooser() }
+            if (!Utils.isDeviceLand(resources)) {
+                vectorFrame.safeClickListener { startCategoryChooser() }
+            }
+
             categoriesChip.setOnClickListener { startCategoryChooser() }
+
             backgroundColorPicker.safeClickListener {
                 startColorPicker(
                     getString(R.string.background_color_key),
@@ -299,7 +298,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             }
 
             setNavigationOnClickListener {
-                if (Utils.isDeviceLand(resources) && !mVectorifyPreferences.recentSetupsLand.isNullOrEmpty() || !Utils.isDeviceLand(resources) && !mVectorifyPreferences.recentSetups.isNullOrEmpty()) {
+                if (!mVectorifyPreferences.recentSetups.isNullOrEmpty()) {
                     with(RecentsSheet.newInstance()) {
                         onRecentClick = { recent ->
                             updateFabColor()
@@ -329,14 +328,20 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
 
             afterMeasured {
                 with(mMainActivityBinding) {
+
                     val lp = version.layoutParams as CoordinatorLayout.LayoutParams
                     lp.setMargins(0, 0, 0, height)
-                    cardsContainer.setPadding(
-                        0,
-                        0,
-                        0,
-                        height + version.height
-                    )
+                    cardsContainer.setPadding(0, 0, 0, height + version.height)
+
+                    if (Utils.isDeviceLand(resources)) {
+                        val lpSelector = categoriesChip.layoutParams as FrameLayout.LayoutParams
+                        lpSelector.setMargins(0,
+                            vectorsRv.height,
+                            resources.getDimensionPixelSize(R.dimen.recent_setups_elevation),
+                            0
+                        )
+                    }
+
                     with(root.animate()) {
                         duration = 750
                         alpha(1.0F)
@@ -351,6 +356,8 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         //setup presets
         with(mMainActivityBinding.presetsRv) {
 
+            mVectorsRecyclerViewLayoutManager =
+                GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
             layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
 
@@ -377,16 +384,10 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         //setup vectors
         with(mMainActivityBinding.vectorsRv) {
 
-            mVectorsRecyclerViewLayoutManager =
-                GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
             layoutManager = mVectorsRecyclerViewLayoutManager
             setHasFixedSize(true)
 
-            val wallpaperToRestore = if (Utils.isDeviceLand(resources)) {
-                mVectorifyPreferences.savedWallpaperLand
-            } else {
-                mVectorifyPreferences.savedWallpaper
-            }
+            val wallpaperToRestore = mVectorifyPreferences.savedWallpaper
             val category = Utils.getCategory(this@MainActivity, wallpaperToRestore.category).second
             mVectorsAdapter = VectorsAdapter(wallpaperToRestore, category).apply {
                 onVectorClick = { vector ->
@@ -499,9 +500,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         mVectorsAdapter.onVectorClick?.invoke(vector)
         mVectorsAdapter.swapSelectedDrawable(mTempVector)
         mMainActivityBinding.vectorsRv.scrollToPosition(
-            mVectorsAdapter.getVectorPosition(
-                mTempVector
-            )
+            mVectorsAdapter.getVectorPosition(mTempVector)
         )
     }
 

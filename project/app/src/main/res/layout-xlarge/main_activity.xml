@@ -28,55 +28,56 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/vector_frame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/vector_frame"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="@string/title_vector"
-                        android:padding="8dp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/categories_chip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:alpha="0.5"
-                        android:textAppearance="@style/chipTextAppearance"
-                        android:textColor="@color/chips_text_color"
-                        app:chipBackgroundColor="@color/chips_color" />
-                </FrameLayout>
-
-                <!-- VECTORS OPTIONS -->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/vectors_rv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:clipToPadding="false"
-                    android:overScrollMode="never" />
-
-            </LinearLayout>
-
+                android:contentDescription="@string/title_vector"
+                android:padding="16dp" />
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/vectors_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/title_background_dialog"
+                android:padding="2dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <!-- VECTORS OPTIONS -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/vectors_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/categories_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:alpha="0.5"
+                    android:textAppearance="@style/chipTextAppearance"
+                    android:textColor="@color/chips_text_color"
+                    app:chipBackgroundColor="@color/chips_color" />
+
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/title_background_dialog"
@@ -159,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/title_vector_dialog"
@@ -219,7 +220,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="@string/title_presets"
                 app:cardBackgroundColor="@color/presets_card_color"
@@ -256,7 +258,6 @@
             </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

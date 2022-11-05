@@ -50,11 +50,7 @@ class VectorView @JvmOverloads constructor(
         }
 
         mDeviceMetrics = mVectorifyPreferences.savedMetrics
-        mDrawable = Utils.tintDrawable(
-            context,
-            mVector,
-            mVectorColor
-        )
+        mDrawable = Utils.tintDrawable(context, mVector, mVectorColor)
     }
 
     fun vectorifyDaHome(isSetAsWallpaper: Boolean) {
@@ -128,11 +124,7 @@ class VectorView @JvmOverloads constructor(
         val toSave = VectorifyWallpaper(mBackgroundColor, mVectorColor,
             mVector, mCategory, mScaleFactor, mHorizontalOffset, mVerticalOffset
         )
-        toSave.addToRecentSetups(Utils.isDeviceLand(resources))
-        if (Utils.isDeviceLand(resources)) {
-            mVectorifyPreferences.savedWallpaperLand = toSave
-            return toSave
-        }
+        toSave.addToRecentSetups()
         mVectorifyPreferences.savedWallpaper = toSave
         return toSave
     }
