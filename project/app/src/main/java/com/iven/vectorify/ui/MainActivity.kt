@@ -356,8 +356,6 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         //setup presets
         with(mMainActivityBinding.presetsRv) {
 
-            mVectorsRecyclerViewLayoutManager =
-                GridLayoutManager(this@MainActivity, 2, GridLayoutManager.HORIZONTAL, false)
             layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
 
@@ -384,6 +382,9 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         //setup vectors
         with(mMainActivityBinding.vectorsRv) {
 
+            mVectorsRecyclerViewLayoutManager =
+                GridLayoutManager(this@MainActivity, 2,
+                    GridLayoutManager.HORIZONTAL, false)
             layoutManager = mVectorsRecyclerViewLayoutManager
             setHasFixedSize(true)
 
