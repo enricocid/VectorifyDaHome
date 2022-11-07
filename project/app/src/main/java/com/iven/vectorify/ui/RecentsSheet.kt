@@ -16,6 +16,7 @@ import com.iven.vectorify.VectorifyPreferences
 import com.iven.vectorify.adapters.RecentsAdapter
 import com.iven.vectorify.applyFullHeightDialog
 import com.iven.vectorify.databinding.ModalRvBinding
+import com.iven.vectorify.disableShapeAnimation
 import com.iven.vectorify.models.VectorifyWallpaper
 
 
@@ -41,6 +42,8 @@ class RecentsSheet: BottomSheetDialogFragment(), SharedPreferences.OnSharedPrefe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        dialog?.disableShapeAnimation()
 
         _modalRvBinding?.run {
 

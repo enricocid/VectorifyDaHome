@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
@@ -13,6 +14,7 @@ import androidx.annotation.ColorInt
 import androidx.core.graphics.ColorUtils
 import androidx.window.layout.WindowMetricsCalculator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.SingleClickHelper
 import com.iven.vectorify.utils.Utils
@@ -91,5 +93,15 @@ fun Dialog?.applyFullHeightDialog(activity: Activity) {
 
     this?.findViewById<FrameLayout>(com.google.android.material.R.id.design_bottom_sheet)?.let { bs ->
         BottomSheetBehavior.from(bs).peekHeight = height
+    }
+}
+
+@SuppressLint("RestrictedApi", "VisibleForTests")
+fun Dialog?.disableShapeAnimation() {
+    try {
+        val bottomSheetDialog = this as BottomSheetDialog
+        bottomSheetDialog.behavior.disableShapeAnimations()
+    } catch (ex: Exception) {
+        Log.e("BaseBottomSheet", "disableShapeAnimation Exception:", ex)
     }
 }
