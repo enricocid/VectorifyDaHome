@@ -44,7 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="8dp"
-            android:text="@string/picker_value_placeholder"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />
@@ -84,7 +83,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="8dp"
-            android:text="@string/picker_value_placeholder"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />
@@ -124,7 +122,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="8dp"
-            android:text="@string/picker_value_placeholder"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />

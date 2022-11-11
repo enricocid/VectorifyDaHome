@@ -110,8 +110,8 @@ fun ViewPager2.reduceDragSensitivity() {
         touchSlopField.set(recyclerView, touchSlop*3) // 3x seems to be the best fit here
 
     } catch (e: Exception) {
-        Log.e("MainActivity", "Unable to reduce ViewPager sensitivity")
-        Log.e("MainActivity", e.stackTraceToString())
+        Log.e("VDH", "Unable to reduce ViewPager sensitivity")
+        Log.e("VDH", e.stackTraceToString())
     }
 }
 

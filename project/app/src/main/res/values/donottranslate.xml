@@ -20,5 +20,4 @@
     <string name="g">G</string>
     <string name="b">B</string>
     <string name="selected_tone">%1s %2s</string>
-    <string name="picker_value_placeholder">000</string>
 </resources>
