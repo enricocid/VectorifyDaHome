@@ -66,4 +66,23 @@
     <string name="boo">¡Bu! ¡Sin acceso no hay fiesta! Usa el fondo de pantalla en vivo :)</string>
     <string name="rationale">Vectorify da home! necesita acceso a la memoria interna para guardar los fondos de pantalla</string>
     <string name="title_clear_recent_setups">Eliminar</string>
+    <string name="lime">Verde Lima</string>
+    <string name="yellow">Amarillo</string>
+    <string name="amber">Ambar</string>
+    <string name="brown">Café</string>
+    <string name="grey">Gris</string>
+    <string name="light_green">Verde Claro</string>
+    <string name="purple">Morado</string>
+    <string name="deep_purple">Púrpura</string>
+    <string name="indigo">Indigo</string>
+    <string name="blue">Azúl</string>
+    <string name="green">Verde</string>
+    <string name="cyan">Cian</string>
+    <string name="orange">Naranja</string>
+    <string name="deep_orange">Naranja Fuerte</string>
+    <string name="red">Rojo</string>
+    <string name="pink">Rosa</string>
+    <string name="light_blue">Azúl Claro</string>
+    <string name="blue_grey">Gris azulado</string>
+    <string name="teal">Turquesa</string>
 </resources>

@@ -66,4 +66,23 @@
     <string name="content_vectors">Images vectorielles disponibles et aperçu</string>
     <string name="rationale">Vectorify da home! nécessite un accès à la mémoire interne pour sauvegarder les fonds d\'écran</string>
     <string name="title_clear_recent_setups">Supprimer</string>
+    <string name="deep_purple">Violet foncé</string>
+    <string name="blue">Bleu</string>
+    <string name="light_blue">Bleu clair</string>
+    <string name="purple">Violet</string>
+    <string name="red">Rouge</string>
+    <string name="green">Vert</string>
+    <string name="light_green">Vert clair</string>
+    <string name="grey">Gris</string>
+    <string name="blue_grey">Gris bleu</string>
+    <string name="yellow">Jaune</string>
+    <string name="brown">Marron</string>
+    <string name="lime">Lime</string>
+    <string name="amber">Ambre</string>
+    <string name="orange">Orange</string>
+    <string name="deep_orange">Orange foncé</string>
+    <string name="cyan">Cyan</string>
+    <string name="teal">Cyan-Vert</string>
+    <string name="pink">Rose</string>
+    <string name="indigo">Indigo</string>
 </resources>

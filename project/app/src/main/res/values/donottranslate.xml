@@ -4,9 +4,6 @@
     <string name="app_name_debug" tools:ignore="UnusedResources">VDH debug</string>
     <string name="space_delimiter">&#160;</string>
     <string name="underscore_delimiter">&#95;</string>
-    <string name="hex">#%1s</string>
-    <string name="background_color_key">background_color_key</string>
-    <string name="vectors_color_key">icon_color_key</string>
     <string name="theme_key">theme_pref_key</string>
     <string name="theme_pref_light">theme_pref_light</string>
     <string name="theme_pref_dark">theme_pref_dark</string>
@@ -18,4 +15,10 @@
     <string name="app_github_link">https://github.com/enricocid/VectorifyDaHome</string>
     <string name="save_pattern">vdh_</string>
     <string name="time_pattern">dd_MM_yy_hh-ss</string>
+    <!-- Color Picker -->
+    <string name="r">R</string>
+    <string name="g">G</string>
+    <string name="b">B</string>
+    <string name="selected_tone">%1s %2s</string>
+    <string name="picker_value_placeholder">000</string>
 </resources>

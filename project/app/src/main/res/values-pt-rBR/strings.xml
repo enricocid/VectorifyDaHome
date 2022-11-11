@@ -66,4 +66,23 @@
     <string name="boo">Boo! Sem acesso, sem festa! Use o papel de parede animado! :)</string>
     <string name="rationale">Vectorify da home! precisa ter acesso à memoria interna para salvar os papéis de parede</string>
     <string name="title_clear_recent_setups">Apagar</string>
+    <string name="pink">Rosa</string>
+    <string name="purple">Roxo</string>
+    <string name="blue">Azul</string>
+    <string name="deep_purple">Roxo escuro</string>
+    <string name="light_blue">Azul claro</string>
+    <string name="green">Verde</string>
+    <string name="light_green">Verde claro</string>
+    <string name="teal">Verde-azulado</string>
+    <string name="yellow">Amarelo</string>
+    <string name="amber">Âmbar</string>
+    <string name="orange">Laranja</string>
+    <string name="lime">Lima</string>
+    <string name="deep_orange">Laranja escuro</string>
+    <string name="brown">Marrom</string>
+    <string name="grey">Cinza</string>
+    <string name="blue_grey">Azul acinzentado</string>
+    <string name="red">Vermelho</string>
+    <string name="cyan">Ciano</string>
+    <string name="indigo">Índigo</string>
 </resources>

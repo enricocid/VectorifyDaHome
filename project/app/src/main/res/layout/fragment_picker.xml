@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".colorpicker.PickerFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/r"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:minHeight="0dp"
+            android:valueFrom="0"
+            android:valueTo="255"
+            app:haloRadius="12dp"
+            app:labelBehavior="gone"
+            app:thumbRadius="6dp" />
+
+        <TextView
+            android:id="@+id/valueR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/picker_value_placeholder"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/g"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderG"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:minHeight="0dp"
+            android:valueFrom="0"
+            android:valueTo="255"
+            app:haloRadius="12dp"
+            app:labelBehavior="gone"
+            app:thumbRadius="6dp" />
+
+        <TextView
+            android:id="@+id/valueG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/picker_value_placeholder"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/b"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:minHeight="0dp"
+            android:valueFrom="0"
+            android:valueTo="255"
+            app:haloRadius="12dp"
+            app:labelBehavior="gone"
+            app:thumbRadius="6dp" />
+
+        <TextView
+            android:id="@+id/valueB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/picker_value_placeholder"
+            android:textAlignment="center"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

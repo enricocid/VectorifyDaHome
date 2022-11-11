@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/selected_palette"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/check"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_check_circle" />
+</com.google.android.material.card.MaterialCardView>

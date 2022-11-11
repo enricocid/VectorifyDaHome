@@ -61,4 +61,23 @@
     <string name="title_weather">Počasí</string>
     <string name="title_math">Matematika</string>
     <string name="title_science">Věda</string>
+    <string name="red">Červená</string>
+    <string name="indigo">Indigo</string>
+    <string name="blue">Modrá</string>
+    <string name="cyan">Tyrkysová</string>
+    <string name="teal">Modrozelená</string>
+    <string name="green">Zelená</string>
+    <string name="light_green">Světle zelená</string>
+    <string name="orange">Oranžová</string>
+    <string name="deep_orange">Tmavě oranžová</string>
+    <string name="brown">Hnědá</string>
+    <string name="purple">Fialová</string>
+    <string name="deep_purple">Tmavě fialová</string>
+    <string name="yellow">Žlutá</string>
+    <string name="pink">Růžová</string>
+    <string name="light_blue">Světle modrá</string>
+    <string name="amber">Jantarová</string>
+    <string name="blue_grey">Šedomodrá</string>
+    <string name="lime">Limetková</string>
+    <string name="grey">Šedá</string>
 </resources>

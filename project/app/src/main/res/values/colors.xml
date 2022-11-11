@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="default_accent_color">#304ffe</color>
-    <color name="primary_color">#BFBFBF</color>
-
     <color name="def_system_bars_color">#20111111</color>
     <color name="status_bar_color">@color/def_system_bars_color</color>
     <color name="nav_bar_color">@color/status_bar_color</color>
     <color name="nav_bar_color_sheets">@color/nav_bar_color</color>
-    <color name="color_picker_nav_bar_color">#E1E1E1</color>
-
     <color name="bottom_bar_color">@color/chips_text_color</color>
     <color name="presets_card_color">@color/bottom_bar_color</color>
     <color name="activity_background_color">@android:color/white</color>
@@ -83,6 +79,9 @@
 
     <color name="plaster">#F4EADE</color>
     <color name="greece">#2F496E</color>
+
+    <color name="ukraine_yellow">#ffd700</color>
+    <color name="ukraine_azure">#0057b7</color>
 
     <!--red-->
     <color name="red_50">#ffebee</color>

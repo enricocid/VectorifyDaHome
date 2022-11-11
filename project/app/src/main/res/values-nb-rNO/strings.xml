@@ -61,4 +61,23 @@
     <string name="title_clear_recent_setups">Slett</string>
     <string name="ok">OK</string>
     <string name="cancel">Avbryt</string>
+    <string name="pink">Rosa</string>
+    <string name="cyan">Cyanblå</string>
+    <string name="teal">Mørk grønnblå</string>
+    <string name="amber">Ravgul</string>
+    <string name="brown">Brun</string>
+    <string name="grey">Grå</string>
+    <string name="blue_grey">Blågrå</string>
+    <string name="red">Rød</string>
+    <string name="light_blue">Lyseblå</string>
+    <string name="yellow">Gul</string>
+    <string name="orange">Oransje</string>
+    <string name="lime">Limegrønn</string>
+    <string name="purple">Lilla</string>
+    <string name="deep_purple">Mørkelilla</string>
+    <string name="indigo">Indigo</string>
+    <string name="blue">Blå</string>
+    <string name="green">Grønn</string>
+    <string name="light_green">Lysegrønn</string>
+    <string name="deep_orange">Mørkeoransje</string>
 </resources>

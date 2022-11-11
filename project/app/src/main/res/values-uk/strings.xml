@@ -61,4 +61,23 @@
     <string name="content_btn_align_horizontal">Горизонтально відцентрувати вектор</string>
     <string name="content_btn_reset">Відновити попередню конфігурацію</string>
     <string name="title_emoticons">Емодзі</string>
+    <string name="grey">Сірий</string>
+    <string name="blue_grey">Сіро-блакитний</string>
+    <string name="purple">Фіолетовий</string>
+    <string name="deep_purple">Насичений фіолетовий</string>
+    <string name="red">Червоний</string>
+    <string name="pink">Рожевий</string>
+    <string name="indigo">Індиго</string>
+    <string name="lime">Лайм</string>
+    <string name="yellow">Жовтий</string>
+    <string name="blue">Синій</string>
+    <string name="cyan">Бірюзовий</string>
+    <string name="teal">Зелений водний</string>
+    <string name="green">Зелений</string>
+    <string name="light_green">Світло-зелений</string>
+    <string name="light_blue">Блакитний</string>
+    <string name="amber">Бурштиновий</string>
+    <string name="orange">Жовтогарячий</string>
+    <string name="deep_orange">Насичений жовтогарячий</string>
+    <string name="brown">Коричневий</string>
 </resources>

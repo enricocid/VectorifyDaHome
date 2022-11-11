@@ -45,4 +45,7 @@
     <string name="title_vector">Vektori</string>
     <string name="title_background_dialog">"Taustaväri"</string>
     <string name="title_background">Tausta</string>
+    <string name="red">Punainen</string>
+    <string name="pink">Vaaleanpunainen</string>
+    <string name="purple">Violetti</string>
 </resources>

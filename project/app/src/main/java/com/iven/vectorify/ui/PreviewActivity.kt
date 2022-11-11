@@ -178,13 +178,13 @@ class PreviewActivity: AppCompatActivity() {
 
         initializeSeekBar()
 
-        window.decorView.afterMeasured {
+        window.decorView.doOnPreDraw {
             if (Utils.isDeviceLand(resources)) {
                 mPreviewActivityBinding.seekbarCard.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                     width = mPreviewActivityBinding.root.width / 2
                 }
             }
-            updateLayoutForDisplayCutoutIfNeeded(this)
+            updateLayoutForDisplayCutoutIfNeeded(it)
         }
 
         with(mPreviewActivityBinding.root.animate()) {

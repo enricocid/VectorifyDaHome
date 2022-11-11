@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="md_corner_radius">16dp</dimen>
     <dimen name="activity_padding">16dp</dimen>
     <dimen name="preset_option_dim">28dp</dimen>
     <dimen name="preset_option_radius">14dp</dimen>

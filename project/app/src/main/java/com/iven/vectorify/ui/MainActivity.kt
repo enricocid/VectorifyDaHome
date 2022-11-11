@@ -21,9 +21,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
+import androidx.core.view.*
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,13 +37,16 @@ import com.iven.vectorify.LiveWallpaper.Companion.VECTOR_COLOR
 import com.iven.vectorify.LiveWallpaper.Companion.V_OFFSET
 import com.iven.vectorify.adapters.PresetsAdapter
 import com.iven.vectorify.adapters.VectorsAdapter
+import com.iven.vectorify.colorpicker.ColorPickerDialog
 import com.iven.vectorify.databinding.MainActivityBinding
 import com.iven.vectorify.models.Metrics
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.Utils
 import com.iven.vectorify.utils.VectorsCategories
-import com.maxkeppeler.sheets.color.ColorSheet
 
+
+private const val COLOR_PICKER_BG = "COLOR_PICKER_BG"
+private const val COLOR_PICKER_VECTOR = "COLOR_PICKER_VECTOR"
 
 class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -91,6 +92,14 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
 
     override fun onResume() {
         super.onResume()
+
+        mMainActivityBinding.root.doOnLayout {
+            with(it.animate()) {
+                duration = 750
+                alpha(1.0F)
+            }
+        }
+
         PreferenceManager.getDefaultSharedPreferences(this)
             .registerOnSharedPreferenceChangeListener(this)
     }
@@ -183,7 +192,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
 
             backgroundColorPicker.safeClickListener {
                 startColorPicker(
-                    getString(R.string.background_color_key),
+                    COLOR_PICKER_BG,
                     R.string.title_background_dialog
                 )
             }
@@ -196,7 +205,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
             }
 
             vectorColorPicker.safeClickListener {
-                startColorPicker(getString(R.string.vectors_color_key), R.string.title_vector_dialog)
+                startColorPicker(COLOR_PICKER_VECTOR, R.string.title_vector_dialog)
             }
 
             accentVector.setOnClickListener {
@@ -249,6 +258,12 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
     private fun setupFabButtonClick() {
         mMainActivityBinding.fab.setOnClickListener {
             //start preview activity
+            mMainActivityBinding.root.doOnLayout {
+                with(mMainActivityBinding.root.animate()) {
+                    duration = 750
+                    alpha(0.0F)
+                }
+            }
             val intent = Intent(this@MainActivity, PreviewActivity::class.java).apply {
                 putExtras(
                     bundleOf(
@@ -313,7 +328,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
                             mTempHorizontalOffset = recent.horizontalOffset
                             mTempVerticalOffset = recent.verticalOffset
 
-                            dismiss()
+                            dismissAllowingStateLoss()
                         }
                         show(supportFragmentManager, RecentsSheet.TAG_MODAL)
                     }
@@ -326,7 +341,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
                 }
             }
 
-            afterMeasured {
+            doOnPreDraw {
                 with(mMainActivityBinding) {
 
                     val lp = version.layoutParams as CoordinatorLayout.LayoutParams
@@ -340,11 +355,6 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
                             resources.getDimensionPixelSize(R.dimen.recent_setups_elevation),
                             0
                         )
-                    }
-
-                    with(root.animate()) {
-                        duration = 750
-                        alpha(1.0F)
                     }
                 }
             }
@@ -450,7 +460,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         mMainActivityBinding.backgroundColorHead.setTextColor(textColor)
         with(mMainActivityBinding.backgroundColorSubhead) {
             setTextColor(textColor)
-            text = color.toHex(this@MainActivity)
+            text = color.toHex()
             setTextColor(textColor)
         }
 
@@ -481,7 +491,7 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
         mMainActivityBinding.vectorColorHead.setTextColor(textColor)
         with(mMainActivityBinding.vectorColorSubhead) {
             setTextColor(textColor)
-            text = mTempVectorColor.toHex(this@MainActivity)
+            text = mTempVectorColor.toHex()
         }
         setVectorFrameColors(false)
         updateFabColor()
@@ -521,26 +531,22 @@ class MainActivity: AppCompatActivity(), SharedPreferences.OnSharedPreferenceCha
 
     //start material dialog
     private fun startColorPicker(key: String, title: Int) {
-        ColorSheet().show(this) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1 && Utils.isThemeLight(this@MainActivity.resources)) {
-                navigationBarColor(ContextCompat.getColor(this@MainActivity, R.color.color_picker_nav_bar_color))
-            }
-            disableAlpha()
-            colorsRes(Utils.colors)
-            title(title)
-            onPositive(R.string.ok) { color ->
+        val color = if (key == COLOR_PICKER_BG) {
+            mTempBackgroundColor
+        } else {
+            mTempVectorColor
+        }
+        ColorPickerDialog.newInstance(getString(title), color).apply {
+            show(supportFragmentManager, ColorPickerDialog.TAG_PICKER)
+            onPositive = { color ->
                 when (key) {
-                    getString(R.string.background_color_key) -> {
-                        //update the color only if it really changed
+                    //update the color only if it really changed
+                    COLOR_PICKER_BG ->
                         if (mTempBackgroundColor != color) setBackgroundColorForUI(color, true)
-                    }
-                    else -> {
-                        //update the color only if it really changed
+                    else ->
                         if (mTempVectorColor != color) setVectorColorForUI(color, true)
-                    }
                 }
             }
-            onNegative(R.string.cancel)
         }
     }
 

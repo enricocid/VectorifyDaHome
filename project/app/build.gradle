@@ -30,8 +30,7 @@ android {
     }
 
     lintOptions {
-        disable 'MissingTranslation', 'AllowBackup',
-                'GoogleAppIndexingWarning'
+        disable 'MissingTranslation', 'AllowBackup', 'GoogleAppIndexingWarning'
     }
 
     packagingOptions {
@@ -71,20 +70,19 @@ dependencies {
 
 // Support
     //https://developer.android.com/jetpack/androidx/versions
+    implementation "androidx.activity:activity-ktx:1.6.1"
+    implementation 'androidx.browser:browser:1.4.0'
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.window:window:1.0.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.browser:browser:1.4.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.window:window:1.0.0'
+
     //https://github.com/material-components/material-components-android/releases
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
 
 // Third-party
     //https://github.com/square/moshi
     implementation 'com.squareup.moshi:moshi:1.14.0'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
-
-    //https://github.com/maxkeppeler/sheets/releases
-    implementation 'com.maxkeppeler.sheets:core:2.3.0'
-    implementation 'com.maxkeppeler.sheets:color:2.3.0'
 }

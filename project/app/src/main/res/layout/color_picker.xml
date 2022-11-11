@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/color_preview"
+        style="@style/CustomCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:cardElevation="1dp">
+
+        <LinearLayout
+            android:id="@+id/value_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="24dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="4dp"
+                android:textColor="@color/vectors_color" />
+
+            <TextView
+                android:id="@+id/hexValue"
+                style="@style/TextAppearance.MaterialComponents.Overline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="24dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textAllCaps="true" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                app:tabGravity="center"
+                app:tabIconTint="@color/vectors_color"
+                app:tabIndicator="@drawable/tab_indicator"
+                app:tabIndicatorColor="@color/vectors_color"
+                app:tabMode="scrollable"
+                app:tabRippleColor="@color/vectors_color" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReset"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:elevation="1dp"
+            android:text="@string/btn_reset"
+            android:textColor="?android:attr/textColorPrimary"
+            app:icon="@drawable/ic_restore"
+            app:iconGravity="end"
+            app:iconTint="?android:attr/textColorPrimary" />
+
+        <LinearLayout
+            android:id="@+id/btn_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNegative"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="@string/cancel"
+                android:text="@string/cancel"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPositive"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="@string/ok"
+                android:text="@string/ok"
+                android:textColor="?android:attr/textColorPrimary" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

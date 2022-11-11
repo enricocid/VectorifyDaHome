@@ -17,10 +17,14 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.os.Build
+import android.util.TypedValue
 import android.widget.Toast
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.core.net.toUri
 import com.iven.vectorify.LiveWallpaper
 import com.iven.vectorify.R
@@ -30,7 +34,7 @@ import com.iven.vectorify.VectorifyPreferences
 object Utils {
 
     //https://material.io/resources/color/
-    val colors = listOf(
+    private val red = listOf(
         R.color.red_50,
         R.color.red_100,
         R.color.red_200,
@@ -40,7 +44,9 @@ object Utils {
         R.color.red_600,
         R.color.red_700,
         R.color.red_800,
-        R.color.red_900,
+        R.color.red_900)
+
+    private val pink = listOf(
         R.color.pink_50,
         R.color.pink_100,
         R.color.pink_200,
@@ -50,7 +56,9 @@ object Utils {
         R.color.pink_600,
         R.color.pink_700,
         R.color.pink_800,
-        R.color.pink_900,
+        R.color.pink_900)
+
+    private val purple = listOf(
         R.color.purple_50,
         R.color.purple_100,
         R.color.purple_200,
@@ -60,7 +68,10 @@ object Utils {
         R.color.purple_600,
         R.color.purple_700,
         R.color.purple_800,
-        R.color.purple_900,
+        R.color.purple_900
+    )
+
+    private val deepPurple = listOf(
         R.color.deep_purple_50,
         R.color.deep_purple_100,
         R.color.deep_purple_200,
@@ -70,7 +81,10 @@ object Utils {
         R.color.deep_purple_600,
         R.color.deep_purple_700,
         R.color.deep_purple_800,
-        R.color.deep_purple_900,
+        R.color.deep_purple_900
+    )
+
+    private val indigo = listOf(
         R.color.indigo_50,
         R.color.indigo_100,
         R.color.indigo_200,
@@ -80,7 +94,10 @@ object Utils {
         R.color.indigo_600,
         R.color.indigo_700,
         R.color.indigo_800,
-        R.color.indigo_900,
+        R.color.indigo_900
+    )
+
+    private val blue = listOf(
         R.color.blue_50,
         R.color.blue_100,
         R.color.blue_200,
@@ -90,7 +107,9 @@ object Utils {
         R.color.blue_600,
         R.color.blue_700,
         R.color.blue_800,
-        R.color.blue_900,
+        R.color.blue_900)
+
+    private val lightBlue = listOf(
         R.color.light_blue_50,
         R.color.light_blue_100,
         R.color.light_blue_200,
@@ -100,7 +119,9 @@ object Utils {
         R.color.light_blue_600,
         R.color.light_blue_700,
         R.color.light_blue_800,
-        R.color.light_blue_900,
+        R.color.light_blue_900)
+
+    private val cyan = listOf(
         R.color.cyan_50,
         R.color.cyan_100,
         R.color.cyan_200,
@@ -110,7 +131,9 @@ object Utils {
         R.color.cyan_600,
         R.color.cyan_700,
         R.color.cyan_800,
-        R.color.cyan_900,
+        R.color.cyan_900)
+
+    private val teal =  listOf(
         R.color.teal_50,
         R.color.teal_100,
         R.color.teal_200,
@@ -120,7 +143,9 @@ object Utils {
         R.color.teal_600,
         R.color.teal_700,
         R.color.teal_800,
-        R.color.teal_900,
+        R.color.teal_900)
+
+    private val green = listOf(
         R.color.green_50,
         R.color.green_100,
         R.color.green_200,
@@ -130,7 +155,9 @@ object Utils {
         R.color.green_600,
         R.color.green_700,
         R.color.green_800,
-        R.color.green_900,
+        R.color.green_900)
+
+    private val lightGreen = listOf(
         R.color.light_green_50,
         R.color.light_green_100,
         R.color.light_green_200,
@@ -140,7 +167,9 @@ object Utils {
         R.color.light_green_600,
         R.color.light_green_700,
         R.color.light_green_800,
-        R.color.light_green_900,
+        R.color.light_green_900)
+
+    private val lime = listOf(
         R.color.lime_50,
         R.color.lime_100,
         R.color.lime_200,
@@ -150,7 +179,9 @@ object Utils {
         R.color.lime_600,
         R.color.lime_700,
         R.color.lime_800,
-        R.color.lime_900,
+        R.color.lime_900)
+
+    private val yellow = listOf(
         R.color.yellow_50,
         R.color.yellow_100,
         R.color.yellow_200,
@@ -160,7 +191,9 @@ object Utils {
         R.color.yellow_600,
         R.color.yellow_700,
         R.color.yellow_800,
-        R.color.yellow_900,
+        R.color.yellow_900)
+
+    private val amber = listOf(
         R.color.amber_50,
         R.color.amber_100,
         R.color.amber_200,
@@ -170,7 +203,9 @@ object Utils {
         R.color.amber_600,
         R.color.amber_700,
         R.color.amber_800,
-        R.color.amber_900,
+        R.color.amber_900)
+
+    private val orange = listOf(
         R.color.orange_50,
         R.color.orange_100,
         R.color.orange_200,
@@ -180,7 +215,9 @@ object Utils {
         R.color.orange_600,
         R.color.orange_700,
         R.color.orange_800,
-        R.color.orange_900,
+        R.color.orange_900)
+
+    private val deepOrange = listOf(
         R.color.deep_orange_50,
         R.color.deep_orange_100,
         R.color.deep_orange_200,
@@ -190,7 +227,9 @@ object Utils {
         R.color.deep_orange_600,
         R.color.deep_orange_700,
         R.color.deep_orange_800,
-        R.color.deep_orange_900,
+        R.color.deep_orange_900)
+
+    private val brown = listOf(
         R.color.brown_50,
         R.color.brown_100,
         R.color.brown_200,
@@ -200,7 +239,9 @@ object Utils {
         R.color.brown_600,
         R.color.brown_700,
         R.color.brown_800,
-        R.color.brown_900,
+        R.color.brown_900)
+
+    private val grey = listOf(
         R.color.grey_50,
         R.color.grey_100,
         R.color.grey_200,
@@ -210,7 +251,9 @@ object Utils {
         R.color.grey_600,
         R.color.grey_700,
         R.color.grey_800,
-        R.color.grey_900,
+        R.color.grey_900)
+
+    private val blueGrey = listOf(
         R.color.blue_grey_50,
         R.color.blue_grey_100,
         R.color.blue_grey_200,
@@ -223,15 +266,17 @@ object Utils {
         R.color.blue_grey_900,
     )
 
+    var colorsMap = mapOf(
+        0 to red, 1 to pink, 2 to purple, 3 to deepPurple,
+        4 to indigo, 5 to blue, 6 to lightBlue, 7 to cyan,
+        8 to teal, 9 to green, 10 to lightGreen, 11 to lime,
+        12 to yellow, 13 to amber, 14 to orange, 15 to deepOrange,
+        16 to brown, 17 to grey, 18 to blueGrey
+    )
+
     @JvmStatic
     fun isDeviceLand(resources: Resources) =
         resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-
-    @JvmStatic
-    fun isThemeLight(resources: Resources): Boolean {
-        val uiMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        return uiMode != Configuration.UI_MODE_NIGHT_YES
-    }
 
     @JvmStatic
     fun getDefaultNightMode(context: Context) = when (VectorifyPreferences.getPrefsInstance().theme) {
@@ -423,7 +468,31 @@ object Utils {
     @JvmStatic
     fun createColouredRipple(context: Context, rippleColor: Int): Drawable {
         val ripple = ContextCompat.getDrawable(context, R.drawable.ripple) as RippleDrawable
-        ripple.setColor(ColorStateList.valueOf(rippleColor))
+        val color = ColorUtils.setAlphaComponent(rippleColor, 25)
+        ripple.setColor(ColorStateList.valueOf(color))
         return ripple
     }
+
+    @ColorInt
+    @JvmStatic
+    fun resolveWidgetsColorNormal(context: Context) = resolveColorAttr(context,
+        android.R.attr.colorButtonNormal)
+
+    @ColorInt
+    @JvmStatic
+    fun resolveColorAttr(context: Context, @AttrRes colorAttr: Int): Int {
+        val resolvedAttr: TypedValue = resolveThemeAttr(context, colorAttr)
+        // resourceId is used if it's a ColorStateList, and data if it's a color reference or a hex color
+        val colorRes =
+            if (resolvedAttr.resourceId != 0) {
+                resolvedAttr.resourceId
+            } else {
+                resolvedAttr.data
+            }
+        return ContextCompat.getColor(context, colorRes)
+    }
+
+    @JvmStatic
+    private fun resolveThemeAttr(context: Context, @AttrRes attrRes: Int) =
+        TypedValue().apply { context.theme.resolveAttribute(attrRes, this, true) }
 }

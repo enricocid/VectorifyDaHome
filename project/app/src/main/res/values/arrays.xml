@@ -22,4 +22,48 @@
         <item>@string/title_zodiac</item> <!--18-->
         <item>@string/title_others</item> <!--others-->
     </string-array>
+
+    <integer-array name="colors">
+        <item>@color/red_700</item>
+        <item>@color/pink_700</item>
+        <item>@color/purple_700</item>
+        <item>@color/deep_purple_700</item>
+        <item>@color/indigo_700</item>
+        <item>@color/blue_700</item>
+        <item>@color/light_blue_700</item>
+        <item>@color/cyan_700</item>
+        <item>@color/teal_700</item>
+        <item>@color/green_700</item>
+        <item>@color/light_green_700</item>
+        <item>@color/lime_700</item>
+        <item>@color/yellow_700</item>
+        <item>@color/amber_700</item>
+        <item>@color/orange_700</item>
+        <item>@color/deep_orange_700</item>
+        <item>@color/brown_700</item>
+        <item>@color/grey_700</item>
+        <item>@color/blue_grey_700</item>
+    </integer-array>
+
+    <string-array name="accent_names">
+        <item>@string/red</item>
+        <item>@string/pink</item>
+        <item>@string/purple</item>
+        <item>@string/deep_purple</item>
+        <item>@string/indigo</item>
+        <item>@string/blue</item>
+        <item>@string/light_blue</item>
+        <item>@string/cyan</item>
+        <item>@string/teal</item>
+        <item>@string/green</item>
+        <item>@string/light_green</item>
+        <item>@string/lime</item>
+        <item>@string/yellow</item>
+        <item>@string/amber</item>
+        <item>@string/orange</item>
+        <item>@string/deep_orange</item>
+        <item>@string/brown</item>
+        <item>@string/grey</item>
+        <item>@string/blue_grey</item>
+    </string-array>
 </resources>

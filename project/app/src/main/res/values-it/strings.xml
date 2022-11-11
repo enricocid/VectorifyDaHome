@@ -25,7 +25,6 @@
     <string name="title_github">Pagina GitHub</string>
     <string name="title_theme">Tema</string>
     <string name="title_restore">Ripristina lo sfondo predefinito!</string>
-    <string name="install_browser_message">Installa un browser prima!</string>
     <!-- Preview -->
     <string name="title_preview">Anteprima</string>
     <string name="title_size">Dimensione e posizione</string>
@@ -71,4 +70,27 @@
     <string name="title_roman">Romani</string>
     <string name="title_zodiac">Zodiaco</string>
     <string name="title_others">Altri</string>
+
+    <string name="red">Rosso</string>
+    <string name="pink">Rosa</string>
+    <string name="purple">Viola</string>
+    <string name="deep_purple">Viola scuro</string>
+    <string name="indigo">Indaco</string>
+    <string name="blue">Blu</string>
+    <string name="light_blue">Blu chiaro</string>
+    <string name="cyan">Ciano</string>
+    <string name="teal">Alzavola</string>
+    <string name="green">Verde</string>
+    <string name="light_green">Verde chiaro</string>
+    <string name="lime">Lime</string>
+    <string name="yellow">Giallo</string>
+    <string name="amber">Ambra</string>
+    <string name="orange">Arancione</string>
+    <string name="deep_orange">Arancione scuro</string>
+    <string name="brown">Marrone</string>
+    <string name="grey">Grigio</string>
+    <string name="blue_grey">Blu grigio</string>
+
+    <string name="install_browser_message">Installa un browser prima!</string>
+    <string name="btn_reset">Resetta</string>
 </resources>

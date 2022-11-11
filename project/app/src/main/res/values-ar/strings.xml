@@ -45,4 +45,23 @@
     <string name="title_vector_dialog">لون الفيكتور</string>
     <string name="title_background_dialog">لون الخلفية</string>
     <string name="title_background">الخلفية</string>
+    <string name="red">أحمر</string>
+    <string name="pink">زهري</string>
+    <string name="purple">بنفسجي</string>
+    <string name="blue_grey">رمادي مزرق</string>
+    <string name="deep_purple">بنفسجي غامق</string>
+    <string name="grey">رمادي</string>
+    <string name="light_blue">أزرق فاتح</string>
+    <string name="blue">أزرق</string>
+    <string name="indigo">نيلي</string>
+    <string name="cyan">أزرق مخضر</string>
+    <string name="teal">شرشيري (تركواز)</string>
+    <string name="green">أخضر</string>
+    <string name="light_green">أخضر فاتح</string>
+    <string name="lime">ليمي(درجة من الأخضر)</string>
+    <string name="yellow">أصفر</string>
+    <string name="amber">كهرماني</string>
+    <string name="orange">برتقالي</string>
+    <string name="deep_orange">برتقالي غامق</string>
+    <string name="brown">بني</string>
 </resources>

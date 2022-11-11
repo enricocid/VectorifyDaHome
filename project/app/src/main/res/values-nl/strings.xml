@@ -59,4 +59,23 @@
     <string name="title_roman">Romeins</string>
     <string name="title_zodiac">Dierenriem</string>
     <string name="title_others">Overig</string>
+    <string name="red">Rood</string>
+    <string name="pink">Roze</string>
+    <string name="lime">Limoen</string>
+    <string name="green">Groen</string>
+    <string name="light_green">Lichtgroen</string>
+    <string name="yellow">Geel</string>
+    <string name="amber">Amber</string>
+    <string name="orange">Oranje</string>
+    <string name="deep_orange">Diep oranje</string>
+    <string name="brown">Bruin</string>
+    <string name="grey">Grijs</string>
+    <string name="blue_grey">Blauw grijs</string>
+    <string name="cyan">Cyaan</string>
+    <string name="deep_purple">Purper</string>
+    <string name="purple">Paars</string>
+    <string name="indigo">Indigo</string>
+    <string name="blue">Blauw</string>
+    <string name="light_blue">Lichtblauw</string>
+    <string name="teal">Groenblauw</string>
 </resources>

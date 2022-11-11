@@ -61,4 +61,23 @@
     <string name="title_clear_recent_setups">Sil</string>
     <string name="ok">Tamam</string>
     <string name="cancel">İptal</string>
+    <string name="pink">Pembe</string>
+    <string name="deep_purple">Koyu mor</string>
+    <string name="indigo">İndigo</string>
+    <string name="blue">Mavi</string>
+    <string name="light_blue">Açık mavi</string>
+    <string name="cyan">Camgöbeği</string>
+    <string name="teal">Deniz mavisi</string>
+    <string name="yellow">Sarı</string>
+    <string name="amber">Kehribar</string>
+    <string name="orange">Turuncu</string>
+    <string name="deep_orange">Koyu turuncu</string>
+    <string name="brown">Kahverengi</string>
+    <string name="grey">Gri</string>
+    <string name="blue_grey">Mavi gri</string>
+    <string name="lime">Limon rengi</string>
+    <string name="red">Kırmızı</string>
+    <string name="purple">Mor</string>
+    <string name="light_green">Açık yeşil</string>
+    <string name="green">Yeşil</string>
 </resources>

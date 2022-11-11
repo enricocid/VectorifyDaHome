@@ -7,32 +7,20 @@ import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.view.View
-import android.view.ViewTreeObserver
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.core.graphics.ColorUtils
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import androidx.window.layout.WindowMetricsCalculator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.iven.vectorify.utils.SingleClickHelper
 import com.iven.vectorify.utils.Utils
+import kotlin.math.roundToInt
 
-
-//viewTreeObserver extension to measure layout params
-//https://antonioleiva.com/kotlin-ongloballayoutlistener/
-inline fun <T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
-    viewTreeObserver.addOnGlobalLayoutListener(object:
-        ViewTreeObserver.OnGlobalLayoutListener {
-        override fun onGlobalLayout() {
-            if (measuredWidth > 0 && measuredHeight > 0) {
-                viewTreeObserver.removeOnGlobalLayoutListener(this)
-                f()
-            }
-        }
-    })
-}
 
 fun VectorifyWallpaper.addToRecentSetups() {
 
@@ -47,9 +35,7 @@ fun VectorifyWallpaper.addToRecentSetups() {
     prefs.recentSetups = toUpdate
 }
 
-@SuppressLint("DefaultLocale")
-fun Int.toHex(context: Context) =
-    context.getString(R.string.hex, Integer.toHexString(this)).uppercase()
+fun Int.toHex() = String.format("#FF%06X", 0xFFFFFF and this)
 
 //method to calculate ui elements color according to main color luminance
 @ColorInt
@@ -105,3 +91,28 @@ fun Dialog?.disableShapeAnimation() {
         Log.e("BaseBottomSheet", "disableShapeAnimation Exception:", ex)
     }
 }
+
+fun ViewPager2.reduceDragSensitivity() {
+
+    // By default, ViewPager2's sensitivity is high enough to result in vertical
+    // scroll events being registered as horizontal scroll events. Reflect into the
+    // internal recyclerview and change the touch slope so that touch actions will
+    // act more as a scroll than as a swipe.
+    try {
+
+        val recycler = ViewPager2::class.java.getDeclaredField("mRecyclerView")
+        recycler.isAccessible = true
+        val recyclerView = recycler.get(this) as RecyclerView
+
+        val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
+        touchSlopField.isAccessible = true
+        val touchSlop = touchSlopField.get(recyclerView) as Int
+        touchSlopField.set(recyclerView, touchSlop*3) // 3x seems to be the best fit here
+
+    } catch (e: Exception) {
+        Log.e("MainActivity", "Unable to reduce ViewPager sensitivity")
+        Log.e("MainActivity", e.stackTraceToString())
+    }
+}
+
+fun Float.toSliderValue() = roundToInt().toString().padStart(3, '0')

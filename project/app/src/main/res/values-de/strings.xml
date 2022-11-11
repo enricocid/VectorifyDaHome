@@ -56,4 +56,23 @@
     <string name="content_invert_bg_vector_colors">Hintergrund- und Vek­tor­gra­fikfarben austauschen</string>
     <string name="content_vector">Vek­tor­gra­fik %1s</string>
     <string name="content_vectors">Verfügbare Vek­tor­gra­fiken und Vorschau</string>
+    <string name="pink">Rosa</string>
+    <string name="purple">Lila</string>
+    <string name="deep_purple">Dunkles Lila</string>
+    <string name="lime">Limette</string>
+    <string name="yellow">Gelb</string>
+    <string name="orange">Orange</string>
+    <string name="brown">Braun</string>
+    <string name="grey">Grau</string>
+    <string name="blue_grey">Blau Grau</string>
+    <string name="green">Grün</string>
+    <string name="light_green">Helles Grün</string>
+    <string name="blue">Blau</string>
+    <string name="light_blue">Helles Blau</string>
+    <string name="cyan">Türkiz</string>
+    <string name="teal">Blaugrün</string>
+    <string name="amber">Bernstein</string>
+    <string name="red">Rot</string>
+    <string name="indigo">Indigo</string>
+    <string name="deep_orange">Dunkles Orange</string>
 </resources>

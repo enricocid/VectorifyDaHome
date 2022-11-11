@@ -37,6 +37,7 @@ class PresetsAdapter: RecyclerView.Adapter<PresetsAdapter.ColorsHolder>() {
         Pair(R.color.sky, R.color.sunflower),
         Pair(R.color.android_green, R.color.navy),
         Pair(R.color.android_blue, R.color.navy),
+        Pair(R.color.ukraine_yellow, R.color.ukraine_azure),
         Pair(R.color.sea, R.color.sandstone),
         Pair(R.color.stem, R.color.poppy),
         Pair(R.color.turquoise, R.color.pink_tulip),

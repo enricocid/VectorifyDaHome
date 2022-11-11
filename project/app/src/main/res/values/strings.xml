@@ -34,6 +34,8 @@
 
     <string name="install_browser_message">Install a browser first!</string>
 
+    <string name="btn_reset">Reset</string>
+
     <!-- Preview things -->
     <string name="title_preview">Preview</string>
     <string name="title_size">Size and position</string>
@@ -80,4 +82,25 @@
     <string name="title_roman">Roman</string>
     <string name="title_zodiac">Zodiac</string>
     <string name="title_others">Others</string>
+
+    <!-- Preferences - Accents names -->
+    <string name="red">Red</string>
+    <string name="pink">Pink</string>
+    <string name="purple">Purple</string>
+    <string name="deep_purple">Deep purple</string>
+    <string name="indigo">Indigo</string>
+    <string name="blue">Blue</string>
+    <string name="light_blue">Light blue</string>
+    <string name="cyan">Cyan</string>
+    <string name="teal">Teal</string>
+    <string name="green">Green</string>
+    <string name="light_green">Light green</string>
+    <string name="lime">Lime</string>
+    <string name="yellow">Yellow</string>
+    <string name="amber">Amber</string>
+    <string name="orange">Orange</string>
+    <string name="deep_orange">Deep orange</string>
+    <string name="brown">Brown</string>
+    <string name="grey">Grey</string>
+    <string name="blue_grey">Blue grey</string>
 </resources>
