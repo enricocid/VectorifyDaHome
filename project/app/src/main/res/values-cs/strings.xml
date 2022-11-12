@@ -80,4 +80,5 @@
     <string name="blue_grey">Šedomodrá</string>
     <string name="lime">Limetková</string>
     <string name="grey">Šedá</string>
+    <string name="btn_reset">Obnovit</string>
 </resources>
