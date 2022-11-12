@@ -34,6 +34,9 @@
 
     <string name="install_browser_message">Install a browser first!</string>
 
+    <!-- Color picker -->
+    <string name="desc_picker">Color picker</string>
+    <string name="desc_palette">Palettes</string>
     <string name="btn_reset">Reset</string>
 
     <!-- Preview things -->

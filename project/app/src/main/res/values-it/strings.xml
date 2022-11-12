@@ -92,5 +92,8 @@
     <string name="blue_grey">Blu grigio</string>
 
     <string name="install_browser_message">Installa un browser prima!</string>
+
+    <string name="desc_picker">Selettore di colori</string>
+    <string name="desc_palette">Tavolozza colori</string>
     <string name="btn_reset">Resetta</string>
 </resources>

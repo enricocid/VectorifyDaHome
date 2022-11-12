@@ -54,7 +54,6 @@ class ColorPickerDialog: BottomSheetDialogFragment() {
         dialog?.disableShapeAnimation()
 
         val pagerAdapter = ScreenSlidePagerAdapter(requireActivity())
-        val icon = listOf(R.drawable.ic_colorize, R.drawable.ic_palette)
 
         _colorPickerBinding?.run {
 
@@ -63,7 +62,9 @@ class ColorPickerDialog: BottomSheetDialogFragment() {
                 vp.adapter = pagerAdapter
                 vp.reduceDragSensitivity()
                 TabLayoutMediator(tabLayout, vp) { tab, position ->
-                    tab.setIcon(icon[position])
+                    val iconDesc = getTabIconAndDesc(position)
+                    tab.setIcon(iconDesc.first)
+                    tab.setContentDescription(iconDesc.second)
                 }.attach()
             }
 
@@ -150,6 +151,11 @@ class ColorPickerDialog: BottomSheetDialogFragment() {
             }
         }
         return handleOnNavigationItemSelected(position)
+    }
+
+    private fun getTabIconAndDesc(position: Int): Pair<Int, Int> = when (position) {
+        0 -> Pair(R.drawable.ic_colorize, R.string.desc_picker)
+        else -> Pair(R.drawable.ic_palette, R.string.desc_palette)
     }
 
     // ViewPager2 adapter class
