@@ -26,7 +26,7 @@ class TonesAdapter: RecyclerView.Adapter<TonesAdapter.TonesHolder>() {
 
     @SuppressLint("NotifyDataSetChanged")
     fun swapColors(selection: Int) {
-        selectedColor = -1
+        resetColor()
         mSelectedPalette = selection
         mColors = Utils.colorsMap.getValue(mSelectedPalette)
         notifyDataSetChanged()

@@ -70,12 +70,16 @@ class PickerFragment : Fragment() {
             mSliders[sliderG] = valueG
             mSliders[sliderB] = valueB
 
+            // restore picker positions
+            updateSliders()
+
             val iterator = mSliders.iterator().withIndex()
 
             while (iterator.hasNext()) {
                 val item = iterator.next()
                 item.value.key?.let { slider ->
                     val textView = mSliders[slider]
+                    textView?.text = slider.value.toSliderValue()
                     slider.addOnChangeListener { _, value, fromUser ->
                         textView?.text = value.toSliderValue()
                         if (fromUser) {
@@ -93,8 +97,6 @@ class PickerFragment : Fragment() {
                 }
             }
         }
-        // restore picker positions
-        updateSliders()
     }
 
     companion object {
