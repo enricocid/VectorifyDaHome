@@ -9,21 +9,17 @@ import com.iven.vectorify.models.Metrics
 import com.iven.vectorify.models.VectorifyWallpaper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import java.lang.reflect.Type
+
 
 class VectorifyPreferences(context: Context) {
 
-    private val prefTheme = context.getString(R.string.theme_key)
-    private val prefsThemeDefault = context.getString(R.string.theme_pref_auto)
+    private val prefTheme = "theme_pref_key"
+    private val prefsThemeDefault = "theme_pref_auto"
 
-    private val prefLiveWallpaper =
-        context.getString(R.string.live_wallpaper_key)
-    private val prefSavedWallpaper =
-        context.getString(R.string.saved_wallpaper_key)
-    private val prefRecentSetups =
-        context.getString(R.string.recent_wallpapers_key)
-    private val prefSavedMetrics =
-        context.getString(R.string.saved_metrics_key)
+    private val prefLiveWallpaper = "livewallpaper_key"
+    private val prefSavedWallpaper = "recentwallpaper_key"
+    private val prefRecentSetups = "recentwallpapers_key"
+    private val prefSavedMetrics = "recentmetrics_key"
 
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -66,11 +62,8 @@ class VectorifyPreferences(context: Context) {
         set(value) = putObjectForClass(prefSavedMetrics, value, Metrics::class.java)
 
     var recentSetups: MutableList<VectorifyWallpaper>?
-        get() = getObjectForType(
-            prefRecentSetups,
-            typeWallpapersList
-        )
-        set(value) = putObjectForType(prefRecentSetups, value, typeWallpapersList)
+        get() = getRecentWallpapers()
+        set(value) = putRecentWallpapers(value)
 
     // Saves object into the Preferences using Moshi
     private fun <T: Any> getObjectForClass(key: String, clazz: Class<T>): T? {
@@ -93,18 +86,18 @@ class VectorifyPreferences(context: Context) {
     }
 
     // Saves object into the Preferences using Moshi
-    private fun <T: Any> putObjectForType(key: String, value: T?, type: Type) {
-        val json = mMoshi.adapter<T>(type).toJson(value)
-        mPrefs.edit { putString(key, json) }
+    private fun <T: Any> putRecentWallpapers(value: T?) {
+        val json = mMoshi.adapter<T>(typeWallpapersList).toJson(value)
+        mPrefs.edit { putString(prefRecentSetups, json) }
     }
 
-    private fun <T: Any> getObjectForType(key: String, type: Type): T? {
-        val json = mPrefs.getString(key, null)
+    private fun <T: Any> getRecentWallpapers(): T? {
+        val json = mPrefs.getString(prefRecentSetups, null)
         return if (json == null) {
             null
         } else {
             try {
-                mMoshi.adapter<T>(type).fromJson(json)
+                mMoshi.adapter<T>(typeWallpapersList).fromJson(json)
             } catch (e: Exception) {
                 e.printStackTrace()
                 null
