@@ -13,53 +13,44 @@ import com.squareup.moshi.Types
 
 class VectorifyPreferences(context: Context) {
 
-    private val prefTheme = "theme_pref_key"
-    private val prefsThemeDefault = "theme_pref_auto"
-
-    private val prefLiveWallpaper = "livewallpaper_key"
-    private val prefSavedWallpaper = "recentwallpaper_key"
-    private val prefRecentSetups = "recentwallpapers_key"
-    private val prefSavedMetrics = "recentmetrics_key"
-
     private val mPrefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
     private val mMoshi = Moshi.Builder().build()
 
     private val typeWallpapersList =
         Types.newParameterizedType(MutableList::class.java, VectorifyWallpaper::class.java)
 
     var theme
-        get() = mPrefs.getString(prefTheme, prefsThemeDefault)
-        set(value) = mPrefs.edit { putString(prefTheme, value) }
+        get() = mPrefs.getString("theme_pref_key", "theme_pref_auto")
+        set(value) = mPrefs.edit { putString("theme_pref_key", value) }
 
     var savedWallpaper: VectorifyWallpaper
         get() = getObjectForClass(
-            prefSavedWallpaper,
+            "recentwallpaper_key",
             VectorifyWallpaper::class.java
         ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
         set(value) = putObjectForClass(
-            prefSavedWallpaper,
+            "recentwallpaper_key",
             value,
             VectorifyWallpaper::class.java
         )
 
     var liveWallpaper: VectorifyWallpaper
         get() = getObjectForClass(
-            prefLiveWallpaper,
+            "livewallpaper_key",
             VectorifyWallpaper::class.java
         ) ?: VectorifyWallpaper(Color.BLACK, Color.WHITE, R.drawable.android_logo_2019, 0, 0.35F, 0F, 0F)
         set(value) = putObjectForClass(
-            prefLiveWallpaper,
+            "livewallpaper_key",
             value,
             VectorifyWallpaper::class.java
         )
 
     var savedMetrics: Metrics
         get() = getObjectForClass(
-            prefSavedMetrics,
+            "wallmetrics_key",
             Metrics::class.java
         ) ?: Metrics(720, 1280)
-        set(value) = putObjectForClass(prefSavedMetrics, value, Metrics::class.java)
+        set(value) = putObjectForClass("wallmetrics_key", value, Metrics::class.java)
 
     var recentSetups: MutableList<VectorifyWallpaper>?
         get() = getRecentWallpapers()
@@ -88,11 +79,11 @@ class VectorifyPreferences(context: Context) {
     // Saves object into the Preferences using Moshi
     private fun <T: Any> putRecentWallpapers(value: T?) {
         val json = mMoshi.adapter<T>(typeWallpapersList).toJson(value)
-        mPrefs.edit { putString(prefRecentSetups, json) }
+        mPrefs.edit { putString("recentwallpapers_key", json) }
     }
 
     private fun <T: Any> getRecentWallpapers(): T? {
-        val json = mPrefs.getString(prefRecentSetups, null)
+        val json = mPrefs.getString("recentwallpapers_key", null)
         return if (json == null) {
             null
         } else {
