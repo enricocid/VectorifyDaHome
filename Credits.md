@@ -8,11 +8,7 @@
 
 ### Libraries/dependencies/dev/support
 
-- [Maximilian Keppeler](https://github.com/maxkeppeler) for beautiful [Color sheet](https://github.com/maxkeppeler/sheets/) library!
-
 - [Square](https://github.com/square/) for [Moshi](https://github.com/square/moshi/) library!
-
-- [Chris Banes](https://github.com/chrisbanes) for the awesome [Insetter](https://github.com/chrisbanes/insetter/) library!
 
 - [Jnss98b](https://github.com/Jnss98b) for his support on different issues: [3](https://github.com/enricocid/VectorifyDaHome/issues/3), [4](https://github.com/enricocid/VectorifyDaHome/issues/4), [7](https://github.com/enricocid/VectorifyDaHome/issues/7),[8](https://github.com/enricocid/VectorifyDaHome/issues/8), [14](https://github.com/enricocid/VectorifyDaHome/issues/14), [16](https://github.com/enricocid/VectorifyDaHome/issues/16), [17](https://github.com/enricocid/VectorifyDaHome/issues/17)!
 
@@ -26,7 +22,7 @@
 
 - [**TacoTheDank**](https://github.com/TacoTheDank) for upgrades to gradle, java 1.8 and [improvements](https://github.com/enricocid/Music-Player-GO/pull/248) which I used here!
 
-- [Toastcode](https://toastco.de/) for the wunderbar [Screener - Better screenshots](https://play.google.com/store/apps/details?id=de.toastcode.screener) app
+- [Gavin Liu](https://play.google.com/store/apps/developer?id=Gavin+Liu) for the wunderbar [Snapmod](https://play.google.com/store/apps/details?id=cn.gavinliu.snapmod) app
 
 - [Potato Open Sauce Project (POSP)](https://potatoproject.co/) team and [POSP Telegram community](https://t.me/SaucyPotatoesOfficial) for support, inspirations and suggestions! The app itself is based on the original iteration [Potate da home!](https://github.com/enricocid/PotateDaHome) that was built thanks to the team/community feedbacks!
 
@@ -42,10 +38,11 @@
 
 - [ZJRDroid](https://github.com/ZJRDroid) for Brazilian Portuguese translations!
 
-- [OraBB1t](https://github.com/OraBB1t) for this [bug reporting](https://github.com/enricocid/VectorifyDaHome/issues/32)
+- [OraBB1t](https://github.com/OraBB1t) for this [bug report](https://github.com/enricocid/VectorifyDaHome/issues/32)
 
 - Abdul Kahlawi for reporting and letting me to fix an issue on Lollipop!
 
+- [jahongir28](https://github.com/jahongir28) for the rounded corner [fix](https://github.com/material-components/material-components-android/issues/1278#issuecomment-1248984201)
 
 ### SVG sources
 

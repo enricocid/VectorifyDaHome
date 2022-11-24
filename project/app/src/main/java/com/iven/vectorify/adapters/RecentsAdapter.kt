@@ -58,14 +58,12 @@ class RecentsAdapter(private val recentSetups: MutableList<VectorifyWallpaper>?)
                             absoluteAdapterPosition.toString()
                         ))
                         .setPositiveButton(R.string.ok) { _, _ ->
-                            //add an empty list to preferences
-                            try {
-                                val index = recentSetups?.indexOf(wallpaper)!!
-                                if (recentSetups.contains(wallpaper)) recentSetups.remove(wallpaper)
-                                notifyItemRemoved(index)
-                                prefs.recentSetups = recentSetups
-                            } catch (e: Exception) {
-                                e.printStackTrace()
+                            recentSetups?.run {
+                                val index = indexOf(wallpaper)
+                                if (recentSetups.remove(wallpaper)) {
+                                    notifyItemRemoved(index)
+                                    prefs.recentSetups = recentSetups
+                                }
                             }
                         }
                         .setNegativeButton(R.string.cancel, null)
