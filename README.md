@@ -8,7 +8,7 @@
 </a>
 
 [![API](https://img.shields.io/static/v1?label=API&message=21&color=a5d6a7)](https://developer.android.com/about/versions/android-5.0.html)
-[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.9.6.5&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases)
+[![TAG](https://img.shields.io/static/v1?label=Tag&message=v1.9.7.0&color=ffe082)](https://github.com/enricocid/VectorifyDaHome/releases)
 <a href="https://github.com/enricocid/VectorifyDaHome/actions">
 <img alt="CI" src="https://github.com/enricocid/VectorifyDaHome/workflows/Android%20CI/badge.svg">
 </a>
