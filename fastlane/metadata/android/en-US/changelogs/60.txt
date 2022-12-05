@@ -1,0 +1,8 @@
+- New color picker
+- Android 13 support
+- Code improvements
+- Better theming
+- Update dependencies
+
+Note: unfortunately recents might be affected after this update.
+Thanks for Your patience!
