@@ -80,4 +80,7 @@
     <string name="orange">Жовтогарячий</string>
     <string name="deep_orange">Насичений жовтогарячий</string>
     <string name="brown">Коричневий</string>
+    <string name="btn_reset">Скинути</string>
+    <string name="desc_picker">Вибір кольору</string>
+    <string name="desc_palette">Палітри</string>
 </resources>
