@@ -85,4 +85,7 @@
     <string name="light_blue">Azúl Claro</string>
     <string name="blue_grey">Gris azulado</string>
     <string name="teal">Turquesa</string>
+    <string name="btn_reset">Reiniciar</string>
+    <string name="desc_palette">Paletas</string>
+    <string name="desc_picker">Selector del color</string>
 </resources>
