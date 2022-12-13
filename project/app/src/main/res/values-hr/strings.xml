@@ -61,4 +61,26 @@
     <string name="rationale">Za spremanje slika pozadine Vectorify da home! treba pristup internoj memoriji</string>
     <string name="boo">Boo! Bez pristupa nema zabave! Koristi živu sliku pozadine! :)</string>
     <string name="title_clear_recent_setups">Izbriži</string>
+    <string name="btn_reset">Resetiraj</string>
+    <string name="yellow">Žuta</string>
+    <string name="desc_palette">Palete</string>
+    <string name="purple">Ljubičasta</string>
+    <string name="green">Zelena</string>
+    <string name="indigo">Modroljubičasta</string>
+    <string name="amber">Žutosmeđa</string>
+    <string name="orange">Narančasta</string>
+    <string name="desc_picker">Birač boje</string>
+    <string name="pink">Ružičasta</string>
+    <string name="red">Crvena</string>
+    <string name="deep_purple">Tamna ljubičasta</string>
+    <string name="blue">Plava</string>
+    <string name="cyan">Cijan</string>
+    <string name="teal">Modrozelena</string>
+    <string name="light_blue">Svjetloplava</string>
+    <string name="light_green">Svjetlozelena</string>
+    <string name="lime">Limunasta</string>
+    <string name="brown">Smeđa</string>
+    <string name="grey">Siva</string>
+    <string name="blue_grey">Plavo siva</string>
+    <string name="deep_orange">Tamnonarančasta</string>
 </resources>
