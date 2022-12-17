@@ -80,4 +80,7 @@
     <string name="purple">Mor</string>
     <string name="light_green">Açık yeşil</string>
     <string name="green">Yeşil</string>
+    <string name="btn_reset">Sıfırla</string>
+    <string name="desc_picker">Renk seçici</string>
+    <string name="desc_palette">Paletler</string>
 </resources>

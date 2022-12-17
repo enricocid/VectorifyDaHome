@@ -81,4 +81,6 @@
     <string name="lime">Limetková</string>
     <string name="grey">Šedá</string>
     <string name="btn_reset">Obnovit</string>
+    <string name="desc_palette">Palety</string>
+    <string name="desc_picker">Výběr barvy</string>
 </resources>

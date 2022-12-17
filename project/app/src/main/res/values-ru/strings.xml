@@ -80,4 +80,7 @@
     <string name="amber">Янтарный</string>
     <string name="red">Красный</string>
     <string name="blue">Синий</string>
+    <string name="btn_reset">Сброс</string>
+    <string name="desc_picker">Выбор цвета</string>
+    <string name="desc_palette">Палитры</string>
 </resources>
