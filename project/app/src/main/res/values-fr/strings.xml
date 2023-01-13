@@ -85,4 +85,7 @@
     <string name="teal">Cyan-Vert</string>
     <string name="pink">Rose</string>
     <string name="indigo">Indigo</string>
+    <string name="btn_reset">Réinitialiser</string>
+    <string name="desc_picker">Sélecteur de couleur</string>
+    <string name="desc_palette">Palettes</string>
 </resources>
