@@ -9,7 +9,7 @@
     <string name="message_clear_recent_setups">സമീപകാല സജ്ജീകരണങ്ങളെല്ലാം ഇല്ലാതാക്കപ്പെടും. നിങ്ങൾക്ക് ഉറപ്പാണോ\? നിങ്ങൾക്ക് നിർദ്ദിഷ്ട സജ്ജീകരണങ്ങൾ ഇല്ലാതാക്കണമെങ്കിൽ അവയിൽ ദീർഘനേരം അമര്‍ത്തുക :).</string>
     <string name="message_clear_single_recent_setup">#%1s സജ്ജീകരണം ഇല്ലാതാക്കും. നിങ്ങൾക്ക് ഉറപ്പാണോ\?</string>
     <string name="title_github">ഗിറ്റ്ഹബ് ഏട്‌</string>
-    <string name="title_theme">പ്രമേയം</string>
+    <string name="title_theme">പ്രതിപാദ്യം</string>
     <string name="title_restore">സ്ഥിരസ്ഥിതി ചുമര്‍ ചിത്രം പുനഃസ്ഥാപിക്കുക!</string>
     <string name="title_emoticons">ഇമോട്ടിക്കോണുകൾ</string>
     <string name="purple">പർപ്പിൾ</string>
@@ -62,13 +62,13 @@
     <string name="title_save_to">ആന്തരിക ഓർമ്മയിലേക്ക് സംരക്ഷിക്കുക</string>
     <string name="message_saved_to">%1s-ലേക്ക് സംരക്ഷിച്ചു</string>
     <string name="title_tech">സാങ്കേതികവിദ്യ</string>
-    <string name="title_nerdy">ഒറ്റബുദ്ധിക്കാരന്‍</string>
+    <string name="title_nerdy">വിരസനായ</string>
     <string name="content_btn_reset">മുമ്പത്തെ ബഹ്യാകാരം പുനഃസ്ഥാപിക്കുക</string>
     <string name="content_go_to_prev">പൂര്‍വ്വദര്‍ശനത്തിലേക്ക് പോകുക</string>
     <string name="title_zodiac">രാശിചക്രം</string>
     <string name="deep_orange">കടും മധുരനാരങ്ങ</string>
     <string name="indigo">നീലം</string>
-    <string name="install_browser_message">ആദ്യം ഒരു നാവികനെ സ്ഥാപിക്കുക!</string>
+    <string name="install_browser_message">ആദ്യം ഒരു ബ്രൗസർ സ്ഥാപിക്കുക!</string>
     <string name="title_go_live">തത്സമയ ചുമര്‍ചിത്രമായി സജ്ജീകരിക്കുക</string>
     <string name="content_vectors">ലഭ്യമായ വെക്റ്ററുകളും പൂര്‍വ്വദര്‍ശനവും</string>
     <string name="content_vector">വെക്റ്റർ %1s</string>
