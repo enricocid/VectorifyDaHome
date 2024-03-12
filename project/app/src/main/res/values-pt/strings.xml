@@ -60,4 +60,27 @@
     <string name="content_btn_align_vertical">Centrar vetor verticalmente</string>
     <string name="boo">Oh! Sem acesso temos pena! Use antes o fundo ao vivo! :)</string>
     <string name="content_invert_bg_vector_colors">Inverter cor de fundo e cor do vetor</string>
+    <string name="red">Vermelho</string>
+    <string name="pink">Rosa</string>
+    <string name="purple">Roxo</string>
+    <string name="cyan">Ciano</string>
+    <string name="teal">Verde-azulado</string>
+    <string name="green">Verde</string>
+    <string name="light_green">Verde claro</string>
+    <string name="lime">Lima</string>
+    <string name="yellow">Amarelo</string>
+    <string name="amber">Âmbar</string>
+    <string name="orange">Laranja</string>
+    <string name="deep_orange">Laranja escuro</string>
+    <string name="brown">Marrom</string>
+    <string name="grey">Cinzento</string>
+    <string name="blue_grey">Azul acinzentado</string>
+    <string name="btn_reset">Restaurar</string>
+    <string name="title_clear_recent_setups">Apagar</string>
+    <string name="deep_purple">Roxo escuro</string>
+    <string name="indigo">Índigo</string>
+    <string name="blue">Azul</string>
+    <string name="desc_picker">Seletor de cores</string>
+    <string name="light_blue">Azul claro</string>
+    <string name="desc_palette">Paletes</string>
 </resources>
