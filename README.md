@@ -56,5 +56,5 @@ Help translate the project on [weblate](https://hosted.weblate.org/engage/vector
 
 Copyright &copy; 2024 **Enrico D'Ortenzio**
 
-This repository is copylefted libre software, licensed [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0), as described in the [LICENSE](LICENSE.md) file.
+This repository is copylefted libre software, licensed [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0), as described in the [LICENSE](LICENSE) file.
 Use, study, change and share at will; with all.
