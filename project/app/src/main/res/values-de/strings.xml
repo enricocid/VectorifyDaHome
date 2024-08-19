@@ -75,4 +75,11 @@
     <string name="red">Rot</string>
     <string name="indigo">Indigo</string>
     <string name="deep_orange">Dunkles Orange</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="rationale">Vectorify da home! benötigt Zugriff auf den internen Speicher, um die Hintergrundbilder zu speichern</string>
+    <string name="title_clear_recent_setups">Löschen</string>
+    <string name="btn_reset">Zurücksetzen</string>
+    <string name="desc_picker">Farbwähler</string>
+    <string name="desc_palette">Paletten</string>
 </resources>
